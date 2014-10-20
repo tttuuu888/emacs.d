@@ -27,6 +27,7 @@
     markdown-toc
     clojure-mode
     cider
+    ac-cider
     ac-cider-compliment
     paredit
     expand-region

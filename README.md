@@ -16,7 +16,7 @@ Packages are automatically installed when you start emacs.
     * ace-jump-mode
     * helm / helm-git / helm-git-files / helm-git-grep
     * markdown-mode / markdown-toc
-    * clojure-mode / cider / ac-cider-compliment / paredit
+    * clojure-mode / cider / ac-cider / ac-cider-compliment / paredit
     * expand-region
 
 ## Dependencies ##
