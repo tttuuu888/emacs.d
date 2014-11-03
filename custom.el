@@ -65,18 +65,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-file-header ((t (:foreground "blue"))))
- '(diff-hunk-header ((t (:background "white" :foreground "blue"))))
- '(diff-index ((t (:foreground "light blue"))))
- '(diff-nonexistent ((t (:background "red"))))
- '(fixed-pitch ((default nil) (nil nil)))
  '(ggtags-highlight ((t nil)))
- '(helm-selection ((t (:background "red" :underline t))))
- '(magit-diff-add ((t (:foreground "magenta"))))
- '(region ((t (:background "yellow"))))
- '(sr-active-path-face ((t (:foreground "yellow" :height 120))))
- '(sr-directory-face ((t (:foreground "DeepSkyBlue"))))
- '(sr-highlight-path-face ((t (:background "yellow" :foreground "black" :height 120))))
- '(sr-passive-path-face ((t (:foreground "lightgray" :height 120))))
- '(sr-symlink-directory-face ((t (:foreground "brown" :slant normal))))
- '(sr-symlink-face ((t (:foreground "SkyBlue" :slant normal)))))
+)
