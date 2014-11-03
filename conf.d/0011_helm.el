@@ -7,8 +7,3 @@
 (if unixp
      (define-key global-map [(control c)(h)(s)] 'helm-git-grep-at-point)
      (define-key global-map [(control c)(h)(s)] 'anything-git-grep-from-here))
-
-(when (not window-system)
-  (custom-set-faces
-   '(helm-selection ((t (:background "red" :underline t))))))
-
