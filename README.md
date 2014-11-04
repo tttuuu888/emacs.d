@@ -27,8 +27,4 @@ Packages are automatically installed when you start emacs.
 #### Cygwin : ####
 If you don't use cygwin on Windows, edit `conf.d/0500_cygwin.el` file as below:
 
-        ...
-            (defvar cygwin-use nil)
-
-    
-    
+        (when win32p (defvar cygwin-use nil))
