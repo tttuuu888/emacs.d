@@ -9,6 +9,7 @@
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
  '(default-frame-alist (quote ((menu-bar-lines . 0) (tool-bar-lines . 0) (line-spacing . 2))))
+ '(diary-file "~/gdrive/org/diary")
  '(display-time-mode t)
  '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -25,6 +26,7 @@
  '(iswitchb-mode t)
  '(large-file-warning-threshold nil)
  '(menu-bar-mode nil)
+ '(org-agenda-files (quote ("~/gdrive/org/")))
  '(org-babel-load-languages (quote ((emacs-lisp . t) (calc . t))))
  '(org-export-creator-info nil)
  '(org-export-default-language "kr")
@@ -40,7 +42,7 @@
 </div>")
  '(org-export-html-validation-link "")
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
- '(org-log-done (quote time) t)
+ '(org-log-done (quote time))
  '(org-startup-indented t)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
@@ -65,5 +67,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ggtags-highlight ((t nil)))
-)
+ '(ggtags-highlight ((t nil))))
