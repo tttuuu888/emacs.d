@@ -12,7 +12,6 @@
     git-rebase-mode
     xcscope
     magit
-    popup
     python-mode
     jedi
     redo+
