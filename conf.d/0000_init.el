@@ -10,7 +10,7 @@
     auto-complete
     git-commit-mode
     git-rebase-mode
-    xcscopee
+    xcscope
     ggtags
     magit
     python-mode
@@ -24,7 +24,7 @@
     helm-git-files
     helm-git-grep
     markdown-mode
-    markdpown-toc
+    markdown-toc
     clojure-mode
     cider
     ac-cider
