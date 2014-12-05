@@ -10,7 +10,8 @@
     auto-complete
     git-commit-mode
     git-rebase-mode
-    xcscope
+    xcscopee
+    ggtags
     magit
     python-mode
     jedi
@@ -23,7 +24,7 @@
     helm-git-files
     helm-git-grep
     markdown-mode
-    markdown-toc
+    markdpown-toc
     clojure-mode
     cider
     ac-cider
@@ -39,9 +40,6 @@
     (push 'anything-git-grep installing-package-list)
     (push 'cygwin-mount installing-package-list)
     (push 'gtags installing-package-list)))
-
-(when unixp
-    (push 'ggtags installing-package-list))
 
 (let ((not-installed (loop for x in installing-package-list
                         when (not (package-installed-p x))
