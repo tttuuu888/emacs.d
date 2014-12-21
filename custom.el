@@ -18,6 +18,7 @@
  '(global-auto-revert-mode t)
  '(global-semantic-stickyfunc-mode t)
  '(gud-gdb-command-name "gdb -i=mi")
+ '(helm-imenu-execute-action-at-once-if-one nil)
  '(ibuffer-default-sorting-mode (quote major-mode))
  '(ibuffer-expert t)
  '(indent-tabs-mode nil)
