@@ -8,7 +8,11 @@
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
- '(default-frame-alist (quote ((menu-bar-lines . 0) (tool-bar-lines . 0) (line-spacing . 2))))
+ '(default-frame-alist
+   (quote
+    ((menu-bar-lines . 0)
+     (tool-bar-lines . 0)
+     (line-spacing . 2))))
  '(diary-file "~/gdrive/org/diary")
  '(display-time-mode t)
  '(dynamic-completion-mode t)
@@ -21,10 +25,10 @@
  '(helm-imenu-execute-action-at-once-if-one nil)
  '(ibuffer-default-sorting-mode (quote major-mode))
  '(ibuffer-expert t)
+ '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(init-loader-show-log-after-init nil)
- '(iswitchb-mode t)
  '(large-file-warning-threshold nil)
  '(menu-bar-mode nil)
  '(org-agenda-files (quote ("~/gdrive/org/")))
@@ -33,7 +37,8 @@
  '(org-export-default-language "kr")
  '(org-export-email-info t)
  '(org-export-headline-levels 2)
- '(org-export-html-footnotes-section "<div id=\"footnotes\">
+ '(org-export-html-footnotes-section
+   "<div id=\"footnotes\">
 <hr>
 <h3 class=\"footnotes\">%s: </h3>
 <div id=\"text-footnotes\">
@@ -43,10 +48,18 @@
 </div>")
  '(org-export-html-validation-link "")
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
- '(org-log-done (quote time))
+ '(org-log-done (quote time) t)
  '(org-startup-indented t)
- '(org-todo-keyword-faces (quote (("TODO" . "red") ("DONE" . "forest green") ("WAITING" . "orange") ("HOLD" . "magenta") ("CANCELLED" . "forest green"))))
- '(org-todo-keywords (quote ((sequence "TODO" "WAITING" "HOLD" "|" "CANCELLED" "DONE"))))
+ '(org-todo-keyword-faces
+   (quote
+    (("TODO" . "red")
+     ("DONE" . "forest green")
+     ("WAITING" . "orange")
+     ("HOLD" . "magenta")
+     ("CANCELLED" . "forest green"))))
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO" "WAITING" "HOLD" "|" "CANCELLED" "DONE"))))
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
  '(scroll-bar-mode nil)
@@ -57,7 +70,9 @@
  '(size-indication-mode t)
  '(split-width-threshold 140)
  '(tab-always-indent (quote complete))
- '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100)))
+ '(tab-stop-list
+   (quote
+    (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100)))
  '(tab-width 4)
  '(text-mode-hook (quote (text-mode-hook-identify)))
  '(tool-bar-mode nil)
