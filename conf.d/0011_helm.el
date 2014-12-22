@@ -6,5 +6,5 @@
 (define-key global-map (kbd "C-c i") 'helm-imenu)
 (define-key global-map (kbd "C-c f") 'helm-git-files)
 (if unixp
-     (define-key global-map (kbd "C-c s") 'helm-git-grep-at-point)
-     (define-key global-map (kbd "C-c s") 'anything-git-grep-from-here))
+     (define-key global-map (kbd "C-c g") 'helm-git-grep-at-point)
+     (define-key global-map (kbd "C-c g") 'anything-git-grep-from-here))
