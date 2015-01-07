@@ -37,29 +37,10 @@
  '(org-export-default-language "kr")
  '(org-export-email-info t)
  '(org-export-headline-levels 2)
- '(org-export-html-footnotes-section
-   "<div id=\"footnotes\">
-<hr>
-<h3 class=\"footnotes\">%s: </h3>
-<div id=\"text-footnotes\">
-%s
-<hr>
-</div>
-</div>")
  '(org-export-html-validation-link "")
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
  '(org-log-done (quote time) t)
  '(org-startup-indented t)
- '(org-todo-keyword-faces
-   (quote
-    (("TODO" . "red")
-     ("DONE" . "forest green")
-     ("WAITING" . "orange")
-     ("HOLD" . "magenta")
-     ("CANCELLED" . "forest green"))))
- '(org-todo-keywords
-   (quote
-    ((sequence "TODO" "WAITING" "HOLD" "|" "CANCELLED" "DONE"))))
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
  '(scroll-bar-mode nil)
