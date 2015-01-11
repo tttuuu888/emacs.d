@@ -25,13 +25,7 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (unless (equal dir nil)
-      (start-process
-       "sk-clean"
-       nil
-       "make"
-       "-C"
-       dir
-       "clean"))))
+      (compile (concat "make " "./" "clean")))))
 
 
 (defun sk-rebuild ()
