@@ -33,23 +33,23 @@
        dir
        "clean"))))
 
+(defun sk-clean2 ()
+  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
+    (unless (equal dir nil)
+      (start-process
+       "sk-clean"
+       nil
+       "make"
+       "-C"
+       dir
+       "clean"))))
 
 (defun sk-rebuild ()
   "Find a Makefile path and excute clean"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
-    (unless (equal dir nil)
-      (set-process-sentinel 
-       (start-process
-        "sk-clean"
-        nil                             ;output buffer name
-        "make"
-        "-C"
-        dir
-        "clean")
-       (lambda (p e) (when (= 0 (process-exit-status p))
-                       (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
-                         (compile (concat "make -C " dir)))))))))
+  (let ((_ (sk-clean2))
+        (dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
+    (compile (concat "make -C " dir))))
 
 (add-hook 'prog-mode-hook
           (lambda () (when (derived-mode-p 'c-mode 'c++-mode)
