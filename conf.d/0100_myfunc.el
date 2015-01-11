@@ -31,8 +31,7 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (unless (equal dir nil)
-       (call-process
-        "make" nil nil nil "-C" dir "clean")
+       (call-process "make" nil nil nil "-C" dir "clean")
        (compile (concat "make -C " dir)))))
 
 
