@@ -29,9 +29,7 @@
 (defun sk-rebuild ()
   "Find a Makefile path and excute rebuild(clean and make)"
   (interactive)
-  (let ((dir 
-         (find-file-in-tree 
-          (file-name-directory default-directory) "Makefile")))
+  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (unless (equal dir nil)
        (call-process
         "make" nil nil nil "-C" dir "clean")
