@@ -8,11 +8,7 @@
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
- '(default-frame-alist
-   (quote
-    ((menu-bar-lines . 0)
-     (tool-bar-lines . 0)
-     (line-spacing . 2))))
+ '(default-frame-alist (quote ((menu-bar-lines . 0) (tool-bar-lines . 0) (line-spacing . 2))))
  '(diary-file "~/gdrive/org/diary")
  '(display-time-mode t)
  '(dynamic-completion-mode t)
@@ -30,6 +26,7 @@
  '(inhibit-startup-screen t)
  '(init-loader-show-log-after-init nil)
  '(large-file-warning-threshold nil)
+ '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(org-agenda-files (quote ("~/gdrive/org/")))
  '(org-babel-load-languages (quote ((emacs-lisp . t) (calc . t))))
@@ -51,9 +48,7 @@
  '(size-indication-mode t)
  '(split-width-threshold 140)
  '(tab-always-indent (quote complete))
- '(tab-stop-list
-   (quote
-    (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100)))
+ '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100)))
  '(tab-width 4)
  '(text-mode-hook (quote (text-mode-hook-identify)))
  '(tool-bar-mode nil)
