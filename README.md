@@ -2,7 +2,7 @@
 This is my personal Emacs setting.
 
 ## Setup ##
-    git clone https://github.com/tttuuu888/emacs.d.git ~/.emacs.d
+    git clone https://github.com/tttuuu888/.emacs.d.git
 Packages are automatically installed when you start emacs.
 (Try restart a couple of times more, if it's not done at once.)
 
