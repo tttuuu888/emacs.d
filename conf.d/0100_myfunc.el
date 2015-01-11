@@ -33,17 +33,9 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (unless (equal dir nil)
-      (set-process-sentinel 
-       (start-process
-        "sk-clean-process"
-        nil                             ;output buffer name
-        "make"
-        "-C"
-        dir
-        "clean")
-       (lambda (p e) (when (= 0 (process-exit-status p))
-                       (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
-                         (compile (concat "make -C " dir)))))))))
+       (call-process
+        "make" nil nil nil "-C" dir "clean")
+       (compile (concat "make -C " dir)))))
 
 (add-hook 'prog-mode-hook
           (lambda () (when (derived-mode-p 'c-mode 'c++-mode)
