@@ -20,10 +20,6 @@
                      (name . "\*Apropos\*")
                      (name . "\*info\*"))))))
 
-(add-hook 'ibuffer-mode-hook
-          '(lambda ()
-            (ibuffer-switch-to-saved-filter-groups "home")))
-
 (setq ibuffer-expert t)
 
 (add-hook 'ibuffer-mode-hook
