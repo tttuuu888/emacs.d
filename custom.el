@@ -10,6 +10,7 @@
  '(cua-mode t nil (cua-base))
  '(default-frame-alist (quote ((menu-bar-lines . 0) (tool-bar-lines . 0) (line-spacing . 2))))
  '(diary-file "~/gdrive/org/diary")
+ '(dired-listing-switches "-alh")
  '(display-time-mode t)
  '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
