@@ -6,7 +6,7 @@
 (add-hook 'dired-mode-hook
           (lambda ()
             (local-set-key (kbd "M-o") 'dired-omit-mode)
-            (local-set-key (kbd "RET") 'dired-find-alternate-file)
+            (local-set-key (kbd "RET") 'dired-find-file-other-window)
             (local-set-key (kbd "^")
                            (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
