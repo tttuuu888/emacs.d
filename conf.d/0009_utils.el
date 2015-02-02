@@ -52,7 +52,7 @@
 
 ;; Korean font
 (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                     '("UnBom" . "iso10646-1"))
+                  "NanumGothicOTF-15")
 
 ;; In terminal mode, change minibuffer prompt color to green
 (when (not window-system)
