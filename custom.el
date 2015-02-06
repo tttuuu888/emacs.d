@@ -56,7 +56,8 @@
  '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(user-full-name "SeungKi Kim")
- '(user-mail-address "tttuuu888@gmail.com"))
+ '(user-mail-address "tttuuu888@gmail.com")
+ '(yas-global-mode t nil (yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -31,6 +31,7 @@
     ac-cider-compliment
     paredit
     expand-region
+    yasnippet
     ))
 
 (when win32p
