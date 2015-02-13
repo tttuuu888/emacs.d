@@ -55,6 +55,7 @@
  '(tool-bar-mode nil)
  '(transient-mark-mode t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(use-file-dialog nil)
  '(user-full-name "SeungKi Kim")
  '(user-mail-address "tttuuu888@gmail.com")
  '(yas-global-mode t nil (yasnippet)))
@@ -63,4 +64,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ggtags-highlight ((t nil))))
+ '(ggtags-highlight ((t nil)))
+ '(powerline-active1 ((t (:inherit mode-line :background "grey22" :foreground "white")))))

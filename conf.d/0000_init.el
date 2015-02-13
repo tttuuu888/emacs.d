@@ -32,6 +32,7 @@
     paredit
     expand-region
     yasnippet
+    powerline
     ))
 
 (when win32p
