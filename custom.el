@@ -11,7 +11,7 @@
  '(default-frame-alist (quote ((menu-bar-lines . 0) (tool-bar-lines . 0) (line-spacing . 2))))
  '(diary-file "~/gdrive/org/diary")
  '(dired-listing-switches "-alh")
- '(display-time-mode t)
+ '(display-time-mode nil)
  '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(gdb-many-windows t)
