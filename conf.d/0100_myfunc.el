@@ -1,5 +1,6 @@
 ;; My functions
 
+; build functions
 (defun parent-directory (dir)
   (unless (equal "/" dir)
     (file-name-directory (directory-file-name dir))))
@@ -38,3 +39,12 @@
 (add-hook 'prog-mode-hook
           (lambda () (when (derived-mode-p 'c-mode 'c++-mode)
                                            (local-set-key [(f9)] 'sk-rebuild))))
+
+
+
+; meld diff
+(defun meld-diff (var1 var2)
+  "diff files or directories with meld program"
+  (interactive (list (read-file-name "Diff first variable : ")
+                     (read-file-name "Diff second variable : ")))
+  (call-process "meld" nil nil nil (file-truename var1) (file-truename var2)))
