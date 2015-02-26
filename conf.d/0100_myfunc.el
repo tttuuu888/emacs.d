@@ -48,3 +48,12 @@
   (interactive (list (read-file-name "Diff first variable : ")
                      (read-file-name "Diff second variable : ")))
   (call-process "meld" nil nil nil (file-truename var1) (file-truename var2)))
+
+
+; open temp file
+(defun tempfile-open ()
+  "open temp file under /tmp directory"
+  (interactive)
+  (find-file (make-temp-file 
+              (let ((now (decode-time)))
+                (concat (number-to-string (car now)) (number-to-string (car (cdr now))) "_temp")))))
