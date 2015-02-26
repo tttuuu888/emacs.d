@@ -15,6 +15,7 @@
                      (mode . java-mode)
                      (mode . lisp-mode)
                      (mode . clojure-mode)))
+         ("Dired" (mode . dired-mode))
          ("Magit" (name . "\*magit"))
          ("Help" (or (name . "\*Help\*")
                      (name . "\*Apropos\*")
