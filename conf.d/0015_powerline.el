@@ -48,6 +48,6 @@
                              (powerline-fill face2 (powerline-width rhs))
                              (powerline-render rhs)))))))
 
-(if (> (x-display-pixel-width) 1440)
+(if (and x-display-name (> (x-display-pixel-width) 1440))
     (powerline-default-theme)
     (powerline-simple-theme))
