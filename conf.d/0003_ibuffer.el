@@ -11,6 +11,7 @@
                          (filename . "OrgMode")))
          ("Code" (or (mode . c-mode)
                      (mode . c++-mode)
+                     (mode . asm-mode)
                      (mode . python-mode)
                      (mode . java-mode)
                      (mode . lisp-mode)
