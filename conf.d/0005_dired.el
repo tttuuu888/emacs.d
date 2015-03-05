@@ -11,7 +11,6 @@
                            (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
                            (lambda () (interactive) (find-alternate-file "..")))
-            (local-set-key [(f9)] 'sk-rebuild)
                                         ; was dired-up-directory
             ))
 
