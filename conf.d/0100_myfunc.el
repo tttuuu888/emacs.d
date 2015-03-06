@@ -37,7 +37,7 @@
 
 
 (add-hook 'prog-mode-hook
-          (lambda () (when (derived-mode-p 'c-mode 'c++-mode)
+          (lambda () (when (derived-mode-p 'c-mode 'c++-mode 'dired-mode 'eshell-mode)
                                            (local-set-key [(f9)] 'sk-rebuild))))
 
 
