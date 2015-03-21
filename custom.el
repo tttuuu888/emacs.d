@@ -21,7 +21,7 @@
  '(gud-gdb-command-name "gdb -i=mi")
  '(helm-imenu-execute-action-at-once-if-one nil)
  '(ibuffer-default-sorting-mode (quote major-mode))
- '(ibuffer-expert t)
+ '(ibuffer-expert t t)
  '(ido-mode (quote buffer) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
