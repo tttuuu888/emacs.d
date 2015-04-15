@@ -29,10 +29,10 @@
     cider
     ac-cider
     ac-cider-compliment
+    chicken-scheme
     paredit
     expand-region
     powerline
-    ;yasnippet
     ))
 
 (when win32p
