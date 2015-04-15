@@ -10,12 +10,12 @@
           "/usr/bin"
           "/sbin"
           "/bin"
-          "/usr/games"
           "/usr/lib/emacs/24.3/x86_64-linux-gnu"
           "/home/sk/prj/Android/android-sdk-linux/tools"
           "/home/sk/prj/Android/android-sdk-linux/platform-tools"
           "/home/sk/prj/Android/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin"
-          "/home/sk/prj/toolchain/launchpad-gcc-arm/bin/"
+          "/home/sk/Android/android-ndk-r10d"
+          "/home/sk/prj/toolchain/launchpad-gcc-arm/bin"
 ;          "/home/sk/prj/toolchain/CodeSourcery/Sourciry_G++-Lite/bin"
           "/home/sk/prj/toolchain/bin"))
   (setq-default exec-path  
@@ -45,5 +45,5 @@
 ;; Lisp Path
 (if unixp
     (setq inferior-lisp-program "/usr/bin/clisp")
-   ;(setq inferior-lisp-program "/usr/bin/sbcl")
+    ;(setq inferior-lisp-program "/usr/bin/sbcl")
     (setq inferior-lisp-program "D:/home/util/clisp-2.49/clisp"))
