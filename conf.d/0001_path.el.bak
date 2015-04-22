@@ -20,17 +20,11 @@
           "/home/sk/prj/toolchain/bin"))
   (setq-default exec-path  
         '(
-          "C:/Program Files/ARM/bin/win_32-pentium"
-          "C:/Program Files/ARM/RVCT/Programs/4.1/462/win_32-pentium"
-          "C:/Program Files/ARM/RVI/Tools/4.0/90/programs/win_32-pentium"
-          "C:/Program Files/ARM/Utilities/FLEXlm/10.8.5.0/1/win_32-pentium"
-          "C:/Program Files/ARM/RVD/Core/4.1/54/win_32-pentium/bin"
           "C:/home/util/android/sdk/platform-tools"
           "C:/home/util/Python27"  
           "C:/home/util/Python27/Scripts"  
           "C:/home/util/Python27/Lib/site-packages/PyQt4"          
           "C:/home/util/cygwin/bin"
-          "C:/home/util/bin"
           "C:/home/.lein/bin")))
 
 
@@ -47,4 +41,4 @@
 (if unixp
     (setq inferior-lisp-program "/usr/bin/clisp")
     ;(setq inferior-lisp-program "/usr/bin/sbcl")
-    (setq inferior-lisp-program "D:/home/util/clisp-2.49/clisp"))
+    (setq inferior-lisp-program "C:/home/util/clisp-2.49/clisp"))

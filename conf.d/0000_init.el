@@ -28,7 +28,7 @@
     clojure-mode
     cider
     ac-cider
-    ac-cider-compliment
+;    ac-cider-compliment
     chicken-scheme
     paredit
     expand-region
@@ -36,12 +36,7 @@
     ))
 
 (when win32p
-  (progn
-    (push 'anything installing-package-list)
-    (push 'anything-git installing-package-list)
-    (push 'anything-git-grep installing-package-list)
-    (push 'cygwin-mount installing-package-list)
-    (push 'gtags installing-package-list)))
+    (push 'cygwin-mount installing-package-list))
 
 (let ((not-installed (loop for x in installing-package-list
                         when (not (package-installed-p x))
