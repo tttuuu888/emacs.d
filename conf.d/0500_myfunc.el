@@ -64,7 +64,7 @@
 
 
 
-; adding temp C code to remove warnings.
+; adding temp C code to remove warnings. 
 ; the function should be in the shape of below:
 ; int temp(int a, int b)
 ; {
@@ -108,3 +108,53 @@
         ))
     (let ((lastp (point)))
       (indent-region p1 lastp))))
+
+;; making .c .h files
+(defun make-author-info (file-name) 
+  (concat "/**\n * " file-name "
+ * Created by SK Kim\n * " (format-time-string "%Y-%m-%d") "
+ */\n"))
+
+(defun c-file-shape (file-name) 
+  (concat (make-author-info (concat file-name ".c"))
+"/* Includes ------------------------------------------------------------------*/
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+/* Private functions ---------------------------------------------------------*/\n\n\n\n\n
+/******************************** END OF FILE *********************************/"))
+
+(defun c-header-shape (file-name)
+  (concat (make-author-info (concat file-name ".h"))
+"#ifndef " (upcase file-name) "_H_
+#define " (upcase file-name) "_H_
+/* Includes ------------------------------------------------------------------*/
+/* Exported macros -----------------------------------------------------------*/
+/* Exported types ------------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
+/* Exported functions ------------------------------------------------------- */\n\n\n\n\n
+#endif  /* " (upcase file-name) "_H_ */
+/******************************** END OF FILE *********************************/"))
+
+(defun c-header-insert (file-name)
+  (interactive "s")
+  (insert (c-header-shape file-name)))
+
+(defun create-h-file (file-name)
+  (interactive "s")
+  (append-to-file (c-header-shape file-name) nil (concat file-name ".h")))
+
+(defun c-file-insert (file-name)
+  (interactive "s")
+  (insert (c-file-shape file-name)))
+
+(defun create-c-file (file-name)
+  (interactive "s")
+  (append-to-file (c-file-shape file-name) nil (concat file-name ".c")))
+
+(defun create-ch-file (file-name)
+  (interactive "s")
+  (create-h-file file-name)
+  (create-c-file file-name))

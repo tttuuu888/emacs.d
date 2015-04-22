@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(backup-directory-alist (quote ((".*" . "/tmp/"))))
  '(c-basic-offset 4)
  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "bsd"))))
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
@@ -21,7 +22,7 @@
  '(gud-gdb-command-name "gdb -i=mi")
  '(helm-imenu-execute-action-at-once-if-one nil)
  '(ibuffer-default-sorting-mode (quote major-mode))
- '(ibuffer-expert t t)
+ '(ibuffer-expert t)
  '(ido-mode (quote buffer) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -37,7 +38,7 @@
  '(org-export-headline-levels 2)
  '(org-export-html-validation-link "")
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
- '(org-log-done (quote time) t)
+ '(org-log-done (quote time))
  '(org-startup-indented t)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
