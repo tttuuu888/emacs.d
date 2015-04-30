@@ -139,22 +139,22 @@
 /******************************** END OF FILE *********************************/"))
 
 (defun c-header-insert (file-name)
-  (interactive "s")
+  (interactive "sEnter File name : ")
   (insert (c-header-shape file-name)))
 
 (defun create-h-file (file-name)
-  (interactive "s")
+  (interactive "sEnter File name : ")
   (append-to-file (c-header-shape file-name) nil (concat file-name ".h")))
 
 (defun c-file-insert (file-name)
-  (interactive "s")
+  (interactive "sEnter File name : ")
   (insert (c-file-shape file-name)))
 
 (defun create-c-file (file-name)
-  (interactive "s")
+  (interactive "sEnter File name : ")
   (append-to-file (c-file-shape file-name) nil (concat file-name ".c")))
 
 (defun create-ch-file (file-name)
-  (interactive "s")
+  (interactive "sEnter File name : ")
   (create-h-file file-name)
   (create-c-file file-name))
