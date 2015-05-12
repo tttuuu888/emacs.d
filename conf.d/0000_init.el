@@ -33,6 +33,7 @@
     paredit
     expand-region
     powerline
+    stickyfunc-enhance
     ))
 
 (when win32p

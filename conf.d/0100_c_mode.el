@@ -1,5 +1,7 @@
 ;; C-mode Setting
 
+(require 'stickyfunc-enhance)
+
 (add-hook 'prog-mode-hook
           (lambda ()
             (when (derived-mode-p 
