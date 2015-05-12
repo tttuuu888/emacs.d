@@ -9,9 +9,7 @@
                    'asm-mode)
               (progn
                 (cscope-minor-mode)
-                (if unixp
-                    (ggtags-mode)
-                    (gtags-mode))))))
+                (ggtags-mode)))))
 
 
 ;; #if 0 distinguish
