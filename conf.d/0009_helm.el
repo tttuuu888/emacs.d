@@ -1,6 +1,6 @@
 ;; Helm Setting
 
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-c y") 'helm-show-kill-ring)
 
 (define-key global-map (kbd "C-c i") 'helm-semantic-or-imenu)
 (define-key global-map (kbd "C-c o") 'helm-git-files)   ;Open file
