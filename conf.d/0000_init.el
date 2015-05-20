@@ -30,6 +30,8 @@
     ac-cider
 ;    ac-cider-compliment
     chicken-scheme
+    geiser
+    ac-geiser
     paredit
     expand-region
     powerline
