@@ -17,18 +17,18 @@
 
 
 ;; Dired Enhancements ------------------------------------------------------------
- (eval-after-load "dired"
-      '(progn
-         (defadvice dired-advertised-find-file (around dired-subst-directory activate)
-           "Replace current buffer if file is a directory."
-           (interactive)
-            (let* ((orig (current-buffer))
-                   ;; (filename (dired-get-filename))
-                   (filename (dired-get-filename t t))
-                  (bye-p (file-directory-p filename)))
-             ad-do-it
-             (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
-               (kill-buffer orig))))))
+;; (eval-after-load "dired"
+;;   '(progn
+;;     (defadvice dired-advertised-find-file (around dired-subst-directory activate)
+;;       "Replace current buffer if file is a directory."
+;;       (interactive)
+;;       (let* ((orig (current-buffer))
+;;              ;; (filename (dired-get-filename))
+;;              (filename (dired-get-filename t t))
+;;              (bye-p (file-directory-p filename)))
+;;         ad-do-it
+;;         (when (and bye-p (not (string-match "[/\\\\]\\.$" filename)))
+;;           (kill-buffer orig))))))
 
 (defun mydired-sort ()
   "Sort dired listings with directories first."
@@ -39,18 +39,18 @@
     (set-buffer-modified-p nil)))
 
 (defadvice dired-readin
-  (after dired-after-updating-hook first () activate)
+    (after dired-after-updating-hook first () activate)
   "Sort dired listings with directories first before adding marks."
   (mydired-sort))
 
 (add-hook 'dired-mode-hook
           (function (lambda ()
-		      (load "dired-x")
-                      ;; Set dired-x buffer-local variables here.  For example:
-                      (setq dired-omit-files-p t)
-		      (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
-		      (setq dired-omit-extensions '("~"))
-                      )))
+            (load "dired-x")
+            ;; Set dired-x buffer-local variables here.  For example:
+            (setq dired-omit-files-p t)
+            (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
+            (setq dired-omit-extensions '("~"))
+            )))
 
 
 ;;;; win32 hiding gid, uid in dired mode
