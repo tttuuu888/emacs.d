@@ -36,6 +36,8 @@
     expand-region
     powerline
     stickyfunc-enhance
+    yasnippet
+    auto-complete-c-headers
     ))
 
 (when win32p
