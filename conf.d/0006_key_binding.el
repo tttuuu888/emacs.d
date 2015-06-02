@@ -10,7 +10,7 @@
 ;(global-set-key [(control \,)] 'complete-tag)
 ;(global-set-key [(meta \,)] 'menu-bar-next-tag)
 
-;; Ace-Jump-Mode
+;; Avy
 (define-key global-map (kbd "C-c C-SPC") 'avy-goto-subword-1)
 
 ;; Expand-Region
