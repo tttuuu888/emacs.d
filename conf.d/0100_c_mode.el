@@ -51,3 +51,5 @@
     (goto-char end) (end-of-line) (insert "\n#endif")
     (goto-char start) (beginning-of-line) (insert "#if 0\n"))
 )
+
+(add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
