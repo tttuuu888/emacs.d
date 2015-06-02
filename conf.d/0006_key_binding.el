@@ -11,7 +11,7 @@
 ;(global-set-key [(meta \,)] 'menu-bar-next-tag)
 
 ;; Ace-Jump-Mode
-(define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-c C-SPC") 'avy-goto-subword-1)
 
 ;; Expand-Region
 (global-set-key (kbd "C-=") 'er/expand-region)

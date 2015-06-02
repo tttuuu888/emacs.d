@@ -18,7 +18,7 @@
     redo+
     slime
     ac-slime
-    ace-jump-mode
+    avy
     helm
     helm-git
     helm-git-files
