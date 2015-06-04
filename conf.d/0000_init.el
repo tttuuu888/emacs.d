@@ -23,6 +23,8 @@
     helm-git
     helm-git-files
     helm-git-grep
+    helm-projectile
+    projectile
     markdown-mode
     markdown-toc
     clojure-mode
