@@ -20,6 +20,7 @@
     ac-slime
     avy
     helm
+    helm-ag
     helm-git
     helm-git-files
     helm-git-grep
