@@ -8,11 +8,12 @@
 (defvar installing-package-list
   '( ;; list of packages
     auto-complete
+    auto-complete-c-headers
+    magit
     git-commit-mode
     git-rebase-mode
-    xcscope
     ggtags
-    magit
+    xcscope
     python-mode
     jedi
     redo+
@@ -32,15 +33,14 @@
     cider
     ac-cider
 ;    ac-cider-compliment
+    paredit
     chicken-scheme
     geiser
     ac-geiser
-    paredit
     expand-region
     powerline
     stickyfunc-enhance
     yasnippet
-    auto-complete-c-headers
     ))
 
 (when win32p

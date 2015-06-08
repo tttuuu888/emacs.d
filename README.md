@@ -12,25 +12,32 @@ Especially if you are on Windows, below programs should be under your path to us
     * python / lein  
 
 ## Packages ##
-    * auto-complete  
+    * auto-complete / auto-complete-c-headers  
     * magit / git-commit-mode / git-rebase-mode  
     * ggtags / xcscope  
     * python-mode / jedi  
     * redo+  
     * slime / ac-slime  
-    * ace-jump-mode  
-    * helm / helm-git / helm-git-files / helm-git-grep  
+    * avy  
+    * helm / helm-ag / helm-git / helm-git-files / helm-git-grep / helm-projectile  
+    * projectile  
     * markdown-mode / markdown-toc  
     * clojure-mode / cider / ac-cider / paredit  
+    * chicken-scheme / geiser / ac-geiser  
     * expand-region  
     * powerline  
+    * stickyfunc-enhance  
+    * yasnippet  
 
 ## Dependencies ##
 
-#### Python : ####
-    pip install virtualenv
+##### helm-ag #####
+    silversearcher-ag ( apt-get install silversearcher-ag )
 
-#### Cygwin : ####
+##### jedi : #####
+    virtualev ( pip install virtualenv )
+
+##### Cygwin : #####
 If you don't use cygwin on Windows, edit `conf.d/0900_cygwin.el` file as below:  
 
     (when win32p (defvar cygwin-use nil))
