@@ -30,14 +30,11 @@ Especially if you are on Windows, below programs should be under your path to us
     * yasnippet  
 
 ## Dependencies ##
-
-##### helm-ag #####
-    silversearcher-ag ( apt-get install silversearcher-ag )
-
-##### jedi : #####
-    virtualev ( pip install virtualenv )
-
-##### Cygwin : #####
-If you don't use cygwin on Windows, edit `conf.d/0900_cygwin.el` file as below:  
-
-    (when win32p (defvar cygwin-use nil))
+- **GNU Global** for ggtags (apt-get install global)
+- **silversearcher-ag** for helm-ag (apt-get install silversearcher-ag)
+- **virtualev** for jedi ( pip install virtualenv )
+- **cygwin** for cygwin-mount.  
+	If you don't use cygwin on Windows, edit `conf.d/0900_cygwin.el` file as below:  
+	```
+	(when win32p (defvar cygwin-use nil))
+	```
