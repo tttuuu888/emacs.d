@@ -7,6 +7,7 @@
 (define-key global-map (kbd "C-c p") 'helm-git-grep-at-point) ;greP
 
 ;; Projectile is only used for the directory not controlled by git.
+(require 'helm-projectile)
 (setq projectile-require-project-root nil)
 (define-key global-map (kbd "C-c h o") 'helm-projectile-find-file)   ;Open file
 (define-key global-map (kbd "C-c h p") 'helm-projectile-ag) ;greP

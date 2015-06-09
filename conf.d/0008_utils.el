@@ -57,3 +57,10 @@
 ;; In terminal mode, change minibuffer prompt color to green
 (when (not window-system)
            (set-face-foreground 'minibuffer-prompt "green"))
+
+
+;; Clear Eshell buffer
+(defun eshell/clear ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
