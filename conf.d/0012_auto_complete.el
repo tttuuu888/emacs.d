@@ -5,8 +5,13 @@
 
 (ac-config-default)
 
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+    :commands yas-global-mode
+    :init
+    (dolist (hook '(c-mode-hook c++-mode-hook java-mode-hook lisp-mode-hook))
+      (add-hook hook #'yas-global-mode))
+    :config
+    (yas-global-mode 1))
 
 (defun my:ac-c-header-init ()
   (require 'auto-complete-c-headers)
@@ -128,4 +133,4 @@
   (my-semantic-parse-dir (expand-file-name dri) c-files-regex)
 )
  
-(provide 'lk-file-search)
+

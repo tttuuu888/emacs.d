@@ -7,8 +7,6 @@
 
 ;; Short cut key configure
 (global-set-key [(control z)] nil)
-;(global-set-key [(control \,)] 'complete-tag)
-;(global-set-key [(meta \,)] 'menu-bar-next-tag)
 
 ;; Avy
 (define-key global-map (kbd "C-c C-SPC") 'avy-goto-subword-1)
@@ -32,10 +30,7 @@
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 49 24 50 M-down] 0 "%d")) arg)))
 (fset 'spawn-window-up
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 49 24 50 M-up] 0 "%d")) arg)))
-;(define-key global-map [(control right)]  'spawn-window-left)
-;(define-key global-map [(control left)]  'spawn-window-right)
-;(define-key global-map [(control down)]  'spawn-window-down)
-;(define-key global-map [(control up)]  'spawn-window-up)
+
 (define-key global-map [(super q)] 'kill-this-buffer)
 ;(define-key global-map [(meta q)] 'kill-buffer-and-window)
 (define-key global-map [(control tab)] 'switch-to-buffer)
@@ -73,7 +68,4 @@
 
 ;; Run recent-open-files on startup
 (define-key global-map [(control x)(control r)]  'recentf-open-files)
-
-;; REDO +
-(global-set-key [(control .)] 'redo)
 

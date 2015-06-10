@@ -63,8 +63,6 @@
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
  '(org-log-done (quote time) t)
  '(org-startup-indented t)
- '(py-shell-name "ipython")
- '(py-split-windows-on-execute-function (quote split-window-horizontally))
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
  '(scheme-program-name "csi")

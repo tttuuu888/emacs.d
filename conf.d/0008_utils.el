@@ -38,6 +38,7 @@
 
 ;; REDO+
 (require 'redo+)
+(global-set-key [(control .)] 'redo)
 
 ;; Hide ^M 
 (defun hide-ctrl-M ()

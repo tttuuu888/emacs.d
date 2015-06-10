@@ -1,6 +1,10 @@
 ;; C-mode Setting
 
-(require 'stickyfunc-enhance)
+(use-package stickyfunc-enhance
+    :commands stickyfunc-enhance
+    :init
+    (dolist (hook '(c-mode-hook c++-mode-hook))
+      (add-hook hook #'stickyfunc-enhance)))
 
 (add-hook 'prog-mode-hook
           (lambda ()

@@ -41,6 +41,7 @@
     powerline
     stickyfunc-enhance
     yasnippet
+    use-package
     ))
 
 (when win32p
@@ -53,3 +54,5 @@
     (package-refresh-contents)
     (dolist (pkg not-installed)
       (package-install pkg))))
+
+(require 'use-package)
