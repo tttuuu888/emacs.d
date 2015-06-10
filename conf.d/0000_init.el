@@ -42,6 +42,7 @@
     stickyfunc-enhance
     yasnippet
     use-package
+    key-chord
     ))
 
 (when win32p
