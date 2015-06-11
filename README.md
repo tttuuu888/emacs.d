@@ -29,7 +29,6 @@ Especially if you are on Windows, below programs should be under your path to us
     * stickyfunc-enhance  
     * yasnippet
     * use-package
-    * key-chord
 
 ## Dependencies ##
 - **GNU Global** for ggtags (apt-get install global)
