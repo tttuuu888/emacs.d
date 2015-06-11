@@ -1,22 +1,19 @@
 ;; C-mode Setting
 
 (use-package stickyfunc-enhance
-    :commands stickyfunc-enhance
+    :mode "c-mode" "c++-mode")
+
+(use-package ggtags
+    :commands ggtags-mode
     :init
-    (dolist (hook '(c-mode-hook c++-mode-hook))
-      (add-hook hook #'stickyfunc-enhance)))
+    (dolist (hook '(c-mode-hook c++-mode-hook java-mode-hook asm-mode-hook))
+      (add-hook hook #'ggtags-mode)))
 
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (when (derived-mode-p 
-                   'c-mode 
-                   'c++-mode 
-                   'java-mode 
-                   'asm-mode)
-              (progn
-                (cscope-minor-mode)
-                (ggtags-mode)))))
-
+(use-package xcscope
+    :commands cscope-minor-mode
+    :init
+    (dolist (hook '(c-mode-hook c++-mode-hook java-mode-hook asm-mode-hook))
+      (add-hook hook #'cscope-minor-mode)))
 
 ;; #if 0 distinguish
 (defun cpp-highlight-if-0/1 ()
