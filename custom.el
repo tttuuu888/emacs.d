@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(ac-quick-help-delay 0.5)
  '(backup-directory-alist (quote ((".*" . "/tmp/"))))
+ '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
    (quote
@@ -61,7 +62,7 @@
  '(org-export-headline-levels 2)
  '(org-export-html-validation-link "")
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
- '(org-log-done (quote time) t)
+ '(org-log-done (quote time))
  '(org-startup-indented t)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
