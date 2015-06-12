@@ -6,10 +6,7 @@
 (ac-config-default)
 
 (use-package yasnippet
-    :commands yas-global-mode
-    :init
-    (dolist (hook '(c-mode-hook c++-mode-hook java-mode-hook lisp-mode-hook))
-      (add-hook hook #'yas-global-mode))
+    :mode "prog-mode"
     :config
     (yas-global-mode 1))
 
