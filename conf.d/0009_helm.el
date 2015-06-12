@@ -1,10 +1,11 @@
 ;; Helm Setting
 
-(global-set-key (kbd "C-c y") 'helm-show-kill-ring)
-
-(define-key global-map (kbd "C-c i") 'helm-semantic-or-imenu)
-(define-key global-map (kbd "C-c o") 'helm-git-files)   ;Open file
-(define-key global-map (kbd "C-c p") 'helm-git-grep-at-point) ;greP
+(use-package helm
+    :bind (("C-c y" . helm-show-kill-ring)
+           ("C-c i" . helm-semantic-or-imenu)
+           ("C-c o" . helm-git-files)          ;Open file
+           ("C-c p" . helm-git-grep-at-point)) ;greP
+    :config (helm-autoresize-mode 1))
 
 ;; Projectile is only used for the directory not controlled by git.
 (use-package helm-projectile
