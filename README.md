@@ -7,13 +7,13 @@ Packages are automatically installed when you start emacs.
 (Try restart a couple of times more, if it's not done at once.)  
   
 Copy `.emacs.d/conf.d/0001_path.el.bak` file to `0001_path.el` and set your path on it.
-Especially if you are on Windows, below programs should be under your path to use all features of my emacs setting.  
+Below programs should be under your path to use all features of this emacs setting.  
     * git / global / gtags / cscope / cscope-indexer  
     * python / lein  
 
 ## Packages ##
     * auto-complete / auto-complete-c-headers  
-    * magit / git-commit-mode / git-rebase-mode  
+    * magit  
     * ggtags / xcscope  
     * python-mode / jedi  
     * redo+  
