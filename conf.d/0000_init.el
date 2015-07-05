@@ -10,8 +10,6 @@
     auto-complete
     auto-complete-c-headers
     magit
-    git-commit-mode
-    git-rebase-mode
     ggtags
     xcscope
     python-mode
