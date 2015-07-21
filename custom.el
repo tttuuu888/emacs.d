@@ -24,6 +24,7 @@
  '(dired-listing-switches "-alh")
  '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
+ '(font-use-system-font t)
  '(gdb-many-windows t)
  '(geiser-implementations-alist
    (quote
