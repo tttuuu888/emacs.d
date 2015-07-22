@@ -104,6 +104,10 @@
     (add-hook 'scheme-mode-hook 'setup-chicken-scheme)
     (add-hook 'scheme-mode-hook 'enable-paredit-mode))
 
+(use-package web-mode
+    :ensure t
+    :defer t
+    :mode ("\\.html\\'" . web-mode))
 
 
 (provide 'conf-dev)

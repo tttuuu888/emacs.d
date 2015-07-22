@@ -112,6 +112,22 @@
     :config
     (use-package sk-dired))
 
+(use-package direx
+    :ensure t
+    :defer t
+    :bind ("C-c C-j" . direx:jump-to-directory)
+    :init
+    (setq
+     direx:leaf-icon "  "
+     direx:open-icon "▾ "
+     direx:closed-icon "▸ "
+     direx:ignored-files-regexp
+     (concat "\\(?:" (regexp-opt completion-ignored-extensions) "\\|#\\)$"))
+    :config
+    (let ((map direx:direx-mode-map))
+      (define-key map (kbd ".") 'direx:up-item)
+      (define-key map (kbd "N") 'direx:next-sibling-item)
+      (define-key map (kbd "P") 'direx:previous-sibling-item)))
 
 (use-package magit
     :ensure t
