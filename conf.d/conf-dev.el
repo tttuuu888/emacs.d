@@ -51,6 +51,12 @@
     (use-package python-mode
         :ensure t))
 
+(use-package paredit
+    :ensure t
+    :defer t
+    :commands enable-paredit-mode
+    :init
+    (add-hook 'clojure-mode-hook 'enable-paredit-mode))
 
 (use-package clojure-mode
     :ensure t
@@ -62,7 +68,8 @@
                                       (ac-cider-setup)))
     :config
     (use-package cider
-        :ensure t))
+        :ensure t)
+    (enable-paredit-mode))
 
 (use-package cider
     :ensure t
@@ -101,7 +108,15 @@
     :commands setup-chicken-scheme
     :init
     (add-hook 'scheme-mode-hook 'setup-chicken-scheme)
-    (add-hook 'scheme-mode-hook 'enable-paredit-mode))
+    (add-hook 'scheme-mode-hook 'enable-paredit-mode)
+    :config
+    (use-package geiser
+        :ensure t))
+
+(use-package geiser
+    :ensure t
+    :defer t
+    :commands run-geiser)
 
 (use-package web-mode
     :ensure t
