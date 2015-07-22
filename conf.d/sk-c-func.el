@@ -95,5 +95,14 @@
   (create-h-file file-name)
   (create-c-file file-name))
 
+(defun sk-find-project-root (dir)
+  (or (find-file-in-tree (file-name-directory dir) ".git")
+      (find-file-in-tree (file-name-directory dir) "project.clj")
+      (find-file-in-tree (file-name-directory dir) "Makefile")
+      (find-file-in-tree (file-name-directory dir) "READEME")
+      (find-file-in-tree (file-name-directory dir) "build.gradle")
+      "~/"))
+
+
 
 (provide 'sk-c-func)
