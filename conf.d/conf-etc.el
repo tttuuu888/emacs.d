@@ -101,6 +101,7 @@
     :config
     (use-package sk-dired))
 
+
 (use-package magit
     :ensure t
     :defer t
@@ -109,8 +110,17 @@
     (setq magit-last-seen-setup-instructions "1.4.0"))
 
 
-(fset 'yes-or-no-p 'y-or-n-p)
+(use-package avy
+    :ensure t
+    :defer t
+    :bind ("C-c C-SPC" . avy-goto-subword-1))
 
+(use-package expand-region
+    :ensure t
+    :defer t
+    :bind ("C-=" . er/expand-region))
+
+(use-package sk-util)
 
 
 (provide 'conf-etc)

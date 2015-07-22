@@ -26,9 +26,10 @@
         :ensure t))
 
 (use-package sk-c-mode
-    :init 
+    :init
     (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file))))
+              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file)))
+    (use-package sk-c-func))
 
 ;; Makefile.example -> Makefile
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
@@ -72,6 +73,36 @@
     (add-hook 'cider-repl-mode-hook (lambda ()
                                       (auto-complete-mode 1)
                                       (ac-cider-setup))))
+
+(use-package slime
+    :ensure t
+    :defer t
+    :commands slime
+    :init
+    (setq lisp-indent-function 'common-lisp-indent-function
+      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
+      slime-startup-animation nil
+      slime-enable-evaluate-in-emacs t
+      slime-log-events t
+      slime-outline-mode-in-events-buffer nil
+      slime-repl-return-behaviour :send-only-if-after-complete
+      slime-autodoc-use-multiline-p t
+      slime-highlight-compiler-notes t
+      slime-contribs '(slime-fancy))
+    ;(set-language-environment "UTF-8")
+    ;(setq slime-net-coding-system 'utf-8-unix)
+    (add-hook 'slime-mode-hook
+              (lambda ()
+                (define-key slime-mode-map (kbd "TAB") 'slime-indent-and-complete-symbol)
+                (define-key slime-mode-map (kbd "\r") 'newline-and-indent))))
+
+(use-package chicken-scheme
+    :ensure t
+    :defer t
+    :commands setup-chicken-scheme
+    :init
+    (add-hook 'scheme-mode-hook 'setup-chicken-scheme)
+    (add-hook 'scheme-mode-hook 'enable-paredit-mode))
 
 
 
