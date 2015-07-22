@@ -51,7 +51,7 @@
  '(ido-mode (quote buffer) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(init-loader-show-log-after-init nil)
+; '(init-loader-show-log-after-init nil)
  '(large-file-warning-threshold nil)
  '(make-backup-files nil)
  '(menu-bar-mode nil)

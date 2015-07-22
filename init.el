@@ -19,6 +19,6 @@
 (load custom-file)
 
 (require 'use-package)
-(use-package sk-start)
+(use-package conf-init)
 
 (recentf-open-files)
