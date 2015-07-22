@@ -12,14 +12,25 @@
     :init
     (bind-keys ("C-." . redo)))
 
+(use-package helm-git-grep
+    :ensure t
+    :defer t
+    :bind ("C-c p" . helm-git-grep-at-point) ;greP
+    :config (helm-autoresize-mode 1))
+
+(use-package helm-git-files
+    :ensure t
+    :defer t
+    :bind ("C-c o" . helm-git-files)          ;Open file
+    :config (helm-autoresize-mode 1))
+
 
 (use-package helm
     :ensure t
     :defer t
     :bind (("C-c y" . helm-show-kill-ring)
-           ("C-c i" . helm-semantic-or-imenu)
-           ("C-c o" . helm-git-files)          ;Open file
-           ("C-c p" . helm-git-grep-at-point)) ;greP
+           ("C-c i" . helm-semantic-or-imenu))
+
     :init
     (add-hook 'eshell-mode-hook (lambda ()
                                   (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
