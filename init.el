@@ -7,7 +7,7 @@
         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 
-;; init-loader
+;; use-package
 (when (not (package-installed-p 'use-package))
   (package-refresh-contents)
   (package-install 'use-package))

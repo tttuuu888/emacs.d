@@ -105,4 +105,4 @@
 
 
 
-(provide 'sk-c-func)
+(provide 'sk-functions)

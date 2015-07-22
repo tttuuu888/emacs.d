@@ -28,8 +28,7 @@
 (use-package sk-c-mode
     :init
     (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file)))
-    (use-package sk-c-func))
+              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file))))
 
 ;; Makefile.example -> Makefile
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
@@ -111,5 +110,6 @@
     :init
     (setq web-mode-markup-indent-offset 2))
 
+(use-package sk-functions)
 
 (provide 'conf-dev)
