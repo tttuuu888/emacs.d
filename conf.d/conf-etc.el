@@ -151,7 +151,7 @@
     :defer t
     :bind ("C-=" . er/expand-region))
 
-(use-package sk-util)
+(use-package sk-utils)
 
 
 (provide 'conf-etc)

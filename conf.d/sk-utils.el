@@ -43,4 +43,4 @@
 
 
 
-(provide 'sk-util)
+(provide 'sk-utils)
