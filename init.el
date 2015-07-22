@@ -8,18 +8,17 @@
 
 
 ;; init-loader
-(when (not (package-installed-p 'init-loader))
+(when (not (package-installed-p 'use-package))
   (package-refresh-contents)
-  (package-install 'init-loader))
+  (package-install 'use-package))
 
-(require 'init-loader)
-(setq init-loader-show-log-after-init 'error-only)
-(init-loader-load "~/.emacs.d/conf.d/")
-
+(add-to-list 'load-path "~/.emacs.d/conf.d/")
 
 ;; custom file
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+(require 'use-package)
+(use-package sk-start)
 
 (recentf-open-files)
