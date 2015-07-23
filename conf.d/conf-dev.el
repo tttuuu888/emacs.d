@@ -5,7 +5,9 @@
     :defer t
     :init
     (add-hook 'c-mode-common-hook (lambda () (ggtags-mode 1)))
-    (add-hook 'asm-hook (lambda () (ggtags-mode 1))))
+    (add-hook 'asm-hook (lambda () (ggtags-mode 1)))
+    :config
+    (local-set-key [(f9)] 'sk-rebuild))
 
 (use-package xcscope
     :ensure t
@@ -28,7 +30,10 @@
 (use-package sk-c-mode
     :init
     (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file))))
+              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file)))
+    (add-hook 'eshell-mode-hook
+              (lambda () (local-set-key [(f9)] 'sk-rebuild))))
+
 
 ;; Makefile.example -> Makefile
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
