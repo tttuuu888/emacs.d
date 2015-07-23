@@ -48,13 +48,19 @@
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :config
-    (setq py-shell-name "python")
-    (setq py-split-windows-on-execute-function (quote split-window-horizontally))
-    (setq py-install-directory
+    (setq py-shell-name "python"
+          py-split-windows-on-execute-function (quote split-window-horizontally)
+          py-install-directory
           (concat "~/.emacs.d/elpa/" (car (directory-files "~/.emacs.d/elpa/" nil "python-mode*"))))
-    (setq jedi:complete-on-dot t)
     (use-package python-mode
         :ensure t))
+
+(use-package jedi
+    :ensure t
+    :defer t
+    :commands jedi:setup
+    :config
+    (setq jedi:complete-on-dot t))
 
 (use-package paredit
     :ensure t

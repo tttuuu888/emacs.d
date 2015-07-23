@@ -24,7 +24,6 @@
     :bind ("C-c o" . helm-git-files)          ;Open file
     :config (helm-autoresize-mode 1))
 
-
 (use-package helm
     :ensure t
     :defer t
@@ -37,6 +36,10 @@
     :config
     (helm-autoresize-mode 1))
 
+(use-package helm-ag
+    :ensure t
+    :defer t
+    :commands helm-ag)
 
 ;; Projectile is only used for the directory not controlled by git.
 (use-package helm-projectile

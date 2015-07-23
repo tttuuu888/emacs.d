@@ -4,10 +4,8 @@ This is my personal Emacs setting.
 ## Setup ##
     git clone https://github.com/tttuuu888/emacs.d.git ~/.emacs.d
 Packages are automatically installed when you start emacs.  
-(Try restart a couple of times more, if it's not done at once.)  
   
-Copy `.emacs.d/conf.d/0001_path.el.bak` file to `0001_path.el` and set your path on it.
-Below programs should be under your path to use all features of this emacs setting.  
+Below programs should be located under your global path to use all features of this emacs setting.  
     * git / global / gtags / cscope / cscope-indexer  
     * python / lein  
 
@@ -34,8 +32,3 @@ Below programs should be under your path to use all features of this emacs setti
 - **GNU Global** for ggtags (apt-get install global)
 - **silversearcher-ag** for helm-ag (apt-get install silversearcher-ag)
 - **virtualenv** for jedi ( pip install virtualenv )
-- **cygwin** for cygwin-mount.  
-	If you don't use cygwin on Windows, edit `conf.d/0900_cygwin.el` file as below:  
-	```
-	(when win32p (defvar cygwin-use nil))
-	```
