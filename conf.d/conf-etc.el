@@ -154,7 +154,25 @@
     :defer t
     :bind ("C-=" . er/expand-region))
 
-(use-package sk-utils)
+(use-package sk-utils
+    :init
+  (bind-keys
+   ("<f5>" . (lambda nil (interactive) (jump-to-register ?5) (message "Windows are Restored by F5")))
+   ("<f6>" . (lambda nil (interactive) (jump-to-register ?6) (message "Windows are Restored by F6")))
+   ("<f7>" . (lambda nil (interactive) (jump-to-register ?7) (message "Windows are Restored by F7")))
+   ("<f8>" . (lambda nil (interactive) (jump-to-register ?8) (message "Windows are Restored by F8")))
+   ("C-<f5>" . (lambda nil (interactive)
+                                 (window-configuration-to-register ?5)
+                                 (message "Windows configuration saved to F5")))
+   ("C-<f6>" . (lambda nil (interactive)
+                                 (window-configuration-to-register ?6)
+                                 (message "Windows configuration saved to F6")))
+   ("C-<f7>" . (lambda nil (interactive)
+                                 (window-configuration-to-register ?7)
+                                 (message "Windows configuration saved to F7")))
+   ("C-<f8>" . (lambda nil (interactive)
+                                 (window-configuration-to-register ?8)
+                                 (message "Windows configuration saved to F8")))))
 
 
 (provide 'conf-etc)
