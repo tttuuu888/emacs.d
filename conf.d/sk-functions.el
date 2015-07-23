@@ -1,6 +1,6 @@
 ;; My functions
 
-; build functions
+;; build functions
 (defun parent-directory (dir)
   (unless (equal "/" dir)
     (file-name-directory (directory-file-name dir))))
@@ -32,26 +32,17 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (unless (equal dir nil)
-       (call-process "make" nil nil nil "-C" dir "clean")
-       (compile (concat "make -C " dir)))))
-
-
-(add-hook 'prog-mode-hook
-          (lambda () (when (derived-mode-p 'c-mode 'c++-mode)
-                                           (local-set-key [(f9)] 'sk-rebuild))))
-
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (local-set-key [(f9)] 'sk-rebuild)))
+      (call-process "make" nil nil nil "-C" dir "clean")
+      (compile (concat "make -C " dir)))))
 
 
 ;; making .c .h files
-(defun make-author-info (file-name) 
+(defun make-author-info (file-name)
   (concat "/**\n * " file-name "
  * Created by SK Kim\n * " (format-time-string "%Y-%m-%d") "
  */\n"))
 
-(defun c-file-shape (file-name) 
+(defun c-file-shape (file-name)
   (concat (make-author-info (concat file-name ".c"))
 "/* Includes ------------------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

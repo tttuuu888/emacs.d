@@ -11,15 +11,13 @@
                            (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
                            (lambda () (interactive) (find-alternate-file "..")))
-            (local-set-key [(f9)] 'sk-rebuild)
-                                        ; was dired-up-directory
-            ))
+            (local-set-key [(f9)] 'sk-rebuild)))
 
 (defun mydired-sort ()
   "Sort dired listings with directories first."
   (save-excursion
     (let (buffer-read-only)
-      (forward-line 2) ;; beyond dir. header 
+      (forward-line 2) ;; beyond dir. header
       (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
     (set-buffer-modified-p nil)))
 
@@ -38,7 +36,7 @@
             )))
 
 
-;;;; win32 hiding gid, uid in dired mode
+;; win32 hiding gid, uid in dired mode
 (when win32p
   (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity))
   (setq ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))

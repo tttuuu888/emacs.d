@@ -24,8 +24,7 @@
 
 (defun jpk/c-mode-hook ()
   (cpp-highlight-if-0/1)
-  (add-hook 'after-save-hook 'cpp-highlight-if-0/1 'append 'local)
-  )
+  (add-hook 'after-save-hook 'cpp-highlight-if-0/1 'append 'local))
 
 ;(add-hook 'c-mode-common-hook 'jpk/c-mode-hook)
 
@@ -36,5 +35,6 @@
   (save-excursion
     (goto-char end) (end-of-line) (insert "\n#endif")
     (goto-char start) (beginning-of-line) (insert "#if 0\n")))
+
 
 (provide 'sk-c-mode)

@@ -23,11 +23,11 @@
   "kill all buffers, leaving *scratch* only"
   (interactive)
   (mapcar (lambda (x) (kill-buffer x))
-	  (buffer-list))
+          (buffer-list))
   (delete-other-windows))
 
 
-;; Hide ^M 
+;; Hide ^M
 (defun hide-ctrl-M ()
   "Hides the disturbing '^M' showing up in files containing mixed UNIX and DOS line endings."
   (interactive)

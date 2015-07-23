@@ -96,10 +96,10 @@
       (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all))
 
     (add-hook 'ibuffer-mode-hook
-          '(lambda ()
-            (ibuffer-auto-mode 1)
-            (ibuffer-switch-to-saved-filter-groups "home")
-            (my-ibuffer-mode-hook))))
+              '(lambda ()
+                (ibuffer-auto-mode 1)
+                (ibuffer-switch-to-saved-filter-groups "home")
+                (my-ibuffer-mode-hook))))
 
 (use-package org
     :defer t
@@ -107,8 +107,8 @@
     :config
     (bind-keys :map org-mode-map
                ("C-c l" . org-store-link)
-               ("C-c a" . org-agenda)    
-               ("C-c b" . org-iswitchb)  
+               ("C-c a" . org-agenda)
+               ("C-c b" . org-iswitchb)
                ("C-c r" . org-remember))
     (setq org-log-done t))
 
@@ -167,17 +167,17 @@
    ("<f7>" . (lambda nil (interactive) (jump-to-register ?7) (message "Windows are Restored by F7")))
    ("<f8>" . (lambda nil (interactive) (jump-to-register ?8) (message "Windows are Restored by F8")))
    ("C-<f5>" . (lambda nil (interactive)
-                                 (window-configuration-to-register ?5)
-                                 (message "Windows configuration saved to F5")))
+                       (window-configuration-to-register ?5)
+                       (message "Windows configuration saved to F5")))
    ("C-<f6>" . (lambda nil (interactive)
-                                 (window-configuration-to-register ?6)
-                                 (message "Windows configuration saved to F6")))
+                       (window-configuration-to-register ?6)
+                       (message "Windows configuration saved to F6")))
    ("C-<f7>" . (lambda nil (interactive)
-                                 (window-configuration-to-register ?7)
-                                 (message "Windows configuration saved to F7")))
+                       (window-configuration-to-register ?7)
+                       (message "Windows configuration saved to F7")))
    ("C-<f8>" . (lambda nil (interactive)
-                                 (window-configuration-to-register ?8)
-                                 (message "Windows configuration saved to F8")))))
+                       (window-configuration-to-register ?8)
+                       (message "Windows configuration saved to F8")))))
 
 
 (provide 'conf-etc)

@@ -29,10 +29,12 @@
 
 (use-package sk-c-mode
     :init
-    (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-o") 'ff-find-other-file)))
-    (add-hook 'eshell-mode-hook
-              (lambda () (local-set-key [(f9)] 'sk-rebuild))))
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (local-set-key (kbd "M-o") 'ff-find-other-file)
+              (local-set-key [(f9)] 'sk-rebuild)))
+  (add-hook 'eshell-mode-hook
+            (lambda () (local-set-key [(f9)] 'sk-rebuild))))
 
 
 ;; Makefile.example -> Makefile
@@ -48,6 +50,9 @@
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :config
+    (bind-keys :map python-mode-map
+               ("M-." . jedi:goto-definition)
+               ("M-*" . jedi:goto-definition-pop-marker))
     (setq py-shell-name "python"
           py-split-windows-on-execute-function (quote split-window-horizontally)
           py-install-directory
@@ -97,17 +102,17 @@
     :commands slime
     :init
     (setq lisp-indent-function 'common-lisp-indent-function
-      slime-complete-symbol-function 'slime-fuzzy-complete-symbol
-      slime-startup-animation nil
-      slime-enable-evaluate-in-emacs t
-      slime-log-events t
-      slime-outline-mode-in-events-buffer nil
-      slime-repl-return-behaviour :send-only-if-after-complete
-      slime-autodoc-use-multiline-p t
-      slime-highlight-compiler-notes t
-      slime-contribs '(slime-fancy))
-    ;(set-language-environment "UTF-8")
-    ;(setq slime-net-coding-system 'utf-8-unix)
+          slime-complete-symbol-function 'slime-fuzzy-complete-symbol
+          slime-startup-animation nil
+          slime-enable-evaluate-in-emacs t
+          slime-log-events t
+          slime-outline-mode-in-events-buffer nil
+          slime-repl-return-behaviour :send-only-if-after-complete
+          slime-autodoc-use-multiline-p t
+          slime-highlight-compiler-notes t
+          slime-contribs '(slime-fancy))
+    ;;(set-language-environment "UTF-8")
+    ;;(setq slime-net-coding-system 'utf-8-unix)
     (add-hook 'slime-mode-hook
               (lambda ()
                 (define-key slime-mode-map (kbd "TAB") 'slime-indent-and-complete-symbol)
@@ -134,5 +139,7 @@
     (setq web-mode-markup-indent-offset 2))
 
 (use-package sk-functions)
+
+
 
 (provide 'conf-dev)
