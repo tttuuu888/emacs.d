@@ -5,7 +5,8 @@
     :init
     (require 'auto-complete-config)
     (global-auto-complete-mode 1)
-    (ac-config-default))
+    (ac-config-default)
+    (setq ac-quick-help-delay 0.5))
 
 (use-package redo+
     :ensure t
@@ -33,6 +34,8 @@
     :init
     (add-hook 'eshell-mode-hook (lambda ()
                                   (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
+    (setq helm-imenu-execute-action-at-once-if-one nil
+          helm-split-window-default-side 'right)
     :config
     (helm-autoresize-mode 1))
 
@@ -82,7 +85,8 @@
              ("Help" (or (name . "\*Help\*")
                          (name . "\*Apropos\*")
                          (name . "\*info\*"))))))
-    (setq ibuffer-expert t)
+    (setq ibuffer-expert t
+          ibuffer-default-sorting-mode 'major-mode)
     (defun my-ibuffer-unmark-all ()
       "Unmark all immdiately"
       (interactive)
@@ -110,8 +114,9 @@
 
 (use-package dired
     :defer t
-    :config
-    (use-package sk-dired))
+    :init
+    (use-package sk-dired)
+    (setq dired-listing-switches "-alh"))
 
 (use-package direx
     :ensure t

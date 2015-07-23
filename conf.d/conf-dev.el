@@ -119,15 +119,12 @@
     :commands setup-chicken-scheme
     :init
     (add-hook 'scheme-mode-hook 'setup-chicken-scheme)
-    (add-hook 'scheme-mode-hook 'enable-paredit-mode)
-    :config
-    (use-package geiser
-        :ensure t))
+    (add-hook 'scheme-mode-hook 'enable-paredit-mode))
 
 (use-package geiser
     :ensure t
     :defer t
-    :commands run-geiser)
+    :commands geiser run-geiser)
 
 (use-package web-mode
     :ensure t

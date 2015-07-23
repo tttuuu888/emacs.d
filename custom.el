@@ -3,7 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-quick-help-delay 0.5)
  '(backup-directory-alist (quote ((".*" . "/tmp/"))))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
@@ -21,31 +20,12 @@
      (tool-bar-lines . 0)
      (line-spacing . 2))))
  '(diary-file "~/Dropbox/org/diary")
- '(dired-listing-switches "-alh")
  '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(font-use-system-font t)
  '(gdb-many-windows t)
- '(geiser-implementations-alist
-   (quote
-    (((regexp "\\.ss$")
-      racket)
-     ((regexp "\\.rkt$")
-      racket)
-     ((regexp "\\.scm$")
-      chicken)
-     ((regexp "\\.release-info$")
-      chicken)
-     ((regexp "\\.meta$")
-      chicken)
-     ((regexp "\\.setup$")
-      chicken))))
  '(global-auto-revert-mode t)
  '(gud-gdb-command-name "gdb -i=mi")
- '(helm-imenu-execute-action-at-once-if-one nil)
- '(helm-split-window-default-side (quote right))
- '(ibuffer-default-sorting-mode (quote major-mode))
- '(ibuffer-expert t)
  '(ido-mode (quote buffer) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -85,5 +65,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ggtags-highlight ((t nil)))
  '(powerline-active1 ((t (:inherit mode-line :background "grey22" :foreground "white")))))
