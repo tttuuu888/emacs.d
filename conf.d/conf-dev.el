@@ -31,7 +31,6 @@
     :init
   (add-hook 'c-mode-common-hook
             (lambda ()
-              (local-set-key (kbd "M-o") 'ff-find-other-file)
               (local-set-key [(f9)] 'sk-rebuild)))
   (add-hook 'eshell-mode-hook
             (lambda () (local-set-key [(f9)] 'sk-rebuild))))
@@ -137,6 +136,16 @@
     :mode ("\\.html\\'" . web-mode)
     :init
     (setq web-mode-markup-indent-offset 2))
+
+(use-package eassist
+    :defer t
+    :load-path "~/.emacs.d/conf.d/external"
+    :commands (eassist-switch-h-cpp eassist-list-methods)
+    :init
+    (defun my-c-mode-common-hook ()
+      (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+      (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+    (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
 
 (use-package sk-functions)
 
