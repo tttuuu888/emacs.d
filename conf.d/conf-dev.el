@@ -20,10 +20,12 @@
     :ensure t
     :defer t
     :init
-    (add-hook 'c-mode-common-hook (lambda () (semantic-mode 1)))
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (semantic-mode 1)
+                (global-semantic-stickyfunc-mode 1)))
     (add-hook 'asm-hook (lambda () (semantic-mode 1)))
     :config
-    (global-semantic-stickyfunc-mode 1)
     (use-package stickyfunc-enhance
         :ensure t))
 
