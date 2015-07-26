@@ -28,6 +28,7 @@
                     "C:/home/util/Python27/Scripts"
                     "C:/home/util/Python27/Lib/site-packages/PyQt4"
                     "C:/home/util/cygwin/bin"
+                    "C:/home/util/Git/bin"
                     "C:/home/.lein/bin")))
 
 
