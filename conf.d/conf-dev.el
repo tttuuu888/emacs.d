@@ -48,12 +48,12 @@
     :commands jedi:setup
     :init
     (add-hook 'python-mode-hook 'jedi:setup)
-    :mode ("\\.py\\'" . python-mode)
-    :interpreter ("python" . python-mode)
-    :config
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker))
+    :mode ("\\.py\\'" . python-mode)
+    :interpreter ("python" . python-mode)
+    :config
     (setq py-shell-name "python"
           py-split-windows-on-execute-function (quote split-window-horizontally)
           py-install-directory
