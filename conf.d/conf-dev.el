@@ -45,12 +45,8 @@
 (use-package python
     :ensure t
     :defer t
-    :commands jedi:setup
     :init
     (add-hook 'python-mode-hook 'jedi:setup)
-    (bind-keys :map python-mode-map
-               ("M-." . jedi:goto-definition)
-               ("M-*" . jedi:goto-definition-pop-marker))
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :config
@@ -59,7 +55,11 @@
           py-install-directory
           (concat "~/.emacs.d/elpa/" (car (directory-files "~/.emacs.d/elpa/" nil "python-mode*"))))
     (use-package python-mode
-        :ensure t))
+        :ensure t)
+    (bind-keys :map python-mode-map
+               ("M-." . jedi:goto-definition)
+               ("M-*" . jedi:goto-definition-pop-marker))
+    )
 
 (use-package jedi
     :ensure t
