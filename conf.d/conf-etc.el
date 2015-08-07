@@ -1,12 +1,18 @@
 ;; Etectra settings
 
-(use-package auto-complete
+(use-package company
     :ensure t
     :init
-    (require 'auto-complete-config)
-    (global-auto-complete-mode 1)
-    (ac-config-default)
-    (setq ac-quick-help-delay 0.5))
+    (global-company-mode 1)
+    (setq company-idle-delay 0.2))
+
+(use-package jedi-core
+    :ensure t
+    :defer t)
+
+(use-package company-jedi
+    :ensure t
+    :defer t)
 
 (use-package redo+
     :ensure t

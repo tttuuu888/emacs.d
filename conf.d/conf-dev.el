@@ -45,8 +45,6 @@
 (use-package python
     :ensure t
     :defer t
-    :init
-    (add-hook 'python-mode-hook 'jedi:setup)
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :config
@@ -59,14 +57,7 @@
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker))
-    )
-
-(use-package jedi
-    :ensure t
-    :defer t
-    :commands jedi:setup
-    :config
-    (setq jedi:complete-on-dot t))
+    (add-to-list 'company-backends 'company-jedi))
 
 (use-package paredit
     :ensure t
@@ -79,10 +70,6 @@
     :ensure t
     :defer t
     :mode ("\\.clj\\'" . clojure-mode)
-    :init
-    (add-hook 'cider-repl-mode-hook (lambda ()
-                                      (auto-complete-mode 1)
-                                      (ac-cider-setup)))
     :config
     (use-package cider
         :ensure t)
@@ -91,11 +78,7 @@
 (use-package cider
     :ensure t
     :defer t
-    :interpreter ("clojure" . cider-repl-mode)
-    :config
-    (add-hook 'cider-repl-mode-hook (lambda ()
-                                      (auto-complete-mode 1)
-                                      (ac-cider-setup))))
+    :interpreter ("clojure" . cider-repl-mode))
 
 (use-package slime
     :ensure t
