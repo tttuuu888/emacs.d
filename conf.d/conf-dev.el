@@ -27,7 +27,11 @@
     (add-hook 'asm-hook (lambda () (semantic-mode 1)))
     :config
     (use-package stickyfunc-enhance
-        :ensure t))
+        :ensure t)
+    (define-key c-mode-map [remap c-indent-line-or-region]
+      'company-indent-or-complete-common)
+    (define-key c++-mode-map [remap c-indent-line-or-region]
+      'company-indent-or-complete-common))
 
 (use-package sk-c-mode
     :init
@@ -131,6 +135,11 @@
       (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
       (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
     (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
+
+(use-package lk-file-search
+    :defer t
+    :load-path "~/.emacs.d/conf.d/external"
+    :commands (lk-parse-dir-c lk-parse-curdir-c))
 
 (use-package sk-functions)
 
