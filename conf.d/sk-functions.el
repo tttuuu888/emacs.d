@@ -95,5 +95,22 @@
       "~/"))
 
 
+(defun clang-complete-armcc ()
+  (interactive)
+  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile"))
+        (ccpy "~/.emacs.d/conf.d/external/cc_args.py ")
+        (armcc "arm-none-eabi-gcc")
+        (armc++ "arm-none-eabi-g++"))
+    (compile (concat "make -j8 -C " dir " 'CC=" ccpy armcc "' 'CXX=" ccpy armc++ "' -B"))))
+
+(defun clang-complete-gcc ()
+  (interactive)
+  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile"))
+        (ccpy "~/.emacs.d/conf.d/external/cc_args.py ")
+        (armcc "gcc")
+        (armc++ "g++"))
+    (compile (concat "make -j8 -C " dir " 'CC=" ccpy armcc "' 'CXX=" ccpy armc++ "' -B"))))
+
+
 
 (provide 'sk-functions)

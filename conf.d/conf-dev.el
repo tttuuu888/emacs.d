@@ -136,11 +136,6 @@
       (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
     (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
 
-(use-package lk-file-search
-    :defer t
-    :load-path "~/.emacs.d/conf.d/external"
-    :commands (lk-parse-dir-c lk-parse-curdir-c))
-
 (use-package sk-functions)
 
 
