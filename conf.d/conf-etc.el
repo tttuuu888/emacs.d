@@ -4,7 +4,8 @@
     :ensure t
     :init
     (global-company-mode 1)
-    (setq company-idle-delay 0.2)
+    (setq company-idle-delay 0.1)
+    (setq company-minimum-prefix-length 2)
     :config
     (add-to-list 'company-backends 'company-irony))
 

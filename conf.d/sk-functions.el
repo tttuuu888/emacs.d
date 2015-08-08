@@ -111,6 +111,18 @@
         (armc++ "g++"))
     (compile (concat "make -j8 -C " dir " 'CC=" ccpy armcc "' 'CXX=" ccpy armc++ "' -B"))))
 
+(defun clang-complete-make ()
+  (interactive)
+  (let ((includes
+         (mapcar (lambda (x) (concat "-I" x "\n"))
+                 (split-string
+                  (shell-command-to-string "find -name '*.h' -printf '%h\n' | sort -u")))))
+    (if (file-exists-p "./.clang_complete")
+        (message ".clang_complete already exists.")
+        (progn
+          (write-region "" nil "./.clang_complete")
+          (mapc (lambda (x) (append-to-file x nil "./.clang_complete")) includes)))))
+
 
 
 (provide 'sk-functions)
