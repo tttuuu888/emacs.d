@@ -80,7 +80,7 @@
     :ensure t
     :defer t
     :bind (("C-c h o" . helm-projectile-find-file)
-           ("C-c h p" . helm-projectile-ag))
+           ("C-c h p" . helm-do-ag-project-root))
     :config
     (setq projectile-require-project-root nil))
 
