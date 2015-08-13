@@ -73,14 +73,15 @@
 (use-package helm-ag
     :ensure t
     :defer t
-    :commands helm-ag)
+    :commands helm-do-ag
+    :bind ("C-c h p" . helm-do-ag))
 
 ;; Projectile is only used for the directory not controlled by git.
 (use-package helm-projectile
     :ensure t
     :defer t
-    :bind (("C-c h o" . helm-projectile-find-file)
-           ("C-c h p" . helm-do-ag-project-root))
+    :bind ("C-c h o" . helm-projectile-find-file)
+
     :config
     (setq projectile-require-project-root nil))
 
