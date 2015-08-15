@@ -133,9 +133,15 @@
                 (ibuffer-switch-to-saved-filter-groups "home")
                 (my-ibuffer-mode-hook))))
 
+
 (use-package org
     :defer t
     :mode ("\\.org\\'" . org-mode)
+    :init
+    (add-hook 'org-mode-hook
+              (lambda ()
+                (use-package ox-ioslide)
+                (use-package ox-ioslide-helper)))
     :config
     (bind-keys :map org-mode-map
                ("C-c l" . org-store-link)
@@ -143,6 +149,11 @@
                ("C-c b" . org-iswitchb)
                ("C-c r" . org-remember))
     (setq org-log-done t))
+
+(use-package ox-ioslide
+    :ensure t
+    :defer t)
+
 
 (use-package dired
     :defer t
