@@ -65,8 +65,9 @@
 
 
 ;; In terminal mode, change color of minibuffer prompt to green
-(when (not window-system)
-  (set-face-foreground 'minibuffer-prompt "green"))
+(if window-system
+    (global-hl-line-mode t)
+    (set-face-foreground 'minibuffer-prompt "green"))
 
 ;; y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
