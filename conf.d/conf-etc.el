@@ -202,6 +202,13 @@
     :defer t
     :bind ("C-=" . er/expand-region))
 
+(use-package aes
+    :ensure t
+    :defer t
+    :commands aes-toggle-encryption
+    :config
+    (aes-enable-auto-decryption))
+
 (use-package sk-utils
     :init
   (bind-keys
@@ -221,6 +228,10 @@
    ("C-<f8>" . (lambda nil (interactive)
                        (window-configuration-to-register ?8)
                        (message "Windows configuration saved to F8")))))
+
+(use-package sk-bit-util
+    :defer t
+    :commands sk-bit-print)
 
 
 (provide 'conf-etc)
