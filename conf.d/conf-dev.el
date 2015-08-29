@@ -5,16 +5,16 @@
     :defer t
     :init
     (add-hook 'c-mode-common-hook (lambda () (ggtags-mode 1)))
-    (add-hook 'asm-hook (lambda () (ggtags-mode 1)))
-    :config
-    (local-set-key [(f9)] 'sk-rebuild))
+    (add-hook 'asm-mode-hook (lambda () (ggtags-mode 1))))
+
+
 
 (use-package xcscope
     :ensure t
     :defer t
     :init
     (add-hook 'c-mode-common-hook (lambda () (cscope-minor-mode 1)))
-    (add-hook 'asm-hook (lambda () (cscope-minor-mode 1))))
+    (add-hook 'asm-mode-hook (lambda () (cscope-minor-mode 1))))
 
 (use-package semantic
     :ensure t
@@ -24,7 +24,7 @@
               (lambda ()
                 (semantic-mode 1)
                 (global-semantic-stickyfunc-mode 1)))
-    (add-hook 'asm-hook (lambda () (semantic-mode 1)))
+    (add-hook 'asm-mode-hook (lambda () (semantic-mode 1)))
     :config
     (use-package stickyfunc-enhance
         :ensure t)
@@ -34,12 +34,13 @@
       'company-indent-or-complete-common))
 
 (use-package sk-c-mode
+    :defer t
     :init
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (local-set-key [(f9)] 'sk-rebuild)))
-  (add-hook 'eshell-mode-hook
-            (lambda () (local-set-key [(f9)] 'sk-rebuild))))
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+                (local-set-key [(f9)] 'sk-rebuild)))
+    (add-hook 'eshell-mode-hook
+              (lambda () (local-set-key [(f9)] 'sk-rebuild))))
 
 
 ;; Makefile.example -> Makefile
