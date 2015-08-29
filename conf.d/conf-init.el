@@ -44,7 +44,7 @@
 ;; Lisp Path
 (if unixp
     (setq inferior-lisp-program "/usr/bin/clisp")
-                                        ;(setq inferior-lisp-program "/usr/bin/sbcl")
+    ;;(setq inferior-lisp-program "/usr/bin/sbcl")
     (setq inferior-lisp-program "C:/home/util/clisp-2.49/clisp"))
 
 ;; hangul 3bulsik

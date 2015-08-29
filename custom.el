@@ -44,7 +44,6 @@
  '(org-startup-indented t)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
- '(scheme-program-name "csi")
  '(scroll-bar-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(setq send-mail-function t)

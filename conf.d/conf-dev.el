@@ -7,8 +7,6 @@
     (add-hook 'c-mode-common-hook (lambda () (ggtags-mode 1)))
     (add-hook 'asm-mode-hook (lambda () (ggtags-mode 1))))
 
-
-
 (use-package xcscope
     :ensure t
     :defer t
@@ -17,6 +15,7 @@
     (add-hook 'asm-mode-hook (lambda () (cscope-minor-mode 1))))
 
 (use-package semantic
+    :disabled
     :ensure t
     :defer t
     :init
@@ -27,11 +26,7 @@
     (add-hook 'asm-mode-hook (lambda () (semantic-mode 1)))
     :config
     (use-package stickyfunc-enhance
-        :ensure t)
-    (define-key c-mode-map [remap c-indent-line-or-region]
-      'company-indent-or-complete-common)
-    (define-key c++-mode-map [remap c-indent-line-or-region]
-      'company-indent-or-complete-common))
+        :ensure t))
 
 (use-package sk-c-mode
     :defer t
@@ -113,7 +108,8 @@
     :commands setup-chicken-scheme
     :init
     (add-hook 'scheme-mode-hook 'setup-chicken-scheme)
-    (add-hook 'scheme-mode-hook 'enable-paredit-mode))
+    (add-hook 'scheme-mode-hook 'enable-paredit-mode)
+    (setq scheme-program-name "csi"))
 
 (use-package geiser
     :ensure t
