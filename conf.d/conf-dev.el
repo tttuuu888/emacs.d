@@ -97,10 +97,7 @@
           slime-contribs '(slime-fancy))
     ;;(set-language-environment "UTF-8")
     ;;(setq slime-net-coding-system 'utf-8-unix)
-    (add-hook 'slime-mode-hook
-              (lambda ()
-                (define-key slime-mode-map (kbd "TAB") 'slime-indent-and-complete-symbol)
-                (define-key slime-mode-map (kbd "\r") 'newline-and-indent))))
+)
 
 (use-package chicken-scheme
     :ensure t
