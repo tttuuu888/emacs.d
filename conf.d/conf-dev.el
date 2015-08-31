@@ -57,7 +57,8 @@
         :ensure t)
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
-               ("M-*" . jedi:goto-definition-pop-marker))
+               ("M-*" . jedi:goto-definition-pop-marker)
+               ("TAB" . company-indent-or-complete-common))
     (add-to-list 'company-backends 'company-jedi))
 
 (use-package paredit
