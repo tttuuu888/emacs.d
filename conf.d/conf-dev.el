@@ -48,6 +48,11 @@
     :defer t
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
+    :init
+    (defun my-company-python-setup ()
+      (make-local-variable 'company-backends)
+      (setq company-backends (remq 'company-capf company-backends)))
+    (add-hook 'python-mode-hook 'my-company-python-setup)
     :config
     (setq py-shell-name "python"
           py-split-windows-on-execute-function (quote split-window-horizontally)
