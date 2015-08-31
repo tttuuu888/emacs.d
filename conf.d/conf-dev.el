@@ -133,8 +133,7 @@
     :commands (eassist-switch-h-cpp eassist-list-methods)
     :init
     (defun my-c-mode-common-hook ()
-      (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
-      (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+      (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp))
     (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
 
 (use-package sk-functions)
