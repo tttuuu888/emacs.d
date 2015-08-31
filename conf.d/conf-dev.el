@@ -30,6 +30,7 @@
 
 (use-package sk-c-mode
     :defer t
+    :commands izero-insert
     :init
     (add-hook 'c-mode-common-hook
               (lambda ()
