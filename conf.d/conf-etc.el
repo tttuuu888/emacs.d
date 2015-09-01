@@ -1,4 +1,4 @@
-;; Etectra settings
+;; Other settings
 
 (use-package company
     :ensure t
@@ -210,7 +210,7 @@
     :config
     (aes-enable-auto-decryption))
 
-(use-package sk-utils
+(use-package sk-etc-utils
     :init
   (bind-keys
    ("<f5>" . (lambda nil (interactive) (jump-to-register ?5) (message "Windows are Restored by F5")))

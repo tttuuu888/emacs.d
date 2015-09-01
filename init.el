@@ -13,6 +13,7 @@
   (package-install 'use-package))
 
 (add-to-list 'load-path "~/.emacs.d/conf.d/")
+(add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
 
 ;; custom file
 (setq custom-file "~/.emacs.d/custom.el")

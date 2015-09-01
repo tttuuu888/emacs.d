@@ -43,4 +43,4 @@
 
 
 
-(provide 'sk-utils)
+(provide 'sk-etc-utils)

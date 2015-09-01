@@ -136,7 +136,7 @@
       (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp))
     (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
 
-(use-package sk-functions)
+(use-package sk-dev-utils)
 
 
 
