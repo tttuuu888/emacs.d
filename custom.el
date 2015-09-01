@@ -26,7 +26,6 @@
  '(gdb-many-windows t)
  '(global-auto-revert-mode t)
  '(gud-gdb-command-name "gdb -i=mi")
- '(ido-mode (quote both) nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(large-file-warning-threshold nil)

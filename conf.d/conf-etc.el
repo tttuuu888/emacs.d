@@ -210,6 +210,15 @@
     :config
     (aes-enable-auto-decryption))
 
+(use-package ido-vertical-mode
+    :ensure t
+    :init
+    (ido-mode 1)
+    (ido-vertical-mode 1)
+    (setq ido-vertical-define-keys 'C-n-and-C-p-only))
+
+
+
 (use-package sk-etc-utils
     :init
   (bind-keys
