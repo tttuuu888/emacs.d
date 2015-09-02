@@ -81,8 +81,12 @@
 (use-package helm-projectile
     :ensure t
     :defer t
-    :bind ("C-c h o" . helm-projectile-find-file)
+    :bind ("C-c h o" . helm-projectile-find-file))
 
+(use-package projectile
+    :ensure t
+    :defer t
+    :bind ("C-c h b" . projectile-switch-to-buffer)
     :config
     (setq projectile-require-project-root nil))
 
@@ -162,28 +166,16 @@
     (use-package sk-dired)
     (setq dired-listing-switches "-alh"))
 
-(use-package direx
+(use-package neotree
     :ensure t
     :defer t
-    :bind ("C-c C-j" . my-direx-directory)
-    :init
-    (setq
-     direx:leaf-icon "  "
-     direx:open-icon "▾ "
-     direx:closed-icon "▸ "
-     direx:ignored-files-regexp
-     (concat "\\(?:" (regexp-opt completion-ignored-extensions) "\\|#\\)$"))
-
+    :bind ("C-c C-t" . my-neotree-directory)
     :config
-    (let ((map direx:direx-mode-map))
-      (define-key map (kbd ".") 'direx:up-item)
-      (define-key map (kbd "N") 'direx:next-sibling-item)
-      (define-key map (kbd "P") 'direx:previous-sibling-item))
-    (defun my-direx-directory ()
+    (defun my-neotree-directory ()
       (interactive)
       (let ((my-root-dir
              (sk-find-project-root (file-name-directory default-directory))))
-        (direx:find-directory my-root-dir))))
+        (neotree-dir my-root-dir))))
 
 (use-package magit
     :ensure t
@@ -215,7 +207,9 @@
     :init
     (ido-mode 1)
     (ido-vertical-mode 1)
-    (setq ido-vertical-define-keys 'C-n-and-C-p-only))
+    (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+    ;;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+    )
 
 
 (use-package sk-etc-utils
