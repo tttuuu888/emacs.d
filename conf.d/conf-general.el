@@ -1,4 +1,4 @@
-;; Other settings
+;; General settings
 
 (use-package company
     :ensure t
@@ -218,7 +218,6 @@
     (setq ido-vertical-define-keys 'C-n-and-C-p-only))
 
 
-
 (use-package sk-etc-utils
     :init
   (bind-keys
@@ -244,4 +243,4 @@
     :commands sk-bit-print)
 
 
-(provide 'conf-etc)
+(provide 'conf-general)
