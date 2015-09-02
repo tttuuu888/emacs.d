@@ -169,13 +169,15 @@
 (use-package neotree
     :ensure t
     :defer t
-    :bind ("C-c C-t" . my-neotree-directory)
+    :bind ("C-c C-j" . my-neotree-directory)
     :config
     (defun my-neotree-directory ()
       (interactive)
       (let ((my-root-dir
              (sk-find-project-root (file-name-directory default-directory))))
-        (neotree-dir my-root-dir))))
+        (if (neo-global--window-exists-p)
+            (neotree-hide)
+            (neotree-dir my-root-dir)))))
 
 (use-package magit
     :ensure t
@@ -183,7 +185,6 @@
     :init
     (global-set-key (kbd "<f12>") 'magit-status)
     (setq magit-last-seen-setup-instructions "1.4.0"))
-
 
 (use-package avy
     :ensure t

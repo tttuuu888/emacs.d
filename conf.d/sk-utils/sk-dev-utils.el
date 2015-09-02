@@ -92,7 +92,7 @@
       (find-file-in-tree (file-name-directory dir) "Makefile")
       (find-file-in-tree (file-name-directory dir) "READEME")
       (find-file-in-tree (file-name-directory dir) "build.gradle")
-      "~/"))
+      "./"))
 
 
 (defun clang-complete-armcc ()
