@@ -81,8 +81,8 @@
     (unbind-key "C-z")
     (bind-key "C-x C-r" 'recentf-open-files))
 
+(use-package conf-general)
 (use-package conf-dev)
-(use-package conf-etc)
 
 
 (provide 'conf-init)
