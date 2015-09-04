@@ -94,6 +94,11 @@
     (setq projectile-enable-caching t)
     :config
     (setq projectile-require-project-root nil)
+    (defun my-projectile-add-project ()
+      (interactive)
+      (when (projectile-project-p)
+        (projectile-add-known-project (projectile-project-root))
+        (projectile-merge-known-projects)))
     )
 
 
