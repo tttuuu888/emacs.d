@@ -90,8 +90,9 @@
     :ensure t
     :defer t
     :init
+    (setq projectile-keymap-prefix (kbd "C-c j"))
     (setq projectile-switch-project-action 'projectile-dired)
-    (setq projectile-enable-caching t)
+    ;;(setq projectile-enable-caching t)
     :config
     (setq projectile-require-project-root nil)
     (defun my-projectile-add-project ()
@@ -180,7 +181,7 @@
 (use-package neotree
     :ensure t
     :defer t
-    :bind ("C-c C-j" . my-neotree-directory)
+    :bind ("C-c C-n" . my-neotree-directory)
     :config
     (defun my-neotree-directory ()
       (interactive)
