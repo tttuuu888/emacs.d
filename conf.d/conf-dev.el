@@ -1,5 +1,13 @@
 ;; Developement settings
 
+(use-package sk-c-mode
+    :defer t
+    :commands izero-insert)
+
+(use-package sk-dev-utils
+    :bind   (("<f9>"    . sk-make)
+             ("C-<f9>"  . sk-rebuild)))
+
 (use-package ggtags
     :ensure t
     :defer t
@@ -27,15 +35,6 @@
     :config
     (use-package stickyfunc-enhance
         :ensure t))
-
-(use-package sk-c-mode
-    :defer t
-    :commands izero-insert
-    :init
-    (dolist (hook '(c-mode-common-hook eshell-mode-hook dired-mode-hook ))
-      (add-hook hook (lambda ()
-                       (local-set-key (kbd "<f9>") 'sk-make)
-                       (local-set-key (kbd "C-<f9>") 'sk-rebuild)))))
 
 
 ;; Makefile.example -> Makefile
@@ -136,8 +135,6 @@
     (defun my-c-mode-common-hook ()
       (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp))
     (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
-
-(use-package sk-dev-utils)
 
 
 
