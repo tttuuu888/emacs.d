@@ -75,20 +75,26 @@
     :ensure t
     :defer t
     :commands helm-do-ag
-    :bind ("C-c h p" . helm-do-ag))
+    :bind ("C-c j p" . helm-projectile-ag))
 
 ;; Projectile is only used for the directory not controlled by git.
 (use-package helm-projectile
     :ensure t
     :defer t
-    :bind ("C-c h o" . helm-projectile-find-file))
+    :bind (("C-c j o" . helm-projectile-find-file)
+           ("C-c j r" . helm-projectile-switch-project)
+           ("C-c j b" . helm-projectile-switch-to-buffer))
+    )
 
 (use-package projectile
     :ensure t
     :defer t
-    :bind ("C-c h b" . projectile-switch-to-buffer)
+    :init
+    (setq projectile-switch-project-action 'projectile-dired)
+    (setq projectile-enable-caching t)
     :config
-    (setq projectile-require-project-root nil))
+    (setq projectile-require-project-root nil)
+    )
 
 
 (use-package powerline
