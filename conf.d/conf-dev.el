@@ -32,18 +32,10 @@
     :defer t
     :commands izero-insert
     :init
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (local-set-key (kbd "<f9>") 'sk-make)
-                (local-set-key (kbd "C-<f9>") 'sk-rebuild)))
-    (add-hook 'eshell-mode-hook
-              (lambda ()
-                (local-set-key (kbd "<f9>") 'sk-make)
-                (local-set-key (kbd "C-<f9>") 'sk-rebuild)))
-    (add-hook 'eshell-mode-hook
-              (lambda ()
-                (local-set-key (kbd "<f9>") 'sk-make)
-                (local-set-key (kbd "C-<f9>") 'sk-rebuild))))
+    (dolist (hook '(c-mode-common-hook eshell-mode-hook dired-mode-hook ))
+      (add-hook hook (lambda ()
+                       (local-set-key (kbd "<f9>") 'sk-make)
+                       (local-set-key (kbd "C-<f9>") 'sk-rebuild)))))
 
 
 ;; Makefile.example -> Makefile
