@@ -10,8 +10,7 @@
             (local-set-key (kbd "^")
                            (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
-                           (lambda () (interactive) (find-alternate-file "..")))
-            (local-set-key [(f9)] 'sk-rebuild)))
+                           (lambda () (interactive) (find-alternate-file "..")))))
 
 (defun mydired-sort ()
   "Sort dired listings with directories first."

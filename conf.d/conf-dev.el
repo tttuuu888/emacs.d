@@ -34,9 +34,16 @@
     :init
     (add-hook 'c-mode-common-hook
               (lambda ()
-                (local-set-key [(f9)] 'sk-rebuild)))
+                (local-set-key (kbd "<f9>") 'sk-make)
+                (local-set-key (kbd "C-<f9>") 'sk-rebuild)))
     (add-hook 'eshell-mode-hook
-              (lambda () (local-set-key [(f9)] 'sk-rebuild))))
+              (lambda ()
+                (local-set-key (kbd "<f9>") 'sk-make)
+                (local-set-key (kbd "C-<f9>") 'sk-rebuild)))
+    (add-hook 'eshell-mode-hook
+              (lambda ()
+                (local-set-key (kbd "<f9>") 'sk-make)
+                (local-set-key (kbd "C-<f9>") 'sk-rebuild))))
 
 
 ;; Makefile.example -> Makefile
