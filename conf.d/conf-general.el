@@ -6,6 +6,10 @@
     (global-company-mode 1)
     (setq company-idle-delay 0.1)
     (setq company-minimum-prefix-length 2)
+    (defun my-company-eshell-setup ()
+      (make-local-variable 'company-backends)
+      (setq company-backends (remq 'company-dabbrev company-backends)))
+    (add-hook 'eshell-mode-hook 'my-company-eshell-setup)
     :config
     (add-to-list 'company-backends 'company-irony))
 
