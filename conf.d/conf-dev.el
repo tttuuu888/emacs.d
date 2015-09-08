@@ -2,7 +2,10 @@
 
 (use-package sk-c-mode
     :defer t
-    :commands izero-insert)
+    :commands izero-insert
+    :init
+    (add-hook 'c-mode-common-hook
+              (lambda () (local-set-key (kbd "C-o") (lambda () (ff-find-other-file nil t))))))
 
 (use-package sk-dev-utils
     :bind   (("<f9>"    . sk-make)
@@ -126,15 +129,6 @@
     :mode ("\\.html\\'" . web-mode)
     :init
     (setq web-mode-markup-indent-offset 2))
-
-(use-package eassist
-    :defer t
-    :load-path "~/.emacs.d/conf.d/external"
-    :commands (eassist-switch-h-cpp eassist-list-methods)
-    :init
-    (defun my-c-mode-common-hook ()
-      (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp))
-    (add-hook 'c-mode-common-hook 'my-c-mode-common-hook))
 
 
 
