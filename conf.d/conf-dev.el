@@ -4,8 +4,11 @@
     :defer t
     :commands izero-insert
     :init
+    (defun sk-c-header-switch ()
+      (interactive)
+      (ff-find-other-file nil t))
     (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "C-o") (lambda () (ff-find-other-file nil t))))))
+              (lambda () (local-set-key (kbd "M-o") 'sk-c-header-switch))))
 
 (use-package sk-dev-utils
     :bind   (("<f9>"    . sk-make)
