@@ -7,8 +7,11 @@
     (setq company-idle-delay 0.1)
     (setq company-minimum-prefix-length 2)
     (defun my-company-eshell-setup ()
+      (require 'cl-lib)
       (make-local-variable 'company-backends)
-      (setq company-backends (remq 'company-dabbrev company-backends)))
+      (let* ((to-remove '(company-capf company-dabbrev))
+             (new-backends (cl-remove-if (lambda (x) (member x to-remove)) company-backends)))
+        (setq company-backends new-backends)))
     (add-hook 'eshell-mode-hook 'my-company-eshell-setup)
     :config
     (add-to-list 'company-backends 'company-irony))
