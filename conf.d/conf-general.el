@@ -213,13 +213,6 @@
     :defer t
     :bind ("C-=" . er/expand-region))
 
-(use-package aes
-    :ensure t
-    :defer t
-    :commands aes-toggle-encryption
-    :config
-    (aes-enable-auto-decryption))
-
 (use-package ido-vertical-mode
     :ensure t
     :init
