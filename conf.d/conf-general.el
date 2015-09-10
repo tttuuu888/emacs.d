@@ -192,11 +192,9 @@
     :config
     (defun my-neotree-directory ()
       (interactive)
-      (let ((my-root-dir
-             (sk-find-project-root (file-name-directory default-directory))))
-        (if (neo-global--window-exists-p)
-            (neotree-hide)
-            (neotree-dir my-root-dir)))))
+      (if (neo-global--window-exists-p)
+          (neotree-hide)
+          (neotree-dir (projectile-project-root)))))
 
 (use-package magit
     :ensure t
