@@ -188,7 +188,7 @@
 (use-package neotree
     :ensure t
     :defer t
-    :bind ("C-c C-n" . my-neotree-directory)
+    :bind ("C-c n" . my-neotree-directory)
     :config
     (defun my-neotree-directory ()
       (interactive)
