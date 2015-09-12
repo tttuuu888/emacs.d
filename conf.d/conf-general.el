@@ -96,6 +96,7 @@
 (use-package projectile
     :ensure t
     :defer t
+    :commands projectile-project-root
     :init
     (setq projectile-keymap-prefix (kbd "C-c j"))
     (setq projectile-switch-project-action 'projectile-dired)
@@ -188,6 +189,7 @@
 (use-package neotree
     :ensure t
     :defer t
+    :commands my-neotree-directory
     :bind ("C-c n" . my-neotree-directory)
     :config
     (defun my-neotree-directory ()
