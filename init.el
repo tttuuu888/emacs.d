@@ -1,5 +1,7 @@
 ;; SK Emacs Setting
 
+(setq gc-cons-threshold 100000000)
+
 (package-initialize)
 (setq package-archives
       '(("ELPA" . "http://tromey.com/elpa/")
