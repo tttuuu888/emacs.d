@@ -25,3 +25,5 @@
 (use-package conf-init)
 
 (recentf-open-files)
+
+(setq gc-cons-threshold 800000)
