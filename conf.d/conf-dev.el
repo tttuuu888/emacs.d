@@ -11,6 +11,7 @@
               (lambda () (local-set-key (kbd "M-o") 'sk-c-header-switch))))
 
 (use-package sk-dev-utils
+    :commands (create-ch-file create-c-file create-h-file clang-complete-make)
     :bind   (("<f9>"    . sk-make)
              ("C-<f9>"  . sk-rebuild)))
 
