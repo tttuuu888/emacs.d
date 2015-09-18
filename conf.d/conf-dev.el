@@ -29,8 +29,19 @@
     (add-hook 'c-mode-common-hook (lambda () (cscope-minor-mode 1)))
     (add-hook 'asm-mode-hook (lambda () (cscope-minor-mode 1))))
 
+(use-package which-function-mode
+    :defer t
+    :init
+    (defun my-which-function-setup ()
+      (make-local-variable 'header-line-format)
+      (which-function-mode)
+      (setq header-line-format
+                    '((which-func-mode ("" which-func-format " "))))
+      (setq which-func-unknown "N/A"))
+    (add-hook 'c-mode-common-hook 'my-which-function-setup))
+
 (use-package semantic
-    :disabled
+    :disabled t
     :ensure t
     :defer t
     :init
