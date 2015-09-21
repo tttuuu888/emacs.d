@@ -69,6 +69,7 @@
       (make-local-variable 'company-backends)
       (setq company-backends (remq 'company-capf company-backends)))
     (add-hook 'python-mode-hook 'my-company-python-setup)
+    (add-hook 'inferior-python-mode 'my-company-python-setup)
     :config
     (setq py-shell-name "python"
           py-split-windows-on-execute-function (quote split-window-horizontally)
