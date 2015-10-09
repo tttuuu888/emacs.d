@@ -6,7 +6,12 @@
 (add-hook 'dired-mode-hook
           (lambda ()
             (local-set-key (kbd "M-o") 'dired-omit-mode)
-            (local-set-key (kbd "RET") 'dired-find-alternate-file)
+            (local-set-key (kbd "RET")
+                           (lambda ()
+                             (interactive)
+                             (if (file-directory-p (dired-get-filename nil t))
+                                 (dired-find-alternate-file)
+                                 (dired-view-file))))
             (local-set-key (kbd "^")
                            (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
