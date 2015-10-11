@@ -38,6 +38,21 @@
     (add-hook 'irony-mode-hook 'my-irony-mode-hook)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
+(use-package flycheck
+    :ensure t
+    :defer t
+    :init
+    (add-hook 'c++-mode-hook 'flycheck-mode)
+    (add-hook 'c-mode-hook 'flycheck-mode))
+
+(use-package flycheck-irony
+    :ensure t
+    :defer t
+    :commands flycheck-irony-setup
+    :init
+    (add-hook 'c++-mode-hook 'flycheck-irony-setup)
+    (add-hook 'c-mode-hook 'flycheck-irony-setup)
+    (add-hook 'objc-mode-hook 'flycheck-irony-setup))
 
 (use-package jedi-core
     :ensure t
