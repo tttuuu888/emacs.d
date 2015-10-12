@@ -39,6 +39,7 @@
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 (use-package flycheck
+    :disabled t
     :ensure t
     :defer t
     :init
@@ -46,6 +47,7 @@
     (add-hook 'c-mode-hook 'flycheck-mode))
 
 (use-package flycheck-irony
+    :disabled t
     :ensure t
     :defer t
     :commands flycheck-irony-setup
