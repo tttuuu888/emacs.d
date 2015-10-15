@@ -236,7 +236,6 @@
     :ensure t
     :init
     (ido-mode 1)
-    (setq ido-enable-flex-matching t)
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
 
