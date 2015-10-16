@@ -59,9 +59,11 @@
 ;; Makefile.example -> Makefile
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
+(use-package python-mode
+    :ensure t
+    :defer t)
 
 (use-package python
-    :ensure t
     :defer t
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
@@ -76,8 +78,7 @@
           py-split-windows-on-execute-function (quote split-window-horizontally)
           py-install-directory
           (concat "~/.emacs.d/elpa/" (car (directory-files "~/.emacs.d/elpa/" nil "python-mode*"))))
-    (use-package python-mode
-        :ensure t)
+    (use-package python-mode)
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker)
@@ -98,8 +99,7 @@
     :defer t
     :mode ("\\.clj\\'" . clojure-mode)
     :config
-    (use-package cider
-        :ensure t)
+    (use-package cider)
     (enable-paredit-mode))
 
 (use-package cider
