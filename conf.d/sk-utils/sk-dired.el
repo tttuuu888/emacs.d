@@ -39,6 +39,11 @@
             (setq dired-omit-extensions '("~"))
             )))
 
+(add-hook 'view-mode-hook
+          (lambda ()
+            (bind-keys :map view-mode-map
+                       ("p" . previous-line)
+                       ("n" . next-line))))
 
 ;; win32 hiding gid, uid in dired mode
 (when win32p
