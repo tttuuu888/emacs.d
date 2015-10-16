@@ -62,12 +62,6 @@
 ;;  M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
 
-(use-package bind-key
-    :ensure t
-    :config
-    (unbind-key "C-z")
-    (bind-key "C-x C-r" 'recentf-open-files))
-
 (use-package conf-general)
 (use-package conf-dev)
 

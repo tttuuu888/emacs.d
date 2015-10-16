@@ -1,7 +1,17 @@
 ;; General settings
 
+(use-package bind-key
+    :ensure t
+    :config
+    (unbind-key "C-z")
+    (bind-key "C-x C-r" 'recentf-open-files))
+
+(use-package diminish
+    :ensure t)
+
 (use-package company
     :ensure t
+    :diminish company-mode
     :init
     (global-company-mode 1)
     (setq company-idle-delay 0.1)
