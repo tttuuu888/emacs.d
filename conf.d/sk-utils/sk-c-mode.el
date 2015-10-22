@@ -28,13 +28,23 @@
 
 ;(add-hook 'c-mode-common-hook 'jpk/c-mode-hook)
 
+
+(defun sharp-ifdef-insert (start end pre)
+  (save-excursion
+    (goto-char end) (end-of-line) (insert "\n#endif")
+    (goto-char start) (beginning-of-line) (insert pre "\n")))
+
 ;; #if 0 ~ #endif insert for the area
 (defun izero-insert (start end)
   "Intesrt #if 0 at the beginning of region and #endif at the end of region"
   (interactive "r")
-  (save-excursion
-    (goto-char end) (end-of-line) (insert "\n#endif")
-    (goto-char start) (beginning-of-line) (insert "#if 0\n")))
+  (sharp-ifdef-insert start end "#if 0"))
+
+;; #ifdef ~ #endif insert for the area
+(defun idef-insert (start end in)
+  "Intesrt #if 0 at the beginning of region and #endif at the end of region"
+  (interactive "r\nsDefine : ")
+  (sharp-ifdef-insert start end (concat "#ifdef " in)))
 
 
 (provide 'sk-c-mode)
