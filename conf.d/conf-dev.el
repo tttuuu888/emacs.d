@@ -41,21 +41,6 @@
     (add-hook 'c-mode-common-hook 'my-which-function-setup)
     (add-hook 'python-mode-hook 'my-which-function-setup))
 
-(use-package semantic
-    :disabled t
-    :ensure t
-    :defer t
-    :init
-    (add-hook 'c-mode-common-hook
-              (lambda ()
-                (semantic-mode 1)
-                (global-semantic-stickyfunc-mode 1)))
-    (add-hook 'asm-mode-hook (lambda () (semantic-mode 1)))
-    :config
-    (use-package stickyfunc-enhance
-        :ensure t))
-
-
 ;; Makefile.example -> Makefile
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
