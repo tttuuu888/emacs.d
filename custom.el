@@ -10,11 +10,7 @@
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
- '(default-frame-alist
-   (quote
-    ((menu-bar-lines . 0)
-     (tool-bar-lines . 0)
-     (line-spacing . 2))))
+ '(default-frame-alist (quote ((line-spacing . 2))))
  '(diary-file "~/Dropbox/org/diary")
  '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
