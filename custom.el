@@ -6,10 +6,7 @@
  '(backup-directory-alist (quote ((".*" . "/tmp/"))))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
- '(c-default-style
-   (quote
-    ((awk-mode . "awk")
-     (other . "bsd"))))
+ '(c-default-style "bsd")
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
