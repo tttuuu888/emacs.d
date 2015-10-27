@@ -8,8 +8,7 @@
  '(c-basic-offset 4)
  '(c-default-style
    (quote
-    ((java-mode . "java")
-     (awk-mode . "awk")
+    ((awk-mode . "awk")
      (other . "bsd"))))
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
  '(cua-enable-cua-keys nil)
