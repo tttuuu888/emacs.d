@@ -2,7 +2,7 @@
 
 (use-package sk-c-mode
     :defer t
-    :commands izero-insert
+    :commands (izero-insert idef-insert)
     :init
     (defun sk-c-header-switch ()
       (interactive)
