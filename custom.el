@@ -45,7 +45,6 @@
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
  '(scroll-bar-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
- '(setq send-mail-function t)
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(split-height-threshold nil)
