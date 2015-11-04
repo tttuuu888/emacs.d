@@ -39,9 +39,7 @@
 
 ;; Korean font
 (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                  '("NanumGothicOTF" . "iso10646-1"))
-(set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-                  '("NanumGothicOTF" . "iso10646-1"))
+                  '("나눔고딕코딩" . "unicode-bmp"))
 
 ;; Korean letter setting
 (when (and enable-multibyte-characters win32p)
