@@ -56,9 +56,8 @@
     (defun my-company-python-setup ()
       (make-local-variable 'company-backends)
       (setq company-backends (remq 'company-capf company-backends)))
-    (add-hook 'python-mode-hook 'my-company-python-setup)
-    (add-hook 'inferior-python-mode-hook 'my-company-python-setup)
-    (add-hook 'py-ipython-shell-mode-hook 'my-company-python-setup)
+    (mapc (lambda (a) (add-hook a 'my-company-python-setup))
+          '(python-mode-hook inferior-python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
     :config
     (setq py-shell-name "python"
           py-split-windows-on-execute-function (quote split-window-horizontally)
