@@ -72,7 +72,9 @@
 
 (use-package company-jedi
     :ensure t
-    :defer t)
+    :defer t
+    :init
+    (add-to-list 'company-backends 'company-jedi))
 
 (use-package redo+
     :ensure t

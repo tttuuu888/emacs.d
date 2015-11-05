@@ -59,16 +59,15 @@
     (mapc (lambda (a) (add-hook a 'my-company-python-setup))
           '(python-mode-hook inferior-python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
     :config
+    (use-package python-mode)
     (setq py-shell-name "python"
           py-split-windows-on-execute-function (quote split-window-horizontally)
           py-install-directory
           (concat "~/.emacs.d/elpa/" (car (directory-files "~/.emacs.d/elpa/" nil "python-mode*"))))
-    (use-package python-mode)
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker)
-               ("TAB" . company-indent-or-complete-common))
-    (add-to-list 'company-backends 'company-jedi))
+               ("TAB" . company-indent-or-complete-common)))
 
 (use-package paredit
     :ensure t
