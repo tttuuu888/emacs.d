@@ -10,7 +10,9 @@
     :ensure t)
 
 (use-package zenburn-theme
-    :ensure t)
+    :ensure t
+    :config
+    (set-face-attribute 'region nil :background "chocolate"))
 
 (use-package company
     :ensure t
