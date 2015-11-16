@@ -9,6 +9,10 @@
 (use-package diminish
     :ensure t)
 
+(use-package zenburn-theme
+    :ensure t
+    :if window-system)
+
 (use-package company
     :ensure t
     :diminish company-mode
