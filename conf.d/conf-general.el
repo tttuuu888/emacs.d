@@ -10,8 +10,7 @@
     :ensure t)
 
 (use-package zenburn-theme
-    :ensure t
-    :if window-system)
+    :ensure t)
 
 (use-package company
     :ensure t
