@@ -13,26 +13,28 @@
                     "/usr/bin"
                     "/sbin"
                     "/bin"
-                    "/home/sk/Android/sdk/tools"
-                    "/home/sk/Android/sdk/platform-tools"
-                    "/home/sk/Android/android-ndk-r10d"
-                    "/home/sk/Android/android-ndk-r10d/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin"
-                    "/home/sk/prj/toolchain/bin"
-                    "/home/sk/prj/toolchain/launchpad-gcc-arm/bin"
-                    "/home/sk/prj/toolchain/mingw-w64-sysroot/bin"))
+                    "~/Android/sdk/tools"
+                    "~/Android/sdk/platform-tools"
+                    "~/Android/android-ndk-r10d"
+                    "~/Android/android-ndk-r10d/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin"
+                    "~/prj/toolchain/bin"
+                    "~/prj/toolchain/launchpad-gcc-arm/bin"
+                    "~/prj/toolchain/mingw-w64-sysroot/bin"))
     (setenv "PATH" (mapconcat 'identity exec-path path-separator))
     (setq-default eshell-path-env (mapconcat 'identity exec-path path-separator)))
 
-;;Python Path
+;; Set 'HOME' environment variable in Windows.
+
+;; Python Path
 (if unixp
-    (setenv "PYTHONPATH" "/usr/local/bin/ipython")
-    (setenv "PYTHONPATH" "C:/home/util/Python27"))
+    (setenv "PYTHONPATH" "/usr/local/bin/python")
+    (setenv "PYTHONPATH" "~/util/Python27"))
 
 ;; Lisp Path
 (if unixp
     (setq inferior-lisp-program "/usr/bin/clisp")
     ;;(setq inferior-lisp-program "/usr/bin/sbcl")
-    (setq inferior-lisp-program "C:/home/util/clisp-2.49/clisp"))
+    (setq inferior-lisp-program "~/util/clisp-2.49/clisp"))
 
 ;; hangul 3bulsik
 (setq default-korean-keyboard "3")
@@ -47,7 +49,6 @@
   (set-keyboard-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
   (set-file-name-coding-system 'euc-kr))
-
 
 ;; global-hl-line
 (global-hl-line-mode t)
