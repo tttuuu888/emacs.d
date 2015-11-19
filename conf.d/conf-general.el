@@ -199,8 +199,7 @@
     :init
     (add-hook 'org-mode-hook
               (lambda ()
-                (use-package ox-ioslide)
-                (use-package ox-ioslide-helper)))
+                (use-package ox-reveal)))
     :config
     (bind-keys :map org-mode-map
                ("C-c l" . org-store-link)
@@ -209,9 +208,13 @@
                ("C-c r" . org-remember))
     (setq org-log-done t))
 
-(use-package ox-ioslide
+(use-package ox-reveal
     :ensure t
-    :defer t)
+    :defer t
+    :config
+    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"
+          org-reveal-title-slide-template "<h1>%t</h1><h4>%a</h4><h4>%e</h4><h4>%d</h4>"
+          org-reveal-hlevel 2))
 
 
 (use-package dired
