@@ -12,7 +12,9 @@
 (use-package zenburn-theme
     :ensure t
     :config
-    (set-face-attribute 'region nil :background "chocolate"))
+    (set-face-attribute 'region nil :background "chocolate")
+    (set-face-attribute 'isearch nil :weight 'bold :background "chocolate")
+    (set-face-attribute 'lazy-highlight nil :weight 'bold :background "DarkViolet"))
 
 (use-package company
     :ensure t
