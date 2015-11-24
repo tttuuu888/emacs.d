@@ -150,7 +150,9 @@
 (use-package powerline
     :ensure t
     :init
-    (use-package sk-powerline))
+    (use-package sk-powerline)
+    :config
+    (set-face-attribute  'powerline-active1 nil :inherit 'mode-line :background "grey22" :foreground "white"))
 
 (use-package ibuffer
     :ensure t
