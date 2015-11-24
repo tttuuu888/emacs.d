@@ -1,14 +1,5 @@
 ;; The other functions Setting
 
-;;;; Turn-off scratch buffer save
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (when (get-buffer "*scratch*")
-              (with-current-buffer "*scratch*"
-                (auto-save-mode -1)
-                (setq buffer-offer-save nil)))))
-
-
 ;; insert date into buffer at point
 ;; optained from http://www.chrislott.org/geek/emacs/dotemacs.html
 (defun insert-date ()
