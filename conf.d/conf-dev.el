@@ -45,6 +45,7 @@
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
 (use-package python-mode
+    :disabled t
     :ensure t
     :defer t)
 
@@ -53,17 +54,8 @@
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :init
-    (defun my-company-python-setup ()
-      (make-local-variable 'company-backends)
-      (setq company-backends (remq 'company-capf company-backends)))
-    (mapc (lambda (a) (add-hook a 'my-company-python-setup))
-          '(python-mode-hook inferior-python-mode-hook py-python-shell-mode-hook py-ipython-shell-mode-hook))
+    (setq python-shell-interpreter "ipython")
     :config
-    (use-package python-mode)
-    (setq py-shell-name "python"
-          py-split-windows-on-execute-function (quote split-window-horizontally)
-          py-install-directory
-          (concat "~/.emacs.d/elpa/" (car (directory-files "~/.emacs.d/elpa/" nil "python-mode*"))))
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker)

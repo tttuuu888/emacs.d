@@ -27,7 +27,7 @@
 
 ;; Python Path
 (if unixp
-    (setenv "PYTHONPATH" "/usr/local/bin/python")
+    (setenv "PYTHONPATH" "/usr/local/bin/ipython")
     (setenv "PYTHONPATH" "~/util/Python27"))
 
 ;; Lisp Path
