@@ -249,7 +249,11 @@
 (use-package avy
     :ensure t
     :defer t
-    :bind ("C-c C-SPC" . avy-goto-subword-1))
+    :bind ("C-c C-SPC" . avy-goto-subword-1)
+    :config
+    ;; face setting for zenburn-theme
+    (set-face-attribute 'avy-lead-face nil :background "chocolate")
+    (set-face-attribute 'avy-lead-face-0 nil :background "DarkViolet"))
 
 (use-package expand-region
     :ensure t
