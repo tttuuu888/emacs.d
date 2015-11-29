@@ -54,8 +54,9 @@
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :init
-    (setq python-shell-interpreter "ipython"
-          python-shell-interpreter-args "-i --matplotlib=qt")
+    (setq python-shell-interpreter "ipython")
+    (if window-system
+        (setq python-shell-interpreter-args "-i --matplotlib=qt"))
     :config
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
