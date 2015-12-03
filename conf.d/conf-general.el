@@ -28,13 +28,18 @@
     (global-company-mode 1)
     (setq company-idle-delay 0.1)
     (setq company-minimum-prefix-length 2)
+    ;; (defun my-company-eshell-setup ()
+    ;;   (require 'cl-lib)
+    ;;   (make-local-variable 'company-backends)
+    ;;   (let* ((to-remove '(company-capf company-dabbrev))
+    ;;          (new-backends (cl-remove-if (lambda (x) (member x to-remove)) company-backends)))
+    ;;     (setq company-backends new-backends)))
     (defun my-company-eshell-setup ()
-      (require 'cl-lib)
-      (make-local-variable 'company-backends)
-      (let* ((to-remove '(company-capf company-dabbrev))
-             (new-backends (cl-remove-if (lambda (x) (member x to-remove)) company-backends)))
-        (setq company-backends new-backends)))
+      (progn
+        (make-local-variable 'company-minimum-prefix-length)
+        (setq company-minimum-prefix-length 3)))
     (add-hook 'eshell-mode-hook 'my-company-eshell-setup)
+    (add-hook 'shell-mode-hook 'my-company-eshell-setup)
     :config
     (add-to-list 'company-backends 'company-irony))
 
