@@ -3,26 +3,6 @@
 (defconst win32p  (eq system-type 'windows-nt) "T if Windows system")
 (defconst unixp   (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "T if Linux system")
 
-;; Total Paths
-(when unixp
-    (setq-default exec-path
-                  '(
-                    "/usr/local/sbin"
-                    "/usr/local/bin"
-                    "/usr/sbin"
-                    "/usr/bin"
-                    "/sbin"
-                    "/bin"
-                    "~/Android/sdk/tools"
-                    "~/Android/sdk/platform-tools"
-                    "~/Android/android-ndk-r10d"
-                    "~/Android/android-ndk-r10d/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin"
-                    "~/prj/toolchain/bin"
-                    "~/prj/toolchain/launchpad-gcc-arm/bin"
-                    "~/prj/toolchain/mingw-w64-sysroot/bin"))
-    (setenv "PATH" (mapconcat 'identity exec-path path-separator))
-    (setq-default eshell-path-env (mapconcat 'identity exec-path path-separator)))
-
 ;; Set 'HOME' environment variable in Windows.
 
 ;; Python Path
