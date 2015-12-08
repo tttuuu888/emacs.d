@@ -57,6 +57,9 @@
     (setq python-shell-interpreter "ipython")
     (if window-system
         (setq python-shell-interpreter-args "-i --matplotlib=qt"))
+    (add-hook 'python-mode-hook
+              (lambda ()
+                (setq imenu-create-index-function 'python-imenu-create-index)))
     :config
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
