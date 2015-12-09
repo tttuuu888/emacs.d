@@ -104,7 +104,14 @@
     :bind ("C-c p" . helm-git-grep-at-point) ;greP
     :config (helm-autoresize-mode 1))
 
+(use-package helm-ls-git
+    :ensure t
+    :defer t
+    :bind ("C-c o" . helm-ls-git-ls)          ;Open file
+    :config (helm-autoresize-mode 1))
+
 (use-package helm-git-files
+    :disabled t
     :ensure t
     :defer t
     :bind ("C-c o" . helm-git-files)          ;Open file
