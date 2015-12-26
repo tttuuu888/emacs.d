@@ -76,19 +76,24 @@
     (add-hook 'clojure-mode-hook 'enable-paredit-mode)
     (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
 
-
 (use-package clojure-mode
     :ensure t
     :defer t
     :mode ("\\.clj\\'" . clojure-mode)
     :config
-    (use-package cider)
     (enable-paredit-mode))
 
 (use-package cider
     :ensure t
     :defer t
+    :mode ("\\.clj\\'" . clojure-mode)
     :interpreter ("clojure" . cider-repl-mode))
+
+(use-package clj-refactor
+    :disabled t
+    :ensure t
+    :defer t
+    :mode ("\\.clj\\'" . clojure-mode))
 
 (use-package slime
     :ensure t
