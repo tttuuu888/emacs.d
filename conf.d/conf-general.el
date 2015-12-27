@@ -18,8 +18,8 @@
         (set-face-attribute 'avy-lead-face-0 nil :background "DarkViolet")))
     :config
     (set-face-attribute 'region nil :background "chocolate")
-    (set-face-attribute 'isearch nil :weight 'bold :background "chocolate")
-    (set-face-attribute 'lazy-highlight nil :weight 'bold :background "DarkViolet"))
+    (set-face-attribute 'lazy-highlight nil :weight 'bold :background "DarkViolet")
+    (set-face-attribute 'isearch nil :weight 'bold :background "chocolate"))
 
 (use-package company
     :ensure t
@@ -28,12 +28,6 @@
     (global-company-mode 1)
     (setq company-idle-delay 0.1)
     (setq company-minimum-prefix-length 2)
-    ;; (defun my-company-eshell-setup ()
-    ;;   (require 'cl-lib)
-    ;;   (make-local-variable 'company-backends)
-    ;;   (let* ((to-remove '(company-capf company-dabbrev))
-    ;;          (new-backends (cl-remove-if (lambda (x) (member x to-remove)) company-backends)))
-    ;;     (setq company-backends new-backends)))
     (defun my-company-eshell-setup ()
       (progn
         (make-local-variable 'company-minimum-prefix-length)
@@ -46,7 +40,6 @@
 (use-package company-irony
     :ensure t
     :defer t)
-
 
 (use-package irony
     :ensure t
@@ -110,13 +103,6 @@
     :bind ("C-c o" . helm-ls-git-ls)          ;Open file
     :config (helm-autoresize-mode 1))
 
-(use-package helm-git-files
-    :disabled t
-    :ensure t
-    :defer t
-    :bind ("C-c o" . helm-git-files)          ;Open file
-    :config (helm-autoresize-mode 1))
-
 (use-package helm
     :ensure t
     :defer t
@@ -124,8 +110,10 @@
            ("C-c i" . helm-semantic-or-imenu))
 
     :init
-    (add-hook 'eshell-mode-hook (lambda ()
-                                  (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
+    (add-hook
+     'eshell-mode-hook
+     (lambda ()
+       (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
     (setq helm-imenu-execute-action-at-once-if-one nil
           helm-split-window-default-side 'right)
     :config
@@ -143,8 +131,7 @@
     :defer t
     :bind (("C-c j o" . helm-projectile-find-file)
            ("C-c j r" . helm-projectile-switch-project)
-           ("C-c j b" . helm-projectile-switch-to-buffer))
-    )
+           ("C-c j b" . helm-projectile-switch-to-buffer)))
 
 (use-package projectile
     :ensure t
@@ -160,8 +147,7 @@
       (interactive)
       (when (projectile-project-p)
         (projectile-add-known-project (projectile-project-root))
-        (projectile-merge-known-projects)))
-    )
+        (projectile-merge-known-projects))))
 
 
 (use-package powerline
@@ -285,10 +271,14 @@
 (use-package sk-etc-utils
     :init
   (bind-keys
-   ("<f5>" . (lambda nil (interactive) (jump-to-register ?5) (message "Windows are Restored by F5")))
-   ("<f6>" . (lambda nil (interactive) (jump-to-register ?6) (message "Windows are Restored by F6")))
-   ("<f7>" . (lambda nil (interactive) (jump-to-register ?7) (message "Windows are Restored by F7")))
-   ("<f8>" . (lambda nil (interactive) (jump-to-register ?8) (message "Windows are Restored by F8")))
+   ("<f5>" . (lambda nil (interactive) (jump-to-register ?5)
+                     (message "Windows are Restored by F5")))
+   ("<f6>" . (lambda nil (interactive) (jump-to-register ?6)
+                     (message "Windows are Restored by F6")))
+   ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
+                     (message "Windows are Restored by F7")))
+   ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
+                     (message "Windows are Restored by F8")))
    ("C-<f5>" . (lambda nil (interactive)
                        (window-configuration-to-register ?5)
                        (message "Windows configuration saved to F5")))
