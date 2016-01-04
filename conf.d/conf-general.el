@@ -136,7 +136,7 @@
 (use-package projectile
     :ensure t
     :defer t
-    :commands projectile-project-root
+    :commands projectile-project-root my-projectile-add-project
     :init
     (setq projectile-keymap-prefix (kbd "C-c j"))
     (setq projectile-switch-project-action 'projectile-dired)
