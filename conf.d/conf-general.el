@@ -267,6 +267,12 @@
     (ido-vertical-mode 1)
     (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
 
+(use-package smex
+    :ensure t
+    :defer t
+    :bind (("M-x" . smex)
+           ("M-X" . smex-major-mode-commands)))
+
 
 (use-package sk-etc-utils
     :init
