@@ -2,19 +2,19 @@
 
 (use-package sk-c-mode
     :defer t
-    :commands (izero-insert idef-insert)
-    :init
-    (defun sk-c-header-switch ()
-      (interactive)
-      (ff-find-other-file nil t))
-    (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-o") 'sk-c-header-switch))))
+    :commands (izero-insert idef-insert))
 
 (use-package sk-dev-utils
     :defer t
     :commands (create-ch-file create-c-file create-h-file sk-clang-complete-make)
     :bind   (("<f9>"    . sk-make)
              ("C-<f9>"  . sk-rebuild)))
+
+(use-package cff
+    :defer t
+    :init
+    (add-hook 'c-mode-common-hook
+              (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
 
 (use-package ggtags
     :ensure t
