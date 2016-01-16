@@ -11,6 +11,7 @@
              ("C-<f9>"  . sk-rebuild)))
 
 (use-package cff
+    :ensure t
     :defer t
     :init
     (add-hook 'c-mode-common-hook

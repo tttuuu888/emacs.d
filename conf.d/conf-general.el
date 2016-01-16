@@ -212,7 +212,8 @@
                ("C-c l" . org-store-link)
                ("C-c a" . org-agenda)
                ("C-c b" . org-iswitchb)
-               ("C-c r" . org-remember))
+               ("C-c r" . org-remember)
+               ("C-c u" . org-up-element))
     (setq org-log-done t))
 
 (use-package ox-reveal
