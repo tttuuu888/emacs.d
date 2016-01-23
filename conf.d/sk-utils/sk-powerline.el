@@ -95,7 +95,7 @@
                              (powerline-fill face2 (powerline-width rhs))
                              (powerline-render rhs)))))))
 
-(if (and x-display-name (> (x-display-pixel-width) 1440))
+(if (and x-display-name (> (x-display-pixel-width) 1600))
     (sk-powerline-default-theme)
     (sk-powerline-simple-theme))
 
