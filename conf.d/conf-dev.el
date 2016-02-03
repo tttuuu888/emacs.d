@@ -103,7 +103,6 @@
     :commands slime
     :init
     (setq lisp-indent-function 'common-lisp-indent-function
-          slime-complete-symbol-function 'slime-fuzzy-complete-symbol
           slime-startup-animation nil
           slime-enable-evaluate-in-emacs t
           slime-log-events t
@@ -112,6 +111,8 @@
           slime-autodoc-use-multiline-p t
           slime-highlight-compiler-notes t
           slime-contribs '(slime-fancy))
+    :config
+    (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol)
     ;;(set-language-environment "UTF-8")
     ;;(setq slime-net-coding-system 'utf-8-unix)
 )

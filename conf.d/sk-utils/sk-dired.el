@@ -34,7 +34,7 @@
           (function (lambda ()
             (load "dired-x")
             ;; Set dired-x buffer-local variables here.  For example:
-            (setq dired-omit-files-p t)
+            (dired-omit-mode)
             (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
             (setq dired-omit-extensions '("~"))
             )))
