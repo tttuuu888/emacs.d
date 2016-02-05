@@ -33,6 +33,7 @@
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
  '(org-log-done (quote time))
  '(org-startup-indented t)
+ '(password-cache-expiry 900)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((dired-omit-mode . t))))
  '(scroll-bar-mode nil)
