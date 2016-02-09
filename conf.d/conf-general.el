@@ -107,7 +107,8 @@
     :ensure t
     :defer t
     :bind (("C-c y" . helm-show-kill-ring)
-           ("C-c i" . helm-semantic-or-imenu))
+           ("C-c i" . helm-semantic-or-imenu)
+           ("M-s o" . helm-occur))
 
     :init
     (add-hook
