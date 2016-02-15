@@ -108,13 +108,12 @@
     :defer t
     :bind (("C-c y" . helm-show-kill-ring)
            ("C-c i" . helm-semantic-or-imenu)
-           ("M-s o" . helm-occur))
-
+           ("M-s o" . helm-occur)
+           ("M-s r" . helm-resume))
     :init
-    (add-hook
-     'eshell-mode-hook
-     (lambda ()
-       (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
+    (add-hook 'eshell-mode-hook
+              (lambda ()
+                (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
     (setq helm-imenu-execute-action-at-once-if-one nil
           helm-split-window-default-side 'right)
     :config
@@ -122,16 +121,14 @@
 
 (use-package helm-ag
     :ensure t
-    :defer t
-    :commands helm-do-ag
-    :bind ("C-c j p" . helm-projectile-ag))
+    :defer t)
 
-;; Projectile is only used for the directory not controlled by git.
 (use-package helm-projectile
     :ensure t
     :defer t
-    :bind (("C-c j o" . helm-projectile-find-file)
-           ("C-c j r" . helm-projectile-switch-project)
+    :bind (("C-c j p" . helm-projectile-ag)
+           ("C-c j o" . helm-projectile-find-file)
+           ("C-c j s" . helm-projectile-switch-project)
            ("C-c j b" . helm-projectile-switch-to-buffer)))
 
 (use-package projectile
