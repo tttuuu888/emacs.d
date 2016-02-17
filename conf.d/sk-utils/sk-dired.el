@@ -11,7 +11,7 @@
                              (interactive)
                              (if (file-directory-p (dired-get-filename nil t))
                                  (dired-find-alternate-file)
-                                 (dired-view-file))))
+                                 (dired-find-file-other-window))))
             (local-set-key (kbd "^")
                            (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
@@ -38,12 +38,6 @@
             (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
             (setq dired-omit-extensions '("~"))
             )))
-
-(add-hook 'view-mode-hook
-          (lambda ()
-            (bind-keys :map view-mode-map
-                       ("p" . previous-line)
-                       ("n" . next-line))))
 
 ;; win32 hiding gid, uid in dired mode
 (when win32p
