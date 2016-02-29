@@ -43,9 +43,6 @@
     (add-hook 'c-mode-common-hook 'my-which-function-setup)
     (add-hook 'python-mode-hook 'my-which-function-setup))
 
-;; Makefile.example -> Makefile
-(add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
-
 (use-package python-mode
     :disabled t
     :ensure t
