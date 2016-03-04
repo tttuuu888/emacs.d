@@ -12,20 +12,18 @@ Below programs are needed to use all features of this emacs setting.
 * silversearcher-ag  
 * lein  
 
-## Packages ##
-* avy / redo+  
+## Main Packages ##
+* avy / redo+ / expand-region  
 * magit  
-* ggtags / xcscope / irony  
+* cff / ggtags / xcscope / irony  
 * python-mode / jedi  
 * helm / helm-ag / helm-git / helm-ls-git / helm-git-grep / helm-projectile  
 * projectile  
 * markdown-mode / markdown-toc  
 * clojure-mode / cider /  paredit  
 * slime / chicken-scheme / geiser   
+* web-mode  
 * company / company-irony / company-jedi  
 * smex / ido-vertical  
-* expand-region  
-* powerline  
+* powerline / zenburn-theme  
 * use-package  
-* zenburn-theme  
-

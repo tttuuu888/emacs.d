@@ -205,6 +205,13 @@
                 (ibuffer-switch-to-saved-filter-groups "home")
                 (my-ibuffer-mode-hook))))
 
+(use-package markdown-mode
+    :ensure t
+    :defer t)
+
+(use-package markdown-toc
+    :ensure t
+    :defer t)
 
 (use-package org
     :defer t
