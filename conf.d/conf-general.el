@@ -227,7 +227,8 @@
                ("C-c b" . org-iswitchb)
                ("C-c r" . org-remember)
                ("C-c u" . org-up-element))
-    (setq org-log-done t))
+    (setq org-log-done t)
+    (add-to-list 'org-babel-load-languages '(python . t)))
 
 (use-package ox-reveal
     :ensure t
