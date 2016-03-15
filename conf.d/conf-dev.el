@@ -6,7 +6,7 @@
 
 (use-package sk-dev-utils
     :defer t
-    :commands (create-ch-file create-c-file create-h-file sk-clang-complete-make)
+    :commands (sk-create-ch-file sk-create-c-file sk-create-h-file sk-clang-complete-make)
     :bind   (("<f9>"    . sk-make)
              ("C-<f9>"  . sk-rebuild)))
 

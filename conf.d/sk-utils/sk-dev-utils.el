@@ -72,30 +72,22 @@
   (interactive "sEnter File name : ")
   (insert (c-header-shape file-name)))
 
-(defun create-h-file (file-name)
-  (interactive "sEnter File name : ")
-  (append-to-file (c-header-shape file-name) nil (concat file-name ".h")))
-
 (defun c-file-insert (file-name)
   (interactive "sEnter File name : ")
   (insert (c-file-shape file-name)))
 
-(defun create-c-file (file-name)
+(defun sk-create-h-file (file-name)
+  (interactive "sEnter File name : ")
+  (append-to-file (c-header-shape file-name) nil (concat file-name ".h")))
+
+(defun sk-create-c-file (file-name)
   (interactive "sEnter File name : ")
   (append-to-file (c-file-shape file-name) nil (concat file-name ".c")))
 
-(defun create-ch-file (file-name)
+(defun sk-create-ch-file (file-name)
   (interactive "sEnter File name : ")
   (create-h-file file-name)
   (create-c-file file-name))
-
-(defun sk-find-project-root (dir)
-  (or (find-file-in-tree (file-name-directory dir) ".git")
-      (find-file-in-tree (file-name-directory dir) "project.clj")
-      (find-file-in-tree (file-name-directory dir) "Makefile")
-      (find-file-in-tree (file-name-directory dir) "READEME")
-      (find-file-in-tree (file-name-directory dir) "build.gradle")
-      "./"))
 
 (defun sk-clang-complete-make ()
   (interactive)
