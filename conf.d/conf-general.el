@@ -228,8 +228,12 @@
                ("C-c r" . org-remember)
                ("C-c u" . org-up-element))
     (setq org-log-done t)
-    (add-to-list 'org-babel-load-languages '(python . t))
-    (org-babel-do-load-languages 'org-babel-do-load-languages 'org-babel-do-load-languages))
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((sh         . t)
+       (css        . t)
+       (python     . t)
+       (emacs-lisp . t))))
 
 (use-package ox-reveal
     :ensure t
