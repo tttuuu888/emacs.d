@@ -228,7 +228,8 @@
                ("C-c r" . org-remember)
                ("C-c u" . org-up-element))
     (setq org-log-done t)
-    (add-to-list 'org-babel-load-languages '(python . t)))
+    (add-to-list 'org-babel-load-languages '(python . t))
+    (org-babel-do-load-languages 'org-babel-do-load-languages 'org-babel-do-load-languages))
 
 (use-package ox-reveal
     :ensure t
