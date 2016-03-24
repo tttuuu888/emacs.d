@@ -1,13 +1,13 @@
 ;; Initial settings
 
-(defconst win32p  (eq system-type 'windows-nt) "T if Windows system")
-(defconst unixp   (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "T if Linux system")
+(defconst win32p (eq system-type 'windows-nt) "t : Windows system")
+(defconst unixp  (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "t : Linux system")
 
 ;; Set 'HOME' environment variable in Windows.
 
 ;; Python Path
 (if unixp
-    (setenv "PYTHONPATH" "/usr/local/bin/ipython")
+    (setenv "PYTHONPATH" "/usr/bin/env ipython")
     (setenv "PYTHONPATH" "~/util/Python27"))
 
 ;; Lisp Path

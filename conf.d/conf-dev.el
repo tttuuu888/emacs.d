@@ -6,7 +6,10 @@
 
 (use-package sk-dev-utils
     :defer t
-    :commands (sk-create-ch-file sk-create-c-file sk-create-h-file sk-clang-complete-make)
+    :commands (sk-create-ch-file
+               sk-create-c-file
+               sk-create-h-file
+               sk-clang-complete-make)
     :bind   (("<f9>"    . sk-make)
              ("C-<f9>"  . sk-rebuild)))
 
@@ -46,23 +49,15 @@
 ;; Makefile.example -> Makefile
 (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
-(use-package python-mode
-    :disabled t
-    :ensure t
-    :defer t)
-
 (use-package python
     :defer t
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
-    :init
-    (setq python-shell-interpreter "ipython")
+    :config
     (if window-system
         (setq python-shell-interpreter-args "-i --matplotlib=qt"))
-    (add-hook 'python-mode-hook
-              (lambda ()
-                (setq imenu-create-index-function 'python-imenu-create-index)))
-    :config
+    (setq python-shell-interpreter "ipython"
+          imenu-create-index-function 'python-imenu-create-index)
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker)
@@ -81,15 +76,12 @@
 (use-package clojure-mode
     :ensure t
     :defer t
-    :mode ("\\.clj\\'" . clojure-mode)
-    :config
-    (enable-paredit-mode))
+    :mode ("\\.clj\\'" . clojure-mode))
 
 (use-package cider
     :ensure t
     :defer t
-    :mode ("\\.clj\\'" . clojure-mode)
-    :interpreter ("clojure" . cider-repl-mode))
+    :commands cider-jack-in)
 
 (use-package clj-refactor
     :disabled t
@@ -101,7 +93,7 @@
     :ensure t
     :defer t
     :commands slime
-    :init
+    :config
     (setq lisp-indent-function 'common-lisp-indent-function
           slime-startup-animation nil
           slime-enable-evaluate-in-emacs t
@@ -110,21 +102,10 @@
           slime-repl-return-behaviour :send-only-if-after-complete
           slime-autodoc-use-multiline-p t
           slime-highlight-compiler-notes t
-          slime-contribs '(slime-fancy))
-    :config
-    (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol)
-    ;;(set-language-environment "UTF-8")
-    ;;(setq slime-net-coding-system 'utf-8-unix)
-)
-
-(use-package chicken-scheme
-    :ensure t
-    :defer t
-    :commands setup-chicken-scheme
-    :init
-    (add-hook 'scheme-mode-hook 'setup-chicken-scheme)
-    (add-hook 'scheme-mode-hook 'enable-paredit-mode)
-    (setq scheme-program-name "csi"))
+          slime-contribs '(slime-fancy)
+          slime-completion-at-point-functions 'slime-fuzzy-complete-symbol
+          slime-net-coding-system 'utf-8-unix)
+    (set-language-environment "UTF-8"))
 
 (use-package geiser
     :ensure t
@@ -135,7 +116,7 @@
     :ensure t
     :defer t
     :mode ("\\.html\\'" . web-mode)
-    :init
+    :config
     (setq web-mode-markup-indent-offset 2))
 
 (use-package go-mode
