@@ -138,6 +138,12 @@
     :init
     (setq web-mode-markup-indent-offset 2))
 
+(use-package go-mode
+    :ensure t
+    :defer t
+    :config
+    (bind-keys :map go-mode-map
+               ("TAB" . company-indent-or-complete-common)))
 
 
 (provide 'conf-dev)

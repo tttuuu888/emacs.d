@@ -33,13 +33,13 @@
         (make-local-variable 'company-minimum-prefix-length)
         (setq company-minimum-prefix-length 3)))
     (add-hook 'eshell-mode-hook 'my-company-eshell-setup)
-    (add-hook 'shell-mode-hook 'my-company-eshell-setup)
-    :config
-    (add-to-list 'company-backends 'company-irony))
+    (add-hook 'shell-mode-hook 'my-company-eshell-setup))
 
 (use-package company-irony
     :ensure t
-    :defer t)
+    :defer t
+    :init
+    (add-to-list 'company-backends 'company-irony))
 
 (use-package irony
     :ensure t
@@ -85,6 +85,12 @@
     :defer t
     :init
     (add-to-list 'company-backends 'company-jedi))
+
+(use-package company-go
+    :ensure t
+    :defer t
+    :init
+    (add-to-list 'company-backends 'company-go))
 
 (use-package redo+
     :ensure t
