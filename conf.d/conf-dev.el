@@ -142,7 +142,13 @@
     :ensure t
     :defer t
     :config
+    (add-hook 'go-mode-hook
+              (lambda ()
+                (make-local-variable 'before-save-hook)
+                (add-hook 'before-save-hook 'gofmt-before-save)))
+
     (bind-keys :map go-mode-map
+               ("M-." . godef-jump)
                ("TAB" . company-indent-or-complete-common)))
 
 
