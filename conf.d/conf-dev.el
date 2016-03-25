@@ -95,12 +95,9 @@
     :commands slime
     :init
     (setq lisp-indent-function 'common-lisp-indent-function
-          slime-startup-animation nil
           slime-enable-evaluate-in-emacs t
           slime-log-events t
           slime-outline-mode-in-events-buffer nil
-          slime-repl-return-behaviour :send-only-if-after-complete
-          slime-autodoc-use-multiline-p t
           slime-highlight-compiler-notes t
           slime-contribs '(slime-fancy))
     :config
