@@ -35,6 +35,9 @@
 ;; y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;;  M-up, M-down, M-left, and M-right keys.
+(windmove-default-keybindings 'meta)
+
 (use-package conf-general)
 (use-package conf-dev)
 
