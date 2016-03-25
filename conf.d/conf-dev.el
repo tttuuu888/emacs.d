@@ -93,7 +93,7 @@
     :ensure t
     :defer t
     :commands slime
-    :config
+    :init
     (setq lisp-indent-function 'common-lisp-indent-function
           slime-startup-animation nil
           slime-enable-evaluate-in-emacs t
@@ -102,10 +102,9 @@
           slime-repl-return-behaviour :send-only-if-after-complete
           slime-autodoc-use-multiline-p t
           slime-highlight-compiler-notes t
-          slime-contribs '(slime-fancy)
-          slime-completion-at-point-functions 'slime-fuzzy-complete-symbol
-          slime-net-coding-system 'utf-8-unix)
-    (set-language-environment "UTF-8"))
+          slime-contribs '(slime-fancy))
+    :config
+    (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol))
 
 (use-package geiser
     :ensure t
