@@ -19,7 +19,8 @@
     :config
     (set-face-attribute 'region nil :background "chocolate")
     (set-face-attribute 'lazy-highlight nil :weight 'bold :background "DarkViolet")
-    (set-face-attribute 'isearch nil :weight 'bold :background "chocolate"))
+    (set-face-attribute 'isearch nil :weight 'bold :background "chocolate")
+    (set-face-attribute 'hl-line nil :background "#525252"))
 
 (use-package company
     :ensure t
