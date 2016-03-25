@@ -108,14 +108,19 @@
 (use-package helm-git-grep
     :ensure t
     :defer t
-    :bind ("C-c p" . helm-git-grep-at-point) ;greP
-    :config (helm-autoresize-mode 1))
+    :bind ("C-c p" . my-git-grep-at-point) ;greP
+    :config
+    (defun my-git-grep-at-point ()
+      (interactive)
+      (if mark-active
+          (helm-git-grep-at-point (region-beginning) (region-end))
+          (helm-git-grep-at-point (point) (point)))))
 
 (use-package helm-ls-git
     :ensure t
     :defer t
     :bind ("C-c o" . helm-ls-git-ls)          ;Open file
-    :config (helm-autoresize-mode 1))
+    )
 
 (use-package helm
     :ensure t
@@ -128,10 +133,10 @@
     (add-hook 'eshell-mode-hook
               (lambda ()
                 (bind-keys :map eshell-mode-map ("C-c C-l" . helm-eshell-history))))
-    (setq helm-imenu-execute-action-at-once-if-one nil
-          helm-split-window-default-side 'right)
     :config
-    (helm-autoresize-mode 1))
+    (helm-autoresize-mode 1)
+    (setq helm-imenu-execute-action-at-once-if-one nil
+          helm-split-window-default-side 'right))
 
 (use-package helm-ag
     :ensure t
@@ -149,12 +154,10 @@
     :ensure t
     :defer t
     :commands projectile-project-root my-projectile-add-project
-    :init
-    (setq projectile-keymap-prefix (kbd "C-c j"))
-    (setq projectile-switch-project-action 'projectile-dired)
-    ;;(setq projectile-enable-caching t)
     :config
-    (setq projectile-require-project-root nil)
+    (setq projectile-keymap-prefix (kbd "C-c j")
+          projectile-switch-project-action 'projectile-dired
+          projectile-require-project-root nil)
     (defun my-projectile-add-project ()
       (interactive)
       (when (projectile-project-p)
@@ -173,7 +176,6 @@
     :ensure t
     :defer t
     :bind ("C-x C-b" . ibuffer)
-
     :config
     (setq ibuffer-saved-filter-groups
           '(("home"
@@ -222,11 +224,8 @@
 (use-package org
     :defer t
     :mode ("\\.org\\'" . org-mode)
-    :init
-    (add-hook 'org-mode-hook
-              (lambda ()
-                (use-package ox-reveal)))
     :config
+    (use-package ox-reveal)
     (bind-keys :map org-mode-map
                ("C-c l" . org-store-link)
                ("C-c a" . org-agenda)
@@ -253,7 +252,7 @@
 
 (use-package dired
     :defer t
-    :init
+    :config
     (use-package sk-dired)
     (setq dired-listing-switches "-alh"))
 
@@ -272,9 +271,7 @@
 (use-package magit
     :ensure t
     :defer t
-    :init
-    (global-set-key (kbd "<f12>") 'magit-status)
-    (setq magit-last-seen-setup-instructions "1.4.0"))
+    :bind ("<f12>" . magit-status))
 
 (use-package avy
     :ensure t
@@ -302,27 +299,27 @@
 
 (use-package sk-etc-utils
     :init
-  (bind-keys
-   ("<f5>" . (lambda nil (interactive) (jump-to-register ?5)
-                     (message "Windows are Restored by F5")))
-   ("<f6>" . (lambda nil (interactive) (jump-to-register ?6)
-                     (message "Windows are Restored by F6")))
-   ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
-                     (message "Windows are Restored by F7")))
-   ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
-                     (message "Windows are Restored by F8")))
-   ("C-<f5>" . (lambda nil (interactive)
-                       (window-configuration-to-register ?5)
-                       (message "Windows configuration saved to F5")))
-   ("C-<f6>" . (lambda nil (interactive)
-                       (window-configuration-to-register ?6)
-                       (message "Windows configuration saved to F6")))
-   ("C-<f7>" . (lambda nil (interactive)
-                       (window-configuration-to-register ?7)
-                       (message "Windows configuration saved to F7")))
-   ("C-<f8>" . (lambda nil (interactive)
-                       (window-configuration-to-register ?8)
-                       (message "Windows configuration saved to F8")))))
+    (bind-keys
+     ("<f5>" . (lambda nil (interactive) (jump-to-register ?5)
+                 (message "Windows are Restored by F5")))
+     ("<f6>" . (lambda nil (interactive) (jump-to-register ?6)
+                 (message "Windows are Restored by F6")))
+     ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
+                 (message "Windows are Restored by F7")))
+     ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
+                 (message "Windows are Restored by F8")))
+     ("C-<f5>" . (lambda nil (interactive)
+                   (window-configuration-to-register ?5)
+                   (message "Windows configuration saved to F5")))
+     ("C-<f6>" . (lambda nil (interactive)
+                   (window-configuration-to-register ?6)
+                   (message "Windows configuration saved to F6")))
+     ("C-<f7>" . (lambda nil (interactive)
+                   (window-configuration-to-register ?7)
+                   (message "Windows configuration saved to F7")))
+     ("C-<f8>" . (lambda nil (interactive)
+                   (window-configuration-to-register ?8)
+                   (message "Windows configuration saved to F8")))))
 
 (use-package sk-bit-util
     :defer t

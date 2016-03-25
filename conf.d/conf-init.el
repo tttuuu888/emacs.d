@@ -13,7 +13,6 @@
 ;; Lisp Path
 (if unixp
     (setq inferior-lisp-program "/usr/bin/clisp")
-    ;;(setq inferior-lisp-program "/usr/bin/sbcl")
     (setq inferior-lisp-program "~/util/clisp-2.49/clisp"))
 
 ;; hangul 3bulsik
@@ -35,9 +34,6 @@
 
 ;; y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;;  M-up, M-down, M-left, and M-right keys.
-(windmove-default-keybindings 'meta)
 
 (use-package conf-general)
 (use-package conf-dev)
