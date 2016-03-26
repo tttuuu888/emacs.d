@@ -38,6 +38,8 @@
 ;;  M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
 
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
 (use-package conf-general)
 (use-package conf-dev)
 
