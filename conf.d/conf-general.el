@@ -102,7 +102,7 @@
     :ensure t
     :defer t
     :commands wgrep-change-to-wgrep-mode
-    :init
+    :config
     (bind-keys :map helm-git-grep-mode-map
                ("C-c C-e" . wgrep-change-to-wgrep-mode)
                ("C-c C-s" . wgrep-save-all-buffers)))
