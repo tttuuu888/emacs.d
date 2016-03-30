@@ -53,11 +53,14 @@
     :defer t
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
+    :init
+    (add-hook 'python-mode-hook
+              (lambda ()
+                (setq imenu-create-index-function 'python-imenu-create-index)))
     :config
     (if window-system
         (setq python-shell-interpreter-args "-i --matplotlib=qt"))
-    (setq python-shell-interpreter "ipython"
-          imenu-create-index-function 'python-imenu-create-index)
+    (setq python-shell-interpreter "ipython")
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-*" . jedi:goto-definition-pop-marker)
