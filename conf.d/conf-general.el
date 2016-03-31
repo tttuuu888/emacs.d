@@ -234,7 +234,11 @@
                ("C-c b" . org-iswitchb)
                ("C-c r" . org-remember)
                ("C-c u" . org-up-element))
-    (setq org-log-done t)
+    (setq org-log-done t
+          org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
+          org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
+                                  "\\|"
+                                  "\\(fn:[-_[:word:]]+\\)\\)"))
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((sh         . t)
