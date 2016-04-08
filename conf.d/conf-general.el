@@ -10,6 +10,7 @@
     :ensure t)
 
 (use-package zenburn-theme
+    :if (not window-system)
     :ensure t
     :init
     (eval-after-load "avy"
