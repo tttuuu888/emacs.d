@@ -86,8 +86,8 @@
 
 (defun sk-create-ch-file (file-name)
   (interactive "sEnter File name : ")
-  (create-h-file file-name)
-  (create-c-file file-name))
+  (sk-create-h-file file-name)
+  (sk-create-c-file file-name))
 
 (defun sk-clang-complete-make ()
   (interactive)
