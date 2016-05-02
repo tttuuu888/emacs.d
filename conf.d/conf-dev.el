@@ -84,7 +84,9 @@
 (use-package cider
     :ensure t
     :defer t
-    :commands cider-jack-in)
+    :commands cider-jack-in
+    :config
+    (setq cider-inject-dependencies-at-jack-in nil))
 
 (use-package clj-refactor
     :disabled t
