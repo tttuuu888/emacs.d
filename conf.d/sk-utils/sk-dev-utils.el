@@ -42,7 +42,7 @@
 ;; making .c .h files
 (defun make-author-info (file-name)
   (concat "/**\n * " file-name "
- * Created by SK Kim\n * " (format-time-string "%Y-%m-%d") "
+ * Created by SeungKi Kim\n * " (format-time-string "%Y-%m-%d") "
  */\n"))
 
 (defun c-file-shape (file-name)
