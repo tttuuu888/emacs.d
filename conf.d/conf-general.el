@@ -305,6 +305,7 @@
 
 (use-package anzu
     :ensure t
+    :diminish anzu-mode
     :init (global-anzu-mode +1))
 
 
