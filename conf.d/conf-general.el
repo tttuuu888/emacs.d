@@ -303,6 +303,10 @@
     :bind (("M-x" . smex)
            ("M-X" . smex-major-mode-commands)))
 
+(use-package anzu
+    :ensure t
+    :init (global-anzu-mode +1))
+
 
 (use-package sk-etc-utils
     :init
