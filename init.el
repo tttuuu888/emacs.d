@@ -1,8 +1,7 @@
 ;; SK Emacs Setting
 
 (let ((file-name-handler-alist nil)
-      (default-gc-value gc-cons-threshold))
-  (setq gc-cons-threshold (* 100 1024  1024))
+      (gc-cons-threshold most-positive-fixnum))
 
   (package-initialize)
   (setq package-archives
@@ -25,6 +24,4 @@
   (require 'use-package)
   (use-package conf-init)
 
-  (recentf-open-files)
-
-  (setq gc-cons-threshold default-gc-value))
+  (recentf-open-files))
