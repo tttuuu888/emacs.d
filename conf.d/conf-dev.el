@@ -111,7 +111,9 @@
 (use-package geiser
     :ensure t
     :defer t
-    :commands geiser run-geiser)
+    :commands geiser run-geiser
+    :init
+    (setq geiser-active-implementations '(chicken guile)))
 
 (use-package web-mode
     :ensure t
