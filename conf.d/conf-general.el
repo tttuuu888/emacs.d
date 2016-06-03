@@ -111,13 +111,8 @@
 (use-package helm-git-grep
     :ensure t
     :defer t
-    :bind ("C-c p" . my-git-grep-at-point) ;greP
-    :config
-    (defun my-git-grep-at-point ()
-      (interactive)
-      (if mark-active
-          (helm-git-grep-at-point (region-beginning) (region-end))
-          (helm-git-grep-at-point (point) (point)))))
+    :bind ("C-c p" . helm-git-grep-at-point) ;greP
+    )
 
 (use-package helm-ls-git
     :ensure t
@@ -229,12 +224,30 @@
     :mode ("\\.org\\'" . org-mode)
     :config
     (use-package ox-reveal)
+    (defun org-insert-src-block (src-code-type)
+      "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
+      (interactive
+       (let ((src-code-types
+              '("emacs-lisp" "python" "c" "sh" "java" "js" "clojure" "c++" "css"
+                "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond" "mscgen"
+                "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
+                "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
+                "scheme" "sqlite")))
+         (list (ido-completing-read "Source code type: " src-code-types))))
+      (progn
+        (insert (format "#+BEGIN_SRC %s\n" src-code-type))
+        (newline-and-indent)
+        (insert "#+END_SRC\n")
+        (previous-line 2)
+        (org-edit-src-code)))
     (bind-keys :map org-mode-map
                ("C-c l" . org-store-link)
                ("C-c a" . org-agenda)
                ("C-c b" . org-iswitchb)
                ("C-c r" . org-remember)
-               ("C-c u" . org-up-element))
+               ("C-c u" . org-up-element)
+               ("C-c s e" . org-edit-src-code)
+               ("C-c s i" . org-insert-src-block))
     (setq org-log-done t
           org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
           org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
