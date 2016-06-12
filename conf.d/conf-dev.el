@@ -119,8 +119,24 @@
     :ensure t
     :defer t
     :mode ("\\.html\\'" . web-mode)
+    :init
+    (add-hook 'web-mode-hook (lambda () (tern-mode t)))
     :config
-    (setq web-mode-markup-indent-offset 2))
+    (setq web-mode-markup-indent-offset 2)
+    (bind-keys :map web-mode-map
+               ("TAB" . company-indent-or-complete-common)))
+
+(use-package js-mode
+    :defer t
+    :init
+    (add-hook 'js-mode-hook (lambda () (tern-mode t)))
+    :config
+    (bind-keys :map js-mode-map
+               ("TAB" . company-indent-or-complete-common)))
+
+(use-package tern
+    :ensure t
+    :defer t)
 
 (use-package go-mode
     :ensure t

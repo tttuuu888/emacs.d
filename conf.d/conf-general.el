@@ -43,6 +43,12 @@
     :init
     (add-to-list 'company-backends 'company-irony))
 
+(use-package company-tern
+    :ensure t
+    :defer t
+    :init
+    (add-to-list 'company-backends 'company-tern))
+
 (use-package irony
     :ensure t
     :defer t
