@@ -13,6 +13,12 @@
     :bind   (("<f9>"    . sk-make)
              ("C-<f9>"  . sk-rebuild)))
 
+(use-package electric-pair-mode
+    :defer t
+    :init
+    (add-hook 'c-mode-common-hook
+              (lambda () (electric-pair-mode t))))
+
 (use-package cff
     :ensure t
     :defer t
@@ -128,11 +134,12 @@
 
 (use-package js-mode
     :defer t
+    :mode "\\.js\\'"
     :init
-    (add-hook 'js-mode-hook (lambda () (tern-mode t)))
-    :config
-    (bind-keys :map js-mode-map
-               ("TAB" . company-indent-or-complete-common)))
+    (add-hook 'js-mode-hook
+              (lambda ()
+                (tern-mode t)
+                (local-set-key (kbd "TAB") 'company-indent-or-complete-common))))
 
 (use-package tern
     :ensure t
