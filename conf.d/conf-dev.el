@@ -126,7 +126,9 @@
     :defer t
     :mode ("\\.html\\'" . web-mode)
     :init
-    (add-hook 'web-mode-hook (lambda () (tern-mode t)))
+    (add-hook 'web-mode-hook (lambda ()
+                               (tern-mode t)
+                               (electric-pair-mode t)))
     :config
     (setq web-mode-markup-indent-offset 2)
     (bind-keys :map web-mode-map
@@ -139,6 +141,7 @@
     (add-hook 'js-mode-hook
               (lambda ()
                 (tern-mode t)
+                (electric-pair-mode t)
                 (local-set-key (kbd "TAB") 'company-indent-or-complete-common))))
 
 (use-package tern
