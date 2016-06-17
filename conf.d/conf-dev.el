@@ -124,7 +124,8 @@
 (use-package web-mode
     :ensure t
     :defer t
-    :mode ("\\.html\\'" . web-mode)
+    :mode (("\\.html\\'" . web-mode)
+           ("\\.ejs\\'" . web-mode))
     :init
     (add-hook 'web-mode-hook (lambda ()
                                (tern-mode t)
