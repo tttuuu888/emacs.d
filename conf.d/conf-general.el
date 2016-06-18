@@ -234,11 +234,11 @@
       "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
       (interactive
        (let ((src-code-types
-              '("emacs-lisp" "python" "c" "sh" "java" "js" "clojure" "c++" "css"
-                "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond" "mscgen"
-                "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
-                "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
-                "scheme" "sqlite")))
+              '("emacs-lisp" "python" "c" "sh" "java" "js" "clojure" "c++"
+                "css" "html" "calc" "asymptote" "dot" "gnuplot"
+                "octave" "R" "sass" "sql" "awk" "ditaa"
+                "haskell" "latex" "lisp" "matlab" "org" "perl" "ruby"
+                "scheme" "sqlite" )))
          (list (ido-completing-read "Source code type: " src-code-types))))
       (progn
         (insert (format "#+BEGIN_SRC %s\n" src-code-type))
