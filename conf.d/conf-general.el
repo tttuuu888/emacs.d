@@ -247,10 +247,11 @@
         (previous-line 2)
         (org-edit-src-code)))
     (bind-keys :map org-mode-map
-               ("C-c l" . org-store-link)
                ("C-c a" . org-agenda)
                ("C-c b" . org-iswitchb)
+               ("C-c l" . org-store-link)
                ("C-c r" . org-remember)
+               ("C-c t" . org-table-create)
                ("C-c u" . org-up-element)
                ("C-c s e" . org-edit-src-code)
                ("C-c s i" . org-insert-src-block))
