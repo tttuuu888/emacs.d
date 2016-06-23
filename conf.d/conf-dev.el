@@ -13,6 +13,13 @@
     :bind   (("<f9>"    . sk-make)
              ("C-<f9>"  . sk-rebuild)))
 
+(use-package gdb
+    :defer t
+    :init
+    (defadvice gdb-setup-windows (after sk-dedicated-window)
+      (set-window-dedicated-p (selected-window) t))
+    (ad-activate 'gdb-setup-windows))
+
 (use-package electric-pair-mode
     :defer t
     :init
