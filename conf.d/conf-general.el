@@ -327,8 +327,6 @@
     :ensure t
     :diminish anzu-mode
     :init (global-anzu-mode t)
-    :bind (("C-s" . isearch-forward-regexp)
-           ("C-r" . isearch-backward-regexp))
     :config
     (setq anzu-search-threshold 1000
           anzu-replace-threshold 1000))
