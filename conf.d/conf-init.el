@@ -19,8 +19,7 @@
 (setq default-korean-keyboard "3")
 
 ;; Korean font
-(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                  '("나눔고딕코딩" . "unicode-bmp"))
+(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
 ;; Korean letter setting
 (when (and enable-multibyte-characters win32p)
