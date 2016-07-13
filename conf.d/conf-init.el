@@ -19,7 +19,7 @@
 (setq default-korean-keyboard "3")
 
 ;; Korean font
-(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+(if window-system (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
 
 ;; Korean letter setting
 (when (and enable-multibyte-characters win32p)
