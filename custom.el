@@ -17,6 +17,7 @@
  '(font-use-system-font t)
  '(gdb-many-windows t)
  '(global-auto-revert-mode t)
+ '(global-hl-line-mode t)
  '(gud-gdb-command-name "gdb -i=mi")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
