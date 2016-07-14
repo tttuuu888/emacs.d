@@ -70,9 +70,6 @@
     (add-hook 'python-mode-hook
               (lambda ()
                 (setq imenu-create-index-function 'python-imenu-create-index)))
-    (if unixp
-        (setenv "PYTHONPATH" "/usr/bin/env ipython")
-        (setenv "PYTHONPATH" "~/util/Python27"))
     :config
     (if window-system
         (setq python-shell-interpreter-args "-i --matplotlib=qt"))
