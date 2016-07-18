@@ -32,6 +32,11 @@
  '(org-export-headline-levels 2)
  '(org-export-html-validation-link "")
  '(org-export-section-number-format (quote ((("1" ".")) . "")))
+ '(org-html-inline-image-rules
+   (quote
+    (("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
+     ("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
+     ("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'"))))
  '(org-log-done (quote time))
  '(org-startup-indented t)
  '(password-cache-expiry 900)
