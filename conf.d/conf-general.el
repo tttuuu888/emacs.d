@@ -257,17 +257,10 @@
                ("C-c u" . org-up-element)
                ("C-c s e" . org-edit-src-code)
                ("C-c s i" . org-insert-src-block))
-    (setq org-log-done t
-          org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
+    (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
           org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                   "\\|"
-                                  "\\(fn:[-_[:word:]]+\\)\\)"))
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((sh         . t)
-       (css        . t)
-       (python     . t)
-       (emacs-lisp . t))))
+                                  "\\(fn:[-_[:word:]]+\\)\\)")))
 
 (use-package ox-reveal
     :ensure t
