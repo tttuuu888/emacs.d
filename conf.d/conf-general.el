@@ -326,6 +326,11 @@
     (setq anzu-search-threshold 1000
           anzu-replace-threshold 1000))
 
+(use-package tramp
+  :defer t
+  :init
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
 
 (use-package sk-etc-utils
     :init
