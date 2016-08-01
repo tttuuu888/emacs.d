@@ -310,7 +310,8 @@
     :init
     (ido-mode 1)
     (ido-vertical-mode 1)
-    (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right))
+    (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right
+          ido-auto-merge-work-directories-length -1))
 
 (use-package smex
     :ensure t
