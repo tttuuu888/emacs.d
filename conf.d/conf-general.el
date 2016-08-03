@@ -157,7 +157,12 @@
 (use-package projectile
     :ensure t
     :defer t
-    :init
+    :commands projectile-project-root my-projectile-add-project
+    :bind (("C-c j k" . projectile-kill-buffers)
+           ("C-c j S" . projectile-save-project-buffers)
+           ("C-c j d" . projectile-find-dir)
+           ("C-c j b" . projectile-switch-to-buffer))
+    :config
     (setq projectile-keymap-prefix (kbd "C-c j")
           projectile-switch-project-action 'projectile-dired
           projectile-require-project-root nil)
@@ -165,8 +170,7 @@
       (interactive)
       (when (projectile-project-p)
         (projectile-add-known-project (projectile-project-root))
-        (projectile-merge-known-projects)))
-    (projectile-global-mode t))
+        (projectile-merge-known-projects))))
 
 
 (use-package powerline
