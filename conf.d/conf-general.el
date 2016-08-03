@@ -157,8 +157,7 @@
 (use-package projectile
     :ensure t
     :defer t
-    :commands projectile-project-root my-projectile-add-project
-    :config
+    :init
     (setq projectile-keymap-prefix (kbd "C-c j")
           projectile-switch-project-action 'projectile-dired
           projectile-require-project-root nil)
@@ -166,7 +165,8 @@
       (interactive)
       (when (projectile-project-p)
         (projectile-add-known-project (projectile-project-root))
-        (projectile-merge-known-projects))))
+        (projectile-merge-known-projects)))
+    (projectile-global-mode t))
 
 
 (use-package powerline
