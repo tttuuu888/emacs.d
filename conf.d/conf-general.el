@@ -151,21 +151,21 @@
     :defer t
     :bind (("C-c j p" . helm-projectile-ag)
            ("C-c j o" . helm-projectile-find-file)
+           ("C-c j d" . helm-projectile-find-dir)
            ("C-c j s" . helm-projectile-switch-project)
            ("C-c j b" . helm-projectile-switch-to-buffer)))
 
 (use-package projectile
     :ensure t
     :defer t
-    :commands projectile-project-root my-projectile-add-project
+    :commands my-projectile-add-project
     :bind (("C-c j k" . projectile-kill-buffers)
-           ("C-c j S" . projectile-save-project-buffers)
-           ("C-c j d" . projectile-find-dir)
-           ("C-c j b" . projectile-switch-to-buffer))
-    :config
+           ("C-c j S" . projectile-save-project-buffers))
+    :init
     (setq projectile-keymap-prefix (kbd "C-c j")
           projectile-switch-project-action 'projectile-dired
           projectile-require-project-root nil)
+    :config
     (defun my-projectile-add-project ()
       (interactive)
       (when (projectile-project-p)
