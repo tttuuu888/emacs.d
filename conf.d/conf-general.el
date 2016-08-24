@@ -82,7 +82,9 @@
     :init
     (add-hook 'c++-mode-hook 'flycheck-irony-setup)
     (add-hook 'c-mode-hook 'flycheck-irony-setup)
-    (add-hook 'objc-mode-hook 'flycheck-irony-setup))
+    (add-hook 'objc-mode-hook 'flycheck-irony-setup)
+    :config
+    (setq flycheck-checker 'irony))
 
 (use-package jedi-core
     :ensure t
