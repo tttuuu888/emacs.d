@@ -40,6 +40,14 @@
     (add-hook 'c-mode-common-hook (lambda () (ggtags-mode 1)))
     (add-hook 'asm-mode-hook (lambda () (ggtags-mode 1))))
 
+(use-package rtags
+    :disabled t
+    :ensure t
+    :init
+    (setq rtags-autostart-diagnostics t
+          rtags-use-helm t)
+    (rtags-enable-standard-keybindings))
+
 (use-package xcscope
     :ensure t
     :defer t
