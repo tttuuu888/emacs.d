@@ -4,10 +4,26 @@
     :ensure t
     :config
     (unbind-key "C-z")
-    (bind-key "C-x C-r" 'recentf-open-files))
+    (bind-keys ("C-x C-r" 'recentf-open-files)
+               ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
+                                 (message "Windows are Restored by F7")))
+               ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
+                                 (message "Windows are Restored by F8")))
+               ("C-<f7>" . (lambda nil (interactive)
+                                   (window-configuration-to-register ?7)
+                                   (message "Windows configuration saved to F7")))
+               ("C-<f8>" . (lambda nil (interactive)
+                                   (window-configuration-to-register ?8)
+                                   (message "Windows configuration saved to F8")))))
 
 (use-package diminish
     :ensure t)
+
+(use-package sk-bit-util
+    :commands sk-bit-print)
+
+(use-package sk-etc-utils
+    :commands (insert-date nuke-all-buffers hide-ctrl-M eshell/clear))
 
 (use-package zenburn-theme
     :if (not window-system)
@@ -338,34 +354,6 @@
   :init
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
-
-(use-package sk-etc-utils
-    :init
-    (bind-keys
-     ("<f5>" . (lambda nil (interactive) (jump-to-register ?5)
-                 (message "Windows are Restored by F5")))
-     ("<f6>" . (lambda nil (interactive) (jump-to-register ?6)
-                 (message "Windows are Restored by F6")))
-     ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
-                 (message "Windows are Restored by F7")))
-     ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
-                 (message "Windows are Restored by F8")))
-     ("C-<f5>" . (lambda nil (interactive)
-                   (window-configuration-to-register ?5)
-                   (message "Windows configuration saved to F5")))
-     ("C-<f6>" . (lambda nil (interactive)
-                   (window-configuration-to-register ?6)
-                   (message "Windows configuration saved to F6")))
-     ("C-<f7>" . (lambda nil (interactive)
-                   (window-configuration-to-register ?7)
-                   (message "Windows configuration saved to F7")))
-     ("C-<f8>" . (lambda nil (interactive)
-                   (window-configuration-to-register ?8)
-                   (message "Windows configuration saved to F8")))))
-
-(use-package sk-bit-util
-    :defer t
-    :commands sk-bit-print)
 
 
 (provide 'conf-general)
