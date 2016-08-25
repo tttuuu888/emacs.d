@@ -4,7 +4,7 @@
     :ensure t
     :config
     (unbind-key "C-z")
-    (bind-keys ("C-x C-r" 'recentf-open-files)
+    (bind-keys ("C-x C-r" . recentf-open-files)
                ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
                                  (message "Windows are Restored by F7")))
                ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
