@@ -149,9 +149,8 @@
                                (tern-mode t)
                                (electric-pair-mode t)))
     :config
-    (if window-system
-        web-mode-enable-current-element-highlight t)
-    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-markup-indent-offset 2
+          web-mode-enable-current-element-highlight t)
     (bind-keys :map web-mode-map
                ("TAB" . company-indent-or-complete-common)))
 
