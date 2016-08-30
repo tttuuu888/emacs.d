@@ -147,6 +147,7 @@
     :init
     (add-hook 'web-mode-hook (lambda ()
                                (tern-mode t)
+                               (emmet-mode t)
                                (electric-pair-mode t)))
     :config
     (setq web-mode-markup-indent-offset 2
@@ -154,15 +155,22 @@
     (bind-keys :map web-mode-map
                ("TAB" . company-indent-or-complete-common)))
 
-(use-package js-mode
+(use-package js
     :defer t
-    :mode "\\.js\\'"
+    :mode ("\\.js\\'" . js-mode)
     :init
-    (add-hook 'js-mode-hook
-              (lambda ()
-                (tern-mode t)
-                (electric-pair-mode t)
-                (local-set-key (kbd "TAB") 'company-indent-or-complete-common))))
+    (add-hook 'js-mode-hook (lambda ()
+                              (tern-mode t)
+                              (electric-pair-mode t)))
+    :config
+    (bind-keys :map js-mode-map
+               ("TAB" . company-indent-or-complete-common)))
+
+(use-package emmet-mode
+    :ensure t
+    :defer t
+    :init
+    (add-hook 'css-mode-hook (lambda () (emmet-mode t))))
 
 (use-package tern
     :ensure t
@@ -172,10 +180,9 @@
     :ensure t
     :defer t
     :config
-    (add-hook 'go-mode-hook
-              (lambda ()
-                (make-local-variable 'before-save-hook)
-                (add-hook 'before-save-hook 'gofmt-before-save)))
+    (add-hook 'go-mode-hook (lambda ()
+                              (make-local-variable 'before-save-hook)
+                              (add-hook 'before-save-hook 'gofmt-before-save)))
 
     (bind-keys :map go-mode-map
                ("M-." . godef-jump)
