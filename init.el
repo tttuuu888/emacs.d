@@ -22,6 +22,6 @@
   (load custom-file)
 
   (require 'use-package)
-  (use-package conf-init)
+  (require 'conf-init)
 
   (recentf-open-files))

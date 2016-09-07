@@ -27,8 +27,8 @@
 
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 
-(use-package conf-general)
-(use-package conf-dev)
+(require 'conf-general)
+(require 'conf-dev)
 
 
 (provide 'conf-init)

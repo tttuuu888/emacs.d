@@ -56,13 +56,15 @@
 (use-package company-irony
     :ensure t
     :defer t
-    :init
+    :after irony
+    :config
     (add-to-list 'company-backends 'company-irony))
 
 (use-package company-tern
     :ensure t
     :defer t
-    :init
+    :after web-mode
+    :config
     (add-to-list 'company-backends 'company-tern))
 
 (use-package irony
@@ -109,13 +111,15 @@
 (use-package company-jedi
     :ensure t
     :defer t
-    :init
+    :after python
+    :config
     (add-to-list 'company-backends 'company-jedi))
 
 (use-package company-go
     :ensure t
     :defer t
-    :init
+    :after go-mode
+    :config
     (add-to-list 'company-backends 'company-go))
 
 (use-package redo+
@@ -194,7 +198,7 @@
 (use-package powerline
     :ensure t
     :init
-    (use-package sk-powerline)
+    (require 'sk-powerline)
     :config
     (set-face-attribute 'powerline-active1 nil :inherit 'mode-line :background "grey22" :foreground "white"))
 
@@ -253,7 +257,6 @@
     :defer t
     :mode ("\\.org\\'" . org-mode)
     :config
-    (use-package ox-reveal)
     (defun org-insert-src-block (src-code-type)
       "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
       (interactive
@@ -287,6 +290,7 @@
 (use-package ox-reveal
     :ensure t
     :defer t
+    :after org
     :config
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"
           org-reveal-title-slide-template "<h1>%t</h1><h4>%a</h4><h4>%e</h4><h4>%d</h4>"
@@ -298,7 +302,7 @@
 (use-package dired
     :defer t
     :config
-    (use-package sk-dired)
+    (require 'sk-dired)
     (setq dired-listing-switches "-alh"))
 
 (use-package neotree
