@@ -318,11 +318,19 @@
     :defer t
     :bind ("C-=" . er/expand-region))
 
+(use-package ido
+    :defer t
+    :bind (("C-x d" . ido-dired)
+           ("C-x C-f" . ido-find-file)
+           ("C-x b" . ido-switch-buffer))
+    :config
+    (ido-mode 1)
+    (ido-vertical-mode 1))
+
 (use-package ido-vertical-mode
     :ensure t
-    :init
-    (ido-mode 1)
-    (ido-vertical-mode 1)
+    :defer t
+    :config
     (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right
           ido-auto-merge-work-directories-length -1))
 
@@ -341,10 +349,10 @@
           anzu-replace-threshold 1000))
 
 (use-package tramp
-  :defer t
-  :init
-  (setq tramp-ssh-controlmaster-options
-        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
+    :defer t
+    :init
+    (setq tramp-ssh-controlmaster-options
+          "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
 
 
 (provide 'conf-general)
