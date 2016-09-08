@@ -40,7 +40,7 @@
             )))
 
 ;; win32 hiding gid, uid in dired mode
-(when win32p
+(when windowsp
   (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity))
   (setq ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))
 

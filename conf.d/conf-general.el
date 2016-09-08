@@ -25,20 +25,6 @@
 (use-package sk-etc-utils
     :commands (insert-date nuke-all-buffers hide-ctrl-M eshell/clear))
 
-(use-package zenburn-theme
-    :if (not window-system)
-    :ensure t
-    :init
-    (eval-after-load "avy"
-      '(progn
-        (set-face-attribute 'avy-lead-face nil :background "chocolate")
-        (set-face-attribute 'avy-lead-face-0 nil :background "DarkViolet")))
-    :config
-    (set-face-attribute 'region nil :background "chocolate")
-    (set-face-attribute 'lazy-highlight nil :weight 'bold :background "DarkViolet")
-    (set-face-attribute 'isearch nil :weight 'bold :background "chocolate")
-    (set-face-attribute 'hl-line nil :background "#525252"))
-
 (use-package company
     :ensure t
     :diminish company-mode

@@ -126,7 +126,7 @@
           slime-outline-mode-in-events-buffer nil
           slime-highlight-compiler-notes t
           slime-contribs '(slime-fancy))
-    (if unixp
+    (if linuxp
         (setq inferior-lisp-program "/usr/bin/clisp")
         (setq inferior-lisp-program "~/util/clisp-2.49/clisp"))
     :config

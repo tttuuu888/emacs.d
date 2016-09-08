@@ -1,7 +1,7 @@
 ;; Initial settings
 
-(defconst win32p (eq system-type 'windows-nt) "t : Windows system")
-(defconst unixp  (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "t : Linux system")
+(defconst windowsp (eq system-type 'windows-nt) "t : Windows system")
+(defconst linuxp  (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "t : Linux system")
 
 ;; hangul 3bulsik
 (setq default-korean-keyboard "3")
@@ -10,7 +10,7 @@
 (if window-system (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
 
 ;; Korean letter setting for Windows
-(when (and win32p enable-multibyte-characters)
+(when (and windowsp enable-multibyte-characters)
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
