@@ -280,6 +280,7 @@
     :config
     (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"
           org-reveal-title-slide-template "<h1>%t</h1><h4>%a</h4><h4>%e</h4><h4>%d</h4>"
+          org-reveal-plugins '(classList markdown highlight zoom notes)
           org-reveal-theme "sky"
           org-reveal-hlevel 2
           org-reveal-center nil))
