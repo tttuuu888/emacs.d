@@ -7,7 +7,8 @@
 (setq default-korean-keyboard "3")
 
 ;; Korean font
-(if window-system (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
+(if window-system
+    (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
 
 ;; Korean letter setting for Windows
 (when (and windowsp enable-multibyte-characters)
@@ -26,6 +27,10 @@
 (windmove-default-keybindings 'meta)
 
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+;; Hope I could remove this setting someday
+(defun package--save-selected-packages (&rest opt) nil)
+
 
 (require 'conf-general)
 (require 'conf-dev)
