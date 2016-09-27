@@ -3,10 +3,10 @@
 (let ((file-name-handler-alist nil)
       (gc-cons-threshold most-positive-fixnum))
 
+  (package-initialize)
   (setq package-archives
         '(("gnu" . "http://elpa.gnu.org/packages/")
           ("melpa" . "http://melpa.milkbox.net/packages/")))
-  (package-initialize)
 
   ;; use-package
   (when (not (package-installed-p 'use-package))
@@ -22,5 +22,8 @@
 
   (require 'use-package)
   (require 'conf-init)
+
+  ;; To be removed after emacs updated.
+  (setq package--initialized nil)
 
   (recentf-open-files))
