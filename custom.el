@@ -39,7 +39,6 @@
  '(org-startup-indented t)
  '(password-cache-expiry 900)
  '(recentf-mode t)
- '(safe-local-variable-values (quote ((dired-omit-mode . t))))
  '(scroll-bar-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(show-paren-mode t)

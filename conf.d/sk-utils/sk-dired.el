@@ -31,13 +31,11 @@
   (mydired-sort))
 
 (add-hook 'dired-mode-hook
-          (function (lambda ()
-            (load "dired-x")
-            ;; Set dired-x buffer-local variables here.  For example:
+          (lambda ()
+            (require 'dired-x)
             (dired-omit-mode)
             (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
-            (setq dired-omit-extensions '("~"))
-            )))
+            (setq dired-omit-extensions '("~"))))
 
 ;; win32 hiding gid, uid in dired mode
 (when windowsp
