@@ -28,24 +28,15 @@
 (use-package eshell
     :defer t
     :config
-    (defun my-company-eshell-setup ()
-      (progn
-        (make-local-variable 'company-minimum-prefix-length)
-        (setq company-minimum-prefix-length 3)
-        (bind-keys :map eshell-mode-map
-               ("C-c C-l" . helm-eshell-history))))
-    (add-hook 'eshell-mode-hook 'my-company-eshell-setup))
+    (add-hook 'eshell-mode-hook
+              (lambda () (bind-keys :map eshell-mode-map
+                                    ("C-c C-l" . helm-eshell-history)))))
 
 (use-package shell
     :defer t
     :config
     (bind-keys :map shell-mode-map
-               ("C-c C-l" . helm-comint-input-ring))
-    (defun my-company-shell-setup ()
-      (progn
-        (make-local-variable 'company-minimum-prefix-length)
-        (setq company-minimum-prefix-length 3)))
-    (add-hook 'shell-mode-hook 'my-company-eshell-setup))
+               ("C-c C-l" . helm-comint-input-ring)))
 
 (use-package company
     :ensure t
