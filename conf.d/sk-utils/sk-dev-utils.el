@@ -5,18 +5,20 @@
   (unless (equal "/" dir)
     (file-name-directory (directory-file-name dir))))
 
-(defun find-file-in-tree (dir fname)
+(defun find-file-in-tree (dir fname &optional project-root)
   (let ((file (concat dir fname))
         (parent (parent-directory dir)))
-    (if (file-exists-p file)
-        dir
-        (when parent
-          (find-file-in-tree parent fname)))))
+    (cond ((and project-root (file-exists-p (concat project-root fname))) project-root)
+          ((file-exists-p file) dir)
+          ((when parent) (find-file-in-tree parent fname))
+          (t nil))))
 
 (defun sk-make ()
   "Find a Makefile path and excute make"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
+  (let ((dir (find-file-in-tree (file-name-directory default-directory)
+                                "Makefile"
+                                (projectile-project-root))))
     (if (equal dir nil)
         (message "Makefile is not found")
         (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
@@ -24,14 +26,18 @@
 (defun sk-clean ()
   "Find a Makefile path and excute make"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
+  (let ((dir (find-file-in-tree (file-name-directory default-directory)
+                                "Makefile"
+                                (projectile-project-root))))
     (unless (equal dir nil)
       (compile (concat "export LANG=en_US && make -C " dir " clean")))))
 
 (defun sk-rebuild ()
   "Find a Makefile path and excute rebuild(clean and make)"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
+  (let ((dir (find-file-in-tree (file-name-directory default-directory)
+                                "Makefile"
+                                (projectile-project-root))))
     (if (equal dir nil)
         (message "Makefile is not found")
         (progn

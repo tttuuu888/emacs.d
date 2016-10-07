@@ -169,7 +169,7 @@
 (use-package projectile
     :ensure t
     :defer t
-    :commands my-projectile-add-project
+    :commands (my-projectile-add-project projectile-project-root)
     :bind (("C-c j k" . projectile-kill-buffers)
            ("C-c j S" . projectile-save-project-buffers))
     :init
