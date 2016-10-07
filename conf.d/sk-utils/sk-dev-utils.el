@@ -19,14 +19,14 @@
   (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (if (equal dir nil)
         (message "Makefile is not found")
-        (compile (concat "make -j8 -C " dir)))))
+        (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
 
 (defun sk-clean ()
   "Find a Makefile path and excute make"
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory) "Makefile")))
     (unless (equal dir nil)
-      (compile (concat "make -C " dir " clean")))))
+      (compile (concat "export LANG=en_US && make -C " dir " clean")))))
 
 (defun sk-rebuild ()
   "Find a Makefile path and excute rebuild(clean and make)"
@@ -36,7 +36,7 @@
         (message "Makefile is not found")
         (progn
          (call-process "make" nil nil nil "-C" dir "clean")
-         (compile (concat "make -j8 -C " dir))))))
+         (compile (concat "export LANG=en_US && make -j8 -C " dir))))))
 
 
 ;; making .c .h files
