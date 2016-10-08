@@ -2,8 +2,18 @@
 
 (use-package bind-key
     :ensure t
+    :init
+    (global-unset-key (kbd "C-z"))
+    (global-unset-key (kbd "<mouse-1>"))
+    (global-unset-key (kbd "<mouse-2>"))
+    (global-unset-key (kbd "<mouse-3>"))
+    (global-unset-key (kbd "<down-mouse-1>"))
+    (global-unset-key (kbd "<down-mouse-2>"))
+    (global-unset-key (kbd "<down-mouse-3>"))
+    (global-unset-key (kbd "<drag-mouse-1>"))
+    (global-unset-key (kbd "<drag-mouse-2>"))
+    (global-unset-key (kbd "<drag-mouse-3>"))
     :config
-    (unbind-key "C-z")
     (bind-keys ("C-x C-r" . recentf-open-files)
                ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
                                  (message "Windows are Restored by F7")))
