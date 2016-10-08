@@ -21,10 +21,10 @@
                                  (message "Windows are Restored by F8")))
                ("C-<f7>" . (lambda nil (interactive)
                                    (window-configuration-to-register ?7)
-                                   (message "Windows configuration saved to F7")))
+                                   (message "Windows are saved to F7")))
                ("C-<f8>" . (lambda nil (interactive)
                                    (window-configuration-to-register ?8)
-                                   (message "Windows configuration saved to F8")))))
+                                   (message "Windows are saved to F8")))))
 
 (use-package diminish
     :ensure t)
