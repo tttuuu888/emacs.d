@@ -10,6 +10,8 @@
     (global-unset-key (kbd "<down-mouse-3>"))
     (global-unset-key (kbd "<drag-mouse-1>"))
     (global-unset-key (kbd "<drag-mouse-3>"))
+    (global-unset-key (kbd "<C-down-mouse-1>"))
+    (global-unset-key (kbd "<M-down-mouse-1>"))
     :config
     (bind-keys ("C-x C-r" . recentf-open-files)
                ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
