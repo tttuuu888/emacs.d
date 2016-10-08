@@ -56,7 +56,10 @@
     :defer t
     :init
     (add-hook 'c-mode-common-hook (lambda () (cscope-minor-mode 1)))
-    (add-hook 'asm-mode-hook (lambda () (cscope-minor-mode 1))))
+    (add-hook 'asm-mode-hook (lambda () (cscope-minor-mode 1)))
+    :config
+    (bind-keys :map cscope-minor-mode-keymap
+               ("<mouse-3>" . nil)))
 
 (use-package which-function-mode
     :defer t

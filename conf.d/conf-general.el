@@ -5,13 +5,10 @@
     :init
     (global-unset-key (kbd "C-z"))
     (global-unset-key (kbd "<mouse-1>"))
-    (global-unset-key (kbd "<mouse-2>"))
     (global-unset-key (kbd "<mouse-3>"))
     (global-unset-key (kbd "<down-mouse-1>"))
-    (global-unset-key (kbd "<down-mouse-2>"))
     (global-unset-key (kbd "<down-mouse-3>"))
     (global-unset-key (kbd "<drag-mouse-1>"))
-    (global-unset-key (kbd "<drag-mouse-2>"))
     (global-unset-key (kbd "<drag-mouse-3>"))
     :config
     (bind-keys ("C-x C-r" . recentf-open-files)
