@@ -1,22 +1,21 @@
 ;; The other functions Setting
 
-;; insert date into buffer at point
-;; optained from http://www.chrislott.org/geek/emacs/dotemacs.html
 (defun insert-date ()
+  "Insert date at point."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %a")))
+
+(defun insert-date-and-time ()
   "Insert date at point."
   (interactive)
   (insert (format-time-string "%Y-%m-%d %a %p %l:%M")))
 
-
-;; ;; Kills all them buffers except scratch
-;; ;; optained from http://www.chrislott.org/geek/emacs/dotemacs.html
 (defun nuke-all-buffers ()
   "kill all buffers, leaving *scratch* only"
   (interactive)
   (mapc (lambda (x) (kill-buffer x))
           (buffer-list))
   (delete-other-windows))
-
 
 ;; Hide ^M
 (defun hide-ctrl-M ()
