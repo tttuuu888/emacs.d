@@ -1,5 +1,23 @@
 ;; My functions
 
+(defun sharp-ifdef-insert (start end pre)
+  (save-excursion
+    (goto-char end) (end-of-line) (insert "\n#endif")
+    (goto-char start) (beginning-of-line) (insert pre "\n")))
+
+;; #if 0 ~ #endif insert for the area
+(defun izero-insert (start end)
+  "Intesrt #if 0 at the beginning of region and #endif at the end of region"
+  (interactive "r")
+  (sharp-ifdef-insert start end "#if 0"))
+
+;; #ifdef ~ #endif insert for the area
+(defun idef-insert (start end in)
+  "Intesrt #if 0 at the beginning of region and #endif at the end of region"
+  (interactive "r\nsDefine : ")
+  (sharp-ifdef-insert start end (concat "#ifdef " in)))
+
+
 ;; build functions
 (defun parent-directory (dir)
   (unless (equal "/" dir)

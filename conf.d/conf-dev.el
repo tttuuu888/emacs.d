@@ -9,12 +9,17 @@
 
 (use-package sk-dev-utils
     :defer t
-    :commands (sk-create-ch-file
+    :commands (izero-insert
+               idef-insert
+               sk-create-ch-file
                sk-create-c-file
                sk-create-h-file
                sk-clang-complete-make)
     :bind   (("<f9>"    . sk-make)
-             ("C-<f9>"  . sk-rebuild)))
+             ("C-<f9>"  . sk-rebuild))
+    :init
+    (add-hook 'c-mode-common-hook
+              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark))))
 
 (use-package gdb
     :defer t

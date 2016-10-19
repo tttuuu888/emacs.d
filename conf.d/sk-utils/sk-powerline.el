@@ -52,7 +52,6 @@
 
 (defun sk-powerline-simple-theme ()
   "Setup the simple mode-line."
-  (interactive)
   (setq-default mode-line-format
                 '("%e"
                   (:eval
