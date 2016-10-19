@@ -52,6 +52,7 @@
     (add-hook 'c-mode-common-hook (lambda () (rtags-start-process-unless-running)))
     :config
     (require 'sk-dev-utils)
+    (require 'rtags-helm)
     (setq rtags-autostart-diagnostics t
           rtags-use-helm t)
     (rtags-enable-standard-keybindings)
