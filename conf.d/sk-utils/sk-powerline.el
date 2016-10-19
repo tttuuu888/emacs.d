@@ -2,7 +2,6 @@
 
 (defun sk-powerline-default-theme ()
   "Setup the default mode-line."
-  (interactive)
   (setq-default mode-line-format
                 '("%e"
                   (:eval

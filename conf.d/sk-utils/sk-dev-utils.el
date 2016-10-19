@@ -14,7 +14,7 @@
           (t nil))))
 
 (defun sk-make ()
-  "Find a Makefile path and excute make"
+  "Find a Makefile path and perform Make"
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
@@ -24,16 +24,17 @@
         (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
 
 (defun sk-clean ()
-  "Find a Makefile path and excute make"
+  "Find a Makefile path and perform Clean"
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
                                 (projectile-project-root))))
-    (unless (equal dir nil)
+    (if (equal dir nil)
+      (message "Makefile is not found")
       (compile (concat "export LANG=en_US && make -C " dir " clean")))))
 
 (defun sk-rebuild ()
-  "Find a Makefile path and excute rebuild(clean and make)"
+  "Find a Makefile path and perform rebuild(clean and make)"
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
@@ -74,11 +75,9 @@
 /******************************** END OF FILE *********************************/"))
 
 (defun c-header-insert (file-name)
-  (interactive "sEnter File name : ")
   (insert (c-header-shape file-name)))
 
 (defun c-file-insert (file-name)
-  (interactive "sEnter File name : ")
   (insert (c-file-shape file-name)))
 
 (defun sk-create-h-file (file-name)
