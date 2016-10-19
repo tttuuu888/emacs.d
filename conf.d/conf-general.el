@@ -28,9 +28,6 @@
 (use-package diminish
     :ensure t)
 
-(use-package sk-bit-util
-    :commands sk-bit-print)
-
 (use-package sk-etc-utils
     :commands (insert-date nuke-all-buffers hide-ctrl-M eshell/clear))
 

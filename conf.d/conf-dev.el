@@ -1,12 +1,5 @@
 ;; Developement settings
 
-(use-package sk-c-mode
-    :defer t
-    :commands (izero-insert idef-insert)
-    :init
-    (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark))))
-
 (use-package sk-dev-utils
     :defer t
     :commands (izero-insert
