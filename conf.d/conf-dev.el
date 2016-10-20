@@ -12,7 +12,9 @@
              ("C-<f9>"  . sk-rebuild))
     :init
     (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark))))
+              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark)))
+    ;; Makefile.example -> Makefile
+    (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode)))
 
 (use-package gdb
     :defer t
@@ -87,9 +89,6 @@
       (setq which-func-unknown "N/A"))
     (add-hook 'c-mode-common-hook 'my-which-function-setup)
     (add-hook 'python-mode-hook 'my-which-function-setup))
-
-;; Makefile.example -> Makefile
-(add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
 (use-package python
     :defer t
