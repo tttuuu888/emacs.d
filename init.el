@@ -9,7 +9,7 @@
           ("melpa" . "http://melpa.milkbox.net/packages/")))
 
   ;; use-package
-  (when (not (package-installed-p 'use-package))
+  (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
 
