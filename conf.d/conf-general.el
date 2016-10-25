@@ -29,7 +29,11 @@
     :ensure t)
 
 (use-package sk-etc-utils
-    :commands (insert-date nuke-all-buffers hide-ctrl-M eshell/clear))
+    :commands (insert-date
+               insert-date-and-time
+               nuke-all-buffers
+               hide-ctrl-M
+               eshell/clear))
 
 (use-package eshell
     :defer t
@@ -147,14 +151,12 @@
 (use-package helm-git-grep
     :ensure t
     :defer t
-    :bind ("C-c p" . helm-git-grep-at-point) ;greP
-    )
+    :bind ("C-c p" . helm-git-grep-at-point))
 
 (use-package helm-ls-git
     :ensure t
     :defer t
-    :bind ("C-c o" . helm-ls-git-ls)          ;Open file
-    )
+    :bind ("C-c o" . helm-ls-git-ls))
 
 (use-package helm
     :ensure t
@@ -370,6 +372,7 @@
 (use-package tramp
     :defer t
     :init
+    ;; For speeding up SSH session creation
     (setq tramp-ssh-controlmaster-options
           "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
 
