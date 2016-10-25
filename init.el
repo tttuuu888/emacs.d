@@ -23,7 +23,4 @@
   (require 'use-package)
   (require 'conf-init)
 
-  ;; To be removed after emacs updated.
-  (setq package--initialized nil)
-
   (recentf-open-files))

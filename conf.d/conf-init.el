@@ -28,12 +28,16 @@
 
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 
-;; Hope I could remove this setting someday
+;; To be removed after emacs updated.
 (defun package--save-selected-packages (&rest opt) nil)
 
 
 (require 'conf-general)
 (require 'conf-dev)
+
+
+;; To be removed after emacs updated.
+(setq package--initialized nil)
 
 
 (provide 'conf-init)
