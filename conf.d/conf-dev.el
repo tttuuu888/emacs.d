@@ -101,7 +101,7 @@
           imenu-create-index-function 'python-imenu-create-index)
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
-               ("M-*" . jedi:goto-definition-pop-marker)
+               ("M-," . jedi:goto-definition-pop-marker)
                ("TAB" . company-indent-or-complete-common)
                ("C->" . python-indent-shift-right)
                ("C-<" . python-indent-shift-left)))
