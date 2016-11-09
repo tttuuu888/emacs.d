@@ -16,6 +16,12 @@
   (add-to-list 'load-path "~/.emacs.d/conf.d/")
   (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
 
+  ;; User Info
+  (let ((name (getenv "USER_FULL_NAME"))
+        (mail (getenv "USER_MAIL_ADDRESS")))
+    (if name (setq user-full-name name))
+    (if mail (setq user-mail-address mail)))
+
   ;; custom file
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
