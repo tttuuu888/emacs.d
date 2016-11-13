@@ -95,6 +95,16 @@
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
     :config
+    (defun sk-toggle-python ()
+      "Toggle between Python2 and Python3"
+      (interactive)
+      (if (equal python-shell-interpreter "ipython")
+          (progn
+            (setq python-shell-interpreter "ipython3")
+            (message "Toggled to Python3"))
+        (progn
+          (setq python-shell-interpreter "ipython")
+          (message "Toggled to Python2"))))
     (if window-system
         (setq python-shell-interpreter-args "-i --matplotlib=qt"))
     (setq python-shell-interpreter "ipython"
