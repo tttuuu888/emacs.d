@@ -13,6 +13,12 @@
     (global-unset-key (kbd "<C-down-mouse-1>"))
     (global-unset-key (kbd "<M-down-mouse-1>"))
     :config
+    (defun jump-10-line-down ()
+      (interactive)
+      (dotimes (i 10) (next-line)))
+    (defun jump-10-line-up ()
+      (interactive)
+      (dotimes (i 10) (previous-line)))
     (bind-keys ("C-x C-r" . recentf-open-files)
                ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
                                  (message "Windows are Restored by F7")))
@@ -23,7 +29,9 @@
                                    (message "Windows are saved to F7")))
                ("C-<f8>" . (lambda nil (interactive)
                                    (window-configuration-to-register ?8)
-                                   (message "Windows are saved to F8")))))
+                                   (message "Windows are saved to F8")))
+               ("M-p" . jump-10-line-up)
+               ("M-n" . jump-10-line-down)))
 
 (use-package diminish
     :ensure t)
