@@ -49,7 +49,7 @@
     :defer t
     :commands my-rtags-index
     :init
-    (add-hook 'c-mode-common-hook (lambda () (rtags-start-process-unless-running)))
+    (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
     :config
     (require 'sk-dev-utils)
     (require 'helm-utils)
@@ -58,7 +58,7 @@
           rtags-use-helm t)
     (rtags-enable-standard-keybindings)
     (rtags-start-process-unless-running)
-    (add-hook 'kill-emacs-hook (lambda () (rtags-quit-rdm)))
+    (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
     (defun my-rtags-index ()
       (interactive)
       (let ((dir (find-file-in-tree (file-name-directory default-directory)
