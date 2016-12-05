@@ -21,7 +21,10 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; background-color : Ivory 2
-(if window-system (set-background-color "#EEEEE0"))
+(if window-system
+    (setq default-frame-alist
+      (append default-frame-alist
+       '((background-color . "#EEEEE0")))))
 
 ;;  M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
