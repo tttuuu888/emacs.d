@@ -14,7 +14,12 @@
     (add-hook 'c-mode-common-hook
               (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark)))
     ;; Makefile.example -> Makefile
-    (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode)))
+    (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
+
+    (defun my-prog-nuke-trailing-whitespace ()
+      (when (derived-mode-p 'prog-mode)
+        (delete-trailing-whitespace)))
+    (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace))
 
 (use-package gdb
     :defer t
