@@ -99,6 +99,7 @@
     :defer t
     :mode ("\\.py\\'" . python-mode)
     :interpreter ("python" . python-mode)
+    :commands sk-toggle-python
     :config
     (defun sk-toggle-python ()
       "Toggle between Python2 and Python3"
