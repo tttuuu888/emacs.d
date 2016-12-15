@@ -24,6 +24,7 @@
  '(large-file-warning-threshold nil)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
+ '(mouse-wheel-progressive-speed nil)
  '(org-agenda-files (quote ("~/Dropbox/org/")))
  '(org-babel-load-languages (quote ((sh . t) (css . t) (python . t) (emacs-lisp . t))))
  '(org-export-default-language "kr")
