@@ -8,8 +8,8 @@
                sk-create-c-file
                sk-create-h-file
                sk-clang-complete-make)
-    :bind   (("<f9>"    . sk-make)
-             ("C-<f9>"  . sk-rebuild))
+    :bind   (("<f5>"    . sk-make)
+             ("C-<f5>"  . sk-rebuild))
     :init
     (add-hook 'c-mode-common-hook
               (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark)))
