@@ -213,10 +213,13 @@
     :ensure t
     :defer t
     :config
-    (add-hook 'go-mode-hook (lambda ()
-                              (make-local-variable 'before-save-hook)
-                              (add-hook 'before-save-hook 'gofmt-before-save)))
-
+    (setq gofmt-command "goimports")
+    (defun my-go-code-hook ()
+      (make-local-variable 'before-save-hook)
+      (add-hook 'before-save-hook 'gofmt-before-save)
+      (set (make-local-variable 'compile-command)
+           "go build -v && go test -v && go vet"))
+    (add-hook 'go-mode-hook 'my-go-code-hook)
     (bind-keys :map go-mode-map
                ("M-." . godef-jump)
                ("TAB" . company-indent-or-complete-common)))
