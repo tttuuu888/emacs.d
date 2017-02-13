@@ -27,6 +27,4 @@
   (load custom-file)
 
   (require 'use-package)
-  (require 'conf-init)
-
-  (recentf-open-files))
+  (require 'conf-init))

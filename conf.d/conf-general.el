@@ -392,5 +392,10 @@
            ("C-c C->" . mc/mark-all-like-this)
            ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
+(use-package recentf
+    :defer t
+    :bind ("C-x C-r" . recentf-open-files)
+    :config
+    (recentf-mode t))
 
 (provide 'conf-general)
