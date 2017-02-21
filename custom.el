@@ -36,7 +36,7 @@
      ("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
      ("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'"))))
  '(org-html-validation-link "")
- '(org-latex-packages-alist (quote (("usepackage" "kotex" nil))))
+ '(org-latex-packages-alist (quote (("" "parskip" nil) ("" "kotex" nil))))
  '(org-log-done t)
  '(org-startup-indented t)
  '(password-cache-expiry 900)
