@@ -398,4 +398,10 @@
     :config
     (recentf-mode t))
 
+(use-package htmlize
+    :ensure t
+    :defer t
+    :after org)
+
+
 (provide 'conf-general)
