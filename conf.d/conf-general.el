@@ -49,6 +49,7 @@
     (defun my-company-eshell-setup ()
       (progn
         (make-local-variable 'company-minimum-prefix-length)
+        (setenv "TERM" "screen-256color")
         (setq company-minimum-prefix-length 3)
         (bind-keys :map eshell-mode-map
                    ("C-c C-l" . helm-eshell-history))))
@@ -214,7 +215,10 @@
     :init
     (require 'sk-powerline)
     :config
-    (set-face-attribute 'powerline-active1 nil :inherit 'mode-line :background "grey22" :foreground "white"))
+    (set-face-attribute 'powerline-active1 nil
+                        :inherit 'mode-line
+                        :background "grey22"
+                        :foreground "white"))
 
 (use-package ibuffer
     :ensure t
