@@ -81,6 +81,13 @@
     :config
     (add-to-list 'company-backends 'company-irony))
 
+(use-package company-irony-c-headers
+    :ensure t
+    :defer t
+    :after irony
+    :config
+    (add-to-list 'company-backends 'company-irony-c-headers))
+
 (use-package company-tern
     :ensure t
     :defer t
