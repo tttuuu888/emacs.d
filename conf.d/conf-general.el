@@ -13,12 +13,12 @@
     (global-unset-key (kbd "<C-down-mouse-1>"))
     (global-unset-key (kbd "<M-down-mouse-1>"))
     :config
-    (defun jump-10-line-down ()
+    (defun jump-8-line-down ()
       (interactive)
-      (dotimes (i 10) (next-line)))
-    (defun jump-10-line-up ()
+      (dotimes (i 8) (next-line)))
+    (defun jump-8-line-up ()
       (interactive)
-      (dotimes (i 10) (previous-line)))
+      (dotimes (i 8) (previous-line)))
     (bind-keys ("C-x C-r" . recentf-open-files)
                ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
                                  (message "Windows are Restored by F7")))
@@ -30,8 +30,8 @@
                ("C-<f8>" . (lambda nil (interactive)
                                    (window-configuration-to-register ?8)
                                    (message "Windows are saved to F8")))
-               ("M-p" . jump-10-line-up)
-               ("M-n" . jump-10-line-down)))
+               ("M-p" . jump-8-line-up)
+               ("M-n" . jump-8-line-down)))
 
 (use-package diminish
     :ensure t)
@@ -414,5 +414,9 @@
     :defer t
     :after org)
 
+(use-package korean-holidays
+    :ensure t
+    :config
+    (setq calendar-holidays korean-holidays))
 
 (provide 'conf-general)
