@@ -406,6 +406,7 @@
 (use-package recentf
     :defer t
     :bind ("C-x C-r" . recentf-open-files)
+    :after (:any ido helm)
     :config
     (recentf-mode t))
 
