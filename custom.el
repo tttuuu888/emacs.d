@@ -21,7 +21,6 @@
  '(gud-gdb-command-name "gdb -i=mi")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(large-file-warning-threshold nil)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)

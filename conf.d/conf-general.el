@@ -327,6 +327,10 @@
 
 (use-package dired
     :defer t
+    :init
+    (add-to-list 'magic-mode-alist
+                 '((lambda () (< large-file-warning-threshold (buffer-size)))
+                   . fundamental-mode))
     :config
     (require 'sk-dired)
     (setq dired-listing-switches "-alh"))
