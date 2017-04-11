@@ -188,7 +188,9 @@
 
 (use-package helm-ag
     :ensure t
-    :defer t)
+    :defer t
+    :config
+    (setq helm-ag-insert-at-point 'symbol))
 
 (use-package helm-projectile
     :ensure t
