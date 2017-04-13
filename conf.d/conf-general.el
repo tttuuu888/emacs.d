@@ -190,7 +190,8 @@
     :ensure t
     :defer t
     :config
-    (setq helm-ag-insert-at-point 'symbol))
+    (setq helm-ag-insert-at-point 'symbol
+          helm-ag-use-grep-ignore-list t))
 
 (use-package helm-projectile
     :ensure t
