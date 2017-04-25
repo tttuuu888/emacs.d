@@ -26,5 +26,7 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
 
+  (setq use-package-enable-imenu-support t)
   (require 'use-package)
+
   (require 'conf-init))
