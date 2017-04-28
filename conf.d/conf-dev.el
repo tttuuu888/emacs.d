@@ -111,10 +111,12 @@
         (progn
           (setq python-shell-interpreter "ipython")
           (message "Toggled to Python2"))))
-    (if window-system
-        (setq python-shell-interpreter-args "-i --matplotlib=qt"))
     (setq python-shell-interpreter "ipython"
-          imenu-create-index-function 'python-imenu-create-index)
+          imenu-create-index-function 'python-imenu-create-index
+          python-shell-interpreter-args "-i --simple-prompt")
+    (if window-system
+        (setq python-shell-interpreter-args
+              (concat python-shell-interpreter-args " --matplotlib=qt")))
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-," . jedi:goto-definition-pop-marker)
