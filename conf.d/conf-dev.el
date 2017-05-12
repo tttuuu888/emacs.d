@@ -12,7 +12,9 @@
              ("C-<f5>"  . sk-rebuild))
     :init
     (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark)))
+              (lambda ()
+                (local-set-key (kbd "M-*") 'pop-tag-mark)
+                (local-set-key (kbd "C-<backspace>") 'c-hungry-backspace)))
     ;; Makefile.example -> Makefile
     (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
