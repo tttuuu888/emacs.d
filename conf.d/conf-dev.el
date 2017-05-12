@@ -9,19 +9,20 @@
                sk-create-h-file
                sk-clang-complete-make)
     :bind   (("<f5>"    . sk-make)
-             ("C-<f5>"  . sk-rebuild))
+             ("C-<f5>"  . sk-rebuild)
+             ("C-<backspace>" . c-hungry-backspace))
     :init
     (add-hook 'c-mode-common-hook
-              (lambda ()
-                (local-set-key (kbd "M-*") 'pop-tag-mark)
-                (local-set-key (kbd "C-<backspace>") 'c-hungry-backspace)))
+              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark)))
     ;; Makefile.example -> Makefile
     (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
 
     (defun my-prog-nuke-trailing-whitespace ()
       (when (derived-mode-p 'prog-mode)
         (delete-trailing-whitespace)))
-    (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace))
+    (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
+    :config
+    (require 'cc-cmds))
 
 (use-package gdb
     :defer t
