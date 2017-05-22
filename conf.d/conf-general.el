@@ -114,10 +114,7 @@
 
 (use-package company-tern
     :ensure t
-    :defer t
-    :after web-mode
-    :config
-    (add-to-list 'company-backends 'company-tern))
+    :defer t)
 
 (use-package irony
     :ensure t

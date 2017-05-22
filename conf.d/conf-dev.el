@@ -191,7 +191,8 @@
     (setq web-mode-markup-indent-offset 2
           web-mode-enable-current-element-highlight t)
     (bind-keys :map web-mode-map
-               ("TAB" . company-indent-or-complete-common)))
+               ("TAB" . company-indent-or-complete-common))
+    (add-to-list 'company-backends 'company-tern))
 
 (use-package js
     :defer t
@@ -202,7 +203,8 @@
                               (electric-pair-mode t)))
     :config
     (bind-keys :map js-mode-map
-               ("TAB" . company-indent-or-complete-common)))
+               ("TAB" . company-indent-or-complete-common))
+    (add-to-list 'company-backends 'company-tern))
 
 (use-package emmet-mode
     :ensure t
