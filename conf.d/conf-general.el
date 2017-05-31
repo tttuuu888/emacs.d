@@ -64,12 +64,18 @@
     :commands (insert-date
                insert-date-and-time
                nuke-all-buffers
-               hide-ctrl-M
-               eshell/clear))
+               hide-ctrl-M))
 
 (use-package eshell
     :defer t
     :config
+    ;; Clear Eshell buffer
+    (defun eshell/clear ()
+      (interactive)
+      (let ((inhibit-read-only t))
+        (erase-buffer)
+        (execute-kbd-macro (kbd "<RET>"))))
+
     (defun my-company-eshell-setup ()
       (progn
         (make-local-variable 'company-minimum-prefix-length)

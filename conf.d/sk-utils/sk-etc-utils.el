@@ -25,12 +25,4 @@
   (aset buffer-display-table ?\^M []))
 
 
-;; Clear Eshell buffer
-(defun eshell/clear ()
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
-
-
-
 (provide 'sk-etc-utils)
