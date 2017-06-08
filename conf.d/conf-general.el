@@ -454,4 +454,16 @@
     :config
     (setq calendar-holidays korean-holidays))
 
+(use-package visual-regexp
+    :ensure t
+    :defer t
+    :bind (("C-c r" . vr/replace)
+           ("C-c q" . vr/query-replace))
+    :config
+    (require 'visual-regexp-steroids))
+
+(use-package visual-regexp-steroids
+    :ensure t
+    :defer t)
+
 (provide 'conf-general)
