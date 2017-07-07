@@ -244,7 +244,10 @@
       (interactive)
       (when (projectile-project-p)
         (projectile-add-known-project (projectile-project-root))
-        (projectile-merge-known-projects))))
+        (projectile-merge-known-projects)
+        (message (concat
+                  (projectile-project-root)
+                  " has added into projectile projects.")))))
 
 
 (use-package powerline
