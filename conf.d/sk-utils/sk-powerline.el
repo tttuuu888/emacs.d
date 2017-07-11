@@ -6,6 +6,7 @@
                 '("%e"
                   (:eval
                    (let* ((active (powerline-selected-window-active))
+                          (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
                           (mode-line (if active 'mode-line 'mode-line-inactive))
                           (face1 (if active 'powerline-active1 'powerline-inactive1))
                           (face2 (if active 'powerline-active2 'powerline-inactive2))
@@ -20,7 +21,7 @@
                                        (powerline-buffer-size nil 'l))
                                      (when powerline-display-mule-info
                                        (powerline-raw mode-line-mule-info nil 'l))
-                                     (powerline-buffer-id nil 'l)
+                                     (powerline-buffer-id mode-line-buffer-id 'l)
                                      (powerline-raw " ")
                                      (funcall separator-left mode-line face1)
                                      (when (boundp 'erc-modified-channels-object)
@@ -56,6 +57,7 @@
                 '("%e"
                   (:eval
                    (let* ((active (powerline-selected-window-active))
+                          (mode-line-buffer-id (if active 'mode-line-buffer-id 'mode-line-buffer-id-inactive))
                           (mode-line (if active 'mode-line 'mode-line-inactive))
                           (face1 (if active 'powerline-active1 'powerline-inactive1))
                           (face2 (if active 'powerline-active2 'powerline-inactive2))
@@ -68,7 +70,7 @@
                           (lhs (list (powerline-raw "%*" nil 'l)
                                      (powerline-buffer-size nil 'l)
                                      (powerline-raw mode-line-mule-info nil 'l)
-                                     (powerline-buffer-id nil 'l)
+                                     (powerline-buffer-id mode-line-buffer-id 'l)
                                      (powerline-raw " ")
                                      (funcall separator-left mode-line face1)
                                      (when (boundp 'erc-modified-channels-object)
@@ -93,9 +95,7 @@
                              (powerline-fill face2 (powerline-width rhs))
                              (powerline-render rhs)))))))
 
-(if (and (boundp 'x-display-name)
-         x-display-name
-         (> (x-display-pixel-width) 1600))
+(if (> (display-pixel-width) 1600)
     (sk-powerline-default-theme)
     (sk-powerline-simple-theme))
 
