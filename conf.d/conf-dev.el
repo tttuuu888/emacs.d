@@ -107,19 +107,15 @@
     (defun sk-toggle-python ()
       "Toggle between Python2 and Python3"
       (interactive)
-      (if (equal python-shell-interpreter "ipython")
+      (if (equal python-shell-interpreter "python")
           (progn
-            (setq python-shell-interpreter "ipython3")
+            (setq python-shell-interpreter "python3")
             (message "Toggled to Python3"))
         (progn
-          (setq python-shell-interpreter "ipython")
+          (setq python-shell-interpreter "python")
           (message "Toggled to Python2"))))
-    (setq python-shell-interpreter "ipython"
-          imenu-create-index-function 'python-imenu-create-index
-          python-shell-interpreter-args "-i --simple-prompt")
-    (if window-system
-        (setq python-shell-interpreter-args
-              (concat python-shell-interpreter-args " --matplotlib=qt")))
+    (setq python-shell-interpreter "python"
+          imenu-create-index-function 'python-imenu-create-index)
     (bind-keys :map python-mode-map
                ("M-." . jedi:goto-definition)
                ("M-," . jedi:goto-definition-pop-marker)
