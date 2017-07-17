@@ -96,7 +96,8 @@
                     '((which-func-mode ("" which-func-format " "))))
       (setq which-func-unknown "N/A"))
     (add-hook 'c-mode-common-hook 'my-which-function-setup)
-    (add-hook 'python-mode-hook 'my-which-function-setup))
+    (add-hook 'python-mode-hook 'my-which-function-setup)
+    (add-hook 'js-mode-hook 'my-which-function-setup))
 
 (use-package python
     :defer t
