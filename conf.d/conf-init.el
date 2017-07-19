@@ -1,14 +1,17 @@
 ;; Initial settings
 
 (defconst windowsp (eq system-type 'windows-nt) "t : Windows system")
-(defconst linuxp  (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "t : Linux system")
+(defconst linuxp (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "t : Linux system")
 
 ;; hangul 3bulsik
 (setq default-korean-keyboard "3")
 
-;; Korean font
-(if window-system
-    (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
+(when window-system
+  ;; Korean font
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  ;; background-color : Ivory 2
+  (setq default-frame-alist
+        (append default-frame-alist '((background-color . "#EEEEE0")))))
 
 ;; Korean letter setting for Windows
 (when (and windowsp enable-multibyte-characters)
@@ -19,12 +22,6 @@
 
 ;; y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;; background-color : Ivory 2
-(if window-system
-    (setq default-frame-alist
-      (append default-frame-alist
-       '((background-color . "#EEEEE0")))))
 
 ;;  M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
