@@ -29,8 +29,6 @@
 ;;  M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
 
-(remove-hook 'find-file-hooks 'vc-find-file-hook)
-
 ;; To be removed after emacs updated.
 (defun package--save-selected-packages (&rest opt) nil)
 
