@@ -160,10 +160,8 @@
           slime-log-events t
           slime-outline-mode-in-events-buffer nil
           slime-highlight-compiler-notes t
-          slime-contribs '(slime-fancy))
-    (if linuxp
-        (setq inferior-lisp-program "/usr/bin/clisp")
-        (setq inferior-lisp-program "~/util/clisp-2.49/clisp"))
+          slime-contribs '(slime-fancy)
+          inferior-lisp-program "clisp")
     :config
     (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol))
 

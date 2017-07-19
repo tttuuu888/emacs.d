@@ -1,7 +1,6 @@
 ;; Initial settings
 
 (defconst windowsp (eq system-type 'windows-nt) "t : Windows system")
-(defconst linuxp (eq system-type (or 'gnu/linux 'gnu/kfreebsd)) "t : Linux system")
 
 ;; hangul 3bulsik
 (setq default-korean-keyboard "3")
