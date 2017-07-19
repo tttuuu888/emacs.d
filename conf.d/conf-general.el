@@ -42,6 +42,7 @@
       (move-line (if (null n) 1 n)))
 
     (bind-keys ("C-x C-r" . recentf-open-files)
+               ("C-C <RET>" . cua-set-rectangle-mark)
                ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
                                  (message "Windows are Restored by F7")))
                ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
@@ -393,7 +394,8 @@
 (use-package expand-region
     :ensure t
     :defer t
-    :bind ("C-=" . er/expand-region))
+    :bind (("C-=" . er/expand-region)
+           ("C-c =" . er/expand-region)))
 
 (use-package ido
     :defer t
