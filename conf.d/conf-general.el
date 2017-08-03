@@ -332,6 +332,22 @@
         (insert "#+END_SRC\n")
         (previous-line 2)
         (org-edit-src-code)))
+    (defun my-org-inline-css-hook (exporter)
+      (when (eq exporter 'html)
+        (make-local-variable 'org-html-head-include-default-style)
+        (make-local-variable 'org-html-head)
+        (setq org-html-head-include-default-style nil
+              org-html-head (concat
+                             "<style type=\"text/css\">\n"
+                             "<!--/*--><![CDATA[/*><!--*/\n"
+                             (with-temp-buffer
+                               (insert-file-contents "~/.emacs.d/conf.d/sk-utils/org.css")
+                               (buffer-string))
+                             "/*]]>*/-->\n"
+                             "</style>\n")))
+      (when (eq exporter 'reveal)
+        (make-local-variable 'org-export-with-toc)
+        (setq org-export-with-toc nil)))
     (bind-keys :map org-mode-map
                ("C-c a" . org-agenda)
                ("C-c b" . org-iswitchb)
@@ -344,7 +360,8 @@
     (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
           org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                   "\\|"
-                                  "\\(fn:[-_[:word:]]+\\)\\)")))
+                                  "\\(fn:[-_[:word:]]+\\)\\)"))
+    (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
 
 (use-package ox-reveal
     :ensure t
