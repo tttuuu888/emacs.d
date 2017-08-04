@@ -12,10 +12,8 @@
              ("C-<f5>"  . sk-rebuild)
              ("C-<backspace>" . c-hungry-backspace))
     :init
-    (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-*") 'pop-tag-mark)))
-    ;; Makefile.example -> Makefile
     (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
+    (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
     (defun my-prog-nuke-trailing-whitespace ()
       (when (derived-mode-p 'prog-mode)
