@@ -28,7 +28,10 @@
  '(org-babel-load-languages (quote ((sh . t) (css . t) (python . t) (emacs-lisp . t))))
  '(org-export-default-language "kr")
  '(org-export-headline-levels 2)
+ '(org-export-with-date nil)
  '(org-export-with-email t)
+ '(org-export-with-section-numbers nil)
+ '(org-export-with-sub-superscripts nil)
  '(org-html-inline-image-rules
    (quote
     (("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
@@ -36,7 +39,7 @@
      ("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'"))))
  '(org-html-validation-link "")
  '(org-latex-packages-alist (quote (("" "parskip" nil) ("" "kotex" nil))))
- '(org-log-done t)
+ '(org-log-done (quote time))
  '(org-startup-indented t)
  '(password-cache-expiry 900)
  '(scroll-bar-mode nil)

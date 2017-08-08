@@ -2,7 +2,7 @@
 {
     html {
         margin: 0;
-        font: .9em/1.6em "Droid Serif", Cambria, NanumGothicCoding, "DejaVu Serif", serif;
+        /* font: .9em/1.6em "Droid Serif", Cambria, NanumGothicCoding, "DejaVu Serif", serif; */
         background-attachment: fixed;
         background-position: right bottom;
         background-repeat: no-repeat;
@@ -26,12 +26,12 @@
         /* box-shadow: 3px 3px 5px #888; */
     }
     body .title {
-        padding:40px 0;
+        padding:10px 0;
         text-align: center;
         font-size: 32pt;
-        line-height: 32pt;
-        color: white;
-        background-color: #343C44;
+        /* line-height: 32pt; */
+        /* color: white; */
+        /* background-color: #343C44; */
     }
 
     #org-div-home-and-up{
@@ -946,6 +946,9 @@ content: "*** "
         z-index: -1000;
     }
 
+    .src {
+         background-color: #ffffee;
+     }
 
 } /* END OF @media all */
 
