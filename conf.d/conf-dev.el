@@ -153,13 +153,8 @@
     :defer t
     :commands slime
     :init
-    (setq lisp-indent-function 'common-lisp-indent-function
-          slime-enable-evaluate-in-emacs t
-          slime-log-events t
-          slime-outline-mode-in-events-buffer nil
-          slime-highlight-compiler-notes t
-          slime-contribs '(slime-fancy)
-          inferior-lisp-program "clisp")
+    (setq inferior-lisp-program "clisp"
+          slime-contribs '(slime-fancy))
     :config
     (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol))
 
