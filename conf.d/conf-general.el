@@ -181,7 +181,8 @@
 (use-package redo+
     :ensure t
     :init
-    (bind-keys ("C-." . redo)))
+    (bind-keys ("C-." . redo)
+               ("C-c ." . redo)))
 
 (use-package wgrep
     :ensure t
