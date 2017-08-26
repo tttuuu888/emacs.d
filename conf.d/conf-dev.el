@@ -13,7 +13,6 @@
              ("C-<backspace>" . c-hungry-backspace))
     :init
     (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
-    (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
     (defun my-prog-nuke-trailing-whitespace ()
       (when (derived-mode-p 'prog-mode)
