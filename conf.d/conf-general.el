@@ -40,6 +40,16 @@
       "Move the current line down by N lines."
       (interactive "p")
       (move-line (if (null n) 1 n)))
+    (defun transpose-windows ()
+      (interactive)
+      (let ((this-buffer (window-buffer (selected-window)))
+            (other-buffer (prog2
+                              (other-window +1)
+                              (window-buffer (selected-window))
+                            (other-window -1))))
+        (switch-to-buffer other-buffer)
+        (switch-to-buffer-other-window this-buffer)
+        (other-window -1)))
 
     (bind-keys ("C-x C-r" . recentf-open-files)
                ("C-C <RET>" . cua-set-rectangle-mark)
@@ -56,7 +66,9 @@
                ("M-p" . jump-8-line-up)
                ("M-n" . jump-8-line-down)
                ("M-S-<up>" . move-line-up)
-               ("M-S-<down>" . move-line-down)))
+               ("M-S-<down>" . move-line-down)
+               ("C-," . other-window)
+               ("C-M-," . transpose-windows)))
 
 (use-package diminish
     :ensure t)
