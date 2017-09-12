@@ -21,7 +21,7 @@
     :config
     (require 'cc-cmds))
 
-(use-package gdb
+(use-package gdb-mi
     :defer t
     :init
     (defadvice gdb-setup-windows (after sk-dedicated-window)
