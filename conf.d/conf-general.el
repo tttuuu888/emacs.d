@@ -463,7 +463,16 @@
     :ensure t
     :defer t
     :bind (("M-x" . smex)
-           ("M-X" . smex-major-mode-commands)))
+           ("M-X" . smex-major-mode-commands))
+    :config
+    (defadvice smex (around space-inserts-hyphen activate compile)
+      (let ((ido-cannot-complete-command
+             `(lambda ()
+                (interactive)
+                (if (string= " " (this-command-keys))
+                    (insert ?-)
+                  (funcall ,ido-cannot-complete-command)))))
+        ad-do-it)))
 
 (use-package anzu
     :ensure t
