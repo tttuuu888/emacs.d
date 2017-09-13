@@ -1,83 +1,61 @@
 ;; General settings
 
+(use-package sk-utils
+  :defer t
+  :commands (insert-date
+             insert-date-and-time
+             nuke-all-buffers
+             hide-ctrl-M
+             izero-insert
+             idef-insert
+             buffer-save-or-restore
+             sk-create-ch-file
+             sk-create-c-file
+             sk-create-h-file
+             sk-clang-comple-make)
+  :bind (("C-<backspace>" . c-hungry-backspace)
+         ("C-C <RET>"     . cua-set-rectangle-mark)
+         ("<f5>"          . sk-make)
+         ("C-<f5>"        . sk-rebuild)
+         ("M-p"           . jump-8-line-up)
+         ("M-n"           . jump-8-line-down)
+         ("M-S-<up>"      . move-line-up)
+         ("M-S-<down>"    . move-line-down)
+         ("C-,"           . other-window)
+         ("C-M-,"         . transpose-windows)
+         ("<f7>"          . buffer7-restore)
+         ("<f8>"          . buffer8-restore)
+         ("C-<f7>"        . buffer7-save)
+         ("C-<f8>"        . buffer8-save))
+  :init
+  (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
+  (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
+  (defmacro add-many-hook (hooks function)
+    `(dolist (hook ,hooks)
+       (add-hook hook ,function)))
+  :config
+  (require 'cc-cmds)
+  (defun buffer7-restore () (interactive) (buffer-save-or-restore 7 t))
+  (defun buffer8-restore () (interactive) (buffer-save-or-restore 8 t))
+  (defun buffer7-save () (interactive) (buffer-save-or-restore 7))
+  (defun buffer8-save () (interactive) (buffer-save-or-restore 8)))
+
 (use-package bind-key
-    :ensure t
-    :init
-    (global-unset-key (kbd "C-z"))
-    (global-unset-key (kbd "<mouse-1>"))
-    (global-unset-key (kbd "<mouse-3>"))
-    (global-unset-key (kbd "<down-mouse-1>"))
-    (global-unset-key (kbd "<down-mouse-3>"))
-    (global-unset-key (kbd "<drag-mouse-1>"))
-    (global-unset-key (kbd "<drag-mouse-3>"))
-    (global-unset-key (kbd "<C-down-mouse-1>"))
-    (global-unset-key (kbd "<M-down-mouse-1>"))
-    :config
-    (defun jump-8-line-down ()
-      (interactive)
-      (dotimes (i 8) (next-line)))
-    (defun jump-8-line-up ()
-      (interactive)
-      (dotimes (i 8) (previous-line)))
+  :ensure t
+  :init
+  (bind-keys ("C-z"              . nil)
+             ("<mouse-1>"        . nil)
+             ("<mouse-3>"        . nil)
+             ("<down-mouse-1>"   . nil)
+             ("<down-mouse-3>"   . nil)
+             ("<drag-mouse-1>"   . nil)
+             ("<drag-mouse-3>"   . nil)
+             ("<C-down-mouse-1>" . nil)
+             ("<M-down-mouse-1>" . nil)))
 
-    (defun move-line (n)
-      "Move the current line up or down by N lines."
-      (interactive "p")
-      (setq col (current-column))
-      (beginning-of-line) (setq start (point))
-      (end-of-line) (forward-char) (setq end (point))
-      (let ((line-text (delete-and-extract-region start end)))
-        (forward-line n)
-        (insert line-text)
-        ;; restore point to original column in moved line
-        (forward-line -1)
-        (forward-char col)))
-    (defun move-line-up (n)
-      "Move the current line up by N lines."
-      (interactive "p")
-      (move-line (if (null n) -1 (- n))))
-    (defun move-line-down (n)
-      "Move the current line down by N lines."
-      (interactive "p")
-      (move-line (if (null n) 1 n)))
-    (defun transpose-windows ()
-      (interactive)
-      (let ((this-buffer (window-buffer (selected-window)))
-            (other-buffer (prog2
-                              (other-window +1)
-                              (window-buffer (selected-window))
-                            (other-window -1))))
-        (switch-to-buffer other-buffer)
-        (switch-to-buffer-other-window this-buffer)
-        (other-window -1)))
-
-    (bind-keys ("C-x C-r" . recentf-open-files)
-               ("C-C <RET>" . cua-set-rectangle-mark)
-               ("<f7>" . (lambda nil (interactive) (jump-to-register ?7)
-                                 (message "Windows are Restored by F7")))
-               ("<f8>" . (lambda nil (interactive) (jump-to-register ?8)
-                                 (message "Windows are Restored by F8")))
-               ("C-<f7>" . (lambda nil (interactive)
-                                   (window-configuration-to-register ?7)
-                                   (message "Windows are saved to F7")))
-               ("C-<f8>" . (lambda nil (interactive)
-                                   (window-configuration-to-register ?8)
-                                   (message "Windows are saved to F8")))
-               ("M-p" . jump-8-line-up)
-               ("M-n" . jump-8-line-down)
-               ("M-S-<up>" . move-line-up)
-               ("M-S-<down>" . move-line-down)
-               ("C-," . other-window)
-               ("C-M-," . transpose-windows)))
 
 (use-package diminish
     :ensure t)
-
-(use-package sk-etc-utils
-    :commands (insert-date
-               insert-date-and-time
-               nuke-all-buffers
-               hide-ctrl-M))
 
 (use-package eshell
     :defer t

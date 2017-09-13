@@ -1,26 +1,5 @@
 ;; Developement settings
 
-(use-package sk-dev-utils
-    :defer t
-    :commands (izero-insert
-               idef-insert
-               sk-create-ch-file
-               sk-create-c-file
-               sk-create-h-file
-               sk-clang-complete-make)
-    :bind   (("<f5>"    . sk-make)
-             ("C-<f5>"  . sk-rebuild)
-             ("C-<backspace>" . c-hungry-backspace))
-    :init
-    (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
-
-    (defun my-prog-nuke-trailing-whitespace ()
-      (when (derived-mode-p 'prog-mode)
-        (delete-trailing-whitespace)))
-    (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
-    :config
-    (require 'cc-cmds))
-
 (use-package gdb-mi
     :defer t
     :init
@@ -211,6 +190,7 @@
                              (js2-imenu-extras-mode))))
 
 (use-package js2-refactor
+  :disabled t
   :ensure t
   :defer t
   :config

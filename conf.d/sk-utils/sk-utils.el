@@ -1,4 +1,4 @@
-;; My functions
+;;; My various utils
 
 (defun sharp-ifdef-insert (start end pre)
   (save-excursion
@@ -124,5 +124,84 @@
           (mapc (lambda (x) (append-to-file x nil "./.clang_complete")) includes)))))
 
 
+(defun insert-date ()
+  "Insert date at point."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %a")))
 
-(provide 'sk-dev-utils)
+(defun insert-date-and-time ()
+  "Insert date at point."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d %a %p %l:%M")))
+
+(defun nuke-all-buffers ()
+  "kill all buffers, leaving *scratch* only"
+  (interactive)
+  (mapc (lambda (x) (kill-buffer x))
+          (buffer-list))
+  (delete-other-windows))
+
+;; Hide ^M
+(defun hide-ctrl-M ()
+  "Hides the disturbing '^M' showing up in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+
+(defun jump-8-line-down ()
+  (interactive)
+  (dotimes (i 8) (next-line)))
+
+(defun jump-8-line-up ()
+  (interactive)
+  (dotimes (i 8) (previous-line)))
+
+(defun move-line (n)
+  "Move the current line up or down by N lines."
+  (interactive "p")
+  (setq col (current-column))
+  (beginning-of-line) (setq start (point))
+  (end-of-line) (forward-char) (setq end (point))
+  (let ((line-text (delete-and-extract-region start end)))
+    (forward-line n)
+    (insert line-text)
+    ;; restore point to original column in moved line
+    (forward-line -1)
+    (forward-char col)))
+
+(defun move-line-up (n)
+  "Move the current line up by N lines."
+  (interactive "p")
+  (move-line (if (null n) -1 (- n))))
+
+(defun move-line-down (n)
+  "Move the current line down by N lines."
+  (interactive "p")
+  (move-line (if (null n) 1 n)))
+
+(defun transpose-windows ()
+  (interactive)
+  (let ((this-buffer (window-buffer (selected-window)))
+        (other-buffer (prog2
+                          (other-window +1)
+                          (window-buffer (selected-window))
+                        (other-window -1))))
+    (switch-to-buffer other-buffer)
+    (switch-to-buffer-other-window this-buffer)
+    (other-window -1)))
+
+(defun my-prog-nuke-trailing-whitespace ()
+    (when (derived-mode-p 'prog-mode)
+      (delete-trailing-whitespace)))
+
+(defun buffer-save-or-restore (num &optional restore)
+  (if restore
+      (progn
+        (jump-to-register num)
+        (message (concat "Windows are Restored by F" (number-to-string num))))
+    (progn
+      (window-configuration-to-register num)
+      (message (concat  "Windows are saved to F" (number-to-string num))))))
+
+
+(provide 'sk-utils)
