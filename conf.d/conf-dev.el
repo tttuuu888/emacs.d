@@ -183,7 +183,8 @@
 
 (use-package js
     :defer t
-    :mode ("\\.js\\'" . js-mode)
+    :mode (("\\.js\\'" . js-mode)
+           ("\\.jsx\\'" . jsx-mode))
     :init
     (add-hook 'js-mode-hook (lambda ()
                               (tern-mode t)

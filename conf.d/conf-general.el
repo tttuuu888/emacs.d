@@ -133,7 +133,10 @@
 
 (use-package company-tern
     :ensure t
-    :defer t)
+    :defer t
+    :after tern
+    :config
+    (add-to-list 'company-backends 'company-tern))
 
 (use-package irony
     :ensure t
