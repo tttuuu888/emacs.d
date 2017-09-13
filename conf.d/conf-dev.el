@@ -182,9 +182,10 @@
     (add-to-list 'company-backends 'company-tern))
 
 (use-package js
+    :disabled t
     :defer t
     :mode (("\\.js\\'" . js-mode)
-           ("\\.jsx\\'" . jsx-mode))
+           ("\\.jsx\\'" . js-jsx-mode))
     :init
     (add-hook 'js-mode-hook (lambda ()
                               (tern-mode t)
@@ -193,6 +194,28 @@
     (bind-keys :map js-mode-map
                ("TAB" . company-indent-or-complete-common))
     (add-to-list 'company-backends 'company-tern))
+
+(use-package js2-mode
+  :ensure t
+  :defer t
+  :mode (("\\.js\\'" . js2-mode)
+         ("\\.jsx\\'" . js2-jsx-mode))
+  :config
+  (add-to-list 'company-backends 'company-tern)
+  (bind-keys :map js-mode-map
+               ("TAB" . company-indent-or-complete-common))
+  (add-hook 'js2-mode-hook (lambda ()
+                             (tern-mode t)
+                             (electric-pair-mode t)
+                             (js2-refactor-mode)
+                             (js2-imenu-extras-mode))))
+
+(use-package js2-refactor
+  :ensure t
+  :defer t
+  :config
+  (js2r-add-keybindings-with-prefix "C-c C-n"))
+
 
 (use-package emmet-mode
     :ensure t
