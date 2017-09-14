@@ -13,33 +13,25 @@
              sk-create-ch-file
              sk-create-c-file
              sk-create-h-file
-             sk-clang-comple-make)
-  :bind (("C-<backspace>" . c-hungry-backspace)
-         ("C-C <RET>"     . cua-set-rectangle-mark)
-         ("<f5>"          . sk-make)
+             sk-clang-complete-make)
+  :bind (("<f5>"          . sk-make)
          ("C-<f5>"        . sk-rebuild)
          ("M-p"           . jump-8-line-up)
          ("M-n"           . jump-8-line-down)
          ("M-S-<up>"      . move-line-up)
-         ("M-S-<down>"    . move-line-down)
-         ("C-,"           . other-window)
-         ("C-M-,"         . transpose-windows)
-         ("<f7>"          . buffer7-restore)
-         ("<f8>"          . buffer8-restore)
-         ("C-<f7>"        . buffer7-save)
-         ("C-<f8>"        . buffer8-save))
+         ("M-S-<down>"    . move-line-down))
   :init
   (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
   (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
   (defmacro add-many-hook (hooks function)
     `(dolist (hook ,hooks)
        (add-hook hook ,function)))
+  (bind-keys ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
+             ("<f8>"   . (lambda () (interactive) (buffer-save-or-restore 8 t)))
+             ("C-<f7>" . (lambda () (interactive) (buffer-save-or-restore 7)))
+             ("C-<f8>" . (lambda () (interactive) (buffer-save-or-restore 8))))
   :config
-  (require 'cc-cmds)
-  (defun buffer7-restore () (interactive) (buffer-save-or-restore 7 t))
-  (defun buffer8-restore () (interactive) (buffer-save-or-restore 8 t))
-  (defun buffer7-save () (interactive) (buffer-save-or-restore 7))
-  (defun buffer8-save () (interactive) (buffer-save-or-restore 8)))
+  (require 'cc-cmds))
 
 (use-package bind-key
   :ensure t
@@ -52,7 +44,11 @@
              ("<drag-mouse-1>"   . nil)
              ("<drag-mouse-3>"   . nil)
              ("<C-down-mouse-1>" . nil)
-             ("<M-down-mouse-1>" . nil)))
+             ("<M-down-mouse-1>" . nil)
+             ("C-<backspace>"    . c-hungry-backspace)
+             ("C-C <RET>"        . cua-set-rectangle-mark)
+             ("C-,"              . other-window)
+             ("C-M-,"            . transpose-windows)))
 
 
 (use-package diminish
