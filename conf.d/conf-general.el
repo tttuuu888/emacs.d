@@ -9,6 +9,7 @@
              izero-insert
              idef-insert
              buffer-save-or-restore
+             my-prog-nuke-trailing-whitespace
              sk-create-ch-file
              sk-create-c-file
              sk-create-h-file
