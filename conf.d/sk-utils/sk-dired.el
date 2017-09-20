@@ -12,8 +12,6 @@
                              (if (file-directory-p (dired-get-filename nil t))
                                  (dired-find-alternate-file)
                                  (dired-find-file-other-window))))
-            (local-set-key (kbd "^")
-                           (lambda () (interactive) (find-alternate-file "..")))
             (local-set-key (kbd "DEL")
                            (lambda () (interactive) (find-alternate-file "..")))))
 
