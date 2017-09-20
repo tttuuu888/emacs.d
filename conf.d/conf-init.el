@@ -12,12 +12,8 @@
   (setq default-frame-alist
         (append default-frame-alist '((background-color . "#EEEEE0")))))
 
-;; Korean letter setting for Windows
 (when (and windowsp enable-multibyte-characters)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (prefer-coding-system 'utf-8)
-  (set-file-name-coding-system 'euc-kr))
+  (prefer-coding-system 'utf-8))
 
 ;; y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
