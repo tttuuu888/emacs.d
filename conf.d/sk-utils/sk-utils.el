@@ -113,15 +113,17 @@
 
 (defun sk-clang-complete-make ()
   (interactive)
-  (let ((includes
+  (let ((file "./.clang_complete")
+        (includes
          (mapcar (lambda (x) (concat "-I" x "\n"))
                  (split-string
-                  (shell-command-to-string "find -name '*.h' -printf '%h\n' | sort -u")))))
-    (if (file-exists-p "./.clang_complete")
-        (message ".clang_complete already exists.")
-        (progn
-          (write-region "" nil "./.clang_complete")
-          (mapc (lambda (x) (append-to-file x nil "./.clang_complete")) includes)))))
+                  (shell-command-to-string
+                   "find -type f -name '*.h' -printf '%h\n' | sort -u")))))
+    (progn
+      (when (file-exists-p file)
+        (delete-file file))
+      (write-region "" nil file)
+      (mapc (lambda (x) (append-to-file x nil file)) includes))))
 
 
 (defun insert-date ()
