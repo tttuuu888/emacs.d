@@ -14,12 +14,13 @@
              sk-create-c-file
              sk-create-h-file
              sk-clang-complete-make)
-  :bind (("<f5>"          . sk-make)
-         ("C-<f5>"        . sk-rebuild)
-         ("M-p"           . jump-8-line-up)
-         ("M-n"           . jump-8-line-down)
-         ("M-S-<up>"      . move-line-up)
-         ("M-S-<down>"    . move-line-down))
+  :bind (("<f5>"       . sk-make)
+         ("C-<f5>"     . sk-rebuild)
+         ("M-p"        . jump-8-line-up)
+         ("M-n"        . jump-8-line-down)
+         ("M-S-<up>"   . move-line-up)
+         ("M-S-<down>" . move-line-down)
+         ("C-M-,"      . transpose-windows))
   :init
   (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
   (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
@@ -47,8 +48,7 @@
              ("<M-down-mouse-1>" . nil)
              ("C-<backspace>"    . c-hungry-backspace)
              ("C-C <RET>"        . cua-set-rectangle-mark)
-             ("C-,"              . other-window)
-             ("C-M-,"            . transpose-windows)))
+             ("C-,"              . other-window)))
 
 
 (use-package diminish
