@@ -186,7 +186,6 @@
   (add-hook 'js2-mode-hook (lambda ()
                              (tern-mode t)
                              (electric-pair-mode t)
-                             (js2-refactor-mode)
                              (js2-imenu-extras-mode))))
 
 (use-package js2-refactor
