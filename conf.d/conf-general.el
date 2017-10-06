@@ -46,6 +46,7 @@
              ("<drag-mouse-3>"   . nil)
              ("<C-down-mouse-1>" . nil)
              ("<M-down-mouse-1>" . nil)
+             ("<S-down-mouse-1>" . nil)
              ("C-<backspace>"    . c-hungry-backspace)
              ("C-C <RET>"        . cua-set-rectangle-mark)
              ("C-,"              . other-window)))
