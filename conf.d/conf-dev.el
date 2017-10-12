@@ -154,11 +154,15 @@
                              (emmet-mode t)
                              (electric-pair-mode t)))
   :config
-  (setq web-mode-markup-indent-offset 2
-        web-mode-enable-current-element-highlight t)
   (bind-keys :map web-mode-map
              ("TAB" . company-indent-or-complete-common))
-  (add-to-list 'company-backends 'company-tern))
+  (setq web-mode-markup-indent-offset 2
+        web-mode-enable-current-element-highlight t)
+  (defun my-web-mode-hook ()
+    "Hook for `web-mode'."
+    (set (make-local-variable 'company-backends)
+         '(company-tern company-web-html company-yasnippet company-files)))
+  (add-hook 'web-mode-hook 'my-web-mode-hook))
 
 (use-package js
   :disabled t
