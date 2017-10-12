@@ -114,6 +114,13 @@
   :config
   (add-to-list 'company-backends 'company-tern))
 
+(use-package company-web
+  :ensure t
+  :defer t
+  :after web-mode
+  :config
+  (add-to-list 'company-backends 'company-web-html))
+
 (use-package irony
   :ensure t
   :defer t
