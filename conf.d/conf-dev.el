@@ -24,8 +24,8 @@
   :ensure t
   :defer t
   :init
-  (add-hook 'c-mode-common-hook (lambda () (ggtags-mode 1)))
-  (add-hook 'asm-mode-hook (lambda () (ggtags-mode 1))))
+  (add-many-hook '(c-mode-common-hook asm-mode-hook)
+                 (lambda () (ggtags-mode 1))))
 
 (use-package rtags
   :disabled t
@@ -56,8 +56,8 @@
   :ensure t
   :defer t
   :init
-  (add-hook 'c-mode-common-hook (lambda () (cscope-minor-mode 1)))
-  (add-hook 'asm-mode-hook (lambda () (cscope-minor-mode 1)))
+  (add-many-hook '(c-mode-common-hook asm-mode-hook)
+                 (lambda () (cscope-minor-mode 1)))
   :config
   (bind-keys :map cscope-minor-mode-keymap
              ("<mouse-3>" . nil)))
@@ -71,9 +71,8 @@
     (setq header-line-format
           '((which-func-mode ("" which-func-format " "))))
     (setq which-func-unknown "N/A"))
-  (add-hook 'c-mode-common-hook 'my-which-function-setup)
-  (add-hook 'python-mode-hook 'my-which-function-setup)
-  (add-hook 'js-mode-hook 'my-which-function-setup))
+  (add-many-hook '(c-mode-common-hook python-mode-hook js-mode-hook)
+                 'my-which-function-setup))
 
 (use-package python
   :defer t
@@ -110,8 +109,8 @@
   :defer t
   :commands enable-paredit-mode
   :init
-  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
-  (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
+  (add-many-hook '(clojure-mode-hook emacs-lisp-mode-hook)
+                 'enable-paredit-mode))
 
 (use-package clojure-mode
   :ensure t

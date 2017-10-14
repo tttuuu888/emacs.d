@@ -134,9 +134,8 @@
   :ensure t
   :defer t
   :init
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
+  (add-many-hook '(c++-mode-hook c-mode-hook objc-mode-hook)
+                 'irony-mode)
   :config
   (defun my-irony-mode-hook ()
     (define-key irony-mode-map [remap completion-at-point]
@@ -152,8 +151,7 @@
   :ensure t
   :defer t
   :init
-  (add-hook 'c++-mode-hook 'flycheck-mode)
-  (add-hook 'c-mode-hook 'flycheck-mode))
+  (add-many-hook '(c-mode-hook c++-mode-hook) 'flycheck-mode))
 
 (use-package flycheck-irony
   :disabled t
@@ -161,9 +159,8 @@
   :defer t
   :commands flycheck-irony-setup
   :init
-  (add-hook 'c++-mode-hook 'flycheck-irony-setup)
-  (add-hook 'c-mode-hook 'flycheck-irony-setup)
-  (add-hook 'objc-mode-hook 'flycheck-irony-setup)
+  (add-many-hook '(c++-mode-hook c-mode-hook objc-mode-hook)
+                 'flycheck-irony-setup)
   :config
   (setq flycheck-checker 'irony))
 
