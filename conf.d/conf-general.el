@@ -522,4 +522,13 @@
   :ensure t
   :defer t)
 
+(use-package xref
+  :defer t
+  :config
+  (defun my/do-then-quit (&rest args)
+    (let ((win (selected-window)))
+      (apply (car args) (rest args))
+      (quit-window nil win)))
+  (advice-add #'xref-goto-xref :around #'my/do-then-quit))
+
 (provide 'conf-general)
