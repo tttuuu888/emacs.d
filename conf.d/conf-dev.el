@@ -203,6 +203,12 @@
   :config
   (js2r-add-keybindings-with-prefix "C-c C-n"))
 
+(use-package rjsx-mode
+  :ensure t
+  :defer t
+  :init
+  (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode)))
+
 
 (use-package emmet-mode
   :ensure t
