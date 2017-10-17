@@ -189,7 +189,7 @@
          ("\\.jsx\\'" . js2-jsx-mode))
   :config
   (add-to-list 'company-backends 'company-tern)
-  (bind-keys :map js-mode-map
+  (bind-keys :map js2-mode-map
              ("TAB" . company-indent-or-complete-common))
   (add-hook 'js2-mode-hook (lambda ()
                              (tern-mode t)
