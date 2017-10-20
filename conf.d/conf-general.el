@@ -246,7 +246,6 @@
   :ensure t
   :defer t
   :bind (("C-c j p" . helm-projectile-ag)
-         ("C-c j o" . helm-projectile-find-file)
          ("C-c j d" . helm-projectile-find-dir)
          ("C-c j s" . helm-projectile-switch-project)
          ("C-c j b" . helm-projectile-switch-to-buffer)))
@@ -531,6 +530,12 @@
 (use-package fzf
   :ensure t
   :defer t
-  :commands (fzf fzf-directory))
+  :commands fzf
+  :bind (("C-c j o" . fzf)
+         ("C-c j O" . fzf-here))
+  :config
+  (defun fzf-here ()
+    (interactive)
+    (fzf/start default-directory)))
 
 (provide 'conf-general)
