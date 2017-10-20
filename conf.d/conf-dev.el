@@ -35,7 +35,6 @@
   :init
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
   :config
-  (require 'sk-dev-utils)
   (require 'helm-utils)
   (require 'helm-rtags)
   (setq rtags-autostart-diagnostics t
@@ -167,20 +166,6 @@
     (set (make-local-variable 'company-backends)
          '(company-tern company-web-html company-yasnippet company-files)))
   (add-hook 'web-mode-hook 'my-web-mode-hook))
-
-(use-package js
-  :disabled t
-  :defer t
-  :mode (("\\.js\\'" . js-mode)
-         ("\\.jsx\\'" . js-jsx-mode))
-  :init
-  (add-hook 'js-mode-hook (lambda ()
-                            (tern-mode t)
-                            (electric-pair-mode t)))
-  :config
-  (bind-keys :map js-mode-map
-             ("TAB" . company-indent-or-complete-common))
-  (add-to-list 'company-backends 'company-tern))
 
 (use-package js2-mode
   :ensure t
