@@ -528,4 +528,9 @@
       (quit-window nil win)))
   (advice-add #'xref-goto-xref :around #'my/do-then-quit))
 
+(use-package fzf
+  :ensure t
+  :defer t
+  :commands (fzf fzf-directory))
+
 (provide 'conf-general)
