@@ -530,12 +530,12 @@
 (use-package fzf
   :ensure t
   :defer t
-  :commands fzf
   :bind (("C-c j o" . fzf)
          ("C-c j O" . fzf-here))
   :config
   (defun fzf-here ()
     (interactive)
-    (fzf/start default-directory)))
+    (fzf/start default-directory))
+  (setq fzf/window-height 20))
 
 (provide 'conf-general)
