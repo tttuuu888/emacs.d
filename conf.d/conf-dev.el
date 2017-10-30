@@ -37,6 +37,7 @@
   :config
   (require 'helm-utils)
   (require 'helm-rtags)
+  (require 'sk-utils)
   (setq rtags-autostart-diagnostics t
         rtags-use-helm t)
   (rtags-enable-standard-keybindings)
