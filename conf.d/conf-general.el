@@ -525,7 +525,10 @@
     (let ((win (selected-window)))
       (apply (car args) (rest args))
       (quit-window nil win)))
-  (advice-add #'xref-goto-xref :around #'my/do-then-quit))
+  (advice-add #'xref-goto-xref :around #'my/do-then-quit)
+  (defun xref-find-reference-here ()
+    (interactive)
+    (xref-find-references (thing-at-point 'symbol))))
 
 (use-package fzf
   :ensure t

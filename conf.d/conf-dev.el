@@ -90,15 +90,12 @@
       (progn
         (setq python-shell-interpreter "python")
         (message "Toggled to Python2"))))
-  (defun python-xref-find-reference ()
-    (interactive)
-    (xref-find-references (thing-at-point 'symbol)))
   (setq python-shell-interpreter "python"
         imenu-create-index-function 'python-imenu-create-index)
   (bind-keys :map python-mode-map
              ("M-." . jedi:goto-definition)
              ("M-," . jedi:goto-definition-pop-marker)
-             ("M-]" . python-xref-find-reference)
+             ("M-]" . xref-find-reference-here)
              ("M-*" . xref-pop-marker-stack)
              ("TAB" . company-indent-or-complete-common)
              ("C->" . python-indent-shift-right)
@@ -204,7 +201,11 @@
 
 (use-package tern
   :ensure t
-  :defer t)
+  :defer t
+  :config
+  (bind-keys :map tern-mode-keymap
+             ("M-]" . xref-find-reference-here)
+             ("M-*" . xref-pop-marker-stack)))
 
 (use-package go-mode
   :ensure t
