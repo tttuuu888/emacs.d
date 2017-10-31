@@ -422,7 +422,9 @@
 (use-package magit
   :ensure t
   :defer t
-  :bind ("<f12>" . magit-status))
+  :bind ("<f12>" . magit-status)
+  :config
+  (setq magit-log-section-commit-count 3))
 
 (use-package avy
   :ensure t
