@@ -525,7 +525,7 @@
   :config
   (defun my/do-then-quit (&rest args)
     (let ((win (selected-window)))
-      (apply (car args) (rest args))
+      (apply (car args) (cdr args))
       (quit-window nil win)))
   (advice-add #'xref-goto-xref :around #'my/do-then-quit)
   (defun xref-find-reference-here ()
