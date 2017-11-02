@@ -96,7 +96,7 @@
              ("M-." . jedi:goto-definition)
              ("M-," . jedi:goto-definition-pop-marker)
              ("M-]" . xref-find-reference-here)
-             ("M-*" . xref-pop-marker-stack)
+             ("M-[" . xref-pop-marker-stack)
              ("TAB" . company-indent-or-complete-common)
              ("C->" . python-indent-shift-right)
              ("C-<" . python-indent-shift-left)))
@@ -205,7 +205,7 @@
   :config
   (bind-keys :map tern-mode-keymap
              ("M-]" . xref-find-reference-here)
-             ("M-*" . xref-pop-marker-stack)))
+             ("M-[" . xref-pop-marker-stack)))
 
 (use-package go-mode
   :ensure t
