@@ -114,19 +114,16 @@
   :defer t
   :after tern
   :config
-  (add-to-list 'company-backends 'company-tern)
-  ;; Enable JavaScript completion between <script>...</script> etc.
-  (defadvice company-tern (before web-mode-set-up-ac-sources activate)
-    "Set `tern-mode' based on current language before running company-tern."
-    (message "advice")
+  (defun advice-company-tern (&rest args)
     (if (equal major-mode 'web-mode)
         (let ((web-mode-cur-language
                (web-mode-language-at-pos)))
           (if (or (string= web-mode-cur-language "javascript")
-                  (string= web-mode-cur-language "jsx")
-                  )
+                  (string= web-mode-cur-language "jsx"))
               (unless tern-mode (tern-mode))
-            (if tern-mode (tern-mode -1)))))))
+            (if tern-mode (tern-mode -1))))))
+  (advice-add 'company-tern :before #'advice-company-tern)
+  (add-to-list 'company-backends 'company-tern))
 
 (use-package company-web
   :ensure t

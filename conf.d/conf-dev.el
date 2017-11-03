@@ -3,9 +3,9 @@
 (use-package gdb-mi
   :defer t
   :init
-  (defadvice gdb-setup-windows (after sk-dedicated-window)
-    (set-window-dedicated-p (selected-window) t))
-  (ad-activate 'gdb-setup-windows))
+  (advice-add 'gdb-setup-windows :after
+              (lambda (&rest args)
+                (set-window-dedicated-p (selected-window) t))))
 
 (use-package electric-pair-mode
   :defer t
