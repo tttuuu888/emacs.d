@@ -403,8 +403,39 @@
                '((lambda () (< large-file-warning-threshold (buffer-size)))
                  . fundamental-mode))
   :config
-  (require 'sk-dired)
-  (setq dired-listing-switches "-alh"))
+  (require 'dired-x)
+
+  ;; win32 hiding gid, uid in dired mode
+  (when windowsp
+    (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity))
+    (setq ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))
+
+  (put 'dired-find-alternate-file 'disabled nil)
+
+  "Sort dired listings with directories first."
+  (advice-add 'dired-readin :after
+            (lambda (&rest args)
+              (save-excursion
+                (let (buffer-read-only)
+                  (forward-line 2) ;; beyond dir. header
+                  (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+                (set-buffer-modified-p nil))))
+
+  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
+
+  (bind-keys :map dired-mode-map
+             ("M-o" . dired-omit-mode)
+             ("<DEL>" . (lambda () (interactive) (find-alternate-file "..")))
+             ("<RET>" . (lambda ()
+                          (interactive)
+                          (if (file-directory-p (dired-get-filename nil t))
+                              (dired-find-alternate-file)
+                            (dired-find-file-other-window)))))
+
+  (setq dired-listing-switches "-alh"
+        dired-omit-extensions '("~")
+        dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
+
 
 (use-package neotree
   :ensure t
