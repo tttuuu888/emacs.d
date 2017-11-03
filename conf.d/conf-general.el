@@ -30,9 +30,7 @@
   (bind-keys ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
              ("<f8>"   . (lambda () (interactive) (buffer-save-or-restore 8 t)))
              ("C-<f7>" . (lambda () (interactive) (buffer-save-or-restore 7)))
-             ("C-<f8>" . (lambda () (interactive) (buffer-save-or-restore 8))))
-  :config
-  (require 'cc-cmds))
+             ("C-<f8>" . (lambda () (interactive) (buffer-save-or-restore 8)))))
 
 (use-package bind-key
   :ensure t
@@ -47,13 +45,17 @@
              ("<C-down-mouse-1>" . nil)
              ("<M-down-mouse-1>" . nil)
              ("<S-down-mouse-1>" . nil)
-             ("C-<backspace>"    . c-hungry-backspace)
-             ("C-C <RET>"        . cua-set-rectangle-mark)
+             ("C-c <RET>"        . cua-set-rectangle-mark)
              ("C-,"              . other-window)))
-
 
 (use-package diminish
   :ensure t)
+
+(use-package cc-cmds
+  :defer t
+  :after sk-utils
+  :bind (("C-<backspace>" . c-hungry-backspace)
+         ("C-c <DEL>"     . c-hungry-backspace)))
 
 (use-package eshell
   :defer t
