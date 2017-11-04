@@ -24,6 +24,9 @@
   :init
   (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
   (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
+  (add-hook 'find-file-hook (lambda ()
+                              (when (not (global-auto-revert-mode))
+                                (global-auto-revert-mode t))))
   (defmacro add-many-hook (hooks function)
     `(dolist (hook ,hooks)
        (add-hook hook ,function)))
