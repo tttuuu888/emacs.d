@@ -12,7 +12,6 @@
  '(cua-mode t nil (cua-base))
  '(default-frame-alist (quote ((line-spacing . 2))))
  '(diary-file "~/Dropbox/org/diary")
- '(dynamic-completion-mode t)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(font-use-system-font t)
  '(gdb-many-windows t)
