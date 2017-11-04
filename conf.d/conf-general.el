@@ -489,14 +489,15 @@
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config
-  (defadvice smex (around space-inserts-hyphen activate compile)
-    (let ((ido-cannot-complete-command
-           `(lambda ()
-              (interactive)
-              (if (string= " " (this-command-keys))
-                  (insert ?-)
-                (funcall ,ido-cannot-complete-command)))))
-      ad-do-it)))
+  (advice-add 'smex :around
+              (lambda (func &rest args)
+                (let ((ido-cannot-complete-command
+                       `(lambda ()
+                          (interactive)
+                          (if (string= " " (this-command-keys))
+                              (insert ?-)
+                            (funcall ,ido-cannot-complete-command)))))
+                  (apply func args)))))
 
 (use-package anzu
   :ensure t
@@ -552,6 +553,7 @@
 
 (use-package xref
   :defer t
+  :commands xref-find-reference-here
   :config
   (defun my/do-then-quit (&rest args)
     (let ((win (selected-window)))
