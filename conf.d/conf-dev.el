@@ -202,6 +202,8 @@
 (use-package tern
   :ensure t
   :defer t
+  :init
+  (add-hook 'tern-mode-hook (lambda () (yas-minor-mode)))
   :config
   (bind-keys :map tern-mode-keymap
              ("M-]" . xref-find-reference-here)

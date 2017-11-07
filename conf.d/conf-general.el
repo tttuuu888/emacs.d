@@ -578,4 +578,14 @@
     (fzf/start default-directory))
   (setq fzf/window-height 20))
 
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :commands yas-minor-mode
+  :init
+  (defun yas-reload-all-once ()
+    (yas-reload-all)
+    (advice-remove #'yas-minor-mode #'yas-reload-all-once))
+  (advice-add #'yas-minor-mode :before #'yas-reload-all-once))
+
 (provide 'conf-general)
