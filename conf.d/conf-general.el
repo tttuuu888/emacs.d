@@ -219,23 +219,7 @@
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
-        helm-split-window-default-side 'right)
-
-  (defvar my-helm-follow-sources ()
-    "List of sources for which helm-follow-mode should be enabled")
-
-  ;; Use helm-follow-mode for the following sources:
-  (add-to-list 'my-helm-follow-sources 'helm-source-occur)
-
-  (defun my-helm-set-follow ()
-    "Enable helm-follow-mode for the sources specified in the list"
-    (mapc (lambda (source)
-            (when (memq source my-helm-follow-sources)
-              (helm-attrset 'follow 1 (symbol-value source))))
-          helm-sources))
-
-  ;; Add hook to enable helm-follow mode for specified helm
-  (add-hook 'helm-before-initialize-hook 'my-helm-set-follow))
+        helm-split-window-default-side 'right))
 
 (use-package helm-ag
   :ensure t
