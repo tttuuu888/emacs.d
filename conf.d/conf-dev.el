@@ -59,8 +59,7 @@
   (add-many-hook '(c-mode-common-hook asm-mode-hook)
                  (lambda () (cscope-minor-mode 1)))
   :config
-  (bind-keys :map cscope-minor-mode-keymap
-             ("<mouse-3>" . nil)))
+  (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
 
 (use-package which-function-mode
   :defer t
@@ -155,8 +154,7 @@
                              (emmet-mode t)
                              (electric-pair-mode t)))
   :config
-  (bind-keys :map web-mode-map
-             ("TAB" . company-indent-or-complete-common))
+  (bind-key "TAB" 'company-indent-or-complete-common web-mode-map)
   (setq web-mode-markup-indent-offset 2
         web-mode-enable-current-element-highlight t)
   (defun my-web-mode-hook ()
@@ -172,8 +170,7 @@
          ("\\.jsx\\'" . js2-jsx-mode))
   :config
   (add-to-list 'company-backends 'company-tern)
-  (bind-keys :map js2-mode-map
-             ("TAB" . company-indent-or-complete-common))
+  (bind-key "TAB" 'company-indent-or-complete-common js2-mode-map)
   (add-hook 'js2-mode-hook (lambda ()
                              (tern-mode t)
                              (electric-pair-mode t)

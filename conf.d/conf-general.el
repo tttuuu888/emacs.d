@@ -75,15 +75,13 @@
       (make-local-variable 'company-minimum-prefix-length)
       (setenv "TERM" "screen-256color")
       (setq company-minimum-prefix-length 3)
-      (bind-keys :map eshell-mode-map
-                 ("C-c C-l" . helm-eshell-history))))
+      (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)))
   (add-hook 'eshell-mode-hook 'my-company-eshell-setup))
 
 (use-package shell
   :defer t
   :config
-  (bind-keys :map shell-mode-map
-             ("C-c C-l" . helm-comint-input-ring))
+  (bind-key "C-c C-l" 'helm-comint-input-ring shell-mode-map)
   (defun my-company-shell-setup ()
     (progn
       (make-local-variable 'company-minimum-prefix-length)
