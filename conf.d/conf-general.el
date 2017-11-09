@@ -428,6 +428,7 @@
   :commands my-neotree-directory
   :bind ("C-c n" . my-neotree-directory)
   :config
+  (bind-key "u" 'neotree-select-up-node neotree-mode-map)
   (defun my-neotree-directory ()
     (interactive)
     (if (neo-global--window-exists-p)
