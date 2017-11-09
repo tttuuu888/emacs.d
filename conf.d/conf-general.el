@@ -428,7 +428,7 @@
 
   (bind-keys :map dired-mode-map
              ("M-o" . dired-omit-mode)
-             ("<DEL>" . (lambda () (interactive) (find-alternate-file "..")))
+             ("<DEL>" . dired-up-directory)
              ("<RET>" . (lambda ()
                           (interactive)
                           (if (file-directory-p (dired-get-filename nil t))
