@@ -566,10 +566,7 @@
   :ensure t
   :defer t
   :commands yas-minor-mode
-  :init
-  (defun yas-reload-all-once ()
-    (yas-reload-all)
-    (advice-remove #'yas-minor-mode #'yas-reload-all-once))
-  (advice-add #'yas-minor-mode :before #'yas-reload-all-once))
+  :config
+  (yas-reload-all))
 
 (provide 'conf-general)
