@@ -428,7 +428,13 @@
   :commands my-neotree-directory
   :bind ("C-c n" . my-neotree-directory)
   :config
-  (bind-key "u" 'neotree-select-up-node neotree-mode-map)
+  (bind-keys :map neotree-mode-map
+             ("u" . neotree-select-up-node)
+             ("y" . (lambda ()
+                      "Copy the absolute path of the node at point."
+                      (interactive)
+                      (message "Copied path : %s"
+                               (neotree-copy-filepath-to-yank-ring)))))
   (defun my-neotree-directory ()
     (interactive)
     (if (neo-global--window-exists-p)
