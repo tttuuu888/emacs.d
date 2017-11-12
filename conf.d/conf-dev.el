@@ -106,7 +106,11 @@
   :commands enable-paredit-mode
   :init
   (add-many-hook '(clojure-mode-hook emacs-lisp-mode-hook)
-                 'enable-paredit-mode))
+                 'enable-paredit-mode)
+  :config
+  (bind-keys :map paredit-mode-map
+             ("C-c <right>" . paredit-forward-slurp-sexp)
+             ("C-c <left>"  . paredit-forward-barf-sexp)))
 
 (use-package clojure-mode
   :ensure t
