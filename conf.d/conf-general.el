@@ -411,12 +411,19 @@
 
   (bind-keys :map dired-mode-map
              ("M-o" . dired-omit-mode)
-             ("<DEL>" . dired-up-directory)
+             ("^" . dired-up-and-close-dir)
+             ("<DEL>" . dired-up-and-close-dir)
              ("<RET>" . (lambda ()
                           (interactive)
                           (if (file-directory-p (dired-get-filename nil t))
                               (dired-find-alternate-file)
                             (dired-find-file-other-window)))))
+
+  (defun dired-up-and-close-dir (&optional other-window)
+    (interactive "P")
+    (let ((dir (buffer-name)))
+      (dired-up-directory other-window)
+      (kill-buffer dir)))
 
   (setq dired-listing-switches "-alh"
         dired-omit-extensions '("~")
