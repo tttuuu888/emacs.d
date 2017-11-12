@@ -373,11 +373,12 @@
   :defer t
   :after org
   :config
-  (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/"
-        org-reveal-title-slide-template "<h1>%t</h1><h4>%a</h4><h4>%e</h4><h4>%d</h4>"
+  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0"
+        org-reveal-title-slide "<h1>%t</h1><h4>%a&nbsp(%e)</h4>"
         org-reveal-plugins '(classList markdown highlight zoom notes)
-        org-reveal-theme "sky"
-        org-reveal-hlevel 2
+        org-reveal-theme "moon"
+        org-reveal-transition-speed "fast"
+        org-reveal-transition "linear"
         org-reveal-center nil))
 
 
