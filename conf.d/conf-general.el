@@ -500,12 +500,19 @@
                   (apply func args)))))
 
 (use-package anzu
+  :defer t
   :ensure t
   :diminish anzu-mode
-  :init (global-anzu-mode t)
+  :init
+  (defun isearch-anzu-advice (&rest args)
+    (global-anzu-mode t))
+  (advice-add #'isearch-forward :before #'isearch-anzu-advice)
+  (advice-add #'isearch-backward :before #'isearch-anzu-advice)
   :config
   (setq anzu-search-threshold 1000
-        anzu-replace-threshold 1000))
+        anzu-replace-threshold 1000)
+  (advice-remove #'isearch-forward #'isearch-anzu-advice)
+  (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
 (use-package tramp
   :defer t
