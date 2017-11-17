@@ -145,7 +145,9 @@
   :defer t
   :commands geiser run-geiser
   :init
-  (setq geiser-active-implementations '(chicken guile)))
+  (setq geiser-active-implementations '(chicken guile))
+  (add-many-hook '(geiser-mode-hook geiser-repl-mode-hook)
+                 'local-company-idle-delay-increase))
 
 (use-package web-mode
   :ensure t
