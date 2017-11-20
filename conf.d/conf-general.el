@@ -6,6 +6,7 @@
              insert-date-and-time
              nuke-all-buffers
              hide-ctrl-M
+             jump-n-lines
              izero-insert
              idef-insert
              buffer-save-or-restore
@@ -16,8 +17,6 @@
              sk-clang-complete-make)
   :bind (("<f5>"       . sk-make)
          ("C-<f5>"     . sk-rebuild)
-         ("M-p"        . jump-8-line-up)
-         ("M-n"        . jump-8-line-down)
          ("M-S-<up>"   . move-line-up)
          ("M-S-<down>" . move-line-down)
          ("C-M-,"      . transpose-windows))
@@ -30,7 +29,11 @@
   (defmacro add-many-hook (hooks function)
     `(dolist (hook ,hooks)
        (add-hook hook ,function)))
-  (bind-keys ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
+  (bind-keys ("M-p"    . (lambda () (interactive) (jump-n-lines 8 -1)))
+             ("M-n"    . (lambda () (interactive) (jump-n-lines 8 1)))
+             ("M-P"    . (lambda () (interactive) (jump-n-lines 4 -1)))
+             ("M-N"    . (lambda () (interactive) (jump-n-lines 4 1)))
+             ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
              ("<f8>"   . (lambda () (interactive) (buffer-save-or-restore 8 t)))
              ("C-<f7>" . (lambda () (interactive) (buffer-save-or-restore 7)))
              ("C-<f8>" . (lambda () (interactive) (buffer-save-or-restore 8)))))
