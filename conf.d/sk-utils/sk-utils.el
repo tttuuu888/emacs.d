@@ -66,31 +66,28 @@
 
 ;; making .c .h files
 (defun make-author-info (file-name)
-  (concat "/**\n * " file-name "
- * Created by SeungKi Kim\n * " (format-time-string "%Y-%m-%d") "
- */\n"))
+  (concat "/**\n"
+          " * " file-name "\n"
+          " * Created by " (user-full-name) "\n"
+          " * " (format-time-string "%Y-%m-%d") "\n"
+          " */\n"))
 
 (defun c-file-shape (file-name)
   (concat (make-author-info (concat file-name ".c"))
-"\n/* Includes ------------------------------------------------------------------*/
-/* Private defines -----------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/\n\n\n
-/* Exported functions --------------------------------------------------------*/
-\n\n\n\n\n
-/******************************** END OF FILE *********************************/"))
+          "\n"
+          "/* Static constants */\n"
+          "/* Static variables */\n"
+          "/* Static methods */\n"
+          "/* Public methods */\n"))
 
 (defun c-header-shape (file-name)
   (concat (make-author-info (concat file-name ".h"))
-"#ifndef " (upcase file-name) "_H_
-#define " (upcase file-name) "_H_\n
-/* Includes ------------------------------------------------------------------*/
-/* Exported defines ----------------------------------------------------------*/
-/* Exported variables --------------------------------------------------------*/
-/* Exported functions --------------------------------------------------------*/\n\n\n\n\n
-#endif  /* " (upcase file-name) "_H_ */
-/******************************** END OF FILE *********************************/"))
+          "#ifndef _" (upcase file-name) "_H_\n"
+          "#define _" (upcase file-name) "_H_\n"
+          "/* Public constants */\n"
+          "/* Public variables */\n"
+          "/* Public methods */\n\n\n"
+          "#endif  /* _" (upcase file-name) "_H_ */"))
 
 (defun c-header-insert (file-name)
   (insert (c-header-shape file-name)))
