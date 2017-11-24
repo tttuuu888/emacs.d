@@ -521,13 +521,6 @@
   (advice-remove #'isearch-forward #'isearch-anzu-advice)
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
-(use-package tramp
-  :defer t
-  :init
-  ;; For speeding up SSH session creation
-  (setq tramp-ssh-controlmaster-options
-        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no"))
-
 (use-package multiple-cursors
   :ensure t
   :defer t
