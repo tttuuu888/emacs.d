@@ -521,14 +521,6 @@
   (advice-remove #'isearch-forward #'isearch-anzu-advice)
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
-(use-package multiple-cursors
-  :ensure t
-  :defer t
-  :bind (("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C->" . mc/mark-all-like-this)
-         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
-
 (use-package recentf
   :defer t
   :bind ("C-x C-r" . recentf-open-files)
