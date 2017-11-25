@@ -79,26 +79,28 @@
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
   :config
+  (elpy-enable)
   (defun sk-toggle-python ()
     "Toggle between Python2 and Python3"
     (interactive)
-    (if (equal python-shell-interpreter "python")
-        (progn
-          (setq python-shell-interpreter "python3")
-          (message "Toggled to Python3"))
-      (progn
-        (setq python-shell-interpreter "python")
-        (message "Toggled to Python2"))))
-  (setq python-shell-interpreter "python"
-        imenu-create-index-function 'python-imenu-create-index)
+    (let ((python (if (equal elpy-rpc-python-command "python3")
+                      "python2"
+                    "python3")))
+      (setq python-shell-interpreter python
+            elpy-rpc-python-command python)
+      (message (concat "Toggled to " python))))
+  (setq imenu-create-index-function 'python-imenu-create-index)
   (bind-keys :map python-mode-map
-             ("M-." . jedi:goto-definition)
-             ("M-," . jedi:goto-definition-pop-marker)
+             ("M-," . xref-pop-marker-stack)
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack)
              ("TAB" . company-indent-or-complete-common)
              ("C->" . python-indent-shift-right)
              ("C-<" . python-indent-shift-left)))
+
+(use-package elpy
+  :ensure t
+  :defer t)
 
 (use-package paredit
   :ensure t

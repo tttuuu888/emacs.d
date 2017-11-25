@@ -171,17 +171,6 @@
   :config
   (setq flycheck-checker 'irony))
 
-(use-package jedi-core
-  :ensure t
-  :defer t)
-
-(use-package company-jedi
-  :ensure t
-  :defer t
-  :after python
-  :config
-  (add-to-list 'company-backends 'company-jedi))
-
 (use-package company-go
   :ensure t
   :defer t
@@ -481,7 +470,8 @@
          ("C-x b" . ido-switch-buffer))
   :config
   (ido-mode 1)
-  (ido-vertical-mode 1))
+  (ido-vertical-mode 1)
+  (setq ido-case-fold 1))
 
 (use-package ido-vertical-mode
   :ensure t
