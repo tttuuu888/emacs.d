@@ -206,10 +206,11 @@
 (use-package helm
   :ensure t
   :defer t
-  :bind (("C-c y" . helm-show-kill-ring)
-         ("C-c i" . helm-semantic-or-imenu)
-         ("M-s o" . helm-occur)
-         ("M-s r" . helm-resume))
+  :bind (("C-x C-r" . helm-recentf)
+         ("C-c y"   . helm-show-kill-ring)
+         ("C-c i"   . helm-semantic-or-imenu)
+         ("M-s o"   . helm-occur)
+         ("M-s r"   . helm-resume))
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
@@ -513,7 +514,6 @@
 
 (use-package recentf
   :defer t
-  :bind ("C-x C-r" . recentf-open-files)
   :after (:any ido helm)
   :config
   (recentf-mode t))
