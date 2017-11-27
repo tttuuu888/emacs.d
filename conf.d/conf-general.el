@@ -252,16 +252,6 @@
                 " has added into projectile projects.")))))
 
 
-(use-package powerline
-  :ensure t
-  :init
-  (require 'sk-powerline)
-  :config
-  (set-face-attribute 'powerline-active1 nil
-                      :inherit 'mode-line
-                      :background "grey22"
-                      :foreground "white"))
-
 (use-package ibuffer
   :ensure t
   :defer t

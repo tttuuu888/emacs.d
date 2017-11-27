@@ -2,6 +2,10 @@
 
 (defconst windowsp (eq system-type 'windows-nt) "t : Windows system")
 
+;; mode line setting
+(require 'sk-mode-line)
+(sk-mode-line)
+
 ;; hangul 3bulsik
 (setq default-korean-keyboard "3")
 
