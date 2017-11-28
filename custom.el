@@ -50,7 +50,6 @@
  '(tab-always-indent (quote complete))
  '(tab-width 4)
  '(tool-bar-mode nil)
- '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-file-dialog nil)
  '(vc-follow-symlinks nil))
 (custom-set-faces
