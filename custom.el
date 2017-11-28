@@ -49,7 +49,6 @@
  '(split-width-threshold 140)
  '(tab-always-indent (quote complete))
  '(tab-width 4)
- '(text-mode-hook (quote (text-mode-hook-identify)))
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(use-file-dialog nil)
