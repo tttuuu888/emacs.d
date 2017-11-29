@@ -33,29 +33,33 @@
   (setq-default
    mode-line-format
    '(
-     " %* %I "
-     (:propertize current-input-method-title)
-     "%z:  "
-     (:propertize "%b" face bold)
-     (:propertize " ｜ ")
-     (:propertize mode-name)
-     (:propertize " ｜")
-     (:propertize (vc-mode vc-mode))
      (:eval
-      (let* ((line-info (format-mode-line (list (propertize " %4l :%3c"))))
-             (seperator (format-mode-line (list (propertize " ｜ "))))
-             (pos-info (format-mode-line (list (propertize "%p%%"))))
-             (right-length (length (concat line-info seperator pos-info)))
+      (let* ((seperator1 " ｜ ")
+             (seperator2 " ｜")
+             (buffer-info (concat " %* %I "
+                                  current-input-method-title
+                                  "%z:  "))
+             (buffer-name (propertize "%b" 'face 'bold))
+             (vc-info (format-mode-line '(vc-mode vc-mode)))
+             (line-info (format-mode-line " %4l :%3c"))
+             (pos-info (format-mode-line "%p%%"))
+             (right-length (length (concat line-info seperator1 pos-info)))
              (center-fill (propertize
                            " "
                            'display
                            `((space :align-to
                                     (- (+ right right-fringe right-margin)
                                        (+ ,right-length 3)))))))
-        (list
+        (concat
+         buffer-info
+         buffer-name
+         seperator1
+         mode-name
+         seperator2
+         vc-info
          center-fill
          line-info
-         seperator
+         seperator1
          pos-info))))))
 
 
