@@ -72,9 +72,8 @@
 
   (defun my-company-eshell-setup ()
     (progn
-      (make-local-variable 'company-minimum-prefix-length)
       (setenv "TERM" "screen-256color")
-      (setq company-minimum-prefix-length 3)
+      (setq-local company-minimum-prefix-length 3)
       (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)))
   (add-hook 'eshell-mode-hook 'my-company-eshell-setup))
 
@@ -82,11 +81,8 @@
   :defer t
   :config
   (bind-key "C-c C-l" 'helm-comint-input-ring shell-mode-map)
-  (defun my-company-shell-setup ()
-    (progn
-      (make-local-variable 'company-minimum-prefix-length)
-      (setq company-minimum-prefix-length 3)))
-  (add-hook 'shell-mode-hook 'my-company-shell-setup))
+  (add-hook 'shell-mode-hook
+            '(lambda () (setq-local company-minimum-prefix-length 3))))
 
 (use-package company
   :ensure t
@@ -95,9 +91,7 @@
   (setq company-idle-delay 0.1
         company-minimum-prefix-length 2)
   (defun local-company-idle-delay-increase ()
-    (progn
-      (make-local-variable 'company-idle-delay)
-      (setq company-idle-delay 0.5))))
+    (setq-local company-idle-delay 0.5)))
 
 (use-package company-irony
   :ensure t
@@ -322,20 +316,18 @@
       (org-edit-src-code)))
   (defun my-org-inline-css-hook (exporter)
     (when (eq exporter 'html)
-      (make-local-variable 'org-html-head-include-default-style)
-      (make-local-variable 'org-html-head)
-      (setq org-html-head-include-default-style nil
-            org-html-head (concat
-                           "<style type=\"text/css\">\n"
-                           "<!--/*--><![CDATA[/*><!--*/\n"
-                           (with-temp-buffer
-                             (insert-file-contents "~/.emacs.d/conf.d/sk-utils/org.css")
-                             (buffer-string))
-                           "/*]]>*/-->\n"
-                           "</style>\n")))
+      (setq-local org-html-head-include-default-style nil)
+      (setq-local org-html-head (concat
+                                 "<style type=\"text/css\">\n"
+                                 "<!--/*--><![CDATA[/*><!--*/\n"
+                                 (with-temp-buffer
+                                   (insert-file-contents
+                                    "~/.emacs.d/conf.d/sk-utils/org.css")
+                                   (buffer-string))
+                                 "/*]]>*/-->\n"
+                                 "</style>\n")))
     (when (eq exporter 'reveal)
-      (make-local-variable 'org-export-with-toc)
-      (setq org-export-with-toc nil)))
+      (setq-local org-export-with-toc nil)))
   (bind-keys :map org-mode-map
              ("C-c a" . org-agenda)
              ("C-c b" . org-iswitchb)

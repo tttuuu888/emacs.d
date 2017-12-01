@@ -65,10 +65,9 @@
   :defer t
   :init
   (defun my-which-function-setup ()
-    (make-local-variable 'header-line-format)
     (which-function-mode)
-    (setq header-line-format
-          '((which-func-mode ("" which-func-format " "))))
+    (setq-local header-line-format
+                '((which-func-mode ("" which-func-format " "))))
     (setq which-func-unknown "N/A"))
   (add-many-hook '(c-mode-common-hook python-mode-hook js-mode-hook)
                  'my-which-function-setup))
@@ -167,8 +166,8 @@
         web-mode-enable-current-element-highlight t)
   (defun my-web-mode-hook ()
     "Hook for `web-mode'."
-    (set (make-local-variable 'company-backends)
-         '(company-tern company-web-html company-yasnippet company-files)))
+    (setq-local 'company-backends
+                '(company-tern company-web-html company-yasnippet company-files)))
   (add-hook 'web-mode-hook 'my-web-mode-hook))
 
 (use-package js2-mode
@@ -222,8 +221,8 @@
   (defun my-go-code-hook ()
     (make-local-variable 'before-save-hook)
     (add-hook 'before-save-hook 'gofmt-before-save)
-    (set (make-local-variable 'compile-command)
-         "go build -v && go test -v && go vet"))
+    (setq-local 'compile-command
+                "go build -v && go test -v && go vet"))
   (add-hook 'go-mode-hook 'my-go-code-hook)
   (bind-keys :map go-mode-map
              ("M-." . godef-jump)
