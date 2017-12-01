@@ -539,7 +539,9 @@
   (defun fzf-here ()
     (interactive)
     (fzf/start default-directory))
-  (setq fzf/window-height 20))
+  (setq fzf/window-height 20)
+  (when window-system
+    (setq fzf/args "-x --color bw --print-query --margin=1,0")))
 
 (use-package yasnippet
   :ensure t
