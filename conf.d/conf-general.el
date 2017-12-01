@@ -54,9 +54,6 @@
              ("C-c <RET>"        . cua-set-rectangle-mark)
              ("C-,"              . other-window)))
 
-(use-package diminish
-  :ensure t)
-
 (use-package cc-cmds
   :defer t
   :after sk-utils
@@ -93,7 +90,6 @@
 
 (use-package company
   :ensure t
-  :diminish company-mode
   :init
   (global-company-mode 1)
   (setq company-idle-delay 0.1
@@ -490,7 +486,6 @@
 (use-package anzu
   :defer t
   :ensure t
-  :diminish anzu-mode
   :init
   (defun isearch-anzu-advice (&rest args)
     (global-anzu-mode t))
