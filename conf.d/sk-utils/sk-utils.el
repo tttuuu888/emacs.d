@@ -19,14 +19,13 @@
 
 
 ;; build functions
-(defun parent-directory (dir)
-  (unless (equal "/" dir)
-    (file-name-directory (directory-file-name dir))))
-
 (defun find-file-in-tree (dir fname &optional project-root)
   (let ((file (concat dir fname))
-        (parent (parent-directory dir)))
-    (cond ((and project-root (file-exists-p (concat project-root fname))) project-root)
+        (parent (unless (equal "/" dir)
+                  (file-name-directory (directory-file-name dir)))))
+    (cond ((and project-root
+                (file-exists-p (concat project-root fname)))
+           project-root)
           ((file-exists-p file) dir)
           ((when parent) (find-file-in-tree parent fname))
           (t nil))))
