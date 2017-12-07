@@ -6,7 +6,6 @@
              insert-date-and-time
              nuke-all-buffers
              hide-ctrl-M
-             jump-n-lines
              izero-insert
              idef-insert
              buffer-save-or-restore
@@ -29,10 +28,10 @@
   (defmacro add-many-hook (hooks function)
     `(dolist (hook ,hooks)
        (add-hook hook ,function)))
-  (bind-keys ("M-p"    . (lambda () (interactive) (jump-n-lines 8 -1)))
-             ("M-n"    . (lambda () (interactive) (jump-n-lines 8 1)))
-             ("M-P"    . (lambda () (interactive) (jump-n-lines 4 -1)))
-             ("M-N"    . (lambda () (interactive) (jump-n-lines 4 1)))
+  (bind-keys ("M-p"    . (lambda () (interactive) (forward-line -8)))
+             ("M-n"    . (lambda () (interactive) (forward-line 8)))
+             ("M-P"    . (lambda () (interactive) (forward-line -4)))
+             ("M-N"    . (lambda () (interactive) (forward-line 4)))
              ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
              ("<f8>"   . (lambda () (interactive) (buffer-save-or-restore 8 t)))
              ("C-<f7>" . (lambda () (interactive) (buffer-save-or-restore 7)))

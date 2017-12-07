@@ -147,12 +147,6 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
-(defun jump-n-lines (n dir)
-  (dotimes (i n)
-    (if (> dir 0)
-        (next-line)
-      (previous-line))))
-
 (defun move-line (n)
   "Move the current line up or down by N lines."
   (interactive "p")
