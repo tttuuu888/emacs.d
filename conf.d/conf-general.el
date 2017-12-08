@@ -489,7 +489,6 @@
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
 (use-package recentf
-  :defer t
   :after (:any ido helm)
   :config
   (recentf-mode t))
