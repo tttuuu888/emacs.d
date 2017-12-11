@@ -88,9 +88,7 @@
   :init
   (global-company-mode 1)
   (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2)
-  (defun local-company-idle-delay-increase ()
-    (setq-local company-idle-delay 0.5)))
+        company-minimum-prefix-length 2))
 
 (use-package company-irony
   :ensure t
