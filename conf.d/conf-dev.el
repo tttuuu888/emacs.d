@@ -93,9 +93,7 @@
              ("M-," . xref-pop-marker-stack)
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack)
-             ("TAB" . company-indent-or-complete-common)
-             ("C->" . python-indent-shift-right)
-             ("C-<" . python-indent-shift-left)))
+             ("TAB" . company-indent-or-complete-common)))
 
 (use-package elpy
   :ensure t
