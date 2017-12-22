@@ -1,7 +1,6 @@
 ;;; General settings
 
 (use-package sk-utils
-  :defer t
   :commands (insert-date
              insert-date-and-time
              nuke-all-buffers
@@ -54,7 +53,6 @@
              ("C-,"              . other-window)))
 
 (use-package cc-cmds
-  :defer t
   :after sk-utils
   :bind (("C-<backspace>" . c-hungry-backspace)
          ("C-c <DEL>"     . c-hungry-backspace)))
@@ -92,21 +90,18 @@
 
 (use-package company-irony
   :ensure t
-  :defer t
   :after irony
   :config
   (add-to-list 'company-backends 'company-irony))
 
 (use-package company-irony-c-headers
   :ensure t
-  :defer t
   :after irony
   :config
   (add-to-list 'company-backends 'company-irony-c-headers))
 
 (use-package company-tern
   :ensure t
-  :defer t
   :after tern
   :config
   (defun advice-company-tern (&rest args)
@@ -160,7 +155,6 @@
 
 (use-package company-go
   :ensure t
-  :defer t
   :after go-mode
   :config
   (add-to-list 'company-backends 'company-go))
@@ -173,7 +167,6 @@
 
 (use-package wgrep
   :ensure t
-  :defer t
   :commands wgrep-change-to-wgrep-mode
   :config
   (bind-keys :map helm-git-grep-mode-map
@@ -182,17 +175,14 @@
 
 (use-package helm-git-grep
   :ensure t
-  :defer t
   :bind ("C-c p" . helm-git-grep-at-point))
 
 (use-package helm-ls-git
   :ensure t
-  :defer t
   :bind ("C-c o" . helm-ls-git-ls))
 
 (use-package helm
   :ensure t
-  :defer t
   :bind (("C-x C-r" . helm-recentf)
          ("C-c y"   . helm-show-kill-ring)
          ("C-c i"   . helm-semantic-or-imenu)
@@ -212,7 +202,6 @@
 
 (use-package helm-projectile
   :ensure t
-  :defer t
   :bind (("C-c j p" . helm-projectile-ag)
          ("C-c j d" . helm-projectile-find-dir)
          ("C-c j s" . helm-projectile-switch-project)
@@ -220,7 +209,6 @@
 
 (use-package projectile
   :ensure t
-  :defer t
   :commands (my-projectile-add-project projectile-project-root)
   :bind (("C-c j k" . projectile-kill-buffers)
          ("C-c j S" . projectile-save-project-buffers))
@@ -241,7 +229,6 @@
 
 (use-package ibuffer
   :ensure t
-  :defer t
   :bind ("C-x C-b" . ibuffer)
   :config
   (setq ibuffer-saved-filter-groups
@@ -292,7 +279,6 @@
   :defer t)
 
 (use-package org
-  :defer t
   :mode ("\\.org\\'" . org-mode)
   :config
   (defun org-insert-src-block (src-code-type)
@@ -342,7 +328,6 @@
 
 (use-package ox-reveal
   :ensure t
-  :defer t
   :after org
   :config
   (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0"
@@ -404,7 +389,6 @@
 
 (use-package neotree
   :ensure t
-  :defer t
   :commands my-neotree-directory
   :bind ("C-c n" . my-neotree-directory)
   :config
@@ -423,24 +407,20 @@
 
 (use-package magit
   :ensure t
-  :defer t
   :bind ("<f12>" . magit-status)
   :config
   (setq magit-log-section-commit-count 5))
 
 (use-package avy
   :ensure t
-  :defer t
   :bind ("C-c C-SPC" . avy-goto-subword-1))
 
 (use-package expand-region
   :ensure t
-  :defer t
   :bind (("C-=" . er/expand-region)
          ("C-c =" . er/expand-region)))
 
 (use-package ido
-  :defer t
   :bind (("C-x d" . ido-dired)
          ("C-x C-f" . ido-find-file)
          ("C-x b" . ido-switch-buffer))
@@ -458,7 +438,6 @@
 
 (use-package smex
   :ensure t
-  :defer t
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config
@@ -493,7 +472,6 @@
 
 (use-package htmlize
   :ensure t
-  :defer t
   :after org)
 
 (use-package korean-holidays
@@ -503,7 +481,6 @@
 
 (use-package visual-regexp
   :ensure t
-  :defer t
   :bind (("C-c r" . vr/replace)
          ("C-c q" . vr/query-replace))
   :config
@@ -514,7 +491,6 @@
   :defer t)
 
 (use-package xref
-  :defer t
   :commands xref-find-reference-here
   :config
   (defun my/do-then-quit (&rest args)
@@ -528,7 +504,6 @@
 
 (use-package fzf
   :ensure t
-  :defer t
   :bind (("C-c j o" . fzf)
          ("C-c j O" . fzf-here))
   :config
@@ -541,7 +516,6 @@
 
 (use-package yasnippet
   :ensure t
-  :defer t
   :commands yas-minor-mode
   :config
   (yas-reload-all))

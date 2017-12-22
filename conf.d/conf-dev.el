@@ -225,7 +225,6 @@
              ("TAB" . company-indent-or-complete-common)))
 
 (use-package octave
-  :defer t
   :mode ("\\.m\\'" . octave-mode))
 
 (provide 'conf-dev)
