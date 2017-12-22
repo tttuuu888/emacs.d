@@ -162,7 +162,7 @@
         web-mode-enable-current-element-highlight t)
   (defun my-web-mode-hook ()
     "Hook for `web-mode'."
-    (setq-local 'company-backends
+    (setq-local company-backends
                 '(company-tern company-web-html company-yasnippet company-files)))
   (add-hook 'web-mode-hook 'my-web-mode-hook))
 
@@ -217,7 +217,7 @@
   (defun my-go-code-hook ()
     (make-local-variable 'before-save-hook)
     (add-hook 'before-save-hook 'gofmt-before-save)
-    (setq-local 'compile-command
+    (setq-local compile-command
                 "go build -v && go test -v && go vet"))
   (add-hook 'go-mode-hook 'my-go-code-hook)
   (bind-keys :map go-mode-map
