@@ -520,4 +520,18 @@
   :config
   (yas-reload-all))
 
+(use-package plantuml-mode
+  :ensure t
+  :mode ("\\.puml\\'" . plantuml-mode)
+  :config
+  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (defun plantuml-make-output ()
+    (interactive)
+    (set-process-sentinel (start-process "plantuml" nil "plantuml" (buffer-file-name))
+                          (lambda (&rest args)
+                            (message "PlantUML process is done"))))
+  (bind-keys :map plantuml-mode-map
+             ("TAB" . company-indent-or-complete-common)
+             ("C-c C-e" . plantuml-make-output)))
+
 (provide 'conf-general)
