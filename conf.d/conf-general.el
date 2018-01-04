@@ -178,6 +178,7 @@
   :bind ("C-c p" . helm-git-grep-at-point))
 
 (use-package helm-ls-git
+  :disabled t
   :ensure t
   :bind ("C-c o" . helm-ls-git-ls))
 
@@ -504,15 +505,14 @@
 
 (use-package fzf
   :ensure t
-  :bind (("C-c j o" . fzf)
+  :bind (("C-c o"   . fzf-git-files)
+         ("C-c j o" . fzf)
          ("C-c j O" . fzf-here))
   :config
   (defun fzf-here ()
     (interactive)
     (fzf/start default-directory))
-  (setq fzf/window-height 20)
-  (when window-system
-    (setq fzf/args "-x --color bw --print-query --margin=1,0")))
+  (setq fzf/window-height 20))
 
 (use-package yasnippet
   :ensure t
