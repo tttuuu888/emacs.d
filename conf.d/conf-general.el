@@ -507,7 +507,7 @@
   :ensure t
   :bind (("C-c o"   . fzf-git-files)
          ("C-c j o" . fzf)
-         ("C-c j O" . fzf-here))
+         ("C-c j h" . fzf-here))
   :config
   (defun fzf-here ()
     (interactive)
