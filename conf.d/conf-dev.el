@@ -150,7 +150,8 @@
   :ensure t
   :defer t
   :mode (("\\.html\\'" . web-mode)
-         ("\\.ejs\\'" . web-mode))
+         ("\\.ejs\\'" . web-mode)
+         ("\\.vue\\'" . web-mode))
   :init
   (add-hook 'web-mode-hook (lambda ()
                              (tern-mode t)
