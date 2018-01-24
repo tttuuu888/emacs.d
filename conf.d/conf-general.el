@@ -248,6 +248,7 @@
                        (mode . java-mode)
                        (mode . lisp-mode)
                        (mode . clojure-mode)
+                       (mode . scheme-mode)
                        (mode . web-mode)
                        (mode . js2-mode)))
            ("Dired" (mode . dired-mode))
@@ -527,9 +528,9 @@
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (defun plantuml-make-output ()
     (interactive)
-    (set-process-sentinel (start-process "plantuml" nil "plantuml" (buffer-file-name))
-                          (lambda (&rest args)
-                            (message "PlantUML process is done"))))
+    (set-process-sentinel
+     (start-process "plantuml" nil "plantuml" (buffer-file-name))
+     (lambda (&rest args) (message "PlantUML process is done"))))
   (bind-keys :map plantuml-mode-map
              ("TAB" . company-indent-or-complete-common)
              ("C-c C-e" . plantuml-make-output)))

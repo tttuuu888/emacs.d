@@ -163,8 +163,9 @@
         web-mode-enable-current-element-highlight t)
   (defun my-web-mode-hook ()
     "Hook for `web-mode'."
-    (setq-local company-backends
-                '(company-tern company-web-html company-yasnippet company-files)))
+    (setq-local
+     company-backends
+     '(company-tern company-web-html company-yasnippet company-files)))
   (add-hook 'web-mode-hook 'my-web-mode-hook))
 
 (use-package js2-mode
