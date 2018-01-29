@@ -10,8 +10,7 @@
 (use-package electric-pair-mode
   :defer t
   :init
-  (add-hook 'c-mode-common-hook
-            (lambda () (electric-pair-mode t))))
+  (add-hook 'prog-mode-hook (lambda () (electric-pair-mode t))))
 
 (use-package cff
   :ensure t
@@ -155,8 +154,7 @@
   :init
   (add-hook 'web-mode-hook (lambda ()
                              (tern-mode t)
-                             (emmet-mode t)
-                             (electric-pair-mode t)))
+                             (emmet-mode t)))
   :config
   (bind-key "TAB" 'company-indent-or-complete-common web-mode-map)
   (setq web-mode-markup-indent-offset 2
@@ -178,7 +176,6 @@
   (bind-key "TAB" 'company-indent-or-complete-common js2-mode-map)
   (add-hook 'js2-mode-hook (lambda ()
                              (tern-mode t)
-                             (electric-pair-mode t)
                              (js2-imenu-extras-mode))))
 
 (use-package js2-refactor
