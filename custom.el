@@ -8,6 +8,7 @@
  '(c-basic-offset 4)
  '(c-default-style "bsd")
  '(completion-styles (quote (basic partial-completion emacs22 initials)))
+ '(css-indent-offset 2)
  '(cua-enable-cua-keys nil)
  '(cua-mode t nil (cua-base))
  '(default-frame-alist (quote ((line-spacing . 2))))

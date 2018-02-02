@@ -157,7 +157,11 @@
                              (emmet-mode t)))
   :config
   (bind-key "TAB" 'company-indent-or-complete-common web-mode-map)
-  (setq web-mode-markup-indent-offset 2
+  (setq web-mode-style-padding 0
+        web-mode-script-padding 0
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-markup-indent-offset 2
         web-mode-enable-current-element-highlight t)
   (defun my-web-mode-hook ()
     "Hook for `web-mode'."
@@ -172,6 +176,7 @@
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
   :config
+  (setq js2-basic-offset 2)
   (add-to-list 'company-backends 'company-tern)
   (bind-key "TAB" 'company-indent-or-complete-common js2-mode-map)
   (add-hook 'js2-mode-hook (lambda ()
