@@ -201,7 +201,8 @@
 
 (use-package helm-projectile
   :ensure t
-  :bind (("C-c j p" . helm-projectile-ag)
+  :bind (("C-c j P" . helm-do-grep-ag)
+         ("C-c j p" . helm-projectile-ag)
          ("C-c j d" . helm-projectile-find-dir)
          ("C-c j s" . helm-projectile-switch-project)
          ("C-c j b" . helm-projectile-switch-to-buffer)))
