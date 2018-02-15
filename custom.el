@@ -26,7 +26,7 @@
  '(org-agenda-files (quote ("~/Dropbox/org/")))
  '(org-babel-load-languages (quote ((sh . t) (css . t) (python . t) (emacs-lisp . t))))
  '(org-export-default-language "kr")
- '(org-export-headline-levels 1)
+ '(org-export-headline-levels 2)
  '(org-export-time-stamp-file nil)
  '(org-export-with-email t)
  '(org-export-with-section-numbers nil)
