@@ -518,7 +518,9 @@
   :ensure t
   :commands yas-minor-mode
   :config
-  (yas-reload-all))
+  (yas-reload-all)
+  (bind-keys :map yas-minor-mode-map
+             ("C-c /" . yas-expand)))
 
 (use-package plantuml-mode
   :ensure t
