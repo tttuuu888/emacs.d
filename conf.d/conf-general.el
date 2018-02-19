@@ -231,45 +231,25 @@
   :ensure t
   :bind ("C-x C-b" . ibuffer)
   :config
-  (setq ibuffer-saved-filter-groups
-        '(("home"
-           ("Emacs-config" (or (filename . ".emacs")
-                               (filename . ".emacs.d")
-                               (filename . "emacs-config")))
-           ("Org / MD" (or (mode . org-mode)
-                           (mode . markdown-mode)
-                           (filename . "OrgMode")))
-           ("Code" (or (mode . c-mode)
-                       (mode . c++-mode)
-                       (mode . makefile-gmake-mode)
-                       (mode . asm-mode)
-                       (mode . python-mode)
-                       (mode . java-mode)
-                       (mode . lisp-mode)
-                       (mode . clojure-mode)
-                       (mode . scheme-mode)
-                       (mode . web-mode)
-                       (mode . js2-mode)))
-           ("Dired" (mode . dired-mode))
-           ("Magit" (name . "\*magit"))
-           ("Help" (or (name . "\*Help\*")
-                       (name . "\*Apropos\*")
-                       (name . "\*info\*"))))))
   (setq ibuffer-expert t
         ibuffer-default-sorting-mode 'major-mode)
   (defun my-ibuffer-unmark-all ()
     "Unmark all immdiately"
     (interactive)
     (ibuffer-unmark-all ?\s))
+  (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all)
+  (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1))))
 
-  (defun my-ibuffer-mode-hook ()
-    (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all))
-
-  (add-hook 'ibuffer-mode-hook
-            '(lambda ()
-               (ibuffer-auto-mode 1)
-               (ibuffer-switch-to-saved-filter-groups "home")
-               (my-ibuffer-mode-hook))))
+(use-package ibuffer-projectile
+  :ensure t
+  :after ibuffer
+  :config
+  (setq ibuffer-projectile-prefix "Project: ")
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package markdown-mode
   :ensure t
