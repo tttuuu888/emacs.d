@@ -232,11 +232,18 @@
   :bind ("C-x C-b" . ibuffer)
   :config
   (setq ibuffer-expert t
+        ibuffer-show-empty-filter-groups nil
         ibuffer-default-sorting-mode 'major-mode)
   (defun my-ibuffer-unmark-all ()
     "Unmark all immdiately"
     (interactive)
     (ibuffer-unmark-all ?\s))
+  (define-ibuffer-column size
+    (:name "Size" :inline t)
+    (cond
+     ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+     ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+     (t (format "%8d" (buffer-size)))))
   (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all)
   (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1))))
 
@@ -244,7 +251,7 @@
   :ensure t
   :after ibuffer
   :config
-  (setq ibuffer-projectile-prefix "Project: ")
+  (setq ibuffer-projectile-prefix "")
   (add-hook 'ibuffer-hook
             (lambda ()
               (ibuffer-projectile-set-filter-groups)
