@@ -231,32 +231,50 @@
   :ensure t
   :bind ("C-x C-b" . ibuffer)
   :config
+  (setq ibuffer-saved-filter-groups
+        '(("home"
+           ("Emacs-config" (or (filename . ".emacs")
+                               (filename . ".emacs.d")
+                               (filename . "emacs-config")))
+           ("Org / MD" (or (mode . org-mode)
+                           (mode . markdown-mode)
+                           (filename . "OrgMode")))
+           ("Magit" (mode . magit-status-mode))
+           ("Code" (or (mode . c-mode)
+                       (mode . c++-mode)
+                       (mode . makefile-gmake-mode)
+                       (mode . asm-mode)
+                       (mode . python-mode)
+                       (mode . java-mode)
+                       (mode . lisp-mode)
+                       (mode . clojure-mode)
+                       (mode . scheme-mode)
+                       (mode . web-mode)
+                       (mode . js2-mode)
+                       (mode . go-mode)))
+           ("Dired" (mode . dired-mode))
+           ("Help" (or (name . "\*Help\*")
+                       (name . "\*Apropos\*")
+                       (name . "\*info\*"))))))
   (setq ibuffer-expert t
-        ibuffer-show-empty-filter-groups nil
+        ibuffer-sorting-mode 'alphabetic
         ibuffer-default-sorting-mode 'major-mode)
   (defun my-ibuffer-unmark-all ()
     "Unmark all immdiately"
     (interactive)
     (ibuffer-unmark-all ?\s))
+  (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all)
   (define-ibuffer-column size
     (:name "Size" :inline t)
     (cond
      ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
      ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
      (t (format "%8d" (buffer-size)))))
-  (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all)
-  (add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1))))
 
-(use-package ibuffer-projectile
-  :ensure t
-  :after ibuffer
-  :config
-  (setq ibuffer-projectile-prefix "")
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-projectile-set-filter-groups)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-auto-mode 1)
+               (ibuffer-switch-to-saved-filter-groups "home"))))
 
 (use-package markdown-mode
   :ensure t
