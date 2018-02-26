@@ -162,6 +162,7 @@
   :bind (("C-."   . undo-tree-redo)
          ("M-_"   . undo-tree-redo)
          ("C-/"   . undo-tree-undo)
+         ("C-_"   . undo-tree-undo)
          ("C-x u" . undo-tree-visualize))
   :config
   (global-undo-tree-mode 1))
