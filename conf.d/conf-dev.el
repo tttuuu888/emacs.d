@@ -5,7 +5,9 @@
   :init
   (advice-add 'gdb-setup-windows :after
               (lambda (&rest args)
-                (set-window-dedicated-p (selected-window) t))))
+                (set-window-dedicated-p (selected-window) t)))
+  :config
+  (gdb-many-windows t))
 
 (use-package electric-pair-mode
   :defer t

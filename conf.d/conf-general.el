@@ -47,8 +47,22 @@
              ("<C-down-mouse-1>" . nil)
              ("<M-down-mouse-1>" . nil)
              ("<S-down-mouse-1>" . nil)
-             ("C-c <RET>"        . cua-set-rectangle-mark)
              ("C-,"              . other-window)))
+
+(use-package cua-base
+  :bind (("<C-return>" . cua-set-rectangle-mark)
+         ("C-c RET"    . cua-set-rectangle-mark))
+  :init
+  (setq cua-enable-cua-keys nil)
+  (cua-mode t))
+
+(use-package hl-line
+  :init
+  (global-hl-line-mode t))
+
+(use-package paren
+  :init
+  (show-paren-mode t))
 
 (use-package cc-cmds
   :after sk-utils
@@ -544,5 +558,6 @@
   (bind-keys :map plantuml-mode-map
              ("TAB" . company-indent-or-complete-common)
              ("C-c C-e" . plantuml-make-output)))
+
 
 (provide 'conf-general)
