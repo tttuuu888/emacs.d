@@ -180,10 +180,6 @@
     (switch-to-buffer-other-window this-buffer)
     (other-window -1)))
 
-(defun my-prog-nuke-trailing-whitespace ()
-    (when (derived-mode-p 'prog-mode)
-      (delete-trailing-whitespace)))
-
 (defun buffer-save-or-restore (num &optional restore)
   (if restore
       (progn

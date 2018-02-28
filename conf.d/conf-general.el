@@ -8,7 +8,6 @@
              izero-insert
              idef-insert
              buffer-save-or-restore
-             my-prog-nuke-trailing-whitespace
              sk-create-ch-file
              sk-create-c-file
              sk-create-h-file
@@ -19,14 +18,6 @@
          ("M-S-<down>" . move-line-down)
          ("C-M-,"      . transpose-windows))
   :init
-  (add-to-list 'auto-mode-alist '("Makefile\\..*" . makefile-gmake-mode))
-  (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
-  (add-hook 'find-file-hook (lambda ()
-                              (when (not (global-auto-revert-mode))
-                                (global-auto-revert-mode t))))
-  (defmacro add-many-hook (hooks function)
-    `(dolist (hook ,hooks)
-       (add-hook hook ,function)))
   (bind-keys ("M-p"    . (lambda () (interactive) (previous-line 8)))
              ("M-n"    . (lambda () (interactive) (next-line 8)))
              ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
@@ -65,7 +56,6 @@
   (show-paren-mode t))
 
 (use-package cc-cmds
-  :after sk-utils
   :bind (("C-<backspace>" . c-hungry-backspace)
          ("C-c <DEL>"     . c-hungry-backspace)))
 

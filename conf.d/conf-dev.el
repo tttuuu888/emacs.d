@@ -9,6 +9,10 @@
   :config
   (gdb-many-windows t))
 
+(use-package makefile-mode
+  :defer t
+  :mode ("Makefile.*" . makefile-gmake-mode))
+
 (use-package electric-pair-mode
   :defer t
   :init
