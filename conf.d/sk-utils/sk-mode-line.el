@@ -52,7 +52,7 @@
                            'display
                            `((space :align-to
                                     (- (+ right right-fringe right-margin)
-                                       (+ ,right-length 3)))))))
+                                       (+ ,right-length 2)))))))
         (concat
          buffer-info
          buffer-name
