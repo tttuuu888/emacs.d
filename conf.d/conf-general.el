@@ -161,15 +161,11 @@
   :config
   (add-to-list 'company-backends 'company-go))
 
-(use-package undo-tree
-  :ensure t
-  :bind (("C-."   . undo-tree-redo)
-         ("M-_"   . undo-tree-redo)
-         ("C-/"   . undo-tree-undo)
-         ("C-_"   . undo-tree-undo)
-         ("C-x u" . undo-tree-visualize))
-  :config
-  (global-undo-tree-mode 1))
+(use-package redo+
+  :bind (("C-." . redo+-redo)
+         ("M-_" . redo+-redo)
+         ("C-_" . redo+-undo)
+         ("C-/" . redo+-undo)))
 
 (use-package wgrep
   :ensure t
