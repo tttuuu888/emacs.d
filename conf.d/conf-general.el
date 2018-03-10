@@ -121,6 +121,15 @@
   :ensure t
   :defer t)
 
+(use-package company-sql
+  :init
+  (add-many-hook '(sql-mode-hook sql-interactive-mode-hook)
+                 'my-sql-mode-hook)
+  :config
+  (defun my-sql-mode-hook ()
+    (add-to-list 'company-backends 'company-sql)
+    (local-set-key (kbd "TAB") 'company-indent-or-complete-common)))
+
 (use-package irony
   :ensure t
   :defer t
