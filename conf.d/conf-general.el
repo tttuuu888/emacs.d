@@ -190,12 +190,11 @@
 
 (use-package helm
   :ensure t
-  :bind (("C-c j P" . helm-do-grep-ag)
+  :bind (("C-c i"   . helm-semantic-or-imenu)
          ("C-x C-r" . helm-recentf)
-         ("C-c y"   . helm-show-kill-ring)
-         ("C-c i"   . helm-semantic-or-imenu)
-         ("M-g o"   . helm-occur)
-         ("M-g r"   . helm-resume))
+         ("C-c h y" . helm-show-kill-ring)
+         ("C-c h o" . helm-occur)
+         ("C-c h r" . helm-resume))
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
@@ -210,7 +209,8 @@
 
 (use-package helm-projectile
   :ensure t
-  :bind (("C-c j p" . helm-projectile-ag)))
+  :bind (("C-c j p" . helm-projectile-ag)
+         ("C-c j P" . helm-do-grep-ag)))
 
 (use-package projectile
   :ensure t
