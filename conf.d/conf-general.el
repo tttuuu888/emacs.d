@@ -188,18 +188,14 @@
   :ensure t
   :bind ("C-c p" . helm-git-grep-at-point))
 
-(use-package helm-ls-git
-  :disabled t
-  :ensure t
-  :bind ("C-c o" . helm-ls-git-ls))
-
 (use-package helm
   :ensure t
-  :bind (("C-x C-r" . helm-recentf)
+  :bind (("C-c j P" . helm-do-grep-ag)
+         ("C-x C-r" . helm-recentf)
          ("C-c y"   . helm-show-kill-ring)
          ("C-c i"   . helm-semantic-or-imenu)
-         ("M-s o"   . helm-occur)
-         ("M-s r"   . helm-resume))
+         ("M-g o"   . helm-occur)
+         ("M-g r"   . helm-resume))
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
@@ -214,21 +210,21 @@
 
 (use-package helm-projectile
   :ensure t
-  :bind (("C-c j P" . helm-do-grep-ag)
-         ("C-c j p" . helm-projectile-ag)
-         ("C-c j d" . helm-projectile-find-dir)
-         ("C-c j s" . helm-projectile-switch-project)
-         ("C-c j b" . helm-projectile-switch-to-buffer)))
+  :bind (("C-c j p" . helm-projectile-ag)))
 
 (use-package projectile
   :ensure t
   :commands (my-projectile-add-project projectile-project-root)
-  :bind (("C-c j k" . projectile-kill-buffers)
+  :bind (("C-c j d" . projectile-find-dir)
+         ("C-c j k" . projectile-kill-buffers)
+         ("C-c j b" . projectile-switch-to-buffer)
+         ("C-c j s" . projectile-switch-project)
          ("C-c j S" . projectile-save-project-buffers))
   :init
   (setq projectile-keymap-prefix (kbd "C-c j")
         projectile-switch-project-action 'projectile-dired
-        projectile-require-project-root nil)
+        projectile-require-project-root nil
+        projectile-completion-system 'ivy)
   :config
   (defun my-projectile-add-project ()
     (interactive)
@@ -428,7 +424,8 @@
   :ensure t
   :bind ("<f12>" . magit-status)
   :config
-  (setq magit-log-section-commit-count 5))
+  (setq magit-log-section-commit-count 5
+        magit-completing-read-function #'ivy-completing-read))
 
 (use-package avy
   :ensure t
@@ -471,8 +468,8 @@
                   (apply func args)))))
 
 (use-package anzu
-  :defer t
   :ensure t
+  :defer t
   :init
   (defun isearch-anzu-advice (&rest args)
     (global-anzu-mode t))
@@ -554,5 +551,17 @@
              ("TAB" . company-indent-or-complete-common)
              ("C-c C-e" . plantuml-make-output)))
 
+(use-package ivy
+  :ensure t
+  :defer t
+  :config
+  (setq ivy-height 15
+        ivy-do-completion-in-region nil
+        ivy-wrap t
+        ivy-fixed-height-minibuffer t
+        ;; Don't use ^ as initial input
+        ivy-initial-inputs-alist nil
+        ;; disable magic slash on non-match
+        ivy-magic-slash-non-match-action nil))
 
 (provide 'conf-general)
