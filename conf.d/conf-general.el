@@ -438,9 +438,8 @@
          ("C-c =" . er/expand-region)))
 
 (use-package ido
-  :bind (("C-x d" . ido-dired)
-         ("C-x C-f" . ido-find-file)
-         ("C-x b" . ido-switch-buffer))
+  :bind (("C-x d"   . ido-dired)
+         ("C-x C-f" . ido-find-file))
   :config
   (ido-mode 1)
   (ido-vertical-mode 1)
@@ -554,8 +553,44 @@
 
 (use-package ivy
   :ensure t
-  :defer t
+  :bind (("C-x b" . ivy-switch-buffer))
   :config
+  (defun ivy-buffer-transformer-sk (str)
+    (let* ((buf (get-buffer str))
+           (mode (capitalize
+                  (string-remove-suffix "-mode"
+                                        (symbol-name (buffer-local-value
+                                                      'major-mode buf)))))
+           (max-path-len (max 0 (- (frame-width) 62)))
+           (path-dir (abbreviate-file-name
+                      (buffer-local-value 'default-directory buf)))
+           (path-file (buffer-file-name buf))
+           (path-choice (or (if path-file (abbreviate-file-name path-file))
+                            (if (or (string-match-p "shell" str)
+                                    (equal
+                                     (buffer-local-value 'major-mode buf)
+                                     'dired-mode))
+                                path-dir)
+                            nil))
+           (path-suffix (if (equal (and path-choice
+                                        (substring path-choice 0 1))
+                                   "~")
+                            "~/"
+                          "/"))
+           (path-len (length path-choice))
+           (path-mod (if (<= path-len max-path-len)
+                         nil
+                       (string-remove-prefix
+                        (substring path-choice 0 (- path-len max-path-len))
+                        path-choice)))
+           (path (if path-mod
+                     (concat path-suffix
+                             "…"
+                             (replace-regexp-in-string "^[^~/]*" "" path-mod))
+                   path-choice)))
+      (format "%-35s %-20s %s" buf mode (or path ""))))
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-buffer-transformer-sk)
   (setq ivy-height 15
         ivy-do-completion-in-region nil
         ivy-wrap t
@@ -564,5 +599,6 @@
         ivy-initial-inputs-alist nil
         ;; disable magic slash on non-match
         ivy-magic-slash-non-match-action nil))
+
 
 (provide 'conf-general)
