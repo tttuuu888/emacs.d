@@ -214,19 +214,20 @@
 
 (use-package projectile
   :ensure t
-  :commands (my-projectile-add-project projectile-project-root)
+  :commands (my-add-project my-remove-project projectile-project-root)
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
          ("C-c j b" . projectile-switch-to-buffer)
          ("C-c j s" . projectile-switch-project)
          ("C-c j S" . projectile-save-project-buffers))
   :init
+  (defalias 'my-remove-project 'projectile-remove-current-project-from-known-projects)
   (setq projectile-keymap-prefix (kbd "C-c j")
         projectile-switch-project-action 'projectile-dired
         projectile-require-project-root nil
         projectile-completion-system 'ivy)
   :config
-  (defun my-projectile-add-project ()
+  (defun my-add-project ()
     (interactive)
     (when (projectile-project-p)
       (projectile-add-known-project (projectile-project-root))
