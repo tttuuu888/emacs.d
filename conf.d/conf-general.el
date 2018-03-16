@@ -7,7 +7,7 @@
              hide-ctrl-M
              izero-insert
              idef-insert
-             buffer-save-or-restore
+             buffer-save-or-load
              sk-create-ch-file
              sk-create-c-file
              sk-create-h-file
@@ -20,10 +20,10 @@
   :init
   (bind-keys ("M-p"    . (lambda () (interactive) (previous-line 8)))
              ("M-n"    . (lambda () (interactive) (next-line 8)))
-             ("<f7>"   . (lambda () (interactive) (buffer-save-or-restore 7 t)))
-             ("<f8>"   . (lambda () (interactive) (buffer-save-or-restore 8 t)))
-             ("C-<f7>" . (lambda () (interactive) (buffer-save-or-restore 7)))
-             ("C-<f8>" . (lambda () (interactive) (buffer-save-or-restore 8)))))
+             ("<f7>"   . (lambda () (interactive) (buffer-save-or-load 7 t)))
+             ("<f8>"   . (lambda () (interactive) (buffer-save-or-load 8 t)))
+             ("C-<f7>" . (lambda () (interactive) (buffer-save-or-load 7)))
+             ("C-<f8>" . (lambda () (interactive) (buffer-save-or-load 8)))))
 
 (use-package bind-key
   :ensure t
@@ -153,17 +153,6 @@
   :init
   (add-many-hook '(c-mode-hook c++-mode-hook) 'flycheck-mode))
 
-(use-package flycheck-irony
-  :disabled t
-  :ensure t
-  :defer t
-  :commands flycheck-irony-setup
-  :init
-  (add-many-hook '(c++-mode-hook c-mode-hook objc-mode-hook)
-                 'flycheck-irony-setup)
-  :config
-  (setq flycheck-checker 'irony))
-
 (use-package company-go
   :ensure t
   :after go-mode
@@ -221,20 +210,13 @@
          ("C-c j s" . projectile-switch-project)
          ("C-c j S" . projectile-save-project-buffers))
   :init
-  (defalias 'my-remove-project 'projectile-remove-current-project-from-known-projects)
   (setq projectile-keymap-prefix (kbd "C-c j")
         projectile-switch-project-action 'projectile-dired
         projectile-require-project-root nil
         projectile-completion-system 'ivy)
   :config
-  (defun my-add-project ()
-    (interactive)
-    (when (projectile-project-p)
-      (projectile-add-known-project (projectile-project-root))
-      (projectile-merge-known-projects)
-      (message (concat
-                (projectile-project-root)
-                " has added into projectile projects.")))))
+  (defalias 'my-add-project 'projectile-add-known-project)
+  (defalias 'my-remove-project 'projectile-remove-known-project))
 
 
 (use-package ibuffer
@@ -567,9 +549,8 @@
            (path-file (buffer-file-name buf))
            (path-choice (or (if path-file (abbreviate-file-name path-file))
                             (if (or (string-match-p "shell" str)
-                                    (equal
-                                     (buffer-local-value 'major-mode buf)
-                                     'dired-mode))
+                                    (equal (buffer-local-value 'major-mode buf)
+                                           'dired-mode))
                                 path-dir)
                             nil))
            (path-suffix (if (equal (and path-choice

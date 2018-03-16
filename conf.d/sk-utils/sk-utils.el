@@ -180,7 +180,7 @@
     (switch-to-buffer-other-window this-buffer)
     (other-window -1)))
 
-(defun buffer-save-or-restore (num &optional restore)
+(defun buffer-save-or-load (num &optional restore)
   (if restore
       (progn
         (jump-to-register num)
