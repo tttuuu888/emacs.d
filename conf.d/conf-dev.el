@@ -9,11 +9,11 @@
   :config
   (gdb-many-windows t))
 
-(use-package makefile-mode
+(use-package make-mode
   :defer t
   :mode ("Makefile.*" . makefile-gmake-mode))
 
-(use-package electric-pair-mode
+(use-package elec-pair
   :defer t
   :init
   (add-hook 'prog-mode-hook (lambda () (electric-pair-mode t))))
@@ -66,7 +66,7 @@
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
 
-(use-package which-function-mode
+(use-package which-func
   :defer t
   :init
   (defun my-which-function-setup ()
