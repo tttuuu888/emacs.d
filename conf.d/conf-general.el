@@ -11,7 +11,8 @@
              sk-create-ch-file
              sk-create-c-file
              sk-create-h-file
-             sk-clang-complete-make)
+             sk-clang-complete-make
+             sk-byte-recompile-conf-dir)
   :bind (("<f5>"       . sk-make)
          ("C-<f5>"     . sk-rebuild)
          ("M-S-<up>"   . move-line-up)

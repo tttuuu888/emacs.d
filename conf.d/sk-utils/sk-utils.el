@@ -149,10 +149,13 @@
 (defun move-line (n)
   "Move the current line up or down by N lines."
   (interactive "p")
-  (setq col (current-column))
-  (beginning-of-line) (setq start (point))
-  (end-of-line) (forward-char) (setq end (point))
-  (let ((line-text (delete-and-extract-region start end)))
+  (let* ((col (current-column))
+         (tmp1 (beginning-of-line))
+         (start (point))
+         (tmp2 (end-of-line))
+         (tmp3 (forward-char))
+         (end (point))
+         (line-text (delete-and-extract-region start end)))
     (forward-line n)
     (insert line-text)
     ;; restore point to original column in moved line
@@ -188,6 +191,10 @@
     (progn
       (window-configuration-to-register num)
       (message (concat  "Windows are saved to F" (number-to-string num))))))
+
+(defun sk-byte-recompile-conf-dir ()
+  (interactive)
+  (byte-recompile-directory "~/.emacs.d/conf.d" t))
 
 
 (provide 'sk-utils)
