@@ -426,7 +426,8 @@
   :config
   (ido-mode 1)
   (ido-vertical-mode 1)
-  (setq ido-case-fold 1))
+  (setq ido-case-fold 1)
+  (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package ido-vertical-mode
   :ensure t
@@ -438,17 +439,7 @@
 (use-package smex
   :ensure t
   :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands))
-  :config
-  (advice-add 'smex :around
-              (lambda (func &rest args)
-                (let ((ido-cannot-complete-command
-                       `(lambda ()
-                          (interactive)
-                          (if (string= " " (this-command-keys))
-                              (insert ?-)
-                            (funcall ,ido-cannot-complete-command)))))
-                  (apply func args)))))
+         ("M-X" . smex-major-mode-commands)))
 
 (use-package anzu
   :ensure t
@@ -465,7 +456,7 @@
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
 (use-package recentf
-  :after (:any ido helm)
+  :after (:any ido ivy)
   :config
   (recentf-mode t))
 
@@ -573,7 +564,7 @@
       (format "%-35s %-20s %s" buf mode (or path ""))))
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-buffer-transformer-sk)
-  (setq ivy-height 15
+  (setq ivy-height 12
         ivy-do-completion-in-region nil
         ivy-wrap t
         ivy-fixed-height-minibuffer t
