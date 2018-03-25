@@ -194,7 +194,7 @@
 
 (defun sk-byte-recompile-conf-dir ()
   (interactive)
-  (byte-recompile-directory "~/.emacs.d/conf.d" t))
+  (byte-recompile-directory "~/.emacs.d/conf.d" 0))
 
 
 (provide 'sk-utils)
