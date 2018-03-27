@@ -181,8 +181,8 @@
 (use-package helm
   :ensure t
   :bind (("C-c i"   . helm-semantic-or-imenu)
+         ("C-c y"   . helm-show-kill-ring)
          ("C-x C-r" . helm-recentf)
-         ("C-c h y" . helm-show-kill-ring)
          ("C-c h o" . helm-occur)
          ("C-c h r" . helm-resume))
   :config
