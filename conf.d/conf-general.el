@@ -356,30 +356,53 @@
 
   "Sort dired listings with directories first."
   (advice-add 'dired-readin :after
-            (lambda (&rest args)
-              (save-excursion
-                (let (buffer-read-only)
-                  (forward-line 2) ;; beyond dir. header
-                  (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
-                (set-buffer-modified-p nil))))
+              (lambda (&rest args)
+                (save-excursion
+                  (let (buffer-read-only)
+                    (forward-line 2) ;; beyond dir. header
+                    (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+                  (set-buffer-modified-p nil))))
 
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
 
   (bind-keys :map dired-mode-map
-             ("M-o" . dired-omit-mode)
-             ("^" . dired-up-and-close-dir)
+             ("M-o"   . dired-omit-mode)
+             ("r"     . ora-dired-rsync)
+             ("^"     . dired-up-and-close-dir)
              ("<DEL>" . dired-up-and-close-dir)
-             ("<RET>" . (lambda ()
-                          (interactive)
-                          (if (file-directory-p (dired-get-filename nil t))
-                              (dired-find-alternate-file)
-                            (dired-find-file-other-window)))))
+             ("<RET>" . dired-visit-file-or-dir))
+
+  (defun dired-visit-file-or-dir ()
+    (interactive)
+    (if (file-directory-p (dired-get-filename nil t))
+        (dired-find-alternate-file)
+      (dired-find-file-other-window)))
 
   (defun dired-up-and-close-dir (&optional other-window)
     (interactive "P")
     (let ((dir (buffer-name)))
       (dired-up-directory other-window)
       (kill-buffer dir)))
+
+  (defun ora-dired-rsync (dest)
+    (interactive
+     (list (read-file-name "Rsync to:" (dired-dwim-target-directory))))
+    ;; store all selected files into "files" list
+    (let ((files (dired-get-marked-files nil current-prefix-arg))
+          (command "rsync -ahrvzP ")
+          (prefix (if (string-match-p ".@.*:" dest)
+                      dest
+                    (shell-quote-argument (expand-file-name dest)))))
+      ;; add all selected file names as arguments to the rsync command
+      (dolist (file files)
+        (setq command (concat command (shell-quote-argument file) " ")))
+      ;; append the destination
+      (setq command (concat command prefix))
+      ;; run the async shell command
+      (async-shell-command command "*rsync*")
+      ;; finally, switch to that window
+      (other-window 1)
+      (view-mode)))
 
   (setq dired-listing-switches "-alh"
         dired-omit-extensions '("~")
