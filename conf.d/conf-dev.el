@@ -182,7 +182,8 @@
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
   :config
-  (setq js2-basic-offset 2)
+  (setq js2-basic-offset 2
+        js2-strict-missing-semi-warning nil)
   (add-to-list 'company-backends 'company-tern)
   (bind-key "TAB" 'company-indent-or-complete-common js2-mode-map)
   (add-hook 'js2-mode-hook (lambda ()
