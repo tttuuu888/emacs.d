@@ -34,14 +34,12 @@
                       :box (list :color "dark gray" :line-width -1))
   (setq-default
    mode-line-format
-   '(
+   '("%e"
      (:eval
       (let* ((seperator "｜")   ;; seperator - fullwidth vertical line
-             (buffer-info (concat " %* %I "
-                                  current-input-method-title
-                                  "%z: "))
+             (buffer-info (concat " %* %I " current-input-method-title "%z: "))
              (buffer-name (propertize " %b " 'face 'bold))
-             (mode-info (concat " " mode-name " "))
+             (mode-info (concat " " (format-mode-line mode-name) " "))
              (vc-info (format-mode-line '(vc-mode vc-mode)))
              (line-info (format-mode-line "%4l :%3c "))
              (pos-info (format-mode-line " %p%%"))
