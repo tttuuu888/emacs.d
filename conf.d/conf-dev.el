@@ -238,4 +238,8 @@
 (use-package octave
   :mode ("\\.m\\'" . octave-mode))
 
+(use-package format-all
+  :ensure t
+  :defer t)
+
 (provide 'conf-dev)
