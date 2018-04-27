@@ -21,7 +21,7 @@
 ;; build functions
 (defun find-file-in-tree (dir fname &optional project-root)
   (let ((file (concat dir fname))
-        (parent (unless (equal "/" dir)
+        (parent (unless (or (equal "~" dir) (equal "/" dir))
                   (file-name-directory (directory-file-name dir)))))
     (cond ((and project-root
                 (file-exists-p (concat project-root fname)))
@@ -161,16 +161,6 @@
     ;; restore point to original column in moved line
     (forward-line -1)
     (forward-char col)))
-
-(defun move-line-up (n)
-  "Move the current line up by N lines."
-  (interactive "p")
-  (move-line (if (null n) -1 (- n))))
-
-(defun move-line-down (n)
-  "Move the current line down by N lines."
-  (interactive "p")
-  (move-line (if (null n) 1 n)))
 
 (defun transpose-windows ()
   (interactive)

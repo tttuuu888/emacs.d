@@ -10,7 +10,6 @@
 
 
 ;;; Macros
-
 (defmacro add-many-hook (hooks function)
   `(dolist (hook ,hooks)
      (add-hook hook ,function)))

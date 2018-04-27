@@ -7,6 +7,7 @@
              hide-ctrl-M
              izero-insert
              idef-insert
+             move-line
              buffer-save-or-load
              sk-create-ch-file
              sk-create-c-file
@@ -15,16 +16,15 @@
              sk-byte-recompile-conf-dir)
   :bind (("<f5>"       . sk-make)
          ("C-<f5>"     . sk-rebuild)
-         ("M-S-<up>"   . move-line-up)
-         ("M-S-<down>" . move-line-down)
-         ("C-M-,"      . transpose-windows))
-  :init
-  (bind-keys ("M-p"    . (lambda () (interactive) (line-move -8)))
-             ("M-n"    . (lambda () (interactive) (line-move  8)))
-             ("<f7>"   . (lambda () (interactive) (buffer-save-or-load 7 t)))
-             ("<f8>"   . (lambda () (interactive) (buffer-save-or-load 8 t)))
-             ("C-<f7>" . (lambda () (interactive) (buffer-save-or-load 7)))
-             ("C-<f8>" . (lambda () (interactive) (buffer-save-or-load 8)))))
+         ("C-M-,"      . transpose-windows)
+         ("M-p"        . (lambda () (interactive) (line-move -8)))
+         ("M-n"        . (lambda () (interactive) (line-move  8)))
+         ("M-S-<up>"   . (lambda () (interactive) (move-line -1)))
+         ("M-S-<down>" . (lambda () (interactive) (move-line  1)))
+         ("<f7>"       . (lambda () (interactive) (buffer-save-or-load 7 t)))
+         ("<f8>"       . (lambda () (interactive) (buffer-save-or-load 8 t)))
+         ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
+         ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
 
 (use-package bind-key
   :ensure t
