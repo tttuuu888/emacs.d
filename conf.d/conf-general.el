@@ -449,7 +449,6 @@
   :config
   (ido-mode 1)
   (ido-vertical-mode 1)
-  (setq ido-case-fold 1)
   (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package ido-vertical-mode
