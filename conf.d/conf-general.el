@@ -447,16 +447,7 @@
   :bind (("C-x d"   . ido-dired)
          ("C-x C-f" . ido-find-file))
   :config
-  (ido-mode 1)
-  (ido-vertical-mode 1)
   (defalias 'ido-completing-read 'ivy-completing-read))
-
-(use-package ido-vertical-mode
-  :ensure t
-  :defer t
-  :config
-  (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right
-        ido-auto-merge-work-directories-length -1))
 
 (use-package smex
   :ensure t
@@ -549,8 +540,9 @@
 
 (use-package ivy
   :ensure t
-  :bind (("C-x b" . ivy-switch-buffer))
+  :after (:any ido helm smex projectile)
   :config
+  (ivy-mode t)
   (defun ivy-buffer-transformer-sk (str)
     (let* ((buf (get-buffer str))
            (mode (capitalize
