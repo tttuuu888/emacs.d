@@ -447,6 +447,7 @@
   :bind (("C-x d"   . ido-dired)
          ("C-x C-f" . ido-find-file))
   :config
+  (ivy-mode t)
   (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package smex
@@ -540,9 +541,11 @@
 
 (use-package ivy
   :ensure t
-  :after (:any ido helm smex projectile)
+  :bind ("C-x b" . ivy-switch-buffer)
   :config
   (ivy-mode t)
+  (bind-keys :map ivy-minibuffer-map
+             ("TAB" . ivy-alt-done))
   (defun ivy-buffer-transformer-sk (str)
     (let* ((buf (get-buffer str))
            (mode (capitalize
@@ -585,7 +588,11 @@
         ;; Don't use ^ as initial input
         ivy-initial-inputs-alist nil
         ;; disable magic slash on non-match
-        ivy-magic-slash-non-match-action nil))
+        ivy-magic-slash-non-match-action nil
+        ;; prefix match first
+        ivy-sort-matches-functions-alist
+        '((t . ivy--prefix-sort)
+          (ivy-switch-buffer . ivy-sort-function-buffer))))
 
 
 (provide 'conf-general)
