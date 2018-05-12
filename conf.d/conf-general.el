@@ -521,9 +521,11 @@
   :ensure t
   :commands yas-minor-mode
   :config
-  (yas-reload-all)
-  (bind-keys :map yas-minor-mode-map
-             ("C-c /" . yas-expand)))
+  (yas-reload-all))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
 
 (use-package plantuml-mode
   :ensure t
@@ -594,5 +596,11 @@
         '((t . ivy--prefix-sort)
           (ivy-switch-buffer . ivy-sort-function-buffer))))
 
+(use-package ivy-yasnippet
+  :ensure t
+  :after yasnippet
+  :config
+  (bind-keys :map yas-minor-mode-map
+             ("C-c /" . ivy-yasnippet)))
 
 (provide 'conf-general)
