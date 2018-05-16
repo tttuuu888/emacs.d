@@ -445,16 +445,17 @@
          ("C-c =" . er/expand-region)))
 
 (use-package ido
+  :disabled t
   :bind (("C-x d"   . ido-dired)
          ("C-x C-f" . ido-find-file))
   :config
   (ivy-mode t)
-  (defalias 'ido-completing-read 'ivy-completing-read))
+  (defalias 'ido-completing-read 'ivy-completing-read)
+  )
 
 (use-package smex
   :ensure t
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)))
+  :commands smex)
 
 (use-package anzu
   :ensure t
@@ -604,5 +605,12 @@
   (bind-keys :map yas-minor-mode-map
              ("C-c /" . ivy-yasnippet)))
 
+(use-package counsel
+  :ensure t
+  :bind (("M-x"     . counsel-M-x)
+         ("C-x d"   . counsel-find-file)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h v"   . counsel-describe-variable)
+         ("C-h f"   . counsel-describe-function)))
 
 (provide 'conf-general)
