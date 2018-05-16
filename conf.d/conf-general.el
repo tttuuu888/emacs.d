@@ -405,6 +405,7 @@
       (view-mode)))
 
   (setq dired-listing-switches "-alh"
+        dired-dwim-target t
         dired-omit-extensions '("~")
         dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
 
@@ -602,5 +603,6 @@
   :config
   (bind-keys :map yas-minor-mode-map
              ("C-c /" . ivy-yasnippet)))
+
 
 (provide 'conf-general)

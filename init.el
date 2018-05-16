@@ -5,8 +5,8 @@
 
   (package-initialize)
   (setq package-archives
-        '(("gnu" . "https://elpa.gnu.org/packages/")
-          ("melpa" . "https://melpa.org/packages/")))
+        '(("gnu"   . "http://elpa.gnu.org/packages/")
+          ("melpa" . "http://melpa.org/packages/")))
 
   (add-to-list 'load-path "~/.emacs.d/conf.d/")
   (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
