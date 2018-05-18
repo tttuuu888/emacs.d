@@ -120,12 +120,11 @@
 
 (use-package company-web
   :ensure t
-  :defer t)
+  :after web-mode)
 
 (use-package company-sql
   :init
-  (add-many-hook '(sql-mode-hook sql-interactive-mode-hook)
-                 'my-sql-mode-hook)
+  :hook ((sql-mode sql-interactive) . my-sql-mode-hook)
   :config
   (defun my-sql-mode-hook ()
     (add-to-list 'company-backends 'company-sql)
@@ -133,26 +132,21 @@
 
 (use-package irony
   :ensure t
-  :defer t
-  :init
-  (add-many-hook '(c++-mode-hook c-mode-hook objc-mode-hook)
-                 'irony-mode)
+  :hook ((c++-mode c-mode objc-mode) . irony-mode)
   :config
   (defun my-irony-mode-hook ()
     (define-key irony-mode-map [remap completion-at-point]
       'irony-completion-at-point-async)
     (define-key irony-mode-map [remap complete-symbol]
       'irony-completion-at-point-async)
-    (local-set-key (kbd "TAB") 'company-indent-or-complete-common))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+    (local-set-key (kbd "TAB") 'company-indent-or-complete-common)
+    (irony-cdb-autosetup-compile-options))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook))
 
 (use-package flycheck
   :disabled t
   :ensure t
-  :defer t
-  :init
-  (add-many-hook '(c-mode-hook c++-mode-hook) 'flycheck-mode))
+  :hook ((c-mode c++-mode) . flycheck-mode))
 
 (use-package company-go
   :ensure t
@@ -450,8 +444,7 @@
          ("C-x C-f" . ido-find-file))
   :config
   (ivy-mode t)
-  (defalias 'ido-completing-read 'ivy-completing-read)
-  )
+  (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package smex
   :ensure t
@@ -488,13 +481,11 @@
 (use-package visual-regexp
   :ensure t
   :bind (("C-c r" . vr/replace)
-         ("C-c q" . vr/query-replace))
-  :config
-  (require 'visual-regexp-steroids))
+         ("C-c q" . vr/query-replace)))
 
 (use-package visual-regexp-steroids
   :ensure t
-  :defer t)
+  :after visual-regexp)
 
 (use-package xref
   :commands xref-find-reference-here
@@ -612,5 +603,6 @@
          ("C-x C-f" . counsel-find-file)
          ("C-h v"   . counsel-describe-variable)
          ("C-h f"   . counsel-describe-function)))
+
 
 (provide 'conf-general)

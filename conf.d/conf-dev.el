@@ -15,8 +15,7 @@
 
 (use-package elec-pair
   :defer t
-  :init
-  (add-hook 'prog-mode-hook (lambda () (electric-pair-mode t))))
+  :hook (prog-mode . electric-pair-mode))
 
 (use-package cff
   :ensure t
@@ -27,10 +26,7 @@
 
 (use-package ggtags
   :ensure t
-  :defer t
-  :init
-  (add-many-hook '(c-mode-common-hook asm-mode-hook)
-                 (lambda () (ggtags-mode 1))))
+  :hook ((c-mode-common asm-mode) . ggtags-mode))
 
 (use-package rtags
   :disabled t
@@ -59,23 +55,19 @@
 
 (use-package xcscope
   :ensure t
-  :defer t
-  :init
-  (add-many-hook '(c-mode-common-hook asm-mode-hook)
-                 (lambda () (cscope-minor-mode 1)))
+  :hook ((c-mode-common asm-mode) . cscope-minor-mode)
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
 
 (use-package which-func
   :defer t
-  :init
+  :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
+  :config
   (defun my-which-function-setup ()
     (which-function-mode)
     (setq-local header-line-format
                 '((which-func-mode ("" which-func-format " "))))
-    (setq which-func-unknown "N/A"))
-  (add-many-hook '(c-mode-common-hook python-mode-hook js-mode-hook)
-                 'my-which-function-setup))
+    (setq which-func-unknown "N/A")))
 
 (use-package python
   :defer t
@@ -106,11 +98,7 @@
 
 (use-package paredit
   :ensure t
-  :defer t
-  :commands enable-paredit-mode
-  :init
-  (add-many-hook '(clojure-mode-hook emacs-lisp-mode-hook)
-                 'enable-paredit-mode)
+  :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
   :config
   (bind-keys :map paredit-mode-map
              ("C-c <right>" . paredit-forward-slurp-sexp)
@@ -118,12 +106,10 @@
 
 (use-package clojure-mode
   :ensure t
-  :defer t
   :mode ("\\.clj\\'" . clojure-mode))
 
 (use-package cider
   :ensure t
-  :defer t
   :commands cider-jack-in
   :config
   (setq cider-inject-dependencies-at-jack-in nil))
@@ -131,12 +117,10 @@
 (use-package clj-refactor
   :disabled t
   :ensure t
-  :defer t
   :mode ("\\.clj\\'" . clojure-mode))
 
 (use-package slime
   :ensure t
-  :defer t
   :commands slime
   :init
   (setq inferior-lisp-program "clisp"
@@ -146,21 +130,15 @@
 
 (use-package geiser
   :ensure t
-  :defer t
   :commands geiser run-geiser
   :init
   (setq geiser-active-implementations '(chicken guile)))
 
 (use-package web-mode
   :ensure t
-  :defer t
   :mode (("\\.html\\'" . web-mode)
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
-  :init
-  (add-hook 'web-mode-hook (lambda ()
-                             (tern-mode t)
-                             (emmet-mode t)))
   :config
   (bind-key "TAB" 'company-indent-or-complete-common web-mode-map)
   (setq web-mode-style-padding 0
@@ -170,7 +148,6 @@
         web-mode-markup-indent-offset 2
         web-mode-enable-current-element-highlight t)
   (defun my-web-mode-hook ()
-    "Hook for `web-mode'."
     (setq-local
      company-backends
      '(company-tern company-web-html company-yasnippet company-files)))
@@ -178,7 +155,6 @@
 
 (use-package js2-mode
   :ensure t
-  :defer t
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
   :config
@@ -186,9 +162,7 @@
         js2-strict-missing-semi-warning nil)
   (add-to-list 'company-backends 'company-tern)
   (bind-key "TAB" 'company-indent-or-complete-common js2-mode-map)
-  (add-hook 'js2-mode-hook (lambda ()
-                             (tern-mode t)
-                             (js2-imenu-extras-mode))))
+  (add-hook 'js2-mode-hook (lambda () (js2-imenu-extras-mode))))
 
 (use-package js2-refactor
   :disabled t
@@ -203,26 +177,22 @@
   :init
   (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode)))
 
-
 (use-package emmet-mode
   :ensure t
-  :defer t
-  :init
-  (add-hook 'css-mode-hook (lambda () (emmet-mode t))))
+  :hook (web-mode js2-mode css-mode))
 
 (use-package tern
   :ensure t
-  :defer t
-  :init
-  (add-hook 'tern-mode-hook (lambda () (yas-minor-mode)))
+  :hook ((web-mode js2-mode css-mode) . tern-mode)
   :config
+  (add-hook 'tern-mode-hook (lambda () (yas-minor-mode)))
   (bind-keys :map tern-mode-keymap
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack)))
 
 (use-package go-mode
   :ensure t
-  :defer t
+  :mode ("\\.go\\'" . go-mode)
   :config
   (setq gofmt-command "goimports")
   (defun my-go-code-hook ()
