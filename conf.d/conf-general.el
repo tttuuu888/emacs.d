@@ -178,10 +178,9 @@
 (use-package wgrep
   :ensure t
   :commands wgrep-change-to-wgrep-mode
-  :config
-  (bind-keys :map helm-git-grep-mode-map
-             ("C-c C-e" . wgrep-change-to-wgrep-mode)
-             ("C-c C-s" . wgrep-save-all-buffers)))
+  :bind (:map helm-git-grep-mode-map
+              ("C-c C-e" . wgrep-change-to-wgrep-mode)
+              ("C-c C-s" . wgrep-save-all-buffers)))
 
 (use-package helm-git-grep
   :ensure t
@@ -308,6 +307,14 @@
 
 (use-package org
   :mode ("\\.org\\'" . org-mode)
+  :bind (("C-c a" . org-agenda)
+         ("C-c b" . org-iswitchb)
+         ("C-c l" . org-store-link)
+         ("C-c r" . org-remember)
+         ("C-c t" . org-table-create)
+         ("C-c u" . org-up-element)
+         ("C-c s e" . org-edit-src-code)
+         ("C-c s i" . org-insert-src-block))
   :config
   (defun org-insert-src-block (src-code-type)
     "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
@@ -339,15 +346,6 @@
                                  "</style>\n")))
     (when (eq exporter 'reveal)
       (setq-local org-export-with-toc nil)))
-  (bind-keys :map org-mode-map
-             ("C-c a" . org-agenda)
-             ("C-c b" . org-iswitchb)
-             ("C-c l" . org-store-link)
-             ("C-c r" . org-remember)
-             ("C-c t" . org-table-create)
-             ("C-c u" . org-up-element)
-             ("C-c s e" . org-edit-src-code)
-             ("C-c s i" . org-insert-src-block))
   (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
         org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                 "\\|"
@@ -369,6 +367,11 @@
 
 (use-package dired
   :defer t
+  :bind (("M-o"   . dired-omit-mode)
+         ("r"     . ora-dired-rsync)
+         ("^"     . dired-up-and-close-dir)
+         ("<DEL>" . dired-up-and-close-dir)
+         ("<RET>" . dired-visit-file-or-dir))
   :init
   (add-to-list 'magic-mode-alist
                '((lambda () (< large-file-warning-threshold (buffer-size)))
@@ -393,14 +396,6 @@
                   (set-buffer-modified-p nil))))
 
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
-
-  (bind-keys :map dired-mode-map
-             ("M-o"   . dired-omit-mode)
-             ("r"     . ora-dired-rsync)
-             ("^"     . dired-up-and-close-dir)
-             ("<DEL>" . dired-up-and-close-dir)
-             ("<RET>" . dired-visit-file-or-dir))
-
   (defun dired-visit-file-or-dir ()
     (interactive)
     (if (file-directory-p (dired-get-filename nil t))
@@ -443,16 +438,16 @@
   :ensure t
   :commands my-neotree-directory
   :bind (("C-c n"   . my-neotree-directory)
+         :map neotree-mode-map
+         ("u" . neotree-select-up-node)
+         ("y" . (lambda ()
+                  "Copy the absolute path of the node at point."
+                  (interactive)
+                  (message "Copied path : %s"
+                           (neotree-copy-filepath-to-yank-ring))))
          :map evil-normal-state-map
          ("<SPC> n" . my-neotree-directory))
   :config
-  (bind-keys :map neotree-mode-map
-             ("u" . neotree-select-up-node)
-             ("y" . (lambda ()
-                      "Copy the absolute path of the node at point."
-                      (interactive)
-                      (message "Copied path : %s"
-                               (neotree-copy-filepath-to-yank-ring)))))
   (defun my-neotree-directory ()
     (interactive)
     (if (neo-global--window-exists-p)
@@ -570,26 +565,25 @@
 (use-package plantuml-mode
   :ensure t
   :mode ("\\.puml\\'" . plantuml-mode)
+  :bind (("TAB" . company-indent-or-complete-common)
+         ("C-c C-e" . plantuml-make-output))
   :config
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (defun plantuml-make-output ()
     (interactive)
     (set-process-sentinel
      (start-process "plantuml" nil "plantuml" (buffer-file-name))
-     (lambda (&rest args) (message "PlantUML process is done"))))
-  (bind-keys :map plantuml-mode-map
-             ("TAB" . company-indent-or-complete-common)
-             ("C-c C-e" . plantuml-make-output)))
+     (lambda (&rest args) (message "PlantUML process is done")))))
 
 (use-package ivy
   :ensure t
   :bind (("C-x b"   . ivy-switch-buffer)
+         :map ivy-minibuffer-map
+         ("TAB"     . ivy-alt-done)
          :map evil-normal-state-map
          ("<SPC> b" . ivy-switch-buffer))
   :config
   (ivy-mode t)
-  (bind-keys :map ivy-minibuffer-map
-             ("TAB" . ivy-alt-done))
   (defun ivy-buffer-transformer-sk (str)
     (let* ((buf (get-buffer str))
            (mode (capitalize
@@ -659,14 +653,14 @@
          :map evil-normal-state-map
          ("<SPC> <SPC>" . counsel-M-x)
          ("<SPC> d"     . counsel-find-file)
-         ("<SPC> C-f"   . counsel-find-file)
-         ("<SPC> v"     . counsel-describe-variable)
-         ("<SPC> f"     . counsel-describe-function)))
+         ("<SPC> f"     . counsel-find-file)
+         ("<SPC> h v"   . counsel-describe-variable)
+         ("<SPC> h f"   . counsel-describe-function)
+         ("<SPC> h k"   . describe-key)))
 
 (use-package which-key
   :ensure t
   :init
-  (which-key-mode)
-  (setq which-key-idle-delay 1))
+  (which-key-mode))
 
 (provide 'conf-general)

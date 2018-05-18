@@ -80,6 +80,14 @@
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
+  :bind (("M-," . xref-pop-marker-stack)
+         ("M-]" . xref-find-reference-here)
+         ("M-[" . xref-pop-marker-stack)
+         ("TAB" . company-indent-or-complete-common)
+         :map evil-normal-state-map
+         ("<SPC> ," . xref-pop-marker-stack)
+         ("<SPC> ]" . xref-find-reference-here)
+         ("<SPC> [" . xref-pop-marker-stack))
   :config
   (elpy-enable)
   (defun sk-toggle-python ()
@@ -91,12 +99,7 @@
       (setq python-shell-interpreter python
             elpy-rpc-python-command python)
       (message (concat "Toggled to " python))))
-  (setq imenu-create-index-function 'python-imenu-create-index)
-  (bind-keys :map python-mode-map
-             ("M-," . xref-pop-marker-stack)
-             ("M-]" . xref-find-reference-here)
-             ("M-[" . xref-pop-marker-stack)
-             ("TAB" . company-indent-or-complete-common)))
+  (setq imenu-create-index-function 'python-imenu-create-index))
 
 (use-package elpy
   :ensure t
@@ -105,10 +108,8 @@
 (use-package paredit
   :ensure t
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
-  :config
-  (bind-keys :map paredit-mode-map
-             ("C-c <right>" . paredit-forward-slurp-sexp)
-             ("C-c <left>"  . paredit-forward-barf-sexp)))
+  :bind (("C-c <right>" . paredit-forward-slurp-sexp)
+         ("C-c <left>"  . paredit-forward-barf-sexp)))
 
 (use-package clojure-mode
   :ensure t
@@ -145,8 +146,8 @@
   :mode (("\\.html\\'" . web-mode)
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
+  :bind ("TAB" . company-indent-or-complete-common)
   :config
-  (bind-key "TAB" 'company-indent-or-complete-common web-mode-map)
   (setq web-mode-style-padding 0
         web-mode-script-padding 0
         web-mode-css-indent-offset 2
@@ -163,11 +164,11 @@
   :ensure t
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
+  :bind ("TAB" . company-indent-or-complete-common)
   :config
   (setq js2-basic-offset 2
         js2-strict-missing-semi-warning nil)
   (add-to-list 'company-backends 'company-tern)
-  (bind-key "TAB" 'company-indent-or-complete-common js2-mode-map)
   (add-hook 'js2-mode-hook (lambda () (js2-imenu-extras-mode))))
 
 (use-package js2-refactor
@@ -190,19 +191,20 @@
 (use-package tern
   :ensure t
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
+  :bind (("M-]" . xref-find-reference-here)
+         ("M-[" . xref-pop-marker-stack)
+         :map evil-normal-state-map
+         (",gd" . tern-find-definition))
   :config
   (defun my-tern-hook ()
     (tern-mode)
-    (yas-minor-mode)
-    (evil-local-set-key 'normal ",gd" 'tern-find-definition)
-    (evil-local-set-key 'normal (kbd "M-[") 'xref-pop-marker-stack))
-  (bind-keys :map tern-mode-keymap
-             ("M-]" . xref-find-reference-here)
-             ("M-[" . xref-pop-marker-stack)))
+    (yas-minor-mode)))
 
 (use-package go-mode
   :ensure t
   :mode ("\\.go\\'" . go-mode)
+  :bind (("M-." . godef-jump)
+         ("TAB" . company-indent-or-complete-common))
   :config
   (setq gofmt-command "goimports")
   (defun my-go-code-hook ()
@@ -210,10 +212,7 @@
     (add-hook 'before-save-hook 'gofmt-before-save)
     (setq-local compile-command
                 "go build -v && go test -v && go vet"))
-  (add-hook 'go-mode-hook 'my-go-code-hook)
-  (bind-keys :map go-mode-map
-             ("M-." . godef-jump)
-             ("TAB" . company-indent-or-complete-common)))
+  (add-hook 'go-mode-hook 'my-go-code-hook))
 
 (use-package octave
   :mode ("\\.m\\'" . octave-mode))
