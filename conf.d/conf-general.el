@@ -4,10 +4,12 @@
   :ensure t
   :init
   (evil-mode)
-  (define-key evil-motion-state-map ";" 'evil-ex)
-  (define-key evil-normal-state-map " q" 'kill-buffer)
-  (define-key evil-normal-state-map " Q" 'kill-emacs)
-  (define-key evil-normal-state-map " w" 'save-buffer))
+  (bind-keys :map evil-motion-state-map
+             (";" . evil-ex)
+             :map evil-normal-state-map
+             ("<SPC> q" . kill-buffer)
+             ("<SPC> Q" . kill-emacs)
+             ("<SPC> w" . save-buffer)))
 
 (use-package sk-utils
   :commands (insert-date
@@ -69,7 +71,9 @@
 
 (use-package cc-cmds
   :bind (("C-<backspace>" . c-hungry-backspace)
-         ("C-c <DEL>"     . c-hungry-backspace)))
+         ("C-c <DEL>"     . c-hungry-backspace)
+         :map evil-normal-state-map
+         ("<SPC> <DEL>"   . c-hungry-backspace)))
 
 (use-package eshell
   :defer t
@@ -181,15 +185,23 @@
 
 (use-package helm-git-grep
   :ensure t
-  :bind ("C-c p" . helm-git-grep-at-point))
+  :bind (("C-c p"   . helm-git-grep-at-point)
+         :map evil-normal-state-map
+         ("<SPC> p" . helm-git-grep-at-point)))
 
 (use-package helm
   :ensure t
-  :bind (("C-c i"   . helm-semantic-or-imenu)
-         ("C-c y"   . helm-show-kill-ring)
-         ("C-x C-r" . helm-recentf)
-         ("C-c h o" . helm-occur)
-         ("C-c h r" . helm-resume))
+  :bind (("C-c i"     . helm-semantic-or-imenu)
+         ("C-c y"     . helm-show-kill-ring)
+         ("C-x C-r"   . helm-recentf)
+         ("C-c h o"   . helm-occur)
+         ("C-c h r"   . helm-resume)
+         :map  evil-normal-state-map
+         ("<SPC> i"   . helm-semantic-or-imenu)
+         ("<SPC> y"   . helm-show-kill-ring)
+         ("<SPC> r"   . helm-recentf)
+         ("<SPC> h o" . helm-occur)
+         ("<SPC> h r" . helm-resume))
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
@@ -204,17 +216,27 @@
 
 (use-package helm-projectile
   :ensure t
-  :bind (("C-c j p" . helm-projectile-ag)
-         ("C-c j P" . helm-do-grep-ag)))
+  :commands (helm-projectile-ag helm-do-grep-ag)
+  :bind (("C-c j p"   . helm-projectile-ag)
+         ("C-c j P"   . helm-do-grep-ag)
+         :map evil-normal-state-map
+         ("<SPC> j p" . helm-projectile-ag)
+         ("<SPC> j P" . helm-do-grep-ag)))
 
 (use-package projectile
   :ensure t
   :commands (my-add-project my-remove-project projectile-project-root)
-  :bind (("C-c j d" . projectile-find-dir)
-         ("C-c j k" . projectile-kill-buffers)
-         ("C-c j b" . projectile-switch-to-buffer)
-         ("C-c j s" . projectile-switch-project)
-         ("C-c j S" . projectile-save-project-buffers))
+  :bind (("C-c j d"   . projectile-find-dir)
+         ("C-c j k"   . projectile-kill-buffers)
+         ("C-c j b"   . projectile-switch-to-buffer)
+         ("C-c j s"   . projectile-switch-project)
+         ("C-c j S"   . projectile-save-project-buffers)
+         :map evil-normal-state-map
+         ("<SPC> j d" . projectile-find-dir)
+         ("<SPC> j k" . projectile-kill-buffers)
+         ("<SPC> j b" . projectile-switch-to-buffer)
+         ("<SPC> j s" . projectile-switch-project)
+         ("<SPC> j S" . projectile-save-project-buffers))
   :init
   (setq projectile-keymap-prefix (kbd "C-c j")
         projectile-switch-project-action 'projectile-dired
@@ -227,7 +249,9 @@
 
 (use-package ibuffer
   :ensure t
-  :bind ("C-x C-b" . ibuffer)
+  :bind (("C-x C-b"   . ibuffer)
+         :map evil-normal-state-map
+         ("<SPC> x b" . ibuffer))
   :config
   (setq ibuffer-saved-filter-groups
         '(("home"
@@ -418,7 +442,9 @@
 (use-package neotree
   :ensure t
   :commands my-neotree-directory
-  :bind ("C-c n" . my-neotree-directory)
+  :bind (("C-c n"   . my-neotree-directory)
+         :map evil-normal-state-map
+         ("<SPC> n" . my-neotree-directory))
   :config
   (bind-keys :map neotree-mode-map
              ("u" . neotree-select-up-node)
@@ -446,8 +472,10 @@
 
 (use-package expand-region
   :ensure t
-  :bind (("C-=" . er/expand-region)
-         ("C-c =" . er/expand-region)))
+  :bind (("C-="     . er/expand-region)
+         ("C-c ="   . er/expand-region)
+         :map evil-normal-state-map
+         ("<SPC> =" . er/expand-region)))
 
 (use-package ido
   :disabled t
@@ -474,6 +502,10 @@
         anzu-replace-threshold 1000)
   (advice-remove #'isearch-forward #'isearch-anzu-advice)
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
+
+(use-package evil-anzu
+  :ensure t
+  :after anzu)
 
 (use-package recentf
   :after (:any ido ivy)
@@ -512,13 +544,13 @@
 
 (use-package fzf
   :ensure t
-  :bind (("C-c o"   . fzf-git-files)
-         ("C-c j o" . fzf)
-         ("C-c j h" . fzf-here))
-  :init
-  (define-key evil-normal-state-map " ff" 'fzf)
-  (define-key evil-normal-state-map " fo" 'fzf-git-files)
-  (define-key evil-normal-state-map " fh" 'fzf-here)
+  :bind (("C-c o"     . fzf-git-files)
+         ("C-c j o"   . fzf)
+         ("C-c j h"   . fzf-here)
+         :map evil-normal-state-map
+         ("<SPC> o"   . fzf-git-files)
+         ("<SPC> j o" . fzf)
+         ("<SPC> j h" . fzf-here))
   :config
   (defun fzf-here ()
     (interactive)
@@ -551,9 +583,9 @@
 
 (use-package ivy
   :ensure t
-  :bind ("C-x b" . ivy-switch-buffer)
-  :init
-  (define-key evil-normal-state-map " b" 'ivy-switch-buffer)
+  :bind (("C-x b"   . ivy-switch-buffer)
+         :map evil-normal-state-map
+         ("<SPC> b" . ivy-switch-buffer))
   :config
   (ivy-mode t)
   (bind-keys :map ivy-minibuffer-map
@@ -619,22 +651,22 @@
              counsel-find-file
              counsel-describe-variable
              counsel-describe-function)
-  :bind (("M-x"     . counsel-M-x)
-         ("C-x d"   . counsel-find-file)
-         ("C-x C-f" . counsel-find-file)
-         ("C-h v"   . counsel-describe-variable)
-         ("C-h f"   . counsel-describe-function))
-  :init
-  (define-key evil-normal-state-map "  " 'counsel-M-x)
-  (define-key evil-normal-state-map " d" 'counsel-find-file)
-  (define-key evil-normal-state-map " hv" 'counsel-describe-variable)
-  (define-key evil-normal-state-map " hf" 'counsel-describe-function))
+  :bind (("M-x"         . counsel-M-x)
+         ("C-x d"       . counsel-find-file)
+         ("C-x C-f"     . counsel-find-file)
+         ("C-h v"       . counsel-describe-variable)
+         ("C-h f"       . counsel-describe-function)
+         :map evil-normal-state-map
+         ("<SPC> <SPC>" . counsel-M-x)
+         ("<SPC> d"     . counsel-find-file)
+         ("<SPC> C-f"   . counsel-find-file)
+         ("<SPC> v"     . counsel-describe-variable)
+         ("<SPC> f"     . counsel-describe-function)))
 
 (use-package which-key
   :ensure t
   :init
   (which-key-mode)
-  (setq which-key-idle-delay 0.2))
-
+  (setq which-key-idle-delay 1))
 
 (provide 'conf-general)
