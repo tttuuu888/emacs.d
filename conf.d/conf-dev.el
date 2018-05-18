@@ -26,7 +26,13 @@
 
 (use-package ggtags
   :ensure t
-  :hook ((c-mode-common asm-mode) . ggtags-mode))
+  :hook ((c-mode-common asm-mode) . my-ggtags-hook)
+  :config
+  (defun my-ggtags-hook ()
+    (ggtags-mode)
+    (evil-local-set-key 'normal ",gd" 'ggtags-find-tag-dwim)
+    (evil-local-set-key 'normal ",gr" 'ggtags-find-reference)
+    (evil-local-set-key 'normal ",gu" 'ggtags-update-tags)))
 
 (use-package rtags
   :disabled t
@@ -183,9 +189,13 @@
 
 (use-package tern
   :ensure t
-  :hook ((web-mode js2-mode css-mode) . tern-mode)
+  :hook ((web-mode js2-mode css-mode) . my-tern-hook)
   :config
-  (add-hook 'tern-mode-hook (lambda () (yas-minor-mode)))
+  (defun my-tern-hook ()
+    (tern-mode)
+    (yas-minor-mode)
+    (evil-local-set-key 'normal ",gd" 'tern-find-definition)
+    (evil-local-set-key 'normal (kbd "M-[") 'xref-pop-marker-stack))
   (bind-keys :map tern-mode-keymap
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack)))

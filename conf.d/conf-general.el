@@ -1,5 +1,14 @@
 ;;; General settings
 
+(use-package evil
+  :ensure t
+  :init
+  (evil-mode)
+  (define-key evil-motion-state-map ";" 'evil-ex)
+  (define-key evil-normal-state-map " q" 'kill-buffer)
+  (define-key evil-normal-state-map " Q" 'kill-emacs)
+  (define-key evil-normal-state-map " w" 'save-buffer))
+
 (use-package sk-utils
   :commands (insert-date
              insert-date-and-time
@@ -506,6 +515,10 @@
   :bind (("C-c o"   . fzf-git-files)
          ("C-c j o" . fzf)
          ("C-c j h" . fzf-here))
+  :init
+  (define-key evil-normal-state-map " ff" 'fzf)
+  (define-key evil-normal-state-map " fo" 'fzf-git-files)
+  (define-key evil-normal-state-map " fh" 'fzf-here)
   :config
   (defun fzf-here ()
     (interactive)
@@ -539,6 +552,8 @@
 (use-package ivy
   :ensure t
   :bind ("C-x b" . ivy-switch-buffer)
+  :init
+  (define-key evil-normal-state-map " b" 'ivy-switch-buffer)
   :config
   (ivy-mode t)
   (bind-keys :map ivy-minibuffer-map
@@ -600,11 +615,26 @@
 
 (use-package counsel
   :ensure t
+  :commands (counsel-M-x
+             counsel-find-file
+             counsel-describe-variable
+             counsel-describe-function)
   :bind (("M-x"     . counsel-M-x)
          ("C-x d"   . counsel-find-file)
          ("C-x C-f" . counsel-find-file)
          ("C-h v"   . counsel-describe-variable)
-         ("C-h f"   . counsel-describe-function)))
+         ("C-h f"   . counsel-describe-function))
+  :init
+  (define-key evil-normal-state-map "  " 'counsel-M-x)
+  (define-key evil-normal-state-map " d" 'counsel-find-file)
+  (define-key evil-normal-state-map " hv" 'counsel-describe-variable)
+  (define-key evil-normal-state-map " hf" 'counsel-describe-function))
+
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode)
+  (setq which-key-idle-delay 0.2))
 
 
 (provide 'conf-general)
