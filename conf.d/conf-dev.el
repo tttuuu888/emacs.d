@@ -111,11 +111,10 @@
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
   :bind (:map paredit-mode-map
               ("C-c <right>" . paredit-forward-slurp-sexp)
-              ("C-c <left>"  . paredit-forward-barf-sexp)))
+              ("C-c <left>"  . paredit-forward-barf-sexp))
+  :config
+  (evil-define-key 'normal paredit-mode-map "dd" 'paredit-kill))
 
-(use-package evil-paredit
-  :ensure t
-  :hook ((clojure-mode emacs-lisp-mode) . evil-paredit-mode))
 
 (use-package clojure-mode
   :ensure t

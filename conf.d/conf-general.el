@@ -359,10 +359,6 @@
                                 "\\(fn:[-_[:word:]]+\\)\\)"))
   (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
 
-(use-package evil-org
-  :ensure t
-  :mode ("\\.org\\'" . evil-org-mode))
-
 (use-package ox-reveal
   :ensure t
   :after org
