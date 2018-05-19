@@ -14,6 +14,7 @@
     "q"  'kill-buffer
     "Q"  'kill-emacs
     "w"  'save-buffer)
+  (evil-set-initial-state 'term-mode 'emacs)
   (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode")))
 
 (use-package evil
