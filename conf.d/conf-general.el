@@ -72,8 +72,12 @@
   :bind (("<C-return>" . cua-set-rectangle-mark)
          ("C-c RET"    . cua-set-rectangle-mark))
   :init
-  (setq cua-enable-cua-keys nil)
-  (cua-mode t))
+  (defun evil-stop-and-cua-start ()
+    (interactive)
+    (evil-mode -1)
+    (cua-mode t))
+  :config
+  (setq cua-enable-cua-keys nil))
 
 (use-package hl-line
   :init
@@ -202,7 +206,7 @@
 
 (use-package helm-git-grep
   :ensure t
-  :bind (("C-c p"   . helm-git-grep-at-point))
+  :bind (("C-c p" . helm-git-grep-at-point))
   :init
   (evil-leader/set-key
     "p" 'helm-git-grep-at-point))
@@ -246,11 +250,11 @@
 (use-package projectile
   :ensure t
   :commands (my-add-project my-remove-project projectile-project-root)
-  :bind (("C-c j d"   . projectile-find-dir)
-         ("C-c j k"   . projectile-kill-buffers)
-         ("C-c j b"   . projectile-switch-to-buffer)
-         ("C-c j s"   . projectile-switch-project)
-         ("C-c j S"   . projectile-save-project-buffers))
+  :bind (("C-c j d" . projectile-find-dir)
+         ("C-c j k" . projectile-kill-buffers)
+         ("C-c j b" . projectile-switch-to-buffer)
+         ("C-c j s" . projectile-switch-project)
+         ("C-c j S" . projectile-save-project-buffers))
   :init
   (evil-leader/set-key
     "jd" 'projectile-find-dir
@@ -700,5 +704,6 @@
   :ensure t
   :init
   (which-key-mode))
+
 
 (provide 'conf-general)
