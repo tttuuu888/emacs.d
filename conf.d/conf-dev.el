@@ -80,14 +80,15 @@
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
-  :bind (("M-," . xref-pop-marker-stack)
-         ("M-]" . xref-find-reference-here)
-         ("M-[" . xref-pop-marker-stack)
-         ("TAB" . company-indent-or-complete-common)
-         :map evil-normal-state-map
-         ("<SPC> ," . xref-pop-marker-stack)
-         ("<SPC> ]" . xref-find-reference-here)
-         ("<SPC> [" . xref-pop-marker-stack))
+  :bind (:map python-mode-map
+              ("M-," . xref-pop-marker-stack)
+              ("M-]" . xref-find-reference-here)
+              ("M-[" . xref-pop-marker-stack)
+              ("TAB" . company-indent-or-complete-common)
+              :map evil-normal-state-map
+              ("<SPC> ," . xref-pop-marker-stack)
+              ("<SPC> ]" . xref-find-reference-here)
+              ("<SPC> [" . xref-pop-marker-stack))
   :config
   (elpy-enable)
   (defun sk-toggle-python ()
@@ -108,8 +109,9 @@
 (use-package paredit
   :ensure t
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
-  :bind (("C-c <right>" . paredit-forward-slurp-sexp)
-         ("C-c <left>"  . paredit-forward-barf-sexp)))
+  :bind (:map paredit-mode-map
+              ("C-c <right>" . paredit-forward-slurp-sexp)
+              ("C-c <left>"  . paredit-forward-barf-sexp)))
 
 (use-package clojure-mode
   :ensure t
@@ -146,7 +148,8 @@
   :mode (("\\.html\\'" . web-mode)
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
-  :bind ("TAB" . company-indent-or-complete-common)
+  :bind (:map web-mode-map
+              ("TAB" . company-indent-or-complete-common))
   :config
   (setq web-mode-style-padding 0
         web-mode-script-padding 0
@@ -164,7 +167,8 @@
   :ensure t
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
-  :bind ("TAB" . company-indent-or-complete-common)
+  :bind (:map js2-mode-map
+              ("TAB" . company-indent-or-complete-common))
   :config
   (setq js2-basic-offset 2
         js2-strict-missing-semi-warning nil)
@@ -191,10 +195,11 @@
 (use-package tern
   :ensure t
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
-  :bind (("M-]" . xref-find-reference-here)
-         ("M-[" . xref-pop-marker-stack)
-         :map evil-normal-state-map
-         (",gd" . tern-find-definition))
+  :bind (:map tern-mode-map
+              ("M-]" . xref-find-reference-here)
+              ("M-[" . xref-pop-marker-stack)
+              :map evil-normal-state-map
+              (",gd" . tern-find-definition))
   :config
   (defun my-tern-hook ()
     (tern-mode)
@@ -203,8 +208,9 @@
 (use-package go-mode
   :ensure t
   :mode ("\\.go\\'" . go-mode)
-  :bind (("M-." . godef-jump)
-         ("TAB" . company-indent-or-complete-common))
+  :bind (:map go-mode-map
+              ("M-." . godef-jump)
+              ("TAB" . company-indent-or-complete-common))
   :config
   (setq gofmt-command "goimports")
   (defun my-go-code-hook ()

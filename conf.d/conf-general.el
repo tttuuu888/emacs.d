@@ -307,14 +307,15 @@
 
 (use-package org
   :mode ("\\.org\\'" . org-mode)
-  :bind (("C-c a" . org-agenda)
-         ("C-c b" . org-iswitchb)
-         ("C-c l" . org-store-link)
-         ("C-c r" . org-remember)
-         ("C-c t" . org-table-create)
-         ("C-c u" . org-up-element)
-         ("C-c s e" . org-edit-src-code)
-         ("C-c s i" . org-insert-src-block))
+  :bind (:map org-mode-map
+              ("C-c a" . org-agenda)
+              ("C-c b" . org-iswitchb)
+              ("C-c l" . org-store-link)
+              ("C-c r" . org-remember)
+              ("C-c t" . org-table-create)
+              ("C-c u" . org-up-element)
+              ("C-c s e" . org-edit-src-code)
+              ("C-c s i" . org-insert-src-block))
   :config
   (defun org-insert-src-block (src-code-type)
     "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
@@ -367,11 +368,12 @@
 
 (use-package dired
   :defer t
-  :bind (("M-o"   . dired-omit-mode)
-         ("r"     . ora-dired-rsync)
-         ("^"     . dired-up-and-close-dir)
-         ("<DEL>" . dired-up-and-close-dir)
-         ("<RET>" . dired-visit-file-or-dir))
+  :bind (:map  dired-mode-map
+               ("M-o"   . dired-omit-mode)
+               ("r"     . ora-dired-rsync)
+               ("^"     . dired-up-and-close-dir)
+               ("<DEL>" . dired-up-and-close-dir)
+               ("<RET>" . dired-visit-file-or-dir))
   :init
   (add-to-list 'magic-mode-alist
                '((lambda () (< large-file-warning-threshold (buffer-size)))
@@ -565,8 +567,9 @@
 (use-package plantuml-mode
   :ensure t
   :mode ("\\.puml\\'" . plantuml-mode)
-  :bind (("TAB" . company-indent-or-complete-common)
-         ("C-c C-e" . plantuml-make-output))
+  :bind (:map plantuml-mode-map
+              ("TAB" . company-indent-or-complete-common)
+              ("C-c C-e" . plantuml-make-output))
   :config
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (defun plantuml-make-output ()
