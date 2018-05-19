@@ -33,9 +33,9 @@
   :config
   (defun my-ggtags-hook ()
     (ggtags-mode)
-    (evil-local-set-key 'normal ",gd" 'ggtags-find-tag-dwim)
-    (evil-local-set-key 'normal ",gr" 'ggtags-find-reference)
-    (evil-local-set-key 'normal ",gu" 'ggtags-update-tags)))
+    (evil-local-set-key 'normal " gd" 'ggtags-find-tag-dwim)
+    (evil-local-set-key 'normal " gr" 'ggtags-find-reference)
+    (evil-local-set-key 'normal " gu" 'ggtags-update-tags)))
 
 (use-package rtags
   :disabled t
@@ -201,7 +201,7 @@
   (defun my-tern-hook ()
     (tern-mode)
     (yas-minor-mode)
-    (evil-local-set-key 'normal ",gd" 'tern-find-definition)))
+    (evil-local-set-key 'normal " gd" 'tern-find-definition)))
 
 (use-package go-mode
   :ensure t

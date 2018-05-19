@@ -1,20 +1,28 @@
 ;;; General settings
 
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+    "xo" 'other-window
+    "0"  'delete-window
+    "1"  'delete-other-windows
+    "2"  'split-window-below
+    "3"  'split-window-right
+    "q"  'kill-buffer
+    "Q"  'kill-emacs
+    "w"  'save-buffer)
+  (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode")))
+
 (use-package evil
   :ensure t
   :init
   (evil-mode)
   (define-key evil-motion-state-map " " nil)
   (bind-keys :map evil-motion-state-map
-             (";"        . evil-ex)
-             ("<SPC> xo" . other-window)
-             ("<SPC> 0"  . delete-window)
-             ("<SPC> 1"  . delete-other-windows)
-             ("<SPC> 2"  . split-window-below)
-             ("<SPC> 3"  . split-window-right)
-             ("<SPC> q"  . kill-buffer)
-             ("<SPC> Q"  . kill-emacs)
-             ("<SPC> w"  . save-buffer)))
+             (";"        . evil-ex)))
 
 (use-package sk-utils
   :commands (insert-date
@@ -83,7 +91,6 @@
 (use-package eshell
   :defer t
   :config
-  (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)
   ;; Clear Eshell buffer
   (defun eshell/clear ()
     (interactive)
@@ -94,7 +101,8 @@
     (progn
       (evil-local-mode -1)
       (setenv "TERM" "screen-256color")
-      (setq-local company-minimum-prefix-length 3)))
+      (setq-local company-minimum-prefix-length 3)
+      (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)))
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
 (use-package shell
@@ -193,9 +201,10 @@
 
 (use-package helm-git-grep
   :ensure t
-  :bind (("C-c p"   . helm-git-grep-at-point)
-         :map evil-normal-state-map
-         ("<SPC> p" . helm-git-grep-at-point)))
+  :bind (("C-c p"   . helm-git-grep-at-point))
+  :init
+  (evil-leader/set-key
+    "p" 'helm-git-grep-at-point))
 
 (use-package helm
   :ensure t
@@ -203,13 +212,14 @@
          ("C-c y"     . helm-show-kill-ring)
          ("C-x C-r"   . helm-recentf)
          ("C-c h o"   . helm-occur)
-         ("C-c h r"   . helm-resume)
-         :map  evil-normal-state-map
-         ("<SPC> i"   . helm-semantic-or-imenu)
-         ("<SPC> y"   . helm-show-kill-ring)
-         ("<SPC> r"   . helm-recentf)
-         ("<SPC> h o" . helm-occur)
-         ("<SPC> h r" . helm-resume))
+         ("C-c h r"   . helm-resume))
+  :init
+  (evil-leader/set-key
+    "i"  'helm-semantic-or-imenu
+    "y"  'helm-show-kill-ring
+    "r"  'helm-recentf
+    "ho" 'helm-occur
+    "hr" 'helm-resume)
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
@@ -226,10 +236,11 @@
   :ensure t
   :commands (helm-projectile-ag helm-do-grep-ag)
   :bind (("C-c j p"   . helm-projectile-ag)
-         ("C-c j P"   . helm-do-grep-ag)
-         :map evil-normal-state-map
-         ("<SPC> j p" . helm-projectile-ag)
-         ("<SPC> j P" . helm-do-grep-ag)))
+         ("C-c j P"   . helm-do-grep-ag))
+  :init
+  (evil-leader/set-key
+    "jp" 'helm-projectile-ag
+    "jP" 'helm-do-grep-ag))
 
 (use-package projectile
   :ensure t
@@ -238,13 +249,14 @@
          ("C-c j k"   . projectile-kill-buffers)
          ("C-c j b"   . projectile-switch-to-buffer)
          ("C-c j s"   . projectile-switch-project)
-         ("C-c j S"   . projectile-save-project-buffers)
-         :map evil-normal-state-map
-         ("<SPC> j d" . projectile-find-dir)
-         ("<SPC> j k" . projectile-kill-buffers)
-         ("<SPC> j b" . projectile-switch-to-buffer)
-         ("<SPC> j s" . projectile-switch-project)
-         ("<SPC> j S" . projectile-save-project-buffers))
+         ("C-c j S"   . projectile-save-project-buffers))
+  :init
+  (evil-leader/set-key
+    "jd" 'projectile-find-dir
+    "jk" 'projectile-kill-buffers
+    "jb" 'projectile-switch-to-buffer
+    "js" 'projectile-switch-project
+    "jS" 'projectile-save-project-buffers)
   :init
   (setq projectile-keymap-prefix (kbd "C-c j")
         projectile-switch-project-action 'projectile-dired
@@ -257,9 +269,10 @@
 
 (use-package ibuffer
   :ensure t
-  :bind (("C-x C-b"   . ibuffer)
-         :map evil-normal-state-map
-         ("<SPC> x b" . ibuffer))
+  :bind ("C-x C-b"   . ibuffer)
+  :init
+  (evil-leader/set-key
+    "xb" 'ibuffer)
   :config
   (setq ibuffer-saved-filter-groups
         '(("home"
@@ -448,16 +461,17 @@
 (use-package neotree
   :ensure t
   :commands my-neotree-directory
-  :bind (("C-c n"   . my-neotree-directory)
+  :bind (("C-c n" . my-neotree-directory)
          :map neotree-mode-map
          ("u" . neotree-select-up-node)
          ("y" . (lambda ()
                   "Copy the absolute path of the node at point."
                   (interactive)
                   (message "Copied path : %s"
-                           (neotree-copy-filepath-to-yank-ring))))
-         :map evil-normal-state-map
-         ("<SPC> n" . my-neotree-directory))
+                           (neotree-copy-filepath-to-yank-ring)))))
+  :init
+  (evil-leader/set-key
+    "n" 'my-neotree-directory)
   :config
   (defun my-neotree-directory ()
     (interactive)
@@ -662,20 +676,19 @@
              counsel-find-file
              counsel-describe-variable
              counsel-describe-function)
-  :bind (("M-x"         . counsel-M-x)
-         ("C-x d"       . counsel-find-file)
-         ("C-x C-f"     . counsel-find-file)
-         ("C-h v"       . counsel-describe-variable)
-         ("C-h f"       . counsel-describe-function)
-         :map evil-motion-state-map
-         ("<SPC> <SPC>" . counsel-M-x)
-         :map evil-normal-state-map
-         ("<SPC> <SPC>" . counsel-M-x)
-         ("<SPC> d"     . counsel-find-file)
-         ("<SPC> f"     . counsel-find-file)
-         ("<SPC> h v"   . counsel-describe-variable)
-         ("<SPC> h f"   . counsel-describe-function)
-         ("<SPC> h k"   . describe-key)))
+  :bind (("M-x"     . counsel-M-x)
+         ("C-x d"   . counsel-find-file)
+         ("C-x C-f" . counsel-find-file)
+         ("C-h v"   . counsel-describe-variable)
+         ("C-h f"   . counsel-describe-function))
+  :init
+  (evil-leader/set-key
+    "<SPC>" 'counsel-M-x
+    "d"     'counsel-find-file
+    "f"     'counsel-find-file
+    "hv"    'counsel-describe-variable
+    "hf"    'counsel-describe-function
+    "hk"    'describe-key))
 
 (use-package which-key
   :ensure t
