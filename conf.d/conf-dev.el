@@ -15,7 +15,10 @@
 
 (use-package elec-pair
   :defer t
-  :hook (prog-mode . electric-pair-mode))
+  :hook (prog-mode . electric-pair-mode)
+  :config
+  (evil-local-set-key 'normal " ," 'xref-pop-marker-stack)
+  (evil-local-set-key 'normal " ]" 'xref-find-reference-here))
 
 (use-package cff
   :ensure t
@@ -84,11 +87,7 @@
               ("M-," . xref-pop-marker-stack)
               ("M-]" . xref-find-reference-here)
               ("M-[" . xref-pop-marker-stack)
-              ("TAB" . company-indent-or-complete-common)
-              :map evil-normal-state-map
-              ("<SPC> ," . xref-pop-marker-stack)
-              ("<SPC> ]" . xref-find-reference-here)
-              ("<SPC> [" . xref-pop-marker-stack))
+              ("TAB" . company-indent-or-complete-common))
   :config
   (elpy-enable)
   (defun sk-toggle-python ()
@@ -113,7 +112,7 @@
               ("C-c <right>" . paredit-forward-slurp-sexp)
               ("C-c <left>"  . paredit-forward-barf-sexp))
   :config
-  (evil-define-key 'normal paredit-mode-map "dd" 'paredit-kill))
+  (evil-define-key 'normal paredit-mode-map " k" 'paredit-kill))
 
 
 (use-package clojure-mode
@@ -198,15 +197,11 @@
 (use-package tern
   :ensure t
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
-  :bind (:map tern-mode-map
-              ("M-]" . xref-find-reference-here)
-              ("M-[" . xref-pop-marker-stack)
-              :map evil-normal-state-map
-              (",gd" . tern-find-definition))
   :config
   (defun my-tern-hook ()
     (tern-mode)
-    (yas-minor-mode)))
+    (yas-minor-mode)
+    (evil-local-set-key 'normal ",gd" 'tern-find-definition)))
 
 (use-package go-mode
   :ensure t

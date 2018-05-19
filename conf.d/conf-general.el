@@ -176,6 +176,7 @@
   (add-to-list 'company-backends 'company-go))
 
 (use-package redo+
+  :disabled t
   :bind (("C-." . redo+-redo)
          ("M-_" . redo+-redo)
          ("C-_" . redo+-undo)
