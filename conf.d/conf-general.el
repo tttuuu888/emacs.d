@@ -671,7 +671,9 @@
   :after yasnippet
   :config
   (bind-keys :map yas-minor-mode-map
-             ("C-c /" . ivy-yasnippet)))
+             ("C-c /" . ivy-yasnippet))
+  (evil-local-set-key 'normal " /" 'ivy-yasnippet)
+  (advice-add 'ivy-yasnippet :before #'(lambda () (evil-insert-state))))
 
 (use-package counsel
   :ensure t
