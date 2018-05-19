@@ -484,6 +484,11 @@
          :map evil-normal-state-map
          ("<SPC> =" . er/expand-region)))
 
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
 (use-package ido
   :disabled t
   :bind (("C-x d"   . ido-dired)
