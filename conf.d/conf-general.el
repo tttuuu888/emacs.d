@@ -493,9 +493,10 @@
 (use-package expand-region
   :ensure t
   :bind (("C-="     . er/expand-region)
-         ("C-c ="   . er/expand-region)
-         :map evil-normal-state-map
-         ("<SPC> =" . er/expand-region)))
+         ("C-c ="   . er/expand-region))
+  :init
+  (evil-leader/set-key
+    "=" 'er/expand-region))
 
 (use-package evil-surround
   :ensure t
@@ -571,11 +572,12 @@
   :ensure t
   :bind (("C-c o"     . fzf-git-files)
          ("C-c j o"   . fzf)
-         ("C-c j h"   . fzf-here)
-         :map evil-normal-state-map
-         ("<SPC> o"   . fzf-git-files)
-         ("<SPC> j o" . fzf)
-         ("<SPC> j h" . fzf-here))
+         ("C-c j h"   . fzf-here))
+  :init
+  (evil-leader/set-key
+    "o"  'fzf-git-files
+    "jo" 'fzf
+    "jh" 'fzf-here)
   :config
   (defun fzf-here ()
     (interactive)
@@ -610,9 +612,10 @@
   :ensure t
   :bind (("C-x b"   . ivy-switch-buffer)
          :map ivy-minibuffer-map
-         ("TAB"     . ivy-alt-done)
-         :map evil-normal-state-map
-         ("<SPC> b" . ivy-switch-buffer))
+         ("TAB"     . ivy-alt-done))
+  :init
+  (evil-leader/set-key
+    "b" 'ivy-switch-buffer)
   :config
   (ivy-mode t)
   (defun ivy-buffer-transformer-sk (str)
