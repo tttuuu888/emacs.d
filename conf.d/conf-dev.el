@@ -1,5 +1,13 @@
 ;;; Developement settings
 
+(use-package elec-pair
+  :defer t
+  :hook (prog-mode . electric-pair-mode)
+  :config
+  (evil-local-set-key 'normal " gd" 'xref-find-definitions)
+  (evil-local-set-key 'normal " ,"  'xref-pop-marker-stack)
+  (evil-local-set-key 'normal " ]"  'xref-find-reference-here))
+
 (use-package gdb-mi
   :defer t
   :init
@@ -12,13 +20,6 @@
 (use-package make-mode
   :defer t
   :mode ("Makefile.*" . makefile-gmake-mode))
-
-(use-package elec-pair
-  :defer t
-  :hook (prog-mode . electric-pair-mode)
-  :config
-  (evil-local-set-key 'normal " ," 'xref-pop-marker-stack)
-  (evil-local-set-key 'normal " ]" 'xref-find-reference-here))
 
 (use-package cff
   :ensure t
