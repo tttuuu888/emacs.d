@@ -12,7 +12,6 @@
              ("<SPC> 1"  . delete-other-windows)
              ("<SPC> 2"  . split-window-below)
              ("<SPC> 3"  . split-window-right)
-             :map evil-normal-state-map
              ("<SPC> q"  . kill-buffer)
              ("<SPC> Q"  . kill-emacs)
              ("<SPC> w"  . save-buffer)))
@@ -84,26 +83,29 @@
 (use-package eshell
   :defer t
   :config
+  (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)
   ;; Clear Eshell buffer
   (defun eshell/clear ()
     (interactive)
     (let ((inhibit-read-only t))
       (erase-buffer)
       (execute-kbd-macro (kbd "<RET>"))))
-
-  (defun my-company-eshell-setup ()
+  (defun my-eshell-setup ()
     (progn
+      (evil-local-mode -1)
       (setenv "TERM" "screen-256color")
-      (setq-local company-minimum-prefix-length 3)
-      (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)))
-  (add-hook 'eshell-mode-hook 'my-company-eshell-setup))
+      (setq-local company-minimum-prefix-length 3)))
+  (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
 (use-package shell
   :defer t
   :config
   (bind-key "C-c C-l" 'helm-comint-input-ring shell-mode-map)
-  (add-hook 'shell-mode-hook
-            '(lambda () (setq-local company-minimum-prefix-length 3))))
+  (defun my-shell-setup ()
+    (progn
+      (evil-local-mode -1)
+      (setq-local company-minimum-prefix-length 3)))
+  (add-hook 'shell-mode-hook 'my-shell-setup))
 
 (use-package company
   :ensure t
@@ -668,6 +670,7 @@
          :map evil-motion-state-map
          ("<SPC> <SPC>" . counsel-M-x)
          :map evil-normal-state-map
+         ("<SPC> <SPC>" . counsel-M-x)
          ("<SPC> d"     . counsel-find-file)
          ("<SPC> f"     . counsel-find-file)
          ("<SPC> h v"   . counsel-describe-variable)
