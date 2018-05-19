@@ -213,11 +213,11 @@
 
 (use-package helm
   :ensure t
-  :bind (("C-c i"     . helm-semantic-or-imenu)
-         ("C-c y"     . helm-show-kill-ring)
-         ("C-x C-r"   . helm-recentf)
-         ("C-c h o"   . helm-occur)
-         ("C-c h r"   . helm-resume))
+  :bind (("C-c i"   . helm-semantic-or-imenu)
+         ("C-c y"   . helm-show-kill-ring)
+         ("C-x C-r" . helm-recentf)
+         ("C-c h o" . helm-occur)
+         ("C-c h r" . helm-resume))
   :init
   (evil-leader/set-key
     "i"  'helm-semantic-or-imenu
@@ -240,8 +240,8 @@
 (use-package helm-projectile
   :ensure t
   :commands (helm-projectile-ag helm-do-grep-ag)
-  :bind (("C-c j p"   . helm-projectile-ag)
-         ("C-c j P"   . helm-do-grep-ag))
+  :bind (("C-c j p" . helm-projectile-ag)
+         ("C-c j P" . helm-do-grep-ag))
   :init
   (evil-leader/set-key
     "jp" 'helm-projectile-ag
@@ -274,7 +274,7 @@
 
 (use-package ibuffer
   :ensure t
-  :bind ("C-x C-b"   . ibuffer)
+  :bind ("C-x C-b" . ibuffer)
   :init
   (evil-leader/set-key
     "xb" 'ibuffer)
@@ -335,12 +335,12 @@
 (use-package org
   :mode ("\\.org\\'" . org-mode)
   :bind (:map org-mode-map
-              ("C-c a" . org-agenda)
-              ("C-c b" . org-iswitchb)
-              ("C-c l" . org-store-link)
-              ("C-c r" . org-remember)
-              ("C-c t" . org-table-create)
-              ("C-c u" . org-up-element)
+              ("C-c a"   . org-agenda)
+              ("C-c b"   . org-iswitchb)
+              ("C-c l"   . org-store-link)
+              ("C-c r"   . org-remember)
+              ("C-c t"   . org-table-create)
+              ("C-c u"   . org-up-element)
               ("C-c s e" . org-edit-src-code)
               ("C-c s i" . org-insert-src-block))
   :config
@@ -497,8 +497,8 @@
 
 (use-package expand-region
   :ensure t
-  :bind (("C-="     . er/expand-region)
-         ("C-c ="   . er/expand-region))
+  :bind (("C-="   . er/expand-region)
+         ("C-c =" . er/expand-region))
   :init
   (evil-leader/set-key
     "=" 'er/expand-region))
@@ -575,9 +575,9 @@
 
 (use-package fzf
   :ensure t
-  :bind (("C-c o"     . fzf-git-files)
-         ("C-c j o"   . fzf)
-         ("C-c j h"   . fzf-here))
+  :bind (("C-c o"   . fzf-git-files)
+         ("C-c j o" . fzf)
+         ("C-c j h" . fzf-here))
   :init
   (evil-leader/set-key
     "o"  'fzf-git-files
@@ -615,9 +615,9 @@
 
 (use-package ivy
   :ensure t
-  :bind (("C-x b"   . ivy-switch-buffer)
+  :bind (("C-x b" . ivy-switch-buffer)
          :map ivy-minibuffer-map
-         ("TAB"     . ivy-alt-done))
+         ("TAB"   . ivy-alt-done))
   :init
   (evil-leader/set-key
     "b" 'ivy-switch-buffer)
