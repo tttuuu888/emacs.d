@@ -3,10 +3,10 @@
 (use-package elec-pair
   :defer t
   :hook (prog-mode . electric-pair-mode)
-  :config
-  (evil-local-set-key 'normal " gd" 'xref-find-definitions)
-  (evil-local-set-key 'normal " ,"  'xref-pop-marker-stack)
-  (evil-local-set-key 'normal " ]"  'xref-find-reference-here))
+  :bind (:map evil-normal-state-map
+              ("<SPC> g d" . xref-find-definitions)
+              ("<SPC> ," . xref-pop-marker-stack)
+              ("<SPC> ]" . xref-find-reference-here)))
 
 (use-package gdb-mi
   :defer t

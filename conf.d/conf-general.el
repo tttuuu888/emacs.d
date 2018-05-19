@@ -6,24 +6,27 @@
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
-    "xo" 'other-window
     "0"  'delete-window
     "1"  'delete-other-windows
     "2"  'split-window-below
     "3"  'split-window-right
     "q"  'kill-buffer
     "Q"  'kill-emacs
-    "w"  'save-buffer)
+    "w"  'save-buffer
+    "hb" 'describe-bindings
+    "xo" 'other-window
+    "xe" 'eval-last-sexp)
   (evil-set-initial-state 'term-mode 'emacs)
   (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode")))
 
 (use-package evil
   :ensure t
+  :bind (:map evil-motion-state-map
+              (";" . evil-ex)
+              :map evil-visual-state-map
+              ("<SPC> x r" . eval-region))
   :init
-  (evil-mode)
-  (define-key evil-motion-state-map " " nil)
-  (bind-keys :map evil-motion-state-map
-             (";"        . evil-ex)))
+  (evil-mode))
 
 (use-package sk-utils
   :commands (insert-date
@@ -262,9 +265,7 @@
     "jb" 'projectile-switch-to-buffer
     "js" 'projectile-switch-project
     "jS" 'projectile-save-project-buffers)
-  :init
-  (setq projectile-keymap-prefix (kbd "C-c j")
-        projectile-switch-project-action 'projectile-dired
+  (setq projectile-switch-project-action 'projectile-dired
         projectile-require-project-root nil
         projectile-completion-system 'ivy)
   :config
@@ -678,10 +679,11 @@
 (use-package ivy-yasnippet
   :ensure t
   :after yasnippet
+  :bind (:map yas-minor-mode-map
+              ("C-c /" . ivy-yasnippet)
+              :map evil-normal-state-map
+              ("<SPC> /" . ivy-yasnippet))
   :config
-  (bind-keys :map yas-minor-mode-map
-             ("C-c /" . ivy-yasnippet))
-  (evil-local-set-key 'normal " /" 'ivy-yasnippet)
   (advice-add 'ivy-yasnippet :before #'(lambda () (evil-insert-state))))
 
 (use-package counsel
