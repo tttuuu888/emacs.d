@@ -617,12 +617,16 @@
   :ensure t
   :bind (("C-x b" . ivy-switch-buffer)
          :map ivy-minibuffer-map
-         ("TAB"   . ivy-alt-done))
+         ("TAB"   . eh-ivy-partial-or-done))
   :init
   (evil-leader/set-key
     "b" 'ivy-switch-buffer)
   :config
   (ivy-mode t)
+  (defun eh-ivy-partial-or-done ()
+    (interactive)
+    (or (ivy-partial)
+        (ivy-alt-done)))
   (defun ivy-buffer-transformer-sk (str)
     (let* ((buf (get-buffer str))
            (mode (capitalize
