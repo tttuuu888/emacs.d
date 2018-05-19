@@ -113,6 +113,10 @@
               ("C-c <right>" . paredit-forward-slurp-sexp)
               ("C-c <left>"  . paredit-forward-barf-sexp)))
 
+(use-package evil-paredit
+  :ensure t
+  :hook ((clojure-mode emacs-lisp-mode) . evil-paredit-mode))
+
 (use-package clojure-mode
   :ensure t
   :mode ("\\.clj\\'" . clojure-mode))

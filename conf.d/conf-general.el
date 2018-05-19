@@ -4,12 +4,18 @@
   :ensure t
   :init
   (evil-mode)
+  (define-key evil-motion-state-map " " nil)
   (bind-keys :map evil-motion-state-map
-             (";" . evil-ex)
+             (";"        . evil-ex)
+             ("<SPC> xo" . other-window)
+             ("<SPC> 0"  . delete-window)
+             ("<SPC> 1"  . delete-other-windows)
+             ("<SPC> 2"  . split-window-below)
+             ("<SPC> 3"  . split-window-right)
              :map evil-normal-state-map
-             ("<SPC> q" . kill-buffer)
-             ("<SPC> Q" . kill-emacs)
-             ("<SPC> w" . save-buffer)))
+             ("<SPC> q"  . kill-buffer)
+             ("<SPC> Q"  . kill-emacs)
+             ("<SPC> w"  . save-buffer)))
 
 (use-package sk-utils
   :commands (insert-date
@@ -353,6 +359,10 @@
                                 "\\(fn:[-_[:word:]]+\\)\\)"))
   (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
 
+(use-package evil-org
+  :ensure t
+  :mode ("\\.org\\'" . evil-org-mode))
+
 (use-package ox-reveal
   :ensure t
   :after org
@@ -653,8 +663,9 @@
          ("C-x C-f"     . counsel-find-file)
          ("C-h v"       . counsel-describe-variable)
          ("C-h f"       . counsel-describe-function)
-         :map evil-normal-state-map
+         :map evil-motion-state-map
          ("<SPC> <SPC>" . counsel-M-x)
+         :map evil-normal-state-map
          ("<SPC> d"     . counsel-find-file)
          ("<SPC> f"     . counsel-find-file)
          ("<SPC> h v"   . counsel-describe-variable)
