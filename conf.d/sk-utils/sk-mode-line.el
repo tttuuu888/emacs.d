@@ -39,9 +39,9 @@
       (let* ((seperator "｜")   ;; seperator - fullwidth vertical line
              (evil-info
               (if evil-mode
-                  (concat "["
+                  (concat " <"
                           (upcase (substring (symbol-name evil-state) 0 1))
-                          "]")
+                          ">")
                 ""))
              (buffer-info (concat " %* %I " current-input-method-title "%z: "))
              (buffer-name (propertize " %b " 'face 'bold))
