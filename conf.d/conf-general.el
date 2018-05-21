@@ -76,17 +76,6 @@
              ("<S-down-mouse-1>" . nil)
              ("C-,"              . other-window)))
 
-(use-package cua-base
-  :bind (("<C-return>" . cua-set-rectangle-mark)
-         ("C-c RET"    . cua-set-rectangle-mark))
-  :init
-  (defun evil-stop-and-cua-start ()
-    (interactive)
-    (evil-mode -1)
-    (cua-mode t))
-  :config
-  (setq cua-enable-cua-keys nil))
-
 (use-package hl-line
   :init
   (global-hl-line-mode t))
@@ -586,7 +575,7 @@
          ("C-c j h" . fzf-here))
   :init
   (evil-leader/set-key
-    "ja" 'fzf
+    "jf" 'fzf
     "jh" 'fzf-here
     "jo" 'fzf-git-files)
   :config
