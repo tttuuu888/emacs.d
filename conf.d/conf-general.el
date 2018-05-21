@@ -616,18 +616,20 @@
 
 (use-package ivy
   :ensure t
-  :bind (("C-x b" . ivy-switch-buffer)
+  :bind (("C-x b"    . ivy-switch-buffer)
+         :map minibuffer-inactive-mode-map
+         ("<escape>" . abort-recursive-edit)
+         :map minibuffer-local-map
+         ("<escape>" . abort-recursive-edit)
          :map ivy-minibuffer-map
-         ("TAB"   . eh-ivy-partial-or-done))
+         ("<escape>" . minibuffer-keyboard-quit)
+         ("M-j"      . ivy-partial-or-done)
+         ("TAB"      . ivy-alt-done))
   :init
   (evil-leader/set-key
     "b" 'ivy-switch-buffer)
   :config
   (ivy-mode t)
-  (defun eh-ivy-partial-or-done ()
-    (interactive)
-    (or (ivy-partial)
-        (ivy-alt-done)))
   (defun ivy-buffer-transformer-sk (str)
     (let* ((buf (get-buffer str))
            (mode (capitalize
