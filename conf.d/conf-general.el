@@ -585,6 +585,13 @@
     "jh" 'fzf-here
     "jo" 'fzf-git-files)
   :config
+  (require 'term)
+  (defun term-send-esc ()
+    "Send ESC in term mode."
+    (interactive)
+    (term-send-raw-string "\e"))
+  ;; to quit fzf with ESC key
+  (define-key term-raw-map "\e" 'term-send-esc)
   (defun fzf-here ()
     (interactive)
     (fzf/start default-directory))
