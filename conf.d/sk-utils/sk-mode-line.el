@@ -37,6 +37,12 @@
    '("%e"
      (:eval
       (let* ((seperator "｜")   ;; seperator - fullwidth vertical line
+             (evil-info
+              (if evil-mode
+                  (concat "["
+                          (upcase (substring (symbol-name evil-state) 0 1))
+                          "]")
+                ""))
              (buffer-info (concat " %* %I " current-input-method-title "%z: "))
              (buffer-name (propertize " %b " 'face 'bold))
              (mode-info (concat " " (format-mode-line mode-name) " "))
@@ -52,6 +58,7 @@
                                     (- (+ right right-fringe right-margin)
                                        (+ ,right-length 2)))))))
         (concat
+         evil-info
          buffer-info
          buffer-name
          seperator
