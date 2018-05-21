@@ -13,8 +13,8 @@
     "q"  'kill-buffer
     "Q"  'kill-emacs
     "w"  'save-buffer
+    "o"  'other-window
     "hb" 'describe-bindings
-    "xo" 'other-window
     "xe" 'eval-last-sexp)
   (evil-set-initial-state 'term-mode 'emacs)
   (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode")))
@@ -581,9 +581,9 @@
          ("C-c j h" . fzf-here))
   :init
   (evil-leader/set-key
-    "o"  'fzf-git-files
-    "jo" 'fzf
-    "jh" 'fzf-here)
+    "ja" 'fzf
+    "jh" 'fzf-here
+    "jo" 'fzf-git-files)
   :config
   (defun fzf-here ()
     (interactive)
