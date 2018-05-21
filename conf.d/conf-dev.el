@@ -3,10 +3,11 @@
 (use-package elec-pair
   :defer t
   :hook (prog-mode . electric-pair-mode)
-  :bind (:map evil-normal-state-map
-              ("<SPC> g d" . xref-find-definitions)
-              ("<SPC> ," . xref-pop-marker-stack)
-              ("<SPC> ]" . xref-find-reference-here)))
+  :config
+  (evil-define-key 'normal prog-mode-map
+    " gd" 'xref-find-definitions
+    " ," 'xref-pop-marker-stack
+    " ]" 'xref-find-reference-here))
 
 (use-package gdb-mi
   :defer t
@@ -30,13 +31,12 @@
 
 (use-package ggtags
   :ensure t
-  :hook ((c-mode-common asm-mode) . my-ggtags-hook)
+  :hook ((c-mode-common asm-mode) . ggtags-mode)
   :config
-  (defun my-ggtags-hook ()
-    (ggtags-mode)
-    (evil-local-set-key 'normal " gd" 'ggtags-find-tag-dwim)
-    (evil-local-set-key 'normal " gr" 'ggtags-find-reference)
-    (evil-local-set-key 'normal " gu" 'ggtags-update-tags)))
+  (evil-define-key 'normal ggtags-mode-map
+    " gd" 'ggtags-find-tag-dwim
+    " gr" 'ggtags-find-reference
+    " gu" 'ggtags-update-tags))
 
 (use-package rtags
   :disabled t
@@ -199,10 +199,14 @@
   :ensure t
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
   :config
+  (evil-define-key 'normal tern-mode-keymap
+    " gd" 'tern-find-definition)
+  (bind-keys :map tern-mode-keymap
+             ("M-]" . xref-find-reference-here)
+             ("M-[" . xref-pop-marker-stack))
   (defun my-tern-hook ()
     (tern-mode)
-    (yas-minor-mode)
-    (evil-local-set-key 'normal " gd" 'tern-find-definition)))
+    (yas-minor-mode)))
 
 (use-package go-mode
   :ensure t

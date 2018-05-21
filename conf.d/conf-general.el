@@ -10,10 +10,11 @@
     "1"  'delete-other-windows
     "2"  'split-window-below
     "3"  'split-window-right
+    "o"  'other-window
     "q"  'kill-buffer
     "Q"  'kill-emacs
+    "u"  'pop-to-mark-command
     "w"  'save-buffer
-    "o"  'other-window
     "hb" 'describe-bindings
     "xe" 'eval-last-sexp)
   (setq evil-leader/no-prefix-mode-rx
