@@ -16,8 +16,8 @@
     "o"  'other-window
     "hb" 'describe-bindings
     "xe" 'eval-last-sexp)
-  (evil-set-initial-state 'term-mode 'emacs)
-  (setq evil-leader/no-prefix-mode-rx '("magit-.*-mode" "gnus-.*-mode")))
+  (setq evil-leader/no-prefix-mode-rx
+        '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode")))
 
 (use-package evil
   :ensure t
@@ -26,7 +26,11 @@
               :map evil-visual-state-map
               ("<SPC> x r" . eval-region))
   :init
-  (evil-mode))
+  (evil-mode)
+  ;; for sane FZF work.
+  (evil-set-initial-state 'term-mode 'emacs)
+  ;; mouse disabled in evil
+  (defun evil-mouse-drag-track (start &optional opt) nil))
 
 (use-package sk-utils
   :commands (insert-date
