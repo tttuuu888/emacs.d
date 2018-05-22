@@ -24,6 +24,9 @@
   :ensure t
   :bind (:map evil-motion-state-map
               (";" . evil-ex)
+              :map evil-normal-state-map
+              ("<SPC> x r" . read-only-mode)
+              ("<SPC> x v" . evil-reload-file)
               :map evil-visual-state-map
               ("<SPC> x r" . eval-region))
   :init
@@ -32,6 +35,9 @@
   (evil-set-initial-state 'term-mode 'emacs)
   (add-hook 'evil-insert-state-entry-hook
             (lambda () (when buffer-read-only (read-only-mode -1))))
+  (defun evil-reload-file ()
+    (interactive)
+    (find-alternate-file (buffer-file-name)))
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil))
 
