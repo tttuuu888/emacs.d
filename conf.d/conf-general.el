@@ -30,6 +30,8 @@
   (evil-mode)
   ;; for sane FZF work.
   (evil-set-initial-state 'term-mode 'emacs)
+  (add-hook 'evil-insert-state-entry-hook
+            (lambda () (when buffer-read-only (read-only-mode -1))))
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil))
 
