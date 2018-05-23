@@ -5,10 +5,10 @@
   :hook (prog-mode . electric-pair-mode)
   :config
   (evil-define-key 'normal prog-mode-map
-    " gd" 'xref-find-definitions
-    " ," 'xref-pop-marker-stack
-    " [" 'xref-pop-marker-stack
-    " ]" 'xref-find-reference-here))
+    "gd" 'xref-find-definitions
+    "gp" 'xref-pop-marker-stack
+    "gr" 'xref-find-reference-here
+    "g[" 'xref-pop-marker-stack))
 
 (use-package xref
   :commands xref-find-reference-here
@@ -47,9 +47,10 @@
   :hook ((c-mode-common asm-mode) . ggtags-mode)
   :config
   (evil-define-key 'normal ggtags-mode-map
-    " gd" 'ggtags-find-tag-dwim
-    " gr" 'ggtags-find-reference
-    " gu" 'ggtags-update-tags))
+    "gd" 'ggtags-find-tag-dwim
+    "gp" 'xref-pop-marker-stack
+    "gr" 'ggtags-find-reference
+    "g[" 'xref-pop-marker-stack))
 
 (use-package rtags
   :disabled t
@@ -212,7 +213,10 @@
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
   :config
   (evil-define-key 'normal tern-mode-keymap
-    " gd" 'tern-find-definition)
+    "gd" 'tern-find-definition
+    "gp" 'tern-pop-find-definition
+    "gr" 'xref-find-reference-here
+    "g[" 'xref-pop-marker-stack)
   (bind-keys :map tern-mode-keymap
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack))

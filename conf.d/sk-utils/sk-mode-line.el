@@ -38,7 +38,7 @@
      (:eval
       (let* ((seperator "｜")   ;; seperator - fullwidth vertical line
              (evil-info
-              (if evil-mode
+              (if (and (featurep 'evil) evil-mode)
                   (concat " <"
                           (upcase (substring (symbol-name evil-state) 0 1))
                           ">")
