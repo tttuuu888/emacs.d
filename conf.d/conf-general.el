@@ -566,13 +566,13 @@
 
 (use-package fzf
   :ensure t
-  :bind (("C-c o"   . fzf-git-files)
-         ("C-c j o" . fzf)
-         ("C-c j h" . fzf-here))
+  :bind (("C-c j f" . fzf)
+         ("C-c j h" . fzf-here)
+         ("C-c j o" . fzf-git-files))
   :init
   (evil-leader/set-key
-    "jf" 'fzf
     "jh" 'fzf-here
+    "jf" 'fzf
     "jo" 'fzf-git-files)
   ;; for sane FZF work.
   (evil-set-initial-state 'term-mode 'emacs)
