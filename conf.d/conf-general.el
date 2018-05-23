@@ -31,8 +31,6 @@
               ("<SPC> x r" . eval-region))
   :init
   (evil-mode)
-  ;; for sane FZF work.
-  (evil-set-initial-state 'term-mode 'emacs)
   (add-hook 'evil-insert-state-entry-hook
             (lambda () (when buffer-read-only (read-only-mode -1))))
   (defun evil-reload-file ()
@@ -491,6 +489,8 @@
   :ensure t
   :bind ("<f12>" . magit-status)
   :config
+  (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
+  (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps)
   (setq magit-log-section-commit-count 5
         magit-completing-read-function #'ivy-completing-read))
 
@@ -574,6 +574,8 @@
     "jf" 'fzf
     "jh" 'fzf-here
     "jo" 'fzf-git-files)
+  ;; for sane FZF work.
+  (evil-set-initial-state 'term-mode 'emacs)
   :config
   (require 'term)
   (defun term-send-esc ()
