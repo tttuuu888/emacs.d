@@ -27,6 +27,12 @@
               :map evil-insert-state-map
               ("C-a" . move-beginning-of-line)
               ("C-e" . move-end-of-line)
+              :map evil-ex-completion-map
+              ("C-a" . move-beginning-of-line)
+              ("C-e" . move-end-of-line)
+              ("C-f" . forward-char)
+              ("C-b" . backward-char)
+              ("C-d" . delete-char)
               :map evil-normal-state-map
               ("<SPC> x r" . read-only-mode)
               ("<SPC> x v" . evil-reload-file)
