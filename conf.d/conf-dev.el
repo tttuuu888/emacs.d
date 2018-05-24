@@ -126,7 +126,17 @@
               ("C-c <right>" . paredit-forward-slurp-sexp)
               ("C-c <left>"  . paredit-forward-barf-sexp))
   :config
-  (evil-define-key 'normal paredit-mode-map " k" 'paredit-kill))
+  (defun evil-paredit-kill (&optional ARGUMENT)
+    (interactive)
+    (if (and (equal (point) (- (line-end-position) 1))
+             (equal evil-state 'normal))
+        (progn
+          (evil-append 1)
+          (paredit-kill ARGUMENT)
+          (evil-normal-state nil))
+      (paredit-kill ARGUMENT)))
+  (evil-define-key 'normal paredit-mode-map " k" 'evil-paredit-kill)
+  (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill))
 
 
 (use-package clojure-mode
