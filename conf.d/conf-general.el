@@ -23,21 +23,21 @@
 (use-package evil
   :ensure t
   :bind (:map evil-motion-state-map
-              (";"   . evil-ex)
-              :map evil-insert-state-map
-              ("C-a" . move-beginning-of-line)
-              ("C-e" . move-end-of-line)
-              :map evil-ex-completion-map
-              ("C-a" . move-beginning-of-line)
-              ("C-e" . move-end-of-line)
-              ("C-f" . forward-char)
-              ("C-b" . backward-char)
-              ("C-d" . delete-char)
-              :map evil-normal-state-map
-              ("<SPC> x r" . read-only-mode)
-              ("<SPC> x v" . evil-reload-file)
-              :map evil-visual-state-map
-              ("<SPC> x r" . eval-region))
+         (";"   . evil-ex)
+         :map evil-insert-state-map
+         ("C-a" . move-beginning-of-line)
+         ("C-e" . move-end-of-line)
+         :map evil-ex-completion-map
+         ("C-a" . move-beginning-of-line)
+         ("C-e" . move-end-of-line)
+         ("C-f" . forward-char)
+         ("C-b" . backward-char)
+         ("C-d" . delete-char)
+         :map evil-normal-state-map
+         ("<SPC> x r" . read-only-mode)
+         ("<SPC> x v" . evil-reload-file)
+         :map evil-visual-state-map
+         ("<SPC> x r" . eval-region))
   :init
   (evil-mode)
   (add-hook 'evil-insert-state-entry-hook
@@ -345,14 +345,14 @@
 (use-package org
   :mode ("\\.org\\'" . org-mode)
   :bind (:map org-mode-map
-              ("C-c a"   . org-agenda)
-              ("C-c b"   . org-iswitchb)
-              ("C-c l"   . org-store-link)
-              ("C-c r"   . org-remember)
-              ("C-c t"   . org-table-create)
-              ("C-c u"   . org-up-element)
-              ("C-c s e" . org-edit-src-code)
-              ("C-c s i" . org-insert-src-block))
+         ("C-c a"   . org-agenda)
+         ("C-c b"   . org-iswitchb)
+         ("C-c l"   . org-store-link)
+         ("C-c r"   . org-remember)
+         ("C-c t"   . org-table-create)
+         ("C-c u"   . org-up-element)
+         ("C-c s e" . org-edit-src-code)
+         ("C-c s i" . org-insert-src-block))
   :config
   (defun org-insert-src-block (src-code-type)
     "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
@@ -406,11 +406,11 @@
 (use-package dired
   :defer t
   :bind (:map  dired-mode-map
-               ("M-o"   . dired-omit-mode)
-               ("r"     . ora-dired-rsync)
-               ("^"     . dired-up-and-close-dir)
-               ("<DEL>" . dired-up-and-close-dir)
-               ("<RET>" . dired-visit-file-or-dir))
+         ("M-o"   . dired-omit-mode)
+         ("r"     . ora-dired-rsync)
+         ("^"     . dired-up-and-close-dir)
+         ("<DEL>" . dired-up-and-close-dir)
+         ("<RET>" . dired-visit-file-or-dir))
   :init
   (add-to-list 'magic-mode-alist
                '((lambda () (< large-file-warning-threshold (buffer-size)))
@@ -611,8 +611,8 @@
   :ensure t
   :mode ("\\.puml\\'" . plantuml-mode)
   :bind (:map plantuml-mode-map
-              ("TAB" . company-indent-or-complete-common)
-              ("C-c C-e" . plantuml-make-output))
+         ("TAB" . company-indent-or-complete-common)
+         ("C-c C-e" . plantuml-make-output))
   :config
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (defun plantuml-make-output ()
@@ -689,9 +689,9 @@
   :ensure t
   :after yasnippet
   :bind (:map yas-minor-mode-map
-              ("C-c /" . ivy-yasnippet)
-              :map evil-normal-state-map
-              ("<SPC> /" . ivy-yasnippet))
+         ("C-c /" . ivy-yasnippet)
+         :map evil-normal-state-map
+         ("<SPC> /" . ivy-yasnippet))
   :config
   (advice-add 'ivy-yasnippet :before #'(lambda () (evil-insert-state))))
 

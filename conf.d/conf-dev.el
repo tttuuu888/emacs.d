@@ -99,9 +99,9 @@
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
   :bind (:map python-mode-map
-              ("M-]" . xref-find-reference-here)
-              ("M-[" . xref-pop-marker-stack)
-              ("TAB" . company-indent-or-complete-common))
+         ("M-]" . xref-find-reference-here)
+         ("M-[" . xref-pop-marker-stack)
+         ("TAB" . company-indent-or-complete-common))
   :config
   (elpy-enable)
   (defun sk-toggle-python ()
@@ -123,8 +123,8 @@
   :ensure t
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
   :bind (:map paredit-mode-map
-              ("C-c <right>" . paredit-forward-slurp-sexp)
-              ("C-c <left>"  . paredit-forward-barf-sexp))
+         ("C-c <right>" . paredit-forward-slurp-sexp)
+         ("C-c <left>"  . paredit-forward-barf-sexp))
   :config
   (defun evil-paredit-kill (&optional ARGUMENT)
     (interactive)
@@ -137,7 +137,6 @@
       (paredit-kill ARGUMENT)))
   (evil-define-key 'normal paredit-mode-map " k" 'evil-paredit-kill)
   (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill))
-
 
 (use-package clojure-mode
   :ensure t
@@ -175,7 +174,7 @@
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
   :bind (:map web-mode-map
-              ("TAB" . company-indent-or-complete-common))
+         ("TAB" . company-indent-or-complete-common))
   :config
   (setq web-mode-style-padding 0
         web-mode-script-padding 0
@@ -238,8 +237,8 @@
   :ensure t
   :mode ("\\.go\\'" . go-mode)
   :bind (:map go-mode-map
-              ("M-." . godef-jump)
-              ("TAB" . company-indent-or-complete-common))
+         ("M-." . godef-jump)
+         ("TAB" . company-indent-or-complete-common))
   :config
   (setq gofmt-command "goimports")
   (defun my-go-code-hook ()
