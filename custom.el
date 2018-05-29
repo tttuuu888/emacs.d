@@ -19,7 +19,7 @@
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)
  '(org-agenda-files (quote ("~/Dropbox/org/")))
- '(org-babel-load-languages (quote ((sh . t) (css . t) (python . t) (emacs-lisp . t))))
+ '(org-babel-load-languages (quote ((shell . t) (css . t) (python . t) (emacs-lisp . t))))
  '(org-export-default-language "kr")
  '(org-export-headline-levels 2)
  '(org-export-time-stamp-file nil)

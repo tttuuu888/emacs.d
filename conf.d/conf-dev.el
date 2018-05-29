@@ -13,11 +13,8 @@
 (use-package xref
   :commands xref-find-reference-here
   :config
-  (defun my/do-then-quit (&rest args)
-    (let ((win (selected-window)))
-      (apply (car args) (cdr args))
-      (quit-window nil win)))
-  (advice-add #'xref-goto-xref :around #'my/do-then-quit)
+  (evil-define-key 'normal xref--xref-buffer-mode-map
+    (kbd "<return>") 'xref-quit-and-goto-xref)
   (defun xref-find-reference-here ()
     (interactive)
     (xref-find-references (thing-at-point 'symbol))))
