@@ -48,6 +48,16 @@
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil))
 
+(use-package evil-visualstar
+  :ensure t
+  :commands (evil-visualstar/begin-search-forward
+             evil-visualstar/begin-search-backward)
+  :init
+  (define-key evil-visual-state-map "/" 'evil-visualstar/begin-search-forward)
+  (define-key evil-visual-state-map "?" 'evil-visualstar/begin-search-backward)
+  :config
+  (global-evil-visualstar-mode))
+
 (use-package sk-utils
   :commands (insert-date
              insert-date-and-time
