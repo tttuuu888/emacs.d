@@ -22,9 +22,7 @@
 
 (use-package evil
   :ensure t
-  :bind (:map evil-motion-state-map
-         (";"   . evil-ex)
-         :map evil-insert-state-map
+  :bind (:map evil-insert-state-map
          ("C-a" . move-beginning-of-line)
          ("C-e" . move-end-of-line)
          :map evil-ex-completion-map
