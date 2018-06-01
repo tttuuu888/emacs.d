@@ -19,7 +19,12 @@
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)
  '(org-agenda-files (quote ("~/Dropbox/org/")))
- '(org-babel-load-languages (quote ((shell . t) (css . t) (python . t) (emacs-lisp . t))))
+ '(org-babel-load-languages
+   (quote
+    ((shell . t)
+     (css . t)
+     (python . t)
+     (emacs-lisp . t))))
  '(org-export-default-language "kr")
  '(org-export-headline-levels 2)
  '(org-export-time-stamp-file nil)
@@ -52,4 +57,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(line-number-current-line ((t (:inherit hl-line)))))

@@ -58,6 +58,11 @@
   :config
   (global-evil-visualstar-mode))
 
+(use-package display-line-numbers
+  :hook (prog-mode . display-line-numbers-mode)
+  :config
+  (setq display-line-numbers-type 'relative))
+
 (use-package sk-utils
   :commands (insert-date
              insert-date-and-time
