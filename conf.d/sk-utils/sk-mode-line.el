@@ -43,7 +43,7 @@
                           (upcase (substring (symbol-name evil-state) 0 1))
                           ">")
                 ""))
-             (buffer-info (concat " %* %I " current-input-method-title "%z: "))
+             (buffer-info (concat " %* %I " current-input-method-title))
              (buffer-name (propertize " %b " 'face 'bold))
              (mode-info (concat " " (format-mode-line mode-name) " "))
              (vc-info (format-mode-line '(vc-mode vc-mode)))
