@@ -14,7 +14,8 @@
   :commands xref-find-reference-here
   :config
   (evil-define-key 'normal xref--xref-buffer-mode-map
-    (kbd "<return>") 'xref-quit-and-goto-xref)
+    (kbd "<return>") 'xref-quit-and-goto-xref
+    (kbd "RET") 'xref-quit-and-goto-xref)
   (defun xref-find-reference-here ()
     (interactive)
     (xref-find-references (thing-at-point 'symbol))))
@@ -224,6 +225,7 @@
     "gr" 'xref-find-reference-here
     "g[" 'xref-pop-marker-stack)
   (bind-keys :map tern-mode-keymap
+             ("M-," . other-window)
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack))
   (defun my-tern-hook ()
@@ -237,6 +239,11 @@
          ("M-." . godef-jump)
          ("TAB" . company-indent-or-complete-common))
   :config
+  (evil-define-key 'normal go-mode-map
+    "gd" 'godef-jump
+    "gp" 'xref-pop-marker-stack
+    "gr" 'xref-find-reference-here
+    "g[" 'xref-pop-marker-stack)
   (setq gofmt-command "goimports")
   (defun my-go-code-hook ()
     (make-local-variable 'before-save-hook)
