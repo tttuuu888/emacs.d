@@ -229,6 +229,7 @@
              ("M-]" . xref-find-reference-here)
              ("M-[" . xref-pop-marker-stack))
   (defun my-tern-hook ()
+    (evil-normalize-keymaps)
     (tern-mode)
     (yas-minor-mode)))
 
@@ -246,6 +247,7 @@
     "g[" 'xref-pop-marker-stack)
   (setq gofmt-command "goimports")
   (defun my-go-code-hook ()
+    (evil-normalize-keymaps)
     (make-local-variable 'before-save-hook)
     (add-hook 'before-save-hook 'gofmt-before-save)
     (setq-local compile-command
