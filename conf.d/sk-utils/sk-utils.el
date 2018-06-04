@@ -189,16 +189,6 @@
 (defun tmux-running-p ()
   (zerop (process-file "tmux" nil nil nil "has-session")))
 
-(defun tmux-vi-at-point ()
-  (interactive)
-  (let* ((target (if (equal major-mode 'dired-mode)
-                     (dired-get-filename nil t)
-                   buffer-file-name))
-         (arg (if target target "")))
-    (if (tmux-running-p)
-        (call-process "tmux" nil nil nil "new-window" "vi" arg)
-      (message "Tmux is not running!"))))
-
 (defun tmux-new-pane-here ()
   (interactive)
   (if (tmux-running-p)
