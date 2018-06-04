@@ -4,7 +4,7 @@
 
 ;; Author: SeungKi Kim <tttuuu888@gmail.com>
 ;; URL: https://github.com/tttuuu888/.emacs.d
-;; Version: 0.2.0
+;; Version: 0.3.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -43,8 +43,9 @@
                           (upcase (substring (symbol-name evil-state) 0 1))
                           ">")
                 ""))
-             (buffer-info (concat " %* %I " current-input-method-title))
-             (buffer-name (propertize " %b " 'face 'bold))
+             (buffer-info (concat " %I" current-input-method-title))
+             (buffer-name (propertize " %b" 'face 'bold))
+             (buffer-edited (if (buffer-modified-p) "[+] " " "))
              (mode-info (concat " " (format-mode-line mode-name) " "))
              (vc-info (format-mode-line '(vc-mode vc-mode)))
              (line-info (format-mode-line "%4l :%3c "))
@@ -61,6 +62,7 @@
          evil-info
          buffer-info
          buffer-name
+         buffer-edited
          seperator
          mode-info
          seperator
