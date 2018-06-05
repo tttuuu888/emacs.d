@@ -50,8 +50,8 @@
              (mode-info (propertize
                          (concat " " (format-mode-line mode-name) " ")
                          'face 'mode-line-inactive))
-             (line-info (format-mode-line "%4l :%3c "))
-             (pos-info (format-mode-line " %p%%"))
+             (line-info (format-mode-line " %l :%3c "))
+             (pos-info (format-mode-line " %p%% "))
              (right-info (concat line-info seperator pos-info))
              (right-length (length right-info))
              (center-fill (propertize
@@ -60,7 +60,7 @@
                            'display
                            `((space :align-to
                                     (- (+ right right-fringe right-margin)
-                                       (+ ,right-length 2)))))))
+                                       ,right-length))))))
         (concat
          evil-info
          buffer-info
