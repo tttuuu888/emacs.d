@@ -15,17 +15,6 @@
      (add-hook hook ,function)))
 
 
-;; use-package setting
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(setq use-package-enable-imenu-support t)
-(require 'use-package)
-
-;; mode line setting
-(require 'sk-mode-line)
-(sk-mode-line)
-
 ;; hangul 3bulsik
 (setq default-korean-keyboard "3")
 
@@ -63,6 +52,12 @@
 (advice-add 'package-list-packages :before
             (lambda (&rest args) (package-initialize)))
 
+;; use-package setting
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-enable-imenu-support t)
 
 (require 'conf-general)
 (require 'conf-dev)

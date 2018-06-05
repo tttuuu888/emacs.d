@@ -1,5 +1,37 @@
 ;;; General settings
 
+(use-package sk-mode-line
+  :config
+  (sk-mode-line))
+
+(use-package sk-utils
+  :commands (insert-date
+             insert-date-and-time
+             nuke-all-buffers
+             hide-ctrl-M
+             izero-insert
+             idef-insert
+             move-line
+             buffer-save-or-load
+             sk-create-ch-file
+             sk-create-c-file
+             sk-create-h-file
+             sk-clang-complete-make
+             sk-byte-recompile-conf-dir
+             tmux-new-pane-here
+             tmux-vi-at-point)
+  :bind (("<f5>"       . sk-make)
+         ("C-<f5>"     . sk-rebuild)
+         ("C-M-,"      . transpose-windows)
+         ("M-p"        . (lambda () (interactive) (line-move -8)))
+         ("M-n"        . (lambda () (interactive) (line-move  8)))
+         ("M-S-<up>"   . (lambda () (interactive) (move-line -1)))
+         ("M-S-<down>" . (lambda () (interactive) (move-line  1)))
+         ("<f7>"       . (lambda () (interactive) (buffer-save-or-load 7 t)))
+         ("<f8>"       . (lambda () (interactive) (buffer-save-or-load 8 t)))
+         ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
+         ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
+
 (use-package evil-leader
   :ensure t
   :init
@@ -61,34 +93,6 @@
   :config
   (setq display-line-numbers-type 'relative
         display-line-numbers-current-absolute nil))
-
-(use-package sk-utils
-  :commands (insert-date
-             insert-date-and-time
-             nuke-all-buffers
-             hide-ctrl-M
-             izero-insert
-             idef-insert
-             move-line
-             buffer-save-or-load
-             sk-create-ch-file
-             sk-create-c-file
-             sk-create-h-file
-             sk-clang-complete-make
-             sk-byte-recompile-conf-dir
-             tmux-new-pane-here
-             tmux-vi-at-point)
-  :bind (("<f5>"       . sk-make)
-         ("C-<f5>"     . sk-rebuild)
-         ("C-M-,"      . transpose-windows)
-         ("M-p"        . (lambda () (interactive) (line-move -8)))
-         ("M-n"        . (lambda () (interactive) (line-move  8)))
-         ("M-S-<up>"   . (lambda () (interactive) (move-line -1)))
-         ("M-S-<down>" . (lambda () (interactive) (move-line  1)))
-         ("<f7>"       . (lambda () (interactive) (buffer-save-or-load 7 t)))
-         ("<f8>"       . (lambda () (interactive) (buffer-save-or-load 8 t)))
-         ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
-         ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
 
 (use-package bind-key
   :ensure t
