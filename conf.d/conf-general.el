@@ -91,7 +91,8 @@
 (use-package display-line-numbers
   :hook (prog-mode . display-line-numbers-mode)
   :config
-  (setq display-line-numbers-type 'relative
+  (setq display-line-numbers-width 0
+        display-line-numbers-type 'relative
         display-line-numbers-current-absolute nil))
 
 (use-package bind-key
