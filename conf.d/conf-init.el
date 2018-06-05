@@ -12,7 +12,8 @@
 (setq default-korean-keyboard "3")
 
 ;; Korean font
-(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+(when window-system
+    (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
 
 ;; Default color setting
 (let ((fore-color (if window-system "black"  "light gray"))
