@@ -1,6 +1,6 @@
 ;;; sk-mode-line.el --- Simple modeline setting.
 
-;; Copyright (C) 2017 SeungKi Kim
+;; Copyright (C) 2017-2018 SeungKi Kim
 
 ;; Author: SeungKi Kim <tttuuu888@gmail.com>
 ;; URL: https://github.com/tttuuu888/.emacs.d
@@ -23,37 +23,40 @@
 
 (defun sk-mode-line ()
   (set-face-attribute 'mode-line nil
-                      :foreground "black"
-                      :background "gray"
-                      :overline "dark gray"
-                      :box (list :color "dark gray" :line-width -1))
+                      :foreground "gray2"
+                      :background "dark sea green"
+                      :overline (face-background 'default)
+                      :box nil)
   (set-face-attribute 'mode-line-inactive nil
-                      :foreground "grey55"
-                      :background "black"
-                      :overline "dark gray"
-                      :box (list :color "dark gray" :line-width -1))
+                      :foreground "gray55"
+                      :background (face-background 'default)
+                      :overline (face-background 'default)
+                      :box nil)
   (setq-default
    mode-line-format
    '("%e"
      (:eval
-      (let* ((seperator "｜")   ;; seperator - fullwidth vertical line
-             (evil-info
-              (if (and (featurep 'evil) evil-mode)
-                  (concat " <"
-                          (upcase (substring (symbol-name evil-state) 0 1))
-                          ">")
-                ""))
-             (buffer-info (concat " %I" current-input-method-title))
-             (buffer-name (propertize " %b" 'face 'bold))
-             (buffer-edited (if (buffer-modified-p) "[+] " " "))
-             (mode-info (concat " " (format-mode-line mode-name) " "))
-             (vc-info (format-mode-line '(vc-mode vc-mode)))
+      (let* ((seperator "｜") ;; seperator - fullwidth vertical line
+             (evil-info (if (and (featurep 'evil) evil-mode)
+                            (concat " " (upcase (symbol-name evil-state)))
+                          ""))
+             (buffer-info (concat " %* %I " current-input-method-title))
+             (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
+             (vc-info (if vc-mode
+                          (concat seperator
+                                  (format-mode-line '(vc-mode vc-mode))
+                                  " ")
+                        ""))
+             (mode-info (propertize
+                         (concat " " (format-mode-line mode-name) " ")
+                         'face 'mode-line-inactive))
              (line-info (format-mode-line "%4l :%3c "))
              (pos-info (format-mode-line " %p%%"))
              (right-info (concat line-info seperator pos-info))
              (right-length (length right-info))
              (center-fill (propertize
                            " "
+                           'face 'mode-line-inactive
                            'display
                            `((space :align-to
                                     (- (+ right right-fringe right-margin)
@@ -62,11 +65,8 @@
          evil-info
          buffer-info
          buffer-name
-         buffer-edited
-         seperator
-         mode-info
-         seperator
          vc-info
+         mode-info
          center-fill
          right-info))))))
 

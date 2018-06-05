@@ -5,25 +5,21 @@
 ;; User Info
 (let ((name (getenv "USER_FULL_NAME"))
       (mail (getenv "USER_MAIL_ADDRESS")))
-  (if name (setq user-full-name name))
-  (if mail (setq user-mail-address mail)))
+  (when name (setq user-full-name name))
+  (when mail (setq user-mail-address mail)))
 
-
-;;; Macros
-(defmacro add-many-hook (hooks function)
-  `(dolist (hook ,hooks)
-     (add-hook hook ,function)))
-
-
-;; hangul 3bulsik
+;; Hangul 3bulsik
 (setq default-korean-keyboard "3")
 
-(when window-system
-  ;; Korean font
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-  ;; background-color : Ivory 2
-  (setq default-frame-alist
-        (append default-frame-alist '((background-color . "#EEEEE0")))))
+;; Korean font
+(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+
+;; Default color setting
+(let ((fore-color (if window-system "black"  "light gray"))
+      (back-color (if window-system "ivory2" "gray23")))
+  (set-face-attribute 'default nil
+                      :background back-color
+                      :foreground fore-color))
 
 (when (and windowsp enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
