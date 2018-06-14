@@ -678,6 +678,7 @@
   (evil-leader/set-key
     "b" 'ivy-switch-buffer)
   :config
+  (require 'subr-x)
   (ivy-mode t)
   (defun ivy-buffer-transformer-sk (str)
     (let* ((buf (get-buffer str))
