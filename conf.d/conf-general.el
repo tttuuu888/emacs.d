@@ -372,6 +372,7 @@
          ("C-c s e" . org-edit-src-code)
          ("C-c s i" . org-insert-src-block))
   :config
+  (evil-define-key 'motion org-mode-map (kbd "TAB") 'org-cycle) ; for terminal
   (defun org-insert-src-block (src-code-type)
     "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
     (interactive
