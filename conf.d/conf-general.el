@@ -90,7 +90,7 @@
 (use-package display-line-numbers
   :hook (prog-mode . display-line-numbers-mode)
   :config
-  (setq-default display-line-numbers-width 2
+  (setq-default display-line-numbers-width 3
                 display-line-numbers-type 'relative
                 display-line-numbers-current-absolute nil))
 
