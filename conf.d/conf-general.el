@@ -155,7 +155,10 @@
   :init
   (global-company-mode 1)
   (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2))
+        company-minimum-prefix-length 2)
+  :config
+  (evil-define-key 'insert company-mode-map
+    (kbd "TAB") 'company-indent-or-complete-common))
 
 (use-package company-irony
   :ensure t
