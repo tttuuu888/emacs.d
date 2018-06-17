@@ -62,51 +62,6 @@
          (call-process "make" nil nil nil "-C" dir "clean")
          (compile (concat "export LANG=en_US && make -j8 -C " dir))))))
 
-
-;; making .c .h files
-(defun make-author-info (file-name)
-  (concat "/**\n"
-          " * " file-name "\n"
-          " * Created by " (user-full-name) "\n"
-          " * " (format-time-string "%Y-%m-%d") "\n"
-          " */\n"))
-
-(defun c-file-shape (file-name)
-  (concat (make-author-info (concat file-name ".c"))
-          "\n"
-          "/* Static constants */\n"
-          "/* Static variables */\n"
-          "/* Static methods */\n"
-          "/* Public methods */\n"))
-
-(defun c-header-shape (file-name)
-  (concat (make-author-info (concat file-name ".h"))
-          "#ifndef _" (upcase file-name) "_H_\n"
-          "#define _" (upcase file-name) "_H_\n"
-          "/* Public constants */\n"
-          "/* Public variables */\n"
-          "/* Public methods */\n\n\n"
-          "#endif  /* _" (upcase file-name) "_H_ */"))
-
-(defun c-header-insert (file-name)
-  (insert (c-header-shape file-name)))
-
-(defun c-file-insert (file-name)
-  (insert (c-file-shape file-name)))
-
-(defun sk-create-h-file (file-name)
-  (interactive "sEnter File name : ")
-  (append-to-file (c-header-shape file-name) nil (concat file-name ".h")))
-
-(defun sk-create-c-file (file-name)
-  (interactive "sEnter File name : ")
-  (append-to-file (c-file-shape file-name) nil (concat file-name ".c")))
-
-(defun sk-create-ch-file (file-name)
-  (interactive "sEnter File name : ")
-  (sk-create-h-file file-name)
-  (sk-create-c-file file-name))
-
 (defun sk-clang-complete-make ()
   (interactive)
   (let ((file "./.clang_complete")

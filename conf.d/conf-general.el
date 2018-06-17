@@ -13,9 +13,6 @@
              idef-insert
              move-line
              buffer-save-or-load
-             sk-create-ch-file
-             sk-create-c-file
-             sk-create-h-file
              sk-clang-complete-make
              sk-byte-recompile-conf-dir
              tmux-new-pane-here)

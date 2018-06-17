@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: c source template
+# key: chead
+# --
+/**
+ * `(buffer-name)`
+ * Created by `user-full-name`
+ * `(format-time-string "%Y-%m-%d")`
+ */
+/* Static constants */
+/* Static variables */
+/* Static methods */
+/* Public methods */
