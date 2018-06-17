@@ -94,8 +94,7 @@
 (use-package bind-key
   :ensure t
   :init
-  (bind-keys ("C-z"              . nil)
-             ("<mouse-1>"        . nil)
+  (bind-keys ("<mouse-1>"        . nil)
              ("<mouse-3>"        . nil)
              ("<down-mouse-1>"   . nil)
              ("<down-mouse-3>"   . nil)
