@@ -18,12 +18,14 @@
 ;; Default color setting
 (let ((default-fore-color (if window-system "Black"     "LightGray"))
       (default-back-color (if window-system "Ivory2"    "Gray23"))
+      (linenum-fore-color (if window-system "Gray50"    "Khaki4"))
       (linenum-back-color (if window-system "Cornsilk2" "Gray26")))
   (set-face-attribute 'default nil
                       :background default-back-color
                       :foreground default-fore-color)
   (set-face-attribute 'line-number nil
-                      :background linenum-back-color))
+                      :background linenum-back-color
+                      :foreground linenum-fore-color))
 
 (when (and windowsp enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
