@@ -13,7 +13,7 @@
 
 ;; Korean font
 (when window-system
-    (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding")))
+    (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
 
 ;; Default color setting
 (let ((fore-color (if window-system "black"  "light gray"))
