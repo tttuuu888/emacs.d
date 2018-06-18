@@ -16,11 +16,14 @@
     (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
 
 ;; Default color setting
-(let ((fore-color (if window-system "black"  "light gray"))
-      (back-color (if window-system "ivory2" "gray23")))
+(let ((default-fore-color (if window-system "Black"     "LightGray"))
+      (default-back-color (if window-system "Ivory2"    "Gray23"))
+      (linenum-back-color (if window-system "Cornsilk2" "Gray26")))
   (set-face-attribute 'default nil
-                      :background back-color
-                      :foreground fore-color))
+                      :background default-back-color
+                      :foreground default-fore-color)
+  (set-face-attribute 'line-number nil
+                      :background linenum-back-color))
 
 (when (and windowsp enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
