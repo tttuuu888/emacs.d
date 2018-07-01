@@ -72,7 +72,13 @@
     (interactive)
     (find-alternate-file (buffer-file-name)))
   ;; mouse disabled in evil
-  (defun evil-mouse-drag-track (start &optional opt) nil))
+  (defun evil-mouse-drag-track (start &optional opt) nil)
+  :config
+  (defun isearch-input-method-restore (&rest args)
+    (when current-input-method
+      (deactivate-input-method)))
+  (advice-add #'isearch-forward :after #'isearch-input-method-restore)
+  (advice-add #'isearch-backward :after #'isearch-input-method-restore))
 
 (use-package evil-visualstar
   :ensure t
