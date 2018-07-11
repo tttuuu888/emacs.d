@@ -301,8 +301,11 @@
         projectile-require-project-root nil
         projectile-completion-system 'ivy)
   :config
-  (defalias 'my-add-project 'projectile-add-known-project)
-  (defalias 'my-remove-project 'projectile-remove-known-project))
+  (defalias 'my-remove-project 'projectile-remove-known-project)
+  (defun my-add-project ()
+    (interactive)
+    (call-interactively 'projectile-add-known-project)
+    (projectile-merge-known-projects)))
 
 
 (use-package ibuffer
