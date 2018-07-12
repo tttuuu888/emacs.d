@@ -48,7 +48,10 @@
     "gd" 'ggtags-find-tag-dwim
     "gp" 'xref-pop-marker-stack
     "gr" 'ggtags-find-reference
-    "g[" 'xref-pop-marker-stack))
+    "g[" 'xref-pop-marker-stack)
+  (evil-define-key 'motion ggtags-navigation-mode-map
+    (kbd "<return>") 'ggtags-navigation-mode-done
+    (kbd "RET") 'ggtags-navigation-mode-done))
 
 (use-package rtags
   :disabled t
