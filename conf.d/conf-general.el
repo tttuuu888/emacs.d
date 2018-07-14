@@ -626,12 +626,12 @@
   :ensure t
   :bind (("C-c j f" . fzf)
          ("C-c j h" . fzf-here)
-         ("C-c j o" . fzf-git-files))
+         ("C-c o"   . fzf-git-files))
   :init
   (evil-leader/set-key
     "jh" 'fzf-here
-    "jf" 'fzf
-    "jo" 'fzf-git-files)
+    "jo" 'fzf
+    "o"  'fzf-git-files)
   ;; for sane FZF work.
   (evil-set-initial-state 'term-mode 'emacs)
   :config
