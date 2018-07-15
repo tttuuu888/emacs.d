@@ -50,7 +50,6 @@
     "gr" 'ggtags-find-reference
     "g[" 'xref-pop-marker-stack)
   (evil-define-key 'motion ggtags-navigation-mode-map
-    (kbd "<return>") 'ggtags-navigation-mode-done
     (kbd "RET") 'ggtags-navigation-mode-done))
 
 (use-package rtags
@@ -194,7 +193,7 @@
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
   :bind (:map js2-mode-map
-              ("TAB" . company-indent-or-complete-common))
+         ("TAB" . company-indent-or-complete-common))
   :config
   (setq js2-basic-offset 2
         js2-strict-missing-semi-warning nil)
