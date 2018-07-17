@@ -444,7 +444,7 @@
                  . fundamental-mode))
   :config
   (require 'dired-x)
-
+  (add-to-list 'evil-emacs-state-modes 'dired-mode)
   ;; win32 hiding gid, uid in dired mode
   (when windowsp
     (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity))
@@ -624,7 +624,7 @@
 
 (use-package fzf
   :ensure t
-  :bind (("C-c j f" . fzf)
+  :bind (("C-c j o" . fzf)
          ("C-c j h" . fzf-here)
          ("C-c o"   . fzf-git-files))
   :init
