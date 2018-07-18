@@ -434,6 +434,8 @@
   :defer t
   :bind (:map  dired-mode-map
          ("M-o"   . dired-omit-mode)
+         ("j"     . dired-next-line)
+         ("k"     . dired-previous-line)
          ("r"     . ora-dired-rsync)
          ("^"     . dired-up-and-close-dir)
          ("<DEL>" . dired-up-and-close-dir)
