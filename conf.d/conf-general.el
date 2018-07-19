@@ -74,6 +74,10 @@
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil)
   :config
+  (evil-set-initial-state 'dired-mode 'emacs)
+  (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'shell-mode 'emacs)
+  (evil-set-initial-state 'eshell-mode 'emacs)
   (defun isearch-input-method-restore (&rest args)
     (when current-input-method
       (deactivate-input-method)))
@@ -446,7 +450,6 @@
                  . fundamental-mode))
   :config
   (require 'dired-x)
-  (add-to-list 'evil-emacs-state-modes 'dired-mode)
   ;; win32 hiding gid, uid in dired mode
   (when windowsp
     (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity))
@@ -634,8 +637,6 @@
     "jh" 'fzf-here
     "jo" 'fzf
     "o"  'fzf-git-files)
-  ;; for sane FZF work.
-  (evil-set-initial-state 'term-mode 'emacs)
   :config
   (require 'term)
   (defun term-send-esc ()
