@@ -140,7 +140,6 @@
       (execute-kbd-macro (kbd "<RET>"))))
   (defun my-eshell-setup ()
     (progn
-      (evil-local-mode -1)
       (setenv "TERM" "screen-256color")
       (setq-local company-minimum-prefix-length 3)
       (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)))
@@ -151,9 +150,7 @@
   :config
   (bind-key "C-c C-l" 'helm-comint-input-ring shell-mode-map)
   (defun my-shell-setup ()
-    (progn
-      (evil-local-mode -1)
-      (setq-local company-minimum-prefix-length 3)))
+    (setq-local company-minimum-prefix-length 3))
   (add-hook 'shell-mode-hook 'my-shell-setup))
 
 (use-package company
