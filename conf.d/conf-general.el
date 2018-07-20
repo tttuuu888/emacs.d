@@ -680,7 +680,7 @@
          ("<escape>" . abort-recursive-edit)
          :map ivy-minibuffer-map
          ("<escape>" . minibuffer-keyboard-quit)
-         ("M-j"      . ivy-partial-or-done)
+         ("C-j"      . ivy-partial-or-done)
          ("TAB"      . ivy-alt-done))
   :init
   (evil-leader/set-key
