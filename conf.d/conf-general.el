@@ -44,7 +44,10 @@
     "u"  'pop-to-mark-command
     "w"  'save-buffer
     "hb" 'describe-bindings
-    "xe" 'eval-last-sexp)
+    "hk" 'describe-key
+    "xe" 'eval-last-sexp
+    "xr" 'read-only-mode
+    "xv" 'evil-reload-file)
   (setq evil-leader/no-prefix-mode-rx
         '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode")))
 
@@ -55,13 +58,8 @@
          ("C-e" . move-end-of-line)
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
-         ("C-e" . move-end-of-line)
-         ("C-f" . forward-char)
          ("C-b" . backward-char)
          ("C-d" . delete-char)
-         :map evil-normal-state-map
-         ("<SPC> x r" . read-only-mode)
-         ("<SPC> x v" . evil-reload-file)
          :map evil-visual-state-map
          ("<SPC> x r" . eval-region))
   :init
@@ -74,9 +72,9 @@
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil)
   :config
-  (evil-set-initial-state 'dired-mode 'emacs)
-  (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'shell-mode 'emacs)
+  (evil-set-initial-state 'term-mode   'emacs)
+  (evil-set-initial-state 'dired-mode  'emacs)
+  (evil-set-initial-state 'shell-mode  'emacs)
   (evil-set-initial-state 'eshell-mode 'emacs)
   (defun isearch-input-method-restore (&rest args)
     (when current-input-method
@@ -774,8 +772,7 @@
     "d"     'counsel-find-file
     "f"     'counsel-find-file
     "hv"    'counsel-describe-variable
-    "hf"    'counsel-describe-function
-    "hk"    'describe-key))
+    "hf"    'counsel-describe-function))
 
 (use-package which-key
   :ensure t
