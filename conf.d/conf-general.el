@@ -226,12 +226,23 @@
   :config
   (add-to-list 'company-backends 'company-go))
 
+(use-package undo-tree
+  :config
+  (require 'redo+))
+
 (use-package redo+
-  :disabled t
   :bind (("C-." . redo+-redo)
          ("M-_" . redo+-redo)
          ("C-_" . redo+-undo)
-         ("C-/" . redo+-undo)))
+         ("C-/" . redo+-undo)
+         :map evil-normal-state-map
+         ("u"   . redo+-undo)
+         ("C-r" . redo+-redo))
+  :config
+  (global-undo-tree-mode -1)
+  (defun global-undo-tree-mode (&optional ARG) t)
+  (defalias 'undo-tree-undo 'redo+-undo)
+  (defalias 'undo-tree-redo 'redo+-redo))
 
 (use-package wgrep
   :ensure t
