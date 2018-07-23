@@ -84,11 +84,11 @@
 
 (use-package evil-visualstar
   :ensure t
-  :commands (evil-visualstar/begin-search-forward
-             evil-visualstar/begin-search-backward)
-  :init
-  (define-key evil-visual-state-map "/" 'evil-visualstar/begin-search-forward)
-  (define-key evil-visual-state-map "?" 'evil-visualstar/begin-search-backward)
+  :bind (:map evil-visual-state-map
+         ("/" . evil-visualstar/begin-search-forward)
+         ("?" . evil-visualstar/begin-search-backward)
+         ("n" . evil-visualstar/begin-search-forward)
+         ("N" . evil-visualstar/begin-search-backward))
   :config
   (global-evil-visualstar-mode))
 
