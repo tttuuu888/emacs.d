@@ -75,12 +75,7 @@
   (evil-set-initial-state 'term-mode   'emacs)
   (evil-set-initial-state 'dired-mode  'emacs)
   (evil-set-initial-state 'shell-mode  'emacs)
-  (evil-set-initial-state 'eshell-mode 'emacs)
-  (defun isearch-input-method-restore (&rest args)
-    (when current-input-method
-      (deactivate-input-method)))
-  (advice-add #'isearch-forward :after #'isearch-input-method-restore)
-  (advice-add #'isearch-backward :after #'isearch-input-method-restore))
+  (evil-set-initial-state 'eshell-mode 'emacs))
 
 (use-package evil-visualstar
   :ensure t
