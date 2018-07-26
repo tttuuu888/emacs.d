@@ -29,7 +29,7 @@
                       :box nil)
   (set-face-attribute 'mode-line-inactive nil
                       :foreground "Gray55"
-                      :background (face-background 'default)
+                      ;; :background (face-background 'default)
                       :overline (face-background 'default)
                       :box nil)
   (setq-default
