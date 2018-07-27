@@ -49,7 +49,7 @@
     "xr" 'read-only-mode
     "xv" 'evil-reload-file)
   (setq evil-leader/no-prefix-mode-rx
-        '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode")))
+        '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
 
 (use-package evil
   :ensure t
