@@ -88,10 +88,10 @@
   (global-evil-visualstar-mode))
 
 (use-package display-line-numbers
-  :hook (prog-mode . display-line-numbers-mode)
+  :hook ((find-file prog-mode) . display-line-numbers-mode)
   :config
-  (setq-default display-line-numbers-width 3
-                display-line-numbers-type 'relative
+  (setq-default display-line-numbers-width 2
+                display-line-numbers-type 'visual
                 display-line-numbers-current-absolute nil))
 
 (use-package bind-key
