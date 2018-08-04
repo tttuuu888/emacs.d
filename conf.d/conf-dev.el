@@ -46,9 +46,7 @@
   :config
   (evil-define-key 'normal ggtags-mode-map
     "gd" 'ggtags-find-tag-dwim
-    "gp" 'xref-pop-marker-stack
-    "gr" 'ggtags-find-reference
-    "g[" 'xref-pop-marker-stack)
+    "gr" 'ggtags-find-reference)
   (evil-define-key 'motion ggtags-navigation-mode-map
     (kbd "RET") 'ggtags-navigation-mode-done))
 
@@ -103,6 +101,7 @@
          ("M-[" . xref-pop-marker-stack)
          ("TAB" . company-indent-or-complete-common))
   :config
+  (evil-set-initial-state 'inferior-python-mode 'emacs)
   (elpy-enable)
   (defun sk-toggle-python ()
     "Toggle between Python2 and Python3"
@@ -136,17 +135,40 @@
           (evil-normal-state nil))
       (paredit-kill ARGUMENT)))
   (evil-define-key 'normal paredit-mode-map " k" 'evil-paredit-kill)
-  (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill))
+  (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill)
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode
+    "eb" 'eval-buffer
+    "ee" 'eval-last-sexp
+    "er" 'eval-region)
+  (evil-leader/set-key-for-mode 'lisp-interaction-mode
+    "eb" 'eval-buffer
+    "ee" 'eval-last-sexp
+    "er" 'eval-region))
 
 (use-package clojure-mode
   :ensure t
-  :mode ("\\.clj\\'" . clojure-mode))
+  :mode ("\\.clj\\'" . clojure-mode)
+  :config
+  (evil-define-key 'normal clojure-mode-map
+    "gd" 'cider-find-dwim
+    "gp" 'cider-pop-back)
+  (evil-leader/set-key-for-mode 'clojure-mode
+    "eb" 'cider-eval-buffer
+    "ee" 'cider-eval-last-sexp
+    "er" 'cider-eval-region
+    "ex" 'cider-eval-last-sexp-and-replace))
 
 (use-package cider
   :ensure t
   :commands cider-jack-in
   :config
-  (setq cider-inject-dependencies-at-jack-in nil))
+  (evil-set-initial-state 'cider-repl-mode       'emacs)
+  (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
+  (setq cider-inject-dependencies-at-jack-in nil)
+  (unbind-key "M-," cider-mode-map)
+  (unbind-key "M-," cider-repl-mode-map)
+  (bind-key "M-[" 'cider-pop-back cider-mode-map)
+  (bind-key "M-[" 'cider-pop-back cider-repl-mode-map))
 
 (use-package clj-refactor
   :disabled t
@@ -166,7 +188,9 @@
   :ensure t
   :commands geiser run-geiser
   :init
-  (setq geiser-active-implementations '(chicken guile)))
+  (setq geiser-active-implementations '(chicken guile))
+  :config
+  (unbind-key "M-," geiser-mode-map))
 
 (use-package web-mode
   :ensure t

@@ -45,7 +45,6 @@
     "w"  'save-buffer
     "hb" 'describe-bindings
     "hk" 'describe-key
-    "xe" 'eval-last-sexp
     "xr" 'read-only-mode
     "xv" 'evil-reload-file)
   (setq evil-leader/no-prefix-mode-rx
@@ -59,9 +58,7 @@
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
          ("C-b" . backward-char)
-         ("C-d" . delete-char)
-         :map evil-visual-state-map
-         ("<SPC> x r" . eval-region))
+         ("C-d" . delete-char))
   :init
   (evil-mode)
   (add-hook 'evil-insert-state-entry-hook
@@ -72,11 +69,10 @@
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil)
   :config
-  (evil-set-initial-state 'term-mode            'emacs)
-  (evil-set-initial-state 'dired-mode           'emacs)
-  (evil-set-initial-state 'shell-mode           'emacs)
-  (evil-set-initial-state 'eshell-mode          'emacs)
-  (evil-set-initial-state 'inferior-python-mode 'emacs))
+  (evil-set-initial-state 'term-mode   'emacs)
+  (evil-set-initial-state 'dired-mode  'emacs)
+  (evil-set-initial-state 'shell-mode  'emacs)
+  (evil-set-initial-state 'eshell-mode 'emacs))
 
 (use-package evil-visualstar
   :ensure t
