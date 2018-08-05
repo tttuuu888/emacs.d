@@ -2,20 +2,21 @@
 
 (use-package elec-pair
   :defer t
-  :hook (prog-mode . electric-pair-mode)
-  :config
+  :hook (prog-mode . electric-pair-mode))
+
+(use-package xref
+  :commands xref-find-reference-here
+  :bind (:map xref--xref-buffer-mode-map
+         ("<return>" . xref-quit-and-goto-xref)
+         ("<RET>"    . xref-quit-and-goto-xref))
+  :init
   (evil-define-key 'normal prog-mode-map
     "gd" 'xref-find-definitions
     "gp" 'xref-pop-marker-stack
     "gr" 'xref-find-reference-here
-    "g[" 'xref-pop-marker-stack))
-
-(use-package xref
-  :commands xref-find-reference-here
+    "g[" 'xref-pop-marker-stack)
   :config
-  (evil-define-key 'normal xref--xref-buffer-mode-map
-    (kbd "<return>") 'xref-quit-and-goto-xref
-    (kbd "RET") 'xref-quit-and-goto-xref)
+  (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
   (defun xref-find-reference-here ()
     (interactive)
     (xref-find-references (thing-at-point 'symbol))))
