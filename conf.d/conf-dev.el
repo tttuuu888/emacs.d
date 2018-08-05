@@ -190,7 +190,9 @@
   :commands geiser run-geiser
   :init
   (setq geiser-active-implementations '(chicken guile))
+  (remove-hook 'scheme-mode-hook 'geiser-mode--maybe-activate)
   :config
+  (geiser-mode--maybe-activate)
   (unbind-key "M-," geiser-mode-map))
 
 (use-package web-mode
