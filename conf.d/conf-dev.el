@@ -133,7 +133,8 @@
         (progn
           (evil-append 1)
           (paredit-kill ARGUMENT)
-          (evil-normal-state nil))
+          (evil-normal-state nil)
+          (evil-forward-char))
       (paredit-kill ARGUMENT)))
   (evil-define-key 'normal paredit-mode-map " k" 'evil-paredit-kill)
   (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill)
