@@ -185,8 +185,7 @@
   :after web-mode)
 
 (use-package company-sql
-  :init
-  :hook ((sql-mode sql-interactive) . my-sql-mode-hook)
+  :hook ((sql-mode sql-interactive-mode) . my-sql-mode-hook)
   :config
   (defun my-sql-mode-hook ()
     (add-to-list 'company-backends 'company-sql)
