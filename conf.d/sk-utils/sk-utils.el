@@ -2,8 +2,12 @@
 
 (defun sharp-ifdef-insert (start end pre)
   (save-excursion
-    (goto-char end) (end-of-line) (insert "\n#endif")
-    (goto-char start) (beginning-of-line) (insert pre "\n")))
+  (let ((end2 (if (and (equal evil-state 'visual)
+                       (equal end (line-beginning-position)))
+                  (- end 1)
+                end)))
+    (goto-char end2) (end-of-line) (insert "\n#endif")
+    (goto-char start) (beginning-of-line) (insert pre "\n"))))
 
 ;; #if 0 ~ #endif insert for the area
 (defun izero-insert (start end)
