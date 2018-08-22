@@ -93,13 +93,10 @@
     (setq which-func-unknown "N/A")))
 
 (use-package python
-  :defer t
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
   :bind (:map python-mode-map
-         ("M-]" . xref-find-reference-here)
-         ("M-[" . xref-pop-marker-stack)
          ("TAB" . company-indent-or-complete-common))
   :config
   (evil-set-initial-state 'inferior-python-mode 'emacs)
@@ -254,10 +251,7 @@
     "gp" 'tern-pop-find-definition
     "gr" 'xref-find-reference-here
     "g[" 'xref-pop-marker-stack)
-  (bind-keys :map tern-mode-keymap
-             ("M-," . other-window)
-             ("M-]" . xref-find-reference-here)
-             ("M-[" . xref-pop-marker-stack))
+  (bind-key "M-," 'other-window tern-mode-keymap)
   (defun my-tern-hook ()
     (evil-normalize-keymaps)
     (tern-mode)
