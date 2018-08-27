@@ -15,6 +15,8 @@
              buffer-save-or-load
              sk-clang-complete-make
              sk-byte-recompile-conf-dir
+             sk-insert-current-week-form
+             sk-insert-next-week-form
              tmux-new-pane-here)
   :bind (("<f5>"       . sk-make)
          ("C-<f5>"     . sk-rebuild)

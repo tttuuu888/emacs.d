@@ -154,5 +154,29 @@
         (call-process "tmux" nil nil nil "new-window")
       (message "Tmux is not running!")))
 
+(defun get-current-or-next-week-form (&optional next-week)
+  (let* ((_ (require 'org))
+         (base (if next-week "++8" "++1"))
+         (monday (org-read-date nil t base nil (org-read-date nil t "-sun")))
+         (friday (time-add monday (* 4 24 3600)))
+         (month-of-monday (format-time-string "%m" monday))
+         (month-of-friday (format-time-string "%m" friday))
+         (month-of-next-friday (if (equal month-of-monday month-of-friday)
+                                   ""
+                                 (format "%s월 " month-of-friday)))
+         (start (format-time-string "%W주차  %m월 %d일 ~ " monday))
+         (end (format "%s%s"
+                      month-of-next-friday
+                      (format-time-string "%d일" friday))))
+    (format "%s%s" start end)))
+
+(defun sk-insert-current-week-form ()
+  (interactive)
+  (insert (get-current-or-next-week-form)))
+
+(defun sk-insert-next-week-form ()
+  (interactive)
+  (insert (get-current-or-next-week-form t)))
+
 
 (provide 'sk-utils)
