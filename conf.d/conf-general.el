@@ -267,7 +267,8 @@
   :config
   (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
-        helm-split-window-default-side 'right))
+        helm-split-window-default-side 'right
+        helm-show-completion-display-function nil))
 
 (use-package helm-ag
   :ensure t
