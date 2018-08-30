@@ -708,7 +708,7 @@
                                            'dired-mode))
                                 path-dir)
                             nil))
-           (path-suffix (if (equal (and path-choice
+           (path-prefix (if (equal (and path-choice
                                         (substring path-choice 0 1))
                                    "~")
                             "~/"
@@ -720,7 +720,7 @@
                         (substring path-choice 0 (- path-len max-path-len))
                         path-choice)))
            (path (if path-mod
-                     (concat path-suffix
+                     (concat path-prefix
                              "…"
                              (replace-regexp-in-string "^[^~/]*" "" path-mod))
                    path-choice)))
