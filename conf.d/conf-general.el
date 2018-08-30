@@ -106,7 +106,8 @@
              ("<C-down-mouse-1>" . nil)
              ("<M-down-mouse-1>" . nil)
              ("<S-down-mouse-1>" . nil)
-             ("M-,"              . other-window)))
+             ("M-,"              . other-window)
+             ("C-\\"             . toggle-korean-input-method)))
 
 (use-package hl-line
   :init
