@@ -727,7 +727,8 @@
       (format "%-35s %-20s %s" buf mode (or path ""))))
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-buffer-transformer-sk)
-  (setq ivy-height 12
+  (setq ivy-height 15
+        ivy-height-alist '((t . 15))
         ivy-do-completion-in-region nil
         ivy-wrap t
         ivy-fixed-height-minibuffer t
@@ -767,7 +768,9 @@
     "d"     'counsel-find-file
     "f"     'counsel-find-file
     "hv"    'counsel-describe-variable
-    "hf"    'counsel-describe-function))
+    "hf"    'counsel-describe-function)
+  :config
+  (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
   :ensure t
