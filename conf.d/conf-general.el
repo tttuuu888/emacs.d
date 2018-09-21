@@ -57,12 +57,15 @@
   :bind (:map evil-insert-state-map
          ("C-a" . move-beginning-of-line)
          ("C-e" . move-end-of-line)
+         :map evil-visual-state-map
+         ("p"   . evil-paste-0-register)
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
          ("C-b" . backward-char)
          ("C-d" . delete-char))
   :init
   (evil-mode)
+  :config
   (add-hook 'evil-insert-state-entry-hook
             (lambda () (when buffer-read-only (read-only-mode -1))))
   (defun evil-reload-file ()
@@ -70,7 +73,10 @@
     (find-alternate-file (buffer-file-name)))
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil)
-  :config
+  (defun evil-paste-0-register (count)
+    "Paste in visual mode without copying."
+    (interactive "P<x>")
+    (evil-visual-paste count ?0))
   (evil-set-initial-state 'term-mode   'emacs)
   (evil-set-initial-state 'dired-mode  'emacs)
   (evil-set-initial-state 'shell-mode  'emacs)
