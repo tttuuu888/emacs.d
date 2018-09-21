@@ -54,15 +54,19 @@
 
 (use-package evil
   :ensure t
-  :bind (:map evil-insert-state-map
-         ("C-a" . move-beginning-of-line)
-         ("C-e" . move-end-of-line)
+  :bind (:map evil-emacs-state-map
+         ("<escape>" . keyboard-quit)
+         :map evil-motion-state-map
+         ("<escape>" . keyboard-quit)
+         :map evil-insert-state-map
+         ("C-a"      . move-beginning-of-line)
+         ("C-e"      . move-end-of-line)
          :map evil-visual-state-map
-         ("p"   . evil-paste-0-register)
+         ("p"        . evil-paste-0-register)
          :map evil-ex-completion-map
-         ("C-a" . move-beginning-of-line)
-         ("C-b" . backward-char)
-         ("C-d" . delete-char))
+         ("C-a"      . move-beginning-of-line)
+         ("C-b"      . backward-char)
+         ("C-d"      . delete-char))
   :init
   (evil-mode)
   :config
