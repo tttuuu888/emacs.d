@@ -415,15 +415,15 @@
   (defun my-org-inline-css-hook (exporter)
     (when (eq exporter 'html)
       (setq-local org-html-head-include-default-style nil)
-      (setq-local org-html-head (concat
-                                 "<style type=\"text/css\">\n"
-                                 "<!--/*--><![CDATA[/*><!--*/\n"
-                                 (with-temp-buffer
-                                   (insert-file-contents
-                                    "~/.emacs.d/conf.d/sk-utils/org.css")
-                                   (buffer-string))
-                                 "/*]]>*/-->\n"
-                                 "</style>\n")))
+      (setq-local org-html-head
+                  (concat "<style type=\"text/css\">\n"
+                          "<!--/*--><![CDATA[/*><!--*/\n"
+                          (with-temp-buffer
+                            (insert-file-contents
+                             "~/.emacs.d/conf.d/sk-utils/org.css")
+                            (buffer-string))
+                          "/*]]>*/-->\n"
+                          "</style>\n")))
     (when (eq exporter 'reveal)
       (setq-local org-export-with-toc nil)))
   (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
