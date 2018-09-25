@@ -13,18 +13,15 @@
     line-height: 18pt;
     color: black;
     margin-top: 0;
-
   }
   body #content {
     padding-top: 0px;
     max-width: 80%;
-    min-width: 700px;
-    margin-left: 20px;
+    margin-left: 10px;
     background-color: white;
     padding: 2em;
   }
   body .title {
-    padding:10px 0;
     text-align: center;
     font-size: 32pt;
   }
@@ -889,14 +886,11 @@
 
   #postamble {
     font-size: 75%;
-    min-width: 700px;
-    max-width: 80%;
-    margin-left: 20px;
-    margin-top: 10px;
-    padding: .2em;
-    border: 1px solid gray;
+    margin-left: 40px;
+    padding: -1.0em;
     background-color: #ffffff;
     z-index: -1000;
+    line-height:60%
   }
 
   .src {
