@@ -436,7 +436,7 @@
   :ensure t
   :after org
   :config
-  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0"
+  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
         org-reveal-title-slide "<h1>%t</h1><h4>%a&nbsp(%e)</h4>"
         org-reveal-plugins '(classList markdown highlight zoom notes)
         org-reveal-theme "moon"
