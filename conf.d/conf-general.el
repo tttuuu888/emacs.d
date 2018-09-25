@@ -762,10 +762,6 @@
 
 (use-package counsel
   :ensure t
-  :commands (counsel-M-x
-             counsel-find-file
-             counsel-describe-variable
-             counsel-describe-function)
   :bind (("M-x"     . counsel-M-x)
          ("C-x d"   . counsel-find-file)
          ("C-x C-f" . counsel-find-file)
