@@ -295,7 +295,7 @@
 
 (use-package projectile
   :ensure t
-  :commands (my-add-project my-remove-project projectile-project-root)
+  :commands projectile-project-root
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
          ("C-c j b" . projectile-switch-to-buffer)
@@ -312,11 +312,7 @@
         projectile-require-project-root nil
         projectile-completion-system 'ivy)
   :config
-  (defalias 'my-remove-project 'projectile-remove-known-project)
-  (defun my-add-project ()
-    (interactive)
-    (call-interactively 'projectile-add-known-project)
-    (projectile-merge-known-projects)))
+  (projectile-mode 1))
 
 
 (use-package ibuffer
