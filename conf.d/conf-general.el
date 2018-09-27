@@ -55,7 +55,7 @@
 (use-package evil
   :ensure t
   :bind (:map evil-visual-state-map
-         ("p"   . evil-paste-0-register)
+         ("p"   . evil-paste-pgvy)
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
          ("C-b" . backward-char)
@@ -70,10 +70,12 @@
     (find-alternate-file (buffer-file-name)))
   ;; mouse disabled in evil
   (defun evil-mouse-drag-track (start &optional opt) nil)
-  (defun evil-paste-0-register (count)
-    "Paste in visual mode without copying."
-    (interactive "P<x>")
-    (evil-visual-paste count ?0))
+  (defun evil-paste-pgvy ()
+    "Paste and restore visual block and yank."
+    (interactive)
+    (call-interactively 'evil-paste-after)
+    (evil-visual-restore)
+    (call-interactively 'evil-yank))
   (evil-set-initial-state 'term-mode   'emacs)
   (evil-set-initial-state 'dired-mode  'emacs)
   (evil-set-initial-state 'shell-mode  'emacs)
