@@ -28,7 +28,17 @@
               (lambda (&rest args)
                 (set-window-dedicated-p (selected-window) t)))
   :config
-  (gdb-many-windows t))
+  (gdb-many-windows t)
+  (dolist (mm '(gdb-edit-locals-map-1
+                gdb-locals-mode-map
+                gdb-locals-watch-map
+                gdb-registers-mode-map
+                gdb-frames-mode-map
+                gdb-breakpoints-mode-map
+                gdb-threads-mode-map))
+    (bind-keys :map (symbol-value mm)
+               ("j" . next-line)
+               ("k" . previous-line))))
 
 (use-package make-mode
   :defer t
