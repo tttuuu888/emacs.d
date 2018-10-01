@@ -718,7 +718,9 @@
                                                       'major-mode buf)))))
            (max-path-len (max 0 (- (frame-width) 62)))
            (path-dir (abbreviate-file-name
-                      (buffer-local-value 'default-directory buf)))
+                      (or
+                       (buffer-local-value 'default-directory buf)
+                       "~/")))
            (path-file (buffer-file-name buf))
            (path-choice (or (if path-file (abbreviate-file-name path-file))
                             (if (or (string-match-p "shell" str)
