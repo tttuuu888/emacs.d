@@ -634,7 +634,10 @@
 (use-package visual-regexp
   :ensure t
   :bind (("C-c r" . vr/replace)
-         ("C-c q" . vr/query-replace)))
+         ("C-c q" . vr/query-replace)
+         :map evil-motion-state-map
+         ("gR"    . vr/replace)
+         ("gQ"    . vr/query-replace)))
 
 (use-package visual-regexp-steroids
   :ensure t
