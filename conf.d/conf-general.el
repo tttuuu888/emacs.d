@@ -562,7 +562,7 @@
     (interactive)
     (if (neo-global--window-exists-p)
         (neotree-hide)
-      (neotree-dir (projectile-project-root)))))
+      (neotree-dir (or (projectile-project-root) default-directory)))))
 
 (use-package magit
   :ensure t

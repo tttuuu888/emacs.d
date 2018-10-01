@@ -2,12 +2,12 @@
 
 (defun sharp-ifdef-insert (start end pre)
   (save-excursion
-  (let ((end2 (if (and (equal evil-state 'visual)
-                       (equal end (line-beginning-position)))
-                  (- end 1)
-                end)))
-    (goto-char end2) (end-of-line) (insert "\n#endif")
-    (goto-char start) (beginning-of-line) (insert pre "\n"))))
+    (let ((end2 (if (and (equal evil-state 'visual)
+                         (equal end (line-beginning-position)))
+                    (- end 1)
+                  end)))
+      (goto-char end2) (end-of-line) (insert "\n#endif")
+      (goto-char start) (beginning-of-line) (insert pre "\n"))))
 
 ;; #if 0 ~ #endif insert for the area
 (defun izero-insert (start end)
@@ -39,19 +39,21 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
-                                (projectile-project-root))))
+                                (or (projectile-project-root)
+                                    default-directory))))
     (if (equal dir nil)
         (message "Makefile is not found")
-        (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
+      (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
 
 (defun sk-clean ()
   "Find a Makefile path and perform Clean"
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
-                                (projectile-project-root))))
+                                (or (projectile-project-root)
+                                    default-directory))))
     (if (equal dir nil)
-      (message "Makefile is not found")
+        (message "Makefile is not found")
       (compile (concat "export LANG=en_US && make -C " dir " clean")))))
 
 (defun sk-rebuild ()
@@ -59,12 +61,13 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
-                                (projectile-project-root))))
+                                (or (projectile-project-root)
+                                    default-directory))))
     (if (equal dir nil)
         (message "Makefile is not found")
-        (progn
-         (call-process "make" nil nil nil "-C" dir "clean")
-         (compile (concat "export LANG=en_US && make -j8 -C " dir))))))
+      (progn
+        (call-process "make" nil nil nil "-C" dir "clean")
+        (compile (concat "export LANG=en_US && make -j8 -C " dir))))))
 
 (defun sk-clang-complete-make ()
   (interactive)
@@ -95,7 +98,7 @@
   "kill all buffers, leaving *scratch* only"
   (interactive)
   (mapc (lambda (x) (kill-buffer x))
-          (buffer-list))
+        (buffer-list))
   (delete-other-windows))
 
 ;; Hide ^M
@@ -139,7 +142,7 @@
         (message (concat "Windows are Restored by F" (number-to-string num))))
     (progn
       (window-configuration-to-register num)
-      (message (concat  "Windows are saved to F" (number-to-string num))))))
+      (message (concat "Windows are saved to F" (number-to-string num))))))
 
 (defun sk-byte-recompile-conf-dir ()
   (interactive)
@@ -151,8 +154,8 @@
 (defun tmux-new-pane-here ()
   (interactive)
   (if (tmux-running-p)
-        (call-process "tmux" nil nil nil "new-window")
-      (message "Tmux is not running!")))
+      (call-process "tmux" nil nil nil "new-window")
+    (message "Tmux is not running!")))
 
 (defun get-current-or-next-week-form (&optional next-week)
   (let* ((_ (require 'org))
