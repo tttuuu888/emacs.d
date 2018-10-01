@@ -54,12 +54,17 @@
 
 (use-package evil
   :ensure t
-  :bind (:map evil-visual-state-map
+  :bind (:map evil-insert-state-map
+         ("C-a" . move-beginning-of-line)
+         ("C-e" . move-end-of-line)
+         ("C-k" . kill-line)
+         :map evil-visual-state-map
          ("p"   . evil-paste-pgvy)
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
          ("C-b" . backward-char)
-         ("C-d" . delete-char))
+         ("C-d" . delete-char)
+         ("C-k" . kill-line))
   :init
   (evil-mode)
   :config
