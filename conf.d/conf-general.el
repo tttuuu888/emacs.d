@@ -64,7 +64,9 @@
          ("C-a" . move-beginning-of-line)
          ("C-b" . backward-char)
          ("C-d" . delete-char)
-         ("C-k" . kill-line))
+         ("C-k" . kill-line)
+         ("M-n" . next-complete-history-element)
+         ("M-p" . previous-complete-history-element))
   :init
   (evil-mode)
   :config
@@ -81,6 +83,7 @@
     (call-interactively 'evil-paste-after)
     (evil-visual-restore)
     (call-interactively 'evil-yank))
+  (evil-global-set-key 'normal "Y" (kbd "y$"))
   (evil-set-initial-state 'term-mode   'emacs)
   (evil-set-initial-state 'dired-mode  'emacs)
   (evil-set-initial-state 'shell-mode  'emacs)
