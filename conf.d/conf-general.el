@@ -303,7 +303,7 @@
 
 (use-package projectile
   :ensure t
-  :commands projectile-project-root
+  :commands (projectile-project-p projectile-project-root)
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
          ("C-c j b" . projectile-switch-to-buffer)
@@ -562,7 +562,7 @@
     (interactive)
     (if (neo-global--window-exists-p)
         (neotree-hide)
-      (neotree-dir (or (projectile-project-root) default-directory)))))
+      (neotree-dir (projectile-project-p)))))
 
 (use-package magit
   :ensure t

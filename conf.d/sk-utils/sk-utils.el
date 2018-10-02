@@ -39,8 +39,7 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
-                                (or (projectile-project-root)
-                                    default-directory))))
+                                (projectile-project-p))))
     (if (equal dir nil)
         (message "Makefile is not found")
       (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
@@ -50,8 +49,7 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
-                                (or (projectile-project-root)
-                                    default-directory))))
+                                (projectile-project-p))))
     (if (equal dir nil)
         (message "Makefile is not found")
       (compile (concat "export LANG=en_US && make -C " dir " clean")))))
@@ -61,8 +59,7 @@
   (interactive)
   (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                 "Makefile"
-                                (or (projectile-project-root)
-                                    default-directory))))
+                                (projectile-project-p))))
     (if (equal dir nil)
         (message "Makefile is not found")
       (progn
