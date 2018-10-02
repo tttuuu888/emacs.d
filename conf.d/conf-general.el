@@ -107,6 +107,13 @@
                 display-line-numbers-type 'visual
                 display-line-numbers-current-absolute nil))
 
+(use-package ansi-color
+  :hook (compilation-filter . my-ansi-colorize-buffer)
+  :config
+  (defun my-ansi-colorize-buffer ()
+    (let ((buffer-read-only nil))
+      (ansi-color-apply-on-region (point-min) (point-max)))))
+
 (use-package bind-key
   :ensure t
   :init

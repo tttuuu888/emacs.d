@@ -37,7 +37,7 @@
 (defun sk-make ()
   "Find a Makefile path and perform Make"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory)
+  (let ((dir (find-file-in-tree default-directory
                                 "Makefile"
                                 (projectile-project-p))))
     (if (equal dir nil)
@@ -47,7 +47,7 @@
 (defun sk-clean ()
   "Find a Makefile path and perform Clean"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory)
+  (let ((dir (find-file-in-tree default-directory
                                 "Makefile"
                                 (projectile-project-p))))
     (if (equal dir nil)
@@ -57,7 +57,7 @@
 (defun sk-rebuild ()
   "Find a Makefile path and perform rebuild(clean and make)"
   (interactive)
-  (let ((dir (find-file-in-tree (file-name-directory default-directory)
+  (let ((dir (find-file-in-tree default-directory
                                 "Makefile"
                                 (projectile-project-p))))
     (if (equal dir nil)
