@@ -12,6 +12,7 @@
  '(default-frame-alist (quote ((line-spacing . 2))))
  '(diary-file "~/Dropbox/org/diary")
  '(ediff-split-window-function (quote split-window-horizontally))
+ '(fill-column 80)
  '(font-use-system-font t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
