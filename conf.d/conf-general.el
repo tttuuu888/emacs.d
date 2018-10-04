@@ -32,6 +32,7 @@
 
 (use-package evil-leader
   :ensure t
+  :bind-keymap ("M-m" . evil-leader--default-map)
   :init
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
