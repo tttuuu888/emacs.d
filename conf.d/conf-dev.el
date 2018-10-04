@@ -139,10 +139,10 @@
              (equal evil-state 'normal))
         (progn
           (evil-append 1)
-          (paredit-kill ARGUMENT)
+          (call-interactively 'paredit-kill)
           (evil-normal-state nil)
           (evil-forward-char))
-      (paredit-kill ARGUMENT)))
+      (call-interactively 'paredit-kill)))
   (evil-define-key 'normal paredit-mode-map " k" 'evil-paredit-kill)
   (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill)
   (evil-leader/set-key-for-mode 'emacs-lisp-mode
