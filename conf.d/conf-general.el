@@ -328,6 +328,8 @@
         projectile-require-project-root nil
         projectile-completion-system 'ivy)
   :config
+  ;; Don't add projectile project automatically.
+  (defun projectile-discover-projects-in-search-path () nil)
   (projectile-mode 1))
 
 
