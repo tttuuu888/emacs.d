@@ -467,6 +467,7 @@
          ("j"     . dired-next-line)
          ("k"     . dired-previous-line)
          ("r"     . ora-dired-rsync)
+         ("/"     . evil-search-forward)
          ("^"     . dired-up-and-close-dir)
          ("<DEL>" . dired-up-and-close-dir)
          ("<RET>" . dired-visit-file-or-dir))
