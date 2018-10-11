@@ -266,6 +266,7 @@
               ("C-c C-s" . wgrep-save-all-buffers)))
 
 (use-package helm-git-grep
+  :disabled t
   :ensure t
   :bind (("C-c p" . helm-git-grep-at-point))
   :init
@@ -293,6 +294,7 @@
         helm-show-completion-display-function nil))
 
 (use-package helm-ag
+  :disabled t
   :ensure t
   :defer t
   :config
@@ -300,6 +302,7 @@
         helm-ag-use-grep-ignore-list t))
 
 (use-package helm-projectile
+  :disabled t
   :ensure t
   :commands (helm-projectile-ag helm-do-grep-ag)
   :bind (("C-c j p" . helm-projectile-ag)
@@ -788,15 +791,24 @@
          ("C-x d"   . counsel-find-file)
          ("C-x C-f" . counsel-find-file)
          ("C-h v"   . counsel-describe-variable)
-         ("C-h f"   . counsel-describe-function))
+         ("C-h f"   . counsel-describe-function)
+         :map minibuffer-local-map
+         ("C-r"     . counsel-minibuffer-history))
   :init
   (evil-leader/set-key
     "<SPC>" 'counsel-M-x
     "d"     'counsel-find-file
     "f"     'counsel-find-file
+    "p"     'counsel-git-grep
+    "r"     'counsel-recentf
     "hv"    'counsel-describe-variable
-    "hf"    'counsel-describe-function)
+    "hf"    'counsel-describe-function
+    "jp"    'counsel-ag
+    "jP"    'counsel-ag-here)
   :config
+  (defun counsel-ag-here ()
+    (interactive)
+    (counsel-ag nil default-directory))
   (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
