@@ -490,13 +490,6 @@
          ("C-c C-e" . wgrep-change-to-wgrep-mode)
          ("C-c C-s" . wgrep-save-all-buffers)))
 
-(use-package helm-git-grep
-  :ensure t
-  :bind (("C-c p" . helm-git-grep-at-point))
-  :init
-  (evil-leader/set-key
-    "p" 'helm-git-grep-at-point))
-
 (use-package helm
   :ensure t
   :bind (("C-c i"   . helm-semantic-or-imenu)
@@ -530,18 +523,18 @@
         helm-show-completion-display-function nil))
 
 (use-package helm-ag
-  :disabled t
   :ensure t
   :defer t
   :config
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-use-grep-ignore-list t))
 
-(use-package helm-projectile
-  :disabled t
+(use-package helm-git-grep
   :ensure t
-  :bind (("C-c j p" . helm-projectile-ag)
-         ("C-c j P" . helm-do-grep-ag)))
+  :bind (("C-c p" . helm-git-grep-at-point))
+  :init
+  (evil-leader/set-key
+    "p" 'helm-git-grep-at-point))
 
 (use-package projectile
   :ensure t
