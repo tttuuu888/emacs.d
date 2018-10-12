@@ -491,7 +491,6 @@
          ("C-c C-s" . wgrep-save-all-buffers)))
 
 (use-package helm-git-grep
-  :disabled t
   :ensure t
   :bind (("C-c p" . helm-git-grep-at-point))
   :init
@@ -502,6 +501,8 @@
   :ensure t
   :bind (("C-c i"   . helm-semantic-or-imenu)
          ("C-c y"   . helm-show-kill-ring)
+         ("C-c j p" . helm-ag-project-or-here)
+         ("C-c j P" . helm-ag-here)
          ("C-x C-r" . helm-recentf)
          ("C-c h o" . helm-occur)
          ("C-c h r" . helm-resume))
@@ -511,9 +512,19 @@
     "y"  'helm-show-kill-ring
     "r"  'helm-recentf
     "ho" 'helm-occur
-    "hr" 'helm-resume)
+    "hr" 'helm-resume
+    "jp" 'helm-ag-project-or-here
+    "jP" 'helm-ag-here)
   :config
   (helm-autoresize-mode 1)
+  (defun helm-ag-project-or-here ()
+    (interactive)
+    (helm-do-ag
+     (or (projectile-project-root) default-directory)
+     (car (projectile-parse-dirconfig-file))))
+  (defun helm-ag-here ()
+    (interactive)
+    (helm-do-ag default-directory))
   (setq helm-imenu-execute-action-at-once-if-one nil
         helm-split-window-default-side 'right
         helm-show-completion-display-function nil))
@@ -529,13 +540,8 @@
 (use-package helm-projectile
   :disabled t
   :ensure t
-  :commands (helm-projectile-ag helm-do-grep-ag)
   :bind (("C-c j p" . helm-projectile-ag)
-         ("C-c j P" . helm-do-grep-ag))
-  :init
-  (evil-leader/set-key
-    "jp" 'helm-projectile-ag
-    "jP" 'helm-do-grep-ag))
+         ("C-c j P" . helm-do-grep-ag)))
 
 (use-package projectile
   :ensure t
@@ -809,22 +815,23 @@
     "<SPC>" 'counsel-M-x
     "d"     'counsel-find-file
     "f"     'counsel-find-file
-    "p"     'counsel-git-grep-point
+    ;; "p"     'counsel-git-grep-point
     "r"     'counsel-recentf
     "hv"    'counsel-describe-variable
     "hf"    'counsel-describe-function
-    "jp"    'counsel-ag-point
-    "jP"    'counsel-ag-here)
+    ;; "jp"    'counsel-ag-point
+    ;; "jP"    'counsel-ag-here
+    )
   :config
-  (defun counsel-git-grep-point ()
-    (interactive)
-    (counsel-git-grep nil (thing-at-point 'symbol)))
-  (defun counsel-ag-here ()
-    (interactive)
-    (counsel-ag (thing-at-point 'symbol) default-directory))
-  (defun counsel-ag-point ()
-    (interactive)
-    (counsel-ag (thing-at-point 'symbol)))
+  ;; (defun counsel-git-grep-point ()
+  ;;   (interactive)
+  ;;   (counsel-git-grep nil (thing-at-point 'symbol)))
+  ;; (defun counsel-ag-here ()
+  ;;   (interactive)
+  ;;   (counsel-ag (thing-at-point 'symbol) default-directory))
+  ;; (defun counsel-ag-point ()
+  ;;   (interactive)
+  ;;   (counsel-ag (thing-at-point 'symbol)))
   (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
