@@ -802,6 +802,7 @@
 
 (use-package counsel
   :ensure t
+  :commands (counsel-ag-here counsel-ag-point counsel-git-grep-point)
   :bind (("M-x"     . counsel-M-x)
          ("C-x d"   . counsel-find-file)
          ("C-x C-f" . counsel-find-file)
@@ -824,12 +825,12 @@
   (defun counsel-git-grep-point ()
     (interactive)
     (counsel-git-grep nil (thing-at-point 'symbol)))
-  (defun counsel-ag-point ()
-    (interactive)
-    (counsel-ag (thing-at-point 'symbol)))
   (defun counsel-ag-here ()
     (interactive)
     (counsel-ag (thing-at-point 'symbol) default-directory))
+  (defun counsel-ag-point ()
+    (interactive)
+    (counsel-ag (thing-at-point 'symbol)))
   (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
