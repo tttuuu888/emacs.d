@@ -32,7 +32,6 @@
 
 (use-package evil-leader
   :ensure t
-  :bind-keymap ("M-m" . evil-leader--default-map)
   :init
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
@@ -50,6 +49,14 @@
     "hk" 'describe-key
     "xr" 'read-only-mode
     "xv" 'evil-reload-file)
+  (defun evil-sub-leader-mode ()
+    (let* ((sub-leader (kbd "M-m"))
+           (mode-map (cdr (assoc major-mode evil-leader--mode-maps)))
+           (map (or mode-map evil-leader--default-map)))
+      (evil-normalize-keymaps)
+      (define-key evil-motion-state-local-map sub-leader map)
+      (define-key evil-emacs-state-local-map sub-leader map)))
+  (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
   (setq evil-leader/no-prefix-mode-rx
         '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
 
