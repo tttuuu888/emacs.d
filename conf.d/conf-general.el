@@ -799,16 +799,22 @@
     "<SPC>" 'counsel-M-x
     "d"     'counsel-find-file
     "f"     'counsel-find-file
-    "p"     'counsel-git-grep
+    "p"     'counsel-git-grep-point
     "r"     'counsel-recentf
     "hv"    'counsel-describe-variable
     "hf"    'counsel-describe-function
-    "jp"    'counsel-ag
+    "jp"    'counsel-ag-point
     "jP"    'counsel-ag-here)
   :config
+  (defun counsel-git-grep-point ()
+    (interactive)
+    (counsel-git-grep nil (thing-at-point 'symbol)))
+  (defun counsel-ag-point ()
+    (interactive)
+    (counsel-ag (thing-at-point 'symbol)))
   (defun counsel-ag-here ()
     (interactive)
-    (counsel-ag nil default-directory))
+    (counsel-ag (thing-at-point 'symbol) default-directory))
   (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
