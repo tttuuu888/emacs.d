@@ -1,23 +1,16 @@
 ;;; General settings
 
+;;; Personal packages
 (use-package sk-mode-line
   :config
   (sk-mode-line))
 
 (use-package sk-utils
-  :commands (insert-date
-             insert-date-and-time
-             nuke-all-buffers
-             hide-ctrl-M
-             izero-insert
-             idef-insert
-             move-line
-             buffer-save-or-load
-             sk-clang-complete-make
-             sk-byte-recompile-conf-dir
-             sk-insert-current-week-form
-             sk-insert-next-week-form
-             tmux-new-pane-here)
+  :commands (insert-date insert-date-and-time nuke-all-buffers
+             hide-ctrl-M izero-insert idef-insert move-line
+             buffer-save-or-load sk-clang-complete-make
+             sk-byte-recompile-conf-dir sk-insert-current-week-form
+             sk-insert-next-week-form tmux-new-pane-here)
   :bind (("<f5>"       . sk-make)
          ("C-<f5>"     . sk-rebuild)
          ("C-M-,"      . transpose-windows)
@@ -30,200 +23,6 @@
          ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
          ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
 
-(use-package evil-leader
-  :ensure t
-  :init
-  (global-evil-leader-mode)
-  (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    "0"  'delete-window
-    "1"  'delete-other-windows
-    "2"  'split-window-below
-    "3"  'split-window-right
-    ","  'other-window
-    "q"  'kill-buffer
-    "Q"  'kill-emacs
-    "u"  'pop-to-mark-command
-    "w"  'save-buffer
-    "hb" 'describe-bindings
-    "hk" 'describe-key
-    "xr" 'read-only-mode
-    "xv" 'evil-reload-file)
-  (defun evil-sub-leader-mode ()
-    (let* ((sub-leader (kbd "M-m"))
-           (mode-map (cdr (assoc major-mode evil-leader--mode-maps)))
-           (map (or mode-map evil-leader--default-map)))
-      (evil-normalize-keymaps)
-      (define-key evil-motion-state-local-map sub-leader map)
-      (define-key evil-emacs-state-local-map sub-leader map)))
-  (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
-  (setq evil-leader/no-prefix-mode-rx
-        '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
-
-(use-package evil
-  :ensure t
-  :bind (:map evil-insert-state-map
-         ("C-a" . move-beginning-of-line)
-         ("C-e" . move-end-of-line)
-         ("C-k" . kill-line)
-         :map evil-visual-state-map
-         ("p"   . evil-paste-pgvy)
-         :map evil-ex-completion-map
-         ("C-a" . move-beginning-of-line)
-         ("C-b" . backward-char)
-         ("C-d" . delete-char)
-         ("C-k" . kill-line)
-         ("M-n" . next-complete-history-element)
-         ("M-p" . previous-complete-history-element))
-  :init
-  (evil-mode)
-  :config
-  (add-hook 'evil-insert-state-entry-hook
-            (lambda () (when buffer-read-only (read-only-mode -1))))
-  (defun evil-reload-file ()
-    (interactive)
-    (find-alternate-file (buffer-file-name)))
-  ;; mouse disabled in evil
-  (defun evil-mouse-drag-track (start &optional opt) nil)
-  (defun evil-paste-pgvy ()
-    "Paste and restore visual block and yank."
-    (interactive)
-    (call-interactively 'evil-paste-after)
-    (evil-visual-restore)
-    (call-interactively 'evil-yank))
-  (evil-global-set-key 'normal "Y" (kbd "y$"))
-  (evil-set-initial-state 'term-mode   'emacs)
-  (evil-set-initial-state 'dired-mode  'emacs)
-  (evil-set-initial-state 'shell-mode  'emacs)
-  (evil-set-initial-state 'eshell-mode 'emacs)
-  (evil-set-initial-state 'sql-interactive-mode 'emacs))
-
-(use-package evil-visualstar
-  :ensure t
-  :bind (:map evil-visual-state-map
-         ("/" . evil-visualstar/begin-search-forward)
-         ("?" . evil-visualstar/begin-search-backward)
-         ("n" . evil-visualstar/begin-search-forward)
-         ("N" . evil-visualstar/begin-search-backward))
-  :config
-  (global-evil-visualstar-mode))
-
-(use-package tramp
-  :defer t
-  :config
-  ;; TRAMP respect PATH variable on remote machine.
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
-
-(use-package display-line-numbers
-  :hook ((find-file prog-mode) . display-line-numbers-mode)
-  :config
-  (setq-default display-line-numbers-width 3
-                display-line-numbers-type 'visual
-                display-line-numbers-current-absolute nil))
-
-(use-package ansi-color
-  :hook (compilation-filter . my-ansi-colorize-buffer)
-  :config
-  (defun my-ansi-colorize-buffer ()
-    (let ((buffer-read-only nil))
-      (ansi-color-apply-on-region (point-min) (point-max)))))
-
-(use-package bind-key
-  :ensure t
-  :init
-  (bind-keys ("<mouse-1>"        . nil)
-             ("<mouse-3>"        . nil)
-             ("<down-mouse-1>"   . nil)
-             ("<down-mouse-3>"   . nil)
-             ("<drag-mouse-1>"   . nil)
-             ("<drag-mouse-3>"   . nil)
-             ("<C-down-mouse-1>" . nil)
-             ("<M-down-mouse-1>" . nil)
-             ("<S-down-mouse-1>" . nil)
-             ("M-,"              . other-window)
-             ("C-\\"             . toggle-korean-input-method)))
-
-(use-package hl-line
-  :init
-  (global-hl-line-mode t))
-
-(use-package paren
-  :init
-  (show-paren-mode t))
-
-(use-package cc-cmds
-  :bind (("C-<backspace>" . c-hungry-backspace)
-         ("C-c <DEL>"     . c-hungry-backspace)
-         :map evil-normal-state-map
-         ("<SPC> <DEL>"   . c-hungry-backspace)))
-
-(use-package eshell
-  :defer t
-  :config
-  ;; Clear Eshell buffer
-  (defun eshell/clear ()
-    (interactive)
-    (let ((inhibit-read-only t))
-      (erase-buffer)
-      (execute-kbd-macro (kbd "<RET>"))))
-  (defun my-eshell-setup ()
-    (progn
-      (setenv "TERM" "screen-256color")
-      (setq-local company-minimum-prefix-length 3)
-      (bind-key "C-c C-l" 'counsel-esh-history eshell-mode-map)))
-  (evil-leader/set-key-for-mode 'eshell-mode "l" 'counsel-esh-history)
-  (add-hook 'eshell-mode-hook 'my-eshell-setup))
-
-(use-package shell
-  :defer t
-  :config
-  (bind-key "C-c C-l" 'counsel-shell-history shell-mode-map)
-  (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
-  (defun my-shell-setup ()
-    (setq-local company-minimum-prefix-length 3))
-  (add-hook 'shell-mode-hook 'my-shell-setup))
-
-(use-package company
-  :ensure t
-  :init
-  (global-company-mode 1)
-  (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2)
-  :config
-  (evil-define-key 'insert company-mode-map
-    (kbd "TAB") 'company-indent-or-complete-common))
-
-(use-package company-irony
-  :ensure t
-  :after irony
-  :config
-  (add-to-list 'company-backends 'company-irony))
-
-(use-package company-irony-c-headers
-  :ensure t
-  :after irony
-  :config
-  (add-to-list 'company-backends 'company-irony-c-headers))
-
-(use-package company-tern
-  :ensure t
-  :after tern
-  :config
-  (defun advice-company-tern (&rest args)
-    (if (equal major-mode 'web-mode)
-        (let ((web-mode-cur-language
-               (web-mode-language-at-pos)))
-          (if (or (string= web-mode-cur-language "javascript")
-                  (string= web-mode-cur-language "jsx"))
-              (unless tern-mode (tern-mode))
-            (if tern-mode (tern-mode -1))))))
-  (advice-add 'company-tern :before #'advice-company-tern)
-  (add-to-list 'company-backends 'company-tern))
-
-(use-package company-web
-  :ensure t
-  :after web-mode)
-
 (use-package company-sql
   :hook ((sql-mode sql-interactive-mode) . my-sql-mode-hook)
   :config
@@ -231,252 +30,20 @@
     (add-to-list 'company-backends 'company-sql)
     (local-set-key (kbd "TAB") 'company-indent-or-complete-common)))
 
-(use-package irony
-  :ensure t
-  :hook ((c++-mode c-mode objc-mode) . irony-mode)
-  :config
-  (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async)
-    (local-set-key (kbd "TAB") 'company-indent-or-complete-common)
-    (irony-cdb-autosetup-compile-options))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook))
 
-(use-package flycheck
+;;; Built-in packages
+(use-package recentf
+  :after (:any ido ivy)
+  :config
+  (recentf-mode t))
+
+(use-package ido
   :disabled t
-  :ensure t
-  :hook ((c-mode c++-mode) . flycheck-mode))
-
-(use-package company-go
-  :ensure t
-  :after go-mode
+  :bind (("C-x d"   . ido-dired)
+         ("C-x C-f" . ido-find-file))
   :config
-  (add-to-list 'company-backends 'company-go))
-
-(use-package undo-tree
-  :config
-  (require 'redo+))
-
-(use-package redo+
-  :bind (("C-." . redo+-redo)
-         ("M-_" . redo+-redo)
-         ("C-_" . redo+-undo)
-         ("C-/" . redo+-undo)
-         :map evil-normal-state-map
-         ("u"   . redo+-undo)
-         ("C-r" . redo+-redo))
-  :config
-  (global-undo-tree-mode -1)
-  (defun global-undo-tree-mode (&optional ARG) t)
-  (defalias 'undo-tree-undo 'redo+-undo)
-  (defalias 'undo-tree-redo 'redo+-redo))
-
-(use-package wgrep
-  :ensure t
-  :commands wgrep-change-to-wgrep-mode
-  :bind (:map helm-git-grep-mode-map
-              ("C-c C-e" . wgrep-change-to-wgrep-mode)
-              ("C-c C-s" . wgrep-save-all-buffers)))
-
-(use-package helm-git-grep
-  :disabled t
-  :ensure t
-  :bind (("C-c p" . helm-git-grep-at-point))
-  :init
-  (evil-leader/set-key
-    "p" 'helm-git-grep-at-point))
-
-(use-package helm
-  :ensure t
-  :bind (("C-c i"   . helm-semantic-or-imenu)
-         ("C-c y"   . helm-show-kill-ring)
-         ("C-x C-r" . helm-recentf)
-         ("C-c h o" . helm-occur)
-         ("C-c h r" . helm-resume))
-  :init
-  (evil-leader/set-key
-    "i"  'helm-semantic-or-imenu
-    "y"  'helm-show-kill-ring
-    "r"  'helm-recentf
-    "ho" 'helm-occur
-    "hr" 'helm-resume)
-  :config
-  (helm-autoresize-mode 1)
-  (setq helm-imenu-execute-action-at-once-if-one nil
-        helm-split-window-default-side 'right
-        helm-show-completion-display-function nil))
-
-(use-package helm-ag
-  :disabled t
-  :ensure t
-  :defer t
-  :config
-  (setq helm-ag-insert-at-point 'symbol
-        helm-ag-use-grep-ignore-list t))
-
-(use-package helm-projectile
-  :disabled t
-  :ensure t
-  :commands (helm-projectile-ag helm-do-grep-ag)
-  :bind (("C-c j p" . helm-projectile-ag)
-         ("C-c j P" . helm-do-grep-ag))
-  :init
-  (evil-leader/set-key
-    "jp" 'helm-projectile-ag
-    "jP" 'helm-do-grep-ag))
-
-(use-package projectile
-  :ensure t
-  :commands (projectile-project-p projectile-project-root)
-  :bind (("C-c j d" . projectile-find-dir)
-         ("C-c j k" . projectile-kill-buffers)
-         ("C-c j b" . projectile-switch-to-buffer)
-         ("C-c j s" . projectile-switch-project)
-         ("C-c j S" . projectile-save-project-buffers))
-  :init
-  (evil-leader/set-key
-    "jd" 'projectile-find-dir
-    "jk" 'projectile-kill-buffers
-    "jb" 'projectile-switch-to-buffer
-    "js" 'projectile-switch-project
-    "jS" 'projectile-save-project-buffers)
-  (setq projectile-switch-project-action 'projectile-dired
-        projectile-require-project-root nil
-        projectile-completion-system 'ivy)
-  :config
-  ;; Don't add projectile project automatically.
-  (defun projectile-discover-projects-in-search-path () nil)
-  (projectile-mode 1))
-
-
-(use-package ibuffer
-  :ensure t
-  :bind ("C-x C-b" . ibuffer)
-  :init
-  (evil-leader/set-key
-    "xb" 'ibuffer)
-  :config
-  (setq ibuffer-saved-filter-groups
-        '(("home"
-           ("Emacs-config" (or (filename . ".emacs")
-                               (filename . ".emacs.d")
-                               (filename . "emacs-config")))
-           ("Org / MD" (or (mode . org-mode)
-                           (mode . markdown-mode)
-                           (filename . "OrgMode")))
-           ("Magit" (mode . magit-status-mode))
-           ("Code" (or (mode . c-mode)
-                       (mode . c++-mode)
-                       (mode . makefile-gmake-mode)
-                       (mode . asm-mode)
-                       (mode . python-mode)
-                       (mode . java-mode)
-                       (mode . lisp-mode)
-                       (mode . clojure-mode)
-                       (mode . scheme-mode)
-                       (mode . web-mode)
-                       (mode . js2-mode)
-                       (mode . go-mode)))
-           ("Dired" (mode . dired-mode))
-           ("Help" (or (name . "\*Help\*")
-                       (name . "\*Apropos\*")
-                       (name . "\*info\*"))))))
-  (setq ibuffer-expert t
-        ibuffer-sorting-mode 'alphabetic
-        ibuffer-default-sorting-mode 'major-mode)
-  (defun my-ibuffer-unmark-all ()
-    "Unmark all immdiately"
-    (interactive)
-    (ibuffer-unmark-all ?\s))
-  (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all)
-  (define-ibuffer-column size
-    (:name "Size" :inline t)
-    (cond
-     ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
-     ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
-     (t (format "%8d" (buffer-size)))))
-
-  (add-hook 'ibuffer-mode-hook
-            '(lambda ()
-               (ibuffer-auto-mode 1)
-               (ibuffer-switch-to-saved-filter-groups "home"))))
-
-(use-package markdown-mode
-  :ensure t
-  :defer t)
-
-(use-package markdown-toc
-  :ensure t
-  :defer t)
-
-(use-package org
-  :mode ("\\.org\\'" . org-mode)
-  :bind (:map org-mode-map
-         ("C-c a"   . org-agenda)
-         ("C-c b"   . org-iswitchb)
-         ("C-c l"   . org-store-link)
-         ("C-c r"   . org-remember)
-         ("C-c t"   . org-table-create)
-         ("C-c u"   . org-up-element)
-         ("C-c s e" . org-edit-src-code)
-         ("C-c s i" . org-insert-src-block))
-  :config
-  (evil-define-key 'normal org-mode-map
-    (kbd "TAB") 'org-cycle              ; for terminal
-    " se"       'org-edit-src-code
-    " si"       'org-insert-src-block
-    " ta"       'org-table-create
-    " tl"       'org-tags-view
-    " ts"       'org-set-tags)
-  (defun org-insert-src-block (src-code-type)
-    "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
-    (interactive
-     (let ((src-code-types
-            '("emacs-lisp" "python" "c" "sh" "java" "js" "clojure" "c++"
-              "css" "html" "calc" "asymptote" "dot" "gnuplot"
-              "octave" "R" "sass" "sql" "awk" "ditaa"
-              "haskell" "latex" "lisp" "matlab" "org" "perl" "ruby"
-              "scheme" "sqlite" )))
-       (list (ido-completing-read "Source code type: " src-code-types))))
-    (progn
-      (insert (format "#+BEGIN_SRC %s\n" src-code-type))
-      (newline-and-indent)
-      (insert "#+END_SRC\n")
-      (line-move -2)
-      (org-edit-src-code)))
-  (defun my-org-inline-css-hook (exporter)
-    (when (eq exporter 'html)
-      (setq-local org-html-head-include-default-style nil)
-      (setq-local org-html-head
-                  (concat "<style type=\"text/css\">\n"
-                          "<!--/*--><![CDATA[/*><!--*/\n"
-                          (with-temp-buffer
-                            (insert-file-contents
-                             "~/.emacs.d/conf.d/sk-utils/org.css")
-                            (buffer-string))
-                          "/*]]>*/-->\n"
-                          "</style>\n")))
-    (when (eq exporter 'reveal)
-      (setq-local org-export-with-toc nil)))
-  (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
-        org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
-                                "\\|"
-                                "\\(fn:[-_[:word:]]+\\)\\)"))
-  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
-
-(use-package ox-reveal
-  :ensure t
-  :after org
-  :config
-  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
-        org-reveal-title-slide "<h1>%t</h1><h4>%a&nbsp(%e)</h4>"
-        org-reveal-plugins '(classList markdown highlight zoom notes)
-        org-reveal-theme "moon"
-        org-reveal-transition nil
-        org-reveal-center nil))
-
+  (ivy-mode t)
+  (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package dired
   :defer t
@@ -571,6 +138,446 @@
         dired-omit-extensions '("~")
         dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
 
+(use-package org
+  :mode ("\\.org\\'" . org-mode)
+  :bind (:map org-mode-map
+         ("C-c a"   . org-agenda)
+         ("C-c b"   . org-iswitchb)
+         ("C-c l"   . org-store-link)
+         ("C-c r"   . org-remember)
+         ("C-c t"   . org-table-create)
+         ("C-c u"   . org-up-element)
+         ("C-c s e" . org-edit-src-code)
+         ("C-c s i" . org-insert-src-block))
+  :config
+  (evil-define-key 'normal org-mode-map
+    (kbd "TAB") 'org-cycle              ; for terminal
+    " se"       'org-edit-src-code
+    " si"       'org-insert-src-block
+    " ta"       'org-table-create
+    " tl"       'org-tags-view
+    " ts"       'org-set-tags)
+  (defun org-insert-src-block (src-code-type)
+    "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
+    (interactive
+     (let ((src-code-types
+            '("emacs-lisp" "python" "c" "sh" "java" "js" "clojure" "c++"
+              "css" "html" "calc" "asymptote" "dot" "gnuplot"
+              "octave" "R" "sass" "sql" "awk" "ditaa"
+              "haskell" "latex" "lisp" "matlab" "org" "perl" "ruby"
+              "scheme" "sqlite" )))
+       (list (ido-completing-read "Source code type: " src-code-types))))
+    (progn
+      (insert (format "#+BEGIN_SRC %s\n" src-code-type))
+      (newline-and-indent)
+      (insert "#+END_SRC\n")
+      (line-move -2)
+      (org-edit-src-code)))
+  (defun my-org-inline-css-hook (exporter)
+    (when (eq exporter 'html)
+      (setq-local org-html-head-include-default-style nil)
+      (setq-local org-html-head
+                  (concat "<style type=\"text/css\">\n"
+                          "<!--/*--><![CDATA[/*><!--*/\n"
+                          (with-temp-buffer
+                            (insert-file-contents
+                             "~/.emacs.d/conf.d/sk-utils/org.css")
+                            (buffer-string))
+                          "/*]]>*/-->\n"
+                          "</style>\n")))
+    (when (eq exporter 'reveal)
+      (setq-local org-export-with-toc nil)))
+  (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
+        org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
+                                "\\|"
+                                "\\(fn:[-_[:word:]]+\\)\\)"))
+  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
+
+(use-package ibuffer
+  :ensure t
+  :bind ("C-x C-b" . ibuffer)
+  :init
+  (evil-leader/set-key
+    "xb" 'ibuffer)
+  :config
+  (setq ibuffer-saved-filter-groups
+        '(("home"
+           ("Emacs-config" (or (filename . ".emacs")
+                               (filename . ".emacs.d")
+                               (filename . "emacs-config")))
+           ("Org / MD" (or (mode . org-mode)
+                           (mode . markdown-mode)
+                           (filename . "OrgMode")))
+           ("Magit" (mode . magit-status-mode))
+           ("Code" (or (mode . c-mode)
+                       (mode . c++-mode)
+                       (mode . makefile-gmake-mode)
+                       (mode . asm-mode)
+                       (mode . python-mode)
+                       (mode . java-mode)
+                       (mode . lisp-mode)
+                       (mode . clojure-mode)
+                       (mode . scheme-mode)
+                       (mode . web-mode)
+                       (mode . js2-mode)
+                       (mode . go-mode)))
+           ("Dired" (mode . dired-mode))
+           ("Help" (or (name . "\*Help\*")
+                       (name . "\*Apropos\*")
+                       (name . "\*info\*"))))))
+  (setq ibuffer-expert t
+        ibuffer-sorting-mode 'alphabetic
+        ibuffer-default-sorting-mode 'major-mode)
+  (defun my-ibuffer-unmark-all ()
+    "Unmark all immdiately"
+    (interactive)
+    (ibuffer-unmark-all ?\s))
+  (define-key ibuffer-mode-map (kbd "* *") 'my-ibuffer-unmark-all)
+  (define-ibuffer-column size
+    (:name "Size" :inline t)
+    (cond
+     ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+     ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+     (t (format "%8d" (buffer-size)))))
+
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-auto-mode 1)
+               (ibuffer-switch-to-saved-filter-groups "home"))))
+
+(use-package shell
+  :defer t
+  :config
+  (bind-key "C-c C-l" 'counsel-shell-history shell-mode-map)
+  (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
+  (defun my-shell-setup ()
+    (setq-local company-minimum-prefix-length 3))
+  (add-hook 'shell-mode-hook 'my-shell-setup))
+
+(use-package eshell
+  :defer t
+  :config
+  ;; Clear Eshell buffer
+  (defun eshell/clear ()
+    (interactive)
+    (let ((inhibit-read-only t))
+      (erase-buffer)
+      (execute-kbd-macro (kbd "<RET>"))))
+  (defun my-eshell-setup ()
+    (progn
+      (setenv "TERM" "screen-256color")
+      (setq-local company-minimum-prefix-length 3)
+      (bind-key "C-c C-l" 'counsel-esh-history eshell-mode-map)))
+  (evil-leader/set-key-for-mode 'eshell-mode "l" 'counsel-esh-history)
+  (add-hook 'eshell-mode-hook 'my-eshell-setup))
+
+(use-package cc-cmds
+  :bind (("C-<backspace>" . c-hungry-backspace)
+         ("C-c <DEL>"     . c-hungry-backspace)
+         :map evil-normal-state-map
+         ("<SPC> <DEL>"   . c-hungry-backspace)))
+
+(use-package paren
+  :init
+  (show-paren-mode t))
+
+(use-package hl-line
+  :init
+  (global-hl-line-mode t))
+
+(use-package ansi-color
+  :hook (compilation-filter . my-ansi-colorize-buffer)
+  :config
+  (defun my-ansi-colorize-buffer ()
+    (let ((buffer-read-only nil))
+      (ansi-color-apply-on-region (point-min) (point-max)))))
+
+(use-package display-line-numbers
+  :hook ((find-file prog-mode) . display-line-numbers-mode)
+  :config
+  (setq-default display-line-numbers-width 3
+                display-line-numbers-type 'visual
+                display-line-numbers-current-absolute nil))
+
+(use-package tramp
+  :defer t
+  :config
+  ;; TRAMP respect PATH variable on remote machine.
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
+
+;;; External packages
+(use-package evil-leader
+  :ensure t
+  :init
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+    "0"  'delete-window
+    "1"  'delete-other-windows
+    "2"  'split-window-below
+    "3"  'split-window-right
+    ","  'other-window
+    "q"  'kill-buffer
+    "Q"  'kill-emacs
+    "u"  'pop-to-mark-command
+    "w"  'save-buffer
+    "hb" 'describe-bindings
+    "hk" 'describe-key
+    "xr" 'read-only-mode
+    "xv" 'evil-reload-file)
+  (defun evil-sub-leader-mode ()
+    (let* ((sub-leader (kbd "M-m"))
+           (mode-map (cdr (assoc major-mode evil-leader--mode-maps)))
+           (map (or mode-map evil-leader--default-map)))
+      (evil-normalize-keymaps)
+      (define-key evil-motion-state-local-map sub-leader map)
+      (define-key evil-emacs-state-local-map sub-leader map)))
+  (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
+  (setq evil-leader/no-prefix-mode-rx
+        '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
+
+(use-package evil
+  :ensure t
+  :bind (:map evil-insert-state-map
+         ("C-a" . move-beginning-of-line)
+         ("C-e" . move-end-of-line)
+         ("C-k" . kill-line)
+         :map evil-visual-state-map
+         ("p"   . evil-paste-pgvy)
+         :map evil-ex-completion-map
+         ("C-a" . move-beginning-of-line)
+         ("C-b" . backward-char)
+         ("C-d" . delete-char)
+         ("C-k" . kill-line)
+         ("M-n" . next-complete-history-element)
+         ("M-p" . previous-complete-history-element))
+  :init
+  (evil-mode)
+  :config
+  (add-hook 'evil-insert-state-entry-hook
+            (lambda () (when buffer-read-only (read-only-mode -1))))
+  (defun evil-reload-file ()
+    (interactive)
+    (find-alternate-file (buffer-file-name)))
+  ;; mouse disabled in evil
+  (defun evil-mouse-drag-track (start &optional opt) nil)
+  (defun evil-paste-pgvy ()
+    "Paste and restore visual block and yank."
+    (interactive)
+    (call-interactively 'evil-paste-after)
+    (evil-visual-restore)
+    (call-interactively 'evil-yank))
+  (evil-global-set-key 'normal "Y" (kbd "y$"))
+  (evil-set-initial-state 'term-mode   'emacs)
+  (evil-set-initial-state 'dired-mode  'emacs)
+  (evil-set-initial-state 'shell-mode  'emacs)
+  (evil-set-initial-state 'eshell-mode 'emacs)
+  (evil-set-initial-state 'sql-interactive-mode 'emacs))
+
+(use-package evil-visualstar
+  :ensure t
+  :bind (:map evil-visual-state-map
+         ("/" . evil-visualstar/begin-search-forward)
+         ("?" . evil-visualstar/begin-search-backward)
+         ("n" . evil-visualstar/begin-search-forward)
+         ("N" . evil-visualstar/begin-search-backward))
+  :config
+  (global-evil-visualstar-mode))
+
+(use-package bind-key
+  :ensure t
+  :init
+  (bind-keys ("<mouse-1>"        . nil)
+             ("<mouse-3>"        . nil)
+             ("<down-mouse-1>"   . nil)
+             ("<down-mouse-3>"   . nil)
+             ("<drag-mouse-1>"   . nil)
+             ("<drag-mouse-3>"   . nil)
+             ("<C-down-mouse-1>" . nil)
+             ("<M-down-mouse-1>" . nil)
+             ("<S-down-mouse-1>" . nil)
+             ("M-,"              . other-window)
+             ("C-\\"             . toggle-korean-input-method)))
+
+(use-package company
+  :ensure t
+  :init
+  (global-company-mode 1)
+  (setq company-idle-delay 0.1
+        company-minimum-prefix-length 2)
+  :config
+  (evil-define-key 'insert company-mode-map
+    (kbd "TAB") 'company-indent-or-complete-common))
+
+(use-package company-irony
+  :ensure t
+  :after irony
+  :config
+  (add-to-list 'company-backends 'company-irony))
+
+(use-package company-irony-c-headers
+  :ensure t
+  :after irony
+  :config
+  (add-to-list 'company-backends 'company-irony-c-headers))
+
+(use-package company-tern
+  :ensure t
+  :after tern
+  :config
+  (defun advice-company-tern (&rest args)
+    (if (equal major-mode 'web-mode)
+        (let ((web-mode-cur-language
+               (web-mode-language-at-pos)))
+          (if (or (string= web-mode-cur-language "javascript")
+                  (string= web-mode-cur-language "jsx"))
+              (unless tern-mode (tern-mode))
+            (if tern-mode (tern-mode -1))))))
+  (advice-add 'company-tern :before #'advice-company-tern)
+  (add-to-list 'company-backends 'company-tern))
+
+(use-package company-web
+  :ensure t
+  :after web-mode)
+
+(use-package irony
+  :ensure t
+  :hook ((c++-mode c-mode objc-mode) . irony-mode)
+  :config
+  (defun my-irony-mode-hook ()
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async)
+    (local-set-key (kbd "TAB") 'company-indent-or-complete-common)
+    (irony-cdb-autosetup-compile-options))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook))
+
+(use-package flycheck
+  :disabled t
+  :ensure t
+  :hook ((c-mode c++-mode) . flycheck-mode))
+
+(use-package company-go
+  :ensure t
+  :after go-mode
+  :config
+  (add-to-list 'company-backends 'company-go))
+
+(use-package undo-tree
+  :config
+  (require 'redo+))
+
+(use-package redo+
+  :bind (("C-." . redo+-redo)
+         ("M-_" . redo+-redo)
+         ("C-_" . redo+-undo)
+         ("C-/" . redo+-undo)
+         :map evil-normal-state-map
+         ("u"   . redo+-undo)
+         ("C-r" . redo+-redo))
+  :config
+  (global-undo-tree-mode -1)
+  (defun global-undo-tree-mode (&optional ARG) t)
+  (defalias 'undo-tree-undo 'redo+-undo)
+  (defalias 'undo-tree-redo 'redo+-redo))
+
+(use-package wgrep
+  :ensure t
+  :commands wgrep-change-to-wgrep-mode
+  :bind (:map helm-git-grep-mode-map
+         ("C-c C-e" . wgrep-change-to-wgrep-mode)
+         ("C-c C-s" . wgrep-save-all-buffers)))
+
+(use-package helm-git-grep
+  :disabled t
+  :ensure t
+  :bind (("C-c p" . helm-git-grep-at-point))
+  :init
+  (evil-leader/set-key
+    "p" 'helm-git-grep-at-point))
+
+(use-package helm
+  :ensure t
+  :bind (("C-c i"   . helm-semantic-or-imenu)
+         ("C-c y"   . helm-show-kill-ring)
+         ("C-x C-r" . helm-recentf)
+         ("C-c h o" . helm-occur)
+         ("C-c h r" . helm-resume))
+  :init
+  (evil-leader/set-key
+    "i"  'helm-semantic-or-imenu
+    "y"  'helm-show-kill-ring
+    "r"  'helm-recentf
+    "ho" 'helm-occur
+    "hr" 'helm-resume)
+  :config
+  (helm-autoresize-mode 1)
+  (setq helm-imenu-execute-action-at-once-if-one nil
+        helm-split-window-default-side 'right
+        helm-show-completion-display-function nil))
+
+(use-package helm-ag
+  :disabled t
+  :ensure t
+  :defer t
+  :config
+  (setq helm-ag-insert-at-point 'symbol
+        helm-ag-use-grep-ignore-list t))
+
+(use-package helm-projectile
+  :disabled t
+  :ensure t
+  :commands (helm-projectile-ag helm-do-grep-ag)
+  :bind (("C-c j p" . helm-projectile-ag)
+         ("C-c j P" . helm-do-grep-ag))
+  :init
+  (evil-leader/set-key
+    "jp" 'helm-projectile-ag
+    "jP" 'helm-do-grep-ag))
+
+(use-package projectile
+  :ensure t
+  :commands (projectile-project-p projectile-project-root)
+  :bind (("C-c j d" . projectile-find-dir)
+         ("C-c j k" . projectile-kill-buffers)
+         ("C-c j b" . projectile-switch-to-buffer)
+         ("C-c j s" . projectile-switch-project)
+         ("C-c j S" . projectile-save-project-buffers))
+  :init
+  (evil-leader/set-key
+    "jd" 'projectile-find-dir
+    "jk" 'projectile-kill-buffers
+    "jb" 'projectile-switch-to-buffer
+    "js" 'projectile-switch-project
+    "jS" 'projectile-save-project-buffers)
+  (setq projectile-switch-project-action 'projectile-dired
+        projectile-require-project-root nil
+        projectile-completion-system 'ivy)
+  :config
+  ;; Don't add projectile project automatically.
+  (defun projectile-discover-projects-in-search-path () nil)
+  (projectile-mode 1))
+
+(use-package markdown-mode
+  :ensure t
+  :defer t)
+
+(use-package markdown-toc
+  :ensure t
+  :defer t)
+
+(use-package ox-reveal
+  :ensure t
+  :after org
+  :config
+  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
+        org-reveal-title-slide "<h1>%t</h1><h4>%a&nbsp(%e)</h4>"
+        org-reveal-plugins '(classList markdown highlight zoom notes)
+        org-reveal-theme "moon"
+        org-reveal-transition nil
+        org-reveal-center nil))
 
 (use-package neotree
   :ensure t
@@ -619,14 +626,6 @@
   :config
   (global-evil-surround-mode 1))
 
-(use-package ido
-  :disabled t
-  :bind (("C-x d"   . ido-dired)
-         ("C-x C-f" . ido-find-file))
-  :config
-  (ivy-mode t)
-  (defalias 'ido-completing-read 'ivy-completing-read))
-
 (use-package smex
   :ensure t
   :commands smex)
@@ -648,11 +647,6 @@
 (use-package evil-anzu
   :ensure t
   :after anzu)
-
-(use-package recentf
-  :after (:any ido ivy)
-  :config
-  (recentf-mode t))
 
 (use-package htmlize
   :ensure t

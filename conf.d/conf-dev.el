@@ -1,8 +1,32 @@
 ;;; Developement settings
 
+;;; Built-in packages
 (use-package elec-pair
   :defer t
   :hook (prog-mode . electric-pair-mode))
+
+(use-package octave
+  :mode ("\\.m\\'" . octave-mode))
+
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :commands sk-toggle-python
+  :bind (:map python-mode-map
+         ("TAB" . company-indent-or-complete-common))
+  :config
+  (evil-set-initial-state 'inferior-python-mode 'emacs)
+  (elpy-enable)
+  (defun sk-toggle-python ()
+    "Toggle between Python2 and Python3"
+    (interactive)
+    (let ((python (if (equal elpy-rpc-python-command "python3")
+                      "python2"
+                    "python3")))
+      (setq python-shell-interpreter python
+            elpy-rpc-python-command python)
+      (message (concat "Toggled to " python))))
+  (setq imenu-create-index-function 'python-imenu-create-index))
 
 (use-package xref
   :commands xref-find-reference-here
@@ -44,6 +68,8 @@
   :defer t
   :mode ("Makefile.*" . makefile-gmake-mode))
 
+
+;;; External packages
 (use-package cff
   :ensure t
   :defer t
@@ -101,26 +127,6 @@
     (setq-local header-line-format
                 '((which-func-mode ("" which-func-format " "))))
     (setq which-func-unknown "N/A")))
-
-(use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :commands sk-toggle-python
-  :bind (:map python-mode-map
-         ("TAB" . company-indent-or-complete-common))
-  :config
-  (evil-set-initial-state 'inferior-python-mode 'emacs)
-  (elpy-enable)
-  (defun sk-toggle-python ()
-    "Toggle between Python2 and Python3"
-    (interactive)
-    (let ((python (if (equal elpy-rpc-python-command "python3")
-                      "python2"
-                    "python3")))
-      (setq python-shell-interpreter python
-            elpy-rpc-python-command python)
-      (message (concat "Toggled to " python))))
-  (setq imenu-create-index-function 'python-imenu-create-index))
 
 (use-package elpy
   :ensure t
@@ -287,9 +293,6 @@
     (setq-local compile-command
                 "go build -v && go test -v && go vet"))
   (add-hook 'go-mode-hook 'my-go-code-hook))
-
-(use-package octave
-  :mode ("\\.m\\'" . octave-mode))
 
 (use-package format-all
   :ensure t
