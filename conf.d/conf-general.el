@@ -101,6 +101,12 @@
   :config
   (global-evil-visualstar-mode))
 
+(use-package tramp
+  :defer t
+  :config
+  ;; TRAMP respect PATH variable on remote machine.
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
 (use-package display-line-numbers
   :hook ((find-file prog-mode) . display-line-numbers-mode)
   :config
