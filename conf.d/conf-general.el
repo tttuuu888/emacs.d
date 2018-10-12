@@ -692,7 +692,7 @@
     (interactive)
     (term-send-raw-string "\e"))
   ;; to quit fzf with ESC key
-  (define-key term-raw-map "\e" 'term-send-esc)
+  (define-key term-raw-map (kbd "<escape>") 'term-send-esc)
   (defun fzf-here ()
     (interactive)
     (fzf/start default-directory))
