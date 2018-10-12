@@ -170,13 +170,15 @@
     (progn
       (setenv "TERM" "screen-256color")
       (setq-local company-minimum-prefix-length 3)
-      (bind-key "C-c C-l" 'helm-eshell-history eshell-mode-map)))
+      (bind-key "C-c C-l" 'counsel-esh-history eshell-mode-map)))
+  (evil-leader/set-key-for-mode 'eshell-mode "l" 'counsel-esh-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
 (use-package shell
   :defer t
   :config
-  (bind-key "C-c C-l" 'helm-comint-input-ring shell-mode-map)
+  (bind-key "C-c C-l" 'counsel-shell-history shell-mode-map)
+  (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
   (defun my-shell-setup ()
     (setq-local company-minimum-prefix-length 3))
   (add-hook 'shell-mode-hook 'my-shell-setup))
