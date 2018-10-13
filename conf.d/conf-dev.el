@@ -68,6 +68,15 @@
   :defer t
   :mode ("Makefile.*" . makefile-gmake-mode))
 
+(use-package which-func
+  :defer t
+  :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
+  :config
+  (defun my-which-function-setup ()
+    (which-function-mode)
+    (setq-local header-line-format
+                '((which-func-mode ("" which-func-format " "))))
+    (setq which-func-unknown "N/A")))
 
 ;;; External packages
 (use-package cff
@@ -117,16 +126,6 @@
   :hook ((c-mode-common asm-mode) . cscope-minor-mode)
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
-
-(use-package which-func
-  :defer t
-  :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
-  :config
-  (defun my-which-function-setup ()
-    (which-function-mode)
-    (setq-local header-line-format
-                '((which-func-mode ("" which-func-format " "))))
-    (setq which-func-unknown "N/A")))
 
 (use-package elpy
   :ensure t
