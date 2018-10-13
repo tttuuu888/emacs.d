@@ -62,22 +62,6 @@
                  . fundamental-mode))
   :config
   (require 'dired-x)
-  ;; win32 hiding gid, uid in dired mode
-  (when windowsp
-    (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity))
-    (setq ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))
-
-  (put 'dired-find-alternate-file 'disabled nil)
-
-  "Sort dired listings with directories first."
-  (advice-add 'dired-readin :after
-              (lambda (&rest args)
-                (save-excursion
-                  (let (buffer-read-only)
-                    (forward-line 2) ;; beyond dir. header
-                    (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
-                  (set-buffer-modified-p nil))))
-
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
   (defun dired-visit-file-or-dir ()
     (interactive)
@@ -134,7 +118,12 @@
       (pcase answer
         (?y "yes") (?n "no") (?a "all") (?q "quit"))))
 
-  (setq dired-listing-switches "-alh"
+  ;; win32 hiding gid, uid in dired mode
+  (when windowsp
+    (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity)
+          ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))
+
+  (setq dired-listing-switches "-alh --group-directories-first"
         dired-omit-extensions '("~")
         dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
 
