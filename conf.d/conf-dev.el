@@ -148,16 +148,13 @@
           (evil-normal-state nil)
           (evil-forward-char))
       (call-interactively 'paredit-kill)))
-  (evil-define-key 'normal paredit-mode-map " k" 'evil-paredit-kill)
   (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill)
-  (evil-leader/set-key-for-mode 'emacs-lisp-mode
-    "eb" 'eval-buffer
-    "ee" 'eval-last-sexp
-    "er" 'eval-region)
-  (evil-leader/set-key-for-mode 'lisp-interaction-mode
-    "eb" 'eval-buffer
-    "ee" 'eval-last-sexp
-    "er" 'eval-region))
+  (dolist (mm '(emacs-lisp-mode lisp-interaction-mode))
+    (evil-leader/set-key-for-mode mm
+      "k"  'evil-paredit-kill
+      "eb" 'eval-buffer
+      "ee" 'eval-last-sexp
+      "er" 'eval-region)))
 
 (use-package clojure-mode
   :ensure t
@@ -167,6 +164,7 @@
     "gd" 'cider-find-dwim
     "gp" 'cider-pop-back)
   (evil-leader/set-key-for-mode 'clojure-mode
+    "k"  'evil-paredit-kill
     "eb" 'cider-eval-buffer
     "ee" 'cider-eval-last-sexp
     "er" 'cider-eval-region
