@@ -262,9 +262,9 @@
 
 (use-package cc-cmds
   :bind (("C-<backspace>" . c-hungry-backspace)
-         ("C-c <DEL>"     . c-hungry-backspace)
-         :map evil-normal-state-map
-         ("<SPC> <DEL>"   . c-hungry-backspace)))
+         ("C-c <DEL>"     . c-hungry-backspace))
+  :init
+  (evil-leader/set-key (kbd "<DEL>") 'c-hungry-backspace))
 
 (use-package paren
   :init
