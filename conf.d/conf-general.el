@@ -483,8 +483,6 @@
   :ensure t
   :bind (("C-c i"   . helm-semantic-or-imenu)
          ("C-c y"   . helm-show-kill-ring)
-         ("C-c j p" . helm-ag-project-or-here)
-         ("C-c j P" . helm-ag-here)
          ("C-x C-r" . helm-recentf)
          ("C-c h o" . helm-occur)
          ("C-c h r" . helm-resume))
@@ -492,13 +490,26 @@
   (evil-leader/set-key
     "i"  'helm-semantic-or-imenu
     "y"  'helm-show-kill-ring
-    "r"  'helm-recentf
     "ho" 'helm-occur
     "hr" 'helm-resume
     "jp" 'helm-ag-project-or-here
     "jP" 'helm-ag-here)
   :config
   (helm-autoresize-mode 1)
+  (setq helm-imenu-execute-action-at-once-if-one nil
+        helm-split-window-default-side 'right
+        helm-show-completion-display-function nil))
+
+(use-package helm-ag
+  :ensure t
+  :commands (helm-ag-project-or-here helm-ag-here)
+  :bind (("C-c j p" . helm-ag-project-or-here)
+         ("C-c j P" . helm-ag-here))
+  :init
+  (evil-leader/set-key
+    "jp" 'helm-ag-project-or-here
+    "jP" 'helm-ag-here)
+  :config
   (defun helm-ag-project-or-here ()
     (interactive)
     (helm-do-ag
@@ -507,14 +518,6 @@
   (defun helm-ag-here ()
     (interactive)
     (helm-do-ag default-directory))
-  (setq helm-imenu-execute-action-at-once-if-one nil
-        helm-split-window-default-side 'right
-        helm-show-completion-display-function nil))
-
-(use-package helm-ag
-  :ensure t
-  :defer t
-  :config
   (setq helm-ag-insert-at-point 'symbol
         helm-ag-use-grep-ignore-list t))
 
