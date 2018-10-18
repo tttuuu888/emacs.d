@@ -362,6 +362,11 @@
   :config
   (global-evil-visualstar-mode))
 
+(use-package evil-matchit
+  :ensure t
+  :config
+  (global-evil-matchit-mode 1))
+
 (use-package bind-key
   :ensure t
   :init
@@ -775,7 +780,7 @@
 
 (use-package counsel
   :ensure t
-  :commands (counsel-ag-here counsel-ag-point counsel-git-grep-point)
+  :commands counsel-fzf-here
   :bind (("M-x"     . counsel-M-x)
          ("C-x d"   . counsel-find-file)
          ("C-x C-f" . counsel-find-file)
@@ -792,6 +797,9 @@
     "hv"    'counsel-describe-variable
     "hf"    'counsel-describe-function)
   :config
+  (defun counsel-fzf-here ()
+    (interactive)
+    (counsel-fzf nil default-directory))
   (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
