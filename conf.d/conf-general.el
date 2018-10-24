@@ -536,12 +536,11 @@
     "jb" 'projectile-switch-to-buffer
     "js" 'projectile-switch-project
     "jS" 'projectile-save-project-buffers)
-  (setq projectile-switch-project-action 'projectile-dired
+  (setq projectile-completion-system 'ivy
         projectile-require-project-root nil
-        projectile-completion-system 'ivy)
+        projectile-switch-project-action 'projectile-dired
+        projectile-track-known-projects-automatically nil)
   :config
-  ;; Don't add projectile project automatically.
-  (defun projectile-discover-projects-in-search-path () nil)
   (projectile-mode 1))
 
 (use-package markdown-mode
