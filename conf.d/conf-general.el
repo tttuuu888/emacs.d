@@ -352,6 +352,10 @@
   (evil-set-initial-state 'eshell-mode 'emacs)
   (evil-set-initial-state 'sql-interactive-mode 'emacs))
 
+(use-package evil-anzu
+  :ensure t
+  :after anzu)
+
 (use-package evil-visualstar
   :ensure t
   :bind (:map evil-visual-state-map
@@ -366,6 +370,16 @@
   :ensure t
   :config
   (global-evil-matchit-mode 1))
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
 
 (use-package bind-key
   :ensure t
@@ -604,11 +618,6 @@
   (evil-leader/set-key
     "=" 'er/expand-region))
 
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
-
 (use-package smex
   :ensure t
   :commands smex)
@@ -626,10 +635,6 @@
         anzu-replace-threshold 1000)
   (advice-remove #'isearch-forward #'isearch-anzu-advice)
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
-
-(use-package evil-anzu
-  :ensure t
-  :after anzu)
 
 (use-package htmlize
   :ensure t
