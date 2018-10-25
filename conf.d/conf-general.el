@@ -402,7 +402,8 @@
 
 (use-package evil-commentary
   :config
-  (evil-commentary-mode))
+  (evil-commentary-mode)
+  (evil-ex-define-cmd "gc" 'evil-commentary))
 
 (use-package bind-key
   :init
