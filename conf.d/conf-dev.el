@@ -2,13 +2,16 @@
 
 ;;; Built-in packages
 (use-package elec-pair
+  :ensure nil
   :defer t
   :hook (prog-mode . electric-pair-mode))
 
 (use-package octave
+  :ensure nil
   :mode ("\\.m\\'" . octave-mode))
 
 (use-package python
+  :ensure nil
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
@@ -29,6 +32,7 @@
   (setq imenu-create-index-function 'python-imenu-create-index))
 
 (use-package xref
+  :ensure nil
   :commands xref-find-reference-here
   :bind (:map xref--xref-buffer-mode-map
          ("<return>" . xref-quit-and-goto-xref)
@@ -46,6 +50,7 @@
     (xref-find-references (thing-at-point 'symbol))))
 
 (use-package gdb-mi
+  :ensure nil
   :defer t
   :init
   (advice-add 'gdb-setup-windows :after
@@ -65,10 +70,12 @@
                ("k" . previous-line))))
 
 (use-package make-mode
+  :ensure nil
   :defer t
   :mode ("Makefile.*" . makefile-gmake-mode))
 
 (use-package which-func
+  :ensure nil
   :defer t
   :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
   :config
@@ -80,14 +87,12 @@
 
 ;;; External packages
 (use-package cff
-  :ensure t
   :defer t
   :init
   (add-hook 'c-mode-common-hook
             (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
 
 (use-package ggtags
-  :ensure t
   :hook ((c-mode-common asm-mode) . ggtags-mode)
   :config
   (evil-define-key 'normal ggtags-mode-map
@@ -98,7 +103,6 @@
 
 (use-package rtags
   :disabled t
-  :ensure t
   :defer t
   :commands my-rtags-index
   :init
@@ -122,17 +126,14 @@
         (shell-command (concat "rc -J " dir))))))
 
 (use-package xcscope
-  :ensure t
   :hook ((c-mode-common asm-mode) . cscope-minor-mode)
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
 
 (use-package elpy
-  :ensure t
   :defer t)
 
 (use-package paredit
-  :ensure t
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
   :bind (:map paredit-mode-map
          ("C-c <right>" . paredit-forward-slurp-sexp)
@@ -157,7 +158,6 @@
       "er" 'eval-region)))
 
 (use-package clojure-mode
-  :ensure t
   :mode ("\\.clj\\'" . clojure-mode)
   :config
   (evil-define-key 'normal clojure-mode-map
@@ -171,7 +171,6 @@
     "ex" 'cider-eval-last-sexp-and-replace))
 
 (use-package cider
-  :ensure t
   :commands cider-jack-in
   :config
   (evil-set-initial-state 'cider-repl-mode       'emacs)
@@ -184,11 +183,9 @@
 
 (use-package clj-refactor
   :disabled t
-  :ensure t
   :mode ("\\.clj\\'" . clojure-mode))
 
 (use-package slime
-  :ensure t
   :commands slime
   :init
   (setq inferior-lisp-program "clisp"
@@ -197,7 +194,6 @@
   (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol))
 
 (use-package geiser
-  :ensure t
   :commands geiser run-geiser
   :init
   (setq geiser-active-implementations '(chicken guile))
@@ -207,7 +203,6 @@
   (unbind-key "M-," geiser-mode-map))
 
 (use-package web-mode
-  :ensure t
   :mode (("\\.html\\'" . web-mode)
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
@@ -227,7 +222,6 @@
   (add-hook 'web-mode-hook 'my-web-mode-hook))
 
 (use-package js2-mode
-  :ensure t
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
   :bind (:map js2-mode-map
@@ -240,23 +234,19 @@
 
 (use-package js2-refactor
   :disabled t
-  :ensure t
   :defer t
   :config
   (js2r-add-keybindings-with-prefix "C-c C-n"))
 
 (use-package rjsx-mode
-  :ensure t
   :defer t
   :init
   (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode)))
 
 (use-package emmet-mode
-  :ensure t
   :hook (web-mode js2-mode css-mode))
 
 (use-package tern
-  :ensure t
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
   :config
   (evil-define-key 'normal tern-mode-keymap
@@ -271,7 +261,6 @@
     (yas-minor-mode)))
 
 (use-package go-mode
-  :ensure t
   :mode ("\\.go\\'" . go-mode)
   :bind (:map go-mode-map
          ("M-." . godef-jump)
@@ -292,7 +281,6 @@
   (add-hook 'go-mode-hook 'my-go-code-hook))
 
 (use-package format-all
-  :ensure t
   :defer t)
 
 

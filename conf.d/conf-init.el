@@ -62,7 +62,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(setq use-package-enable-imenu-support t)
+(setq use-package-always-ensure t
+      use-package-enable-imenu-support t)
 (require 'use-package)
 
 (require 'conf-general)

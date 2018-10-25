@@ -2,10 +2,12 @@
 
 ;;; Personal packages
 (use-package sk-mode-line
+  :ensure nil
   :config
   (sk-mode-line))
 
 (use-package sk-utils
+  :ensure nil
   :commands (insert-date insert-date-and-time nuke-all-buffers
              hide-ctrl-M izero-insert idef-insert move-line
              buffer-save-or-load sk-clang-complete-make
@@ -23,7 +25,23 @@
          ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
          ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
 
+(use-package redo+
+  :ensure nil
+  :bind (("C-." . redo+-redo)
+         ("M-_" . redo+-redo)
+         ("C-_" . redo+-undo)
+         ("C-/" . redo+-undo)
+         :map evil-normal-state-map
+         ("u"   . redo+-undo)
+         ("C-r" . redo+-redo))
+  :config
+  (global-undo-tree-mode -1)
+  (defun global-undo-tree-mode (&optional ARG) t)
+  (defalias 'undo-tree-undo 'redo+-undo)
+  (defalias 'undo-tree-redo 'redo+-redo))
+
 (use-package company-sql
+  :ensure nil
   :hook ((sql-mode sql-interactive-mode) . my-sql-mode-hook)
   :config
   (defun my-sql-mode-hook ()
@@ -33,11 +51,13 @@
 
 ;;; Built-in packages
 (use-package recentf
+  :ensure nil
   :after (:any ido ivy)
   :config
   (recentf-mode t))
 
 (use-package ido
+  :ensure nil
   :disabled t
   :bind (("C-x d"   . ido-dired)
          ("C-x C-f" . ido-find-file))
@@ -46,6 +66,7 @@
   (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package dired
+  :ensure nil
   :defer t
   :bind (:map dired-mode-map
          ("M-o"   . dired-omit-mode)
@@ -128,6 +149,7 @@
         dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
 
 (use-package org
+  :ensure nil
   :mode ("\\.org\\'" . org-mode)
   :bind (:map org-mode-map
          ("TAB"     . org-cycle)        ; for terminal
@@ -183,7 +205,7 @@
   (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
 
 (use-package ibuffer
-  :ensure t
+  :ensure nil
   :bind ("C-x C-b" . ibuffer)
   :init
   (evil-leader/set-key
@@ -223,6 +245,7 @@
                (ibuffer-switch-to-saved-filter-groups "home"))))
 
 (use-package shell
+  :ensure nil
   :defer t
   :config
   (bind-key "C-c C-l" 'counsel-shell-history shell-mode-map)
@@ -232,6 +255,7 @@
   (add-hook 'shell-mode-hook 'my-shell-setup))
 
 (use-package eshell
+  :ensure nil
   :defer t
   :config
   ;; Clear Eshell buffer
@@ -249,20 +273,24 @@
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
 (use-package cc-cmds
+  :ensure nil
   :bind (("C-<backspace>" . c-hungry-backspace)
          ("C-c <DEL>"     . c-hungry-backspace))
   :init
   (evil-leader/set-key (kbd "<DEL>") 'c-hungry-backspace))
 
 (use-package paren
+  :ensure nil
   :init
   (show-paren-mode t))
 
 (use-package hl-line
+  :ensure nil
   :init
   (global-hl-line-mode t))
 
 (use-package ansi-color
+  :ensure nil
   :hook (compilation-filter . my-ansi-colorize-buffer)
   :config
   (defun my-ansi-colorize-buffer ()
@@ -270,6 +298,7 @@
       (ansi-color-apply-on-region (point-min) (point-max)))))
 
 (use-package display-line-numbers
+  :ensure nil
   :hook ((find-file prog-mode) . display-line-numbers-mode)
   :config
   (setq-default display-line-numbers-width 3
@@ -277,6 +306,7 @@
                 display-line-numbers-current-absolute nil))
 
 (use-package tramp
+  :ensure nil
   :defer t
   :config
   ;; TRAMP respect PATH variable on remote machine.
@@ -285,7 +315,6 @@
 
 ;;; External packages
 (use-package evil-leader
-  :ensure t
   :init
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
@@ -315,7 +344,6 @@
         '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
 
 (use-package evil
-  :ensure t
   :bind (:map evil-insert-state-map
          ("C-a" . move-beginning-of-line)
          ("C-e" . move-end-of-line)
@@ -353,11 +381,9 @@
   (evil-set-initial-state 'sql-interactive-mode 'emacs))
 
 (use-package evil-anzu
-  :ensure t
   :after anzu)
 
 (use-package evil-visualstar
-  :ensure t
   :bind (:map evil-visual-state-map
          ("/" . evil-visualstar/begin-search-forward)
          ("?" . evil-visualstar/begin-search-backward)
@@ -367,22 +393,18 @@
   (global-evil-visualstar-mode))
 
 (use-package evil-matchit
-  :ensure t
   :config
   (global-evil-matchit-mode 1))
 
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 
 (use-package evil-commentary
-  :ensure t
   :config
   (evil-commentary-mode))
 
 (use-package bind-key
-  :ensure t
   :init
   (bind-keys ("<mouse-1>"        . nil)
              ("<mouse-3>"        . nil)
@@ -397,7 +419,6 @@
              ("C-\\"             . toggle-korean-input-method)))
 
 (use-package company
-  :ensure t
   :init
   (global-company-mode 1)
   (setq company-idle-delay 0.1
@@ -407,19 +428,16 @@
     (kbd "TAB") 'company-indent-or-complete-common))
 
 (use-package company-irony
-  :ensure t
   :after irony
   :config
   (add-to-list 'company-backends 'company-irony))
 
 (use-package company-irony-c-headers
-  :ensure t
   :after irony
   :config
   (add-to-list 'company-backends 'company-irony-c-headers))
 
 (use-package company-tern
-  :ensure t
   :after tern
   :config
   (defun advice-company-tern (&rest args)
@@ -434,11 +452,14 @@
   (add-to-list 'company-backends 'company-tern))
 
 (use-package company-web
-  :ensure t
   :after web-mode)
 
+(use-package company-go
+  :after go-mode
+  :config
+  (add-to-list 'company-backends 'company-go))
+
 (use-package irony
-  :ensure t
   :hook ((c++-mode c-mode objc-mode) . irony-mode)
   :config
   (defun my-irony-mode-hook ()
@@ -452,42 +473,19 @@
 
 (use-package flycheck
   :disabled t
-  :ensure t
   :hook ((c-mode c++-mode) . flycheck-mode))
-
-(use-package company-go
-  :ensure t
-  :after go-mode
-  :config
-  (add-to-list 'company-backends 'company-go))
 
 (use-package undo-tree
   :config
   (require 'redo+))
 
-(use-package redo+
-  :bind (("C-." . redo+-redo)
-         ("M-_" . redo+-redo)
-         ("C-_" . redo+-undo)
-         ("C-/" . redo+-undo)
-         :map evil-normal-state-map
-         ("u"   . redo+-undo)
-         ("C-r" . redo+-redo))
-  :config
-  (global-undo-tree-mode -1)
-  (defun global-undo-tree-mode (&optional ARG) t)
-  (defalias 'undo-tree-undo 'redo+-undo)
-  (defalias 'undo-tree-redo 'redo+-redo))
-
 (use-package wgrep
-  :ensure t
   :commands wgrep-change-to-wgrep-mode
   :bind (:map helm-git-grep-mode-map
          ("C-c C-e" . wgrep-change-to-wgrep-mode)
          ("C-c C-s" . wgrep-save-all-buffers)))
 
 (use-package helm
-  :ensure t
   :bind (("C-c i"   . helm-semantic-or-imenu)
          ("C-c y"   . helm-show-kill-ring)
          ("C-x C-r" . helm-recentf)
@@ -508,7 +506,6 @@
         helm-show-completion-display-function nil))
 
 (use-package helm-ag
-  :ensure t
   :commands (helm-ag-project-or-here helm-ag-here)
   :bind (("C-c j p" . helm-ag-project-or-here)
          ("C-c j P" . helm-ag-here))
@@ -529,14 +526,12 @@
         helm-ag-use-grep-ignore-list t))
 
 (use-package helm-git-grep
-  :ensure t
   :bind (("C-c p" . helm-git-grep-at-point))
   :init
   (evil-leader/set-key
     "p" 'helm-git-grep-at-point))
 
 (use-package projectile
-  :ensure t
   :commands (projectile-project-p projectile-project-root)
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
@@ -558,15 +553,12 @@
   (projectile-mode 1))
 
 (use-package markdown-mode
-  :ensure t
   :defer t)
 
 (use-package markdown-toc
-  :ensure t
   :defer t)
 
 (use-package ox-reveal
-  :ensure t
   :after org
   :config
   (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
@@ -577,7 +569,6 @@
         org-reveal-center nil))
 
 (use-package neotree
-  :ensure t
   :commands my-neotree-directory
   :bind (("C-c n" . my-neotree-directory)
          :map neotree-mode-map
@@ -598,7 +589,6 @@
       (neotree-dir (projectile-project-p)))))
 
 (use-package magit
-  :ensure t
   :bind ("<f12>" . magit-status)
   :config
   (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
@@ -607,11 +597,9 @@
         magit-completing-read-function #'ivy-completing-read))
 
 (use-package avy
-  :ensure t
   :bind ("C-c C-SPC" . avy-goto-subword-1))
 
 (use-package expand-region
-  :ensure t
   :bind (("C-="   . er/expand-region)
          ("C-c =" . er/expand-region))
   :init
@@ -619,11 +607,9 @@
     "=" 'er/expand-region))
 
 (use-package smex
-  :ensure t
   :commands smex)
 
 (use-package anzu
-  :ensure t
   :defer t
   :init
   (defun isearch-anzu-advice (&rest args)
@@ -637,16 +623,13 @@
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
 (use-package htmlize
-  :ensure t
   :after org)
 
 (use-package korean-holidays
-  :ensure t
   :config
   (setq calendar-holidays korean-holidays))
 
 (use-package visual-regexp
-  :ensure t
   :bind (("C-c r" . vr/replace)
          ("C-c q" . vr/query-replace)
          :map evil-motion-state-map
@@ -654,11 +637,9 @@
          ("gQ"    . vr/query-replace)))
 
 (use-package visual-regexp-steroids
-  :ensure t
   :after visual-regexp)
 
 (use-package fzf
-  :ensure t
   :bind (("C-c j o" . fzf)
          ("C-c j h" . fzf-here)
          ("C-c o"   . fzf-git-files))
@@ -681,17 +662,14 @@
   (setq fzf/window-height 20))
 
 (use-package yasnippet
-  :ensure t
   :commands yas-minor-mode
   :config
   (yas-reload-all))
 
 (use-package yasnippet-snippets
-  :ensure t
   :after yasnippet)
 
 (use-package plantuml-mode
-  :ensure t
   :mode ("\\.puml\\'" . plantuml-mode)
   :bind (:map plantuml-mode-map
          ("TAB" . company-indent-or-complete-common)
@@ -705,7 +683,6 @@
      (lambda (&rest args) (message "PlantUML process is done")))))
 
 (use-package ivy
-  :ensure t
   :bind (("C-x b"    . ivy-switch-buffer)
          :map minibuffer-inactive-mode-map
          ("<escape>" . abort-recursive-edit)
@@ -773,7 +750,6 @@
           (ivy-switch-buffer . ivy-sort-function-buffer))))
 
 (use-package ivy-yasnippet
-  :ensure t
   :after yasnippet
   :bind (:map yas-minor-mode-map
          ("C-c /" . ivy-yasnippet)
@@ -783,7 +759,6 @@
   (advice-add 'ivy-yasnippet :before #'(lambda () (evil-insert-state))))
 
 (use-package counsel
-  :ensure t
   :commands counsel-fzf-here
   :bind (("M-x"     . counsel-M-x)
          ("C-x d"   . counsel-find-file)
@@ -807,7 +782,6 @@
   (setq ivy-height-alist '((t . 15))))
 
 (use-package which-key
-  :ensure t
   :init
   (which-key-mode))
 
