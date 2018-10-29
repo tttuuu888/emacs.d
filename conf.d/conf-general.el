@@ -775,7 +775,8 @@
     "f"     'counsel-find-file
     "r"     'counsel-recentf
     "hv"    'counsel-describe-variable
-    "hf"    'counsel-describe-function)
+    "hf"    'counsel-describe-function
+    "jc"    'counsel-fzf-here)
   :config
   (defun counsel-fzf-here ()
     (interactive)
