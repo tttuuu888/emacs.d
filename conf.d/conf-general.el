@@ -268,7 +268,9 @@
     (progn
       (setenv "TERM" "screen-256color")
       (setq-local company-minimum-prefix-length 3)
-      (bind-key "C-c C-l" 'counsel-esh-history eshell-mode-map)))
+      (bind-keys :map eshell-mode-map
+                 ("TAB"     . completion-at-point)
+                 ("C-c C-l" . counsel-esh-history))))
   (evil-leader/set-key-for-mode 'eshell-mode "l" 'counsel-esh-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
