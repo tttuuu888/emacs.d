@@ -85,6 +85,11 @@
                 '((which-func-mode ("" which-func-format " "))))
     (setq which-func-unknown "N/A")))
 
+(use-package sh-script
+  :ensure nil
+  :defer t
+  :hook (sh-mode . (lambda () (sh-electric-here-document-mode -1))))
+
 ;;; External packages
 (use-package cff
   :defer t
