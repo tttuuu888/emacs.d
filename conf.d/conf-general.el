@@ -151,8 +151,9 @@
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
+  :hook ((org-mode . my-org-mode-hook)
+         (org-export-before-processing-hook . my-org-inline-css-hook))
   :bind (:map org-mode-map
-         ("TAB"     . org-cycle)        ; for terminal
          ("C-c a"   . org-agenda)
          ("C-c b"   . org-iswitchb)
          ("C-c l"   . org-store-link)
@@ -184,6 +185,8 @@
       (insert "#+END_SRC\n")
       (line-move -2)
       (org-edit-src-code)))
+  (defun my-org-mode-hook ()
+    (define-key evil-motion-state-local-map (kbd "TAB") 'org-cycle))
   (defun my-org-inline-css-hook (exporter)
     (when (eq exporter 'html)
       (setq-local org-html-head-include-default-style nil)
@@ -201,8 +204,7 @@
   (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
         org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                 "\\|"
-                                "\\(fn:[-_[:word:]]+\\)\\)"))
-  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
+                                "\\(fn:[-_[:word:]]+\\)\\)")))
 
 (use-package ibuffer
   :ensure nil
