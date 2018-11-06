@@ -361,6 +361,8 @@
          ("C-k" . kill-line)
          ("M-n" . next-complete-history-element)
          ("M-p" . previous-complete-history-element))
+  :custom
+  (evil-want-C-u-scroll t)
   :init
   (evil-mode)
   :config
