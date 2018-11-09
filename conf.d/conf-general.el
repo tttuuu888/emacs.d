@@ -53,8 +53,11 @@
 (use-package recentf
   :ensure nil
   :after (:any ido ivy)
+  :custom (recentf-max-saved-items 100)
   :config
-  (recentf-mode t))
+  (recentf-mode t)
+  (add-to-list 'recentf-exclude
+               (format "%s/\\.emacs\\.d/elpa/.*" (getenv "HOME"))))
 
 (use-package ido
   :ensure nil
