@@ -4,27 +4,7 @@
 (use-package elec-pair
   :ensure nil
   :defer t
-  :hook (prog-mode . electric-pair-mode)
-  :config
-  (defun my-delete-char-1 ()
-    (interactive)
-    (delete-char 1))
-  (define-key evil-insert-state-map "x"
-    `(menu-item
-      "" my-delete-char-1
-      :filter
-      ,(lambda (cmd)
-         (let* ((prev (char-before))
-                (next (char-after))
-                (syntax-info (and prev
-                                  (electric-pair-syntax-info prev)))
-                (syntax (car syntax-info))
-                (pair (cadr syntax-info)))
-           (and next pair
-                (memq syntax '(?\( ?\" ?\$))
-                (eq pair next)
-                (not (bound-and-true-p paredit-mode))
-                cmd))))))
+  :hook (prog-mode . electric-pair-mode))
 
 (use-package octave
   :ensure nil
