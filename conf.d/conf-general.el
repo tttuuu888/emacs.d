@@ -167,6 +167,7 @@
          ("C-c s i" . org-insert-src-block))
   :config
   (evil-leader/set-key-for-mode 'org-mode
+    "cl" 'org-insert-link
     "se" 'org-edit-src-code
     "si" 'org-insert-src-block
     "ta" 'org-table-create
