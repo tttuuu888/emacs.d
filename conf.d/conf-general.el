@@ -594,6 +594,7 @@
   (evil-leader/set-key
     "n" 'my-neotree-directory)
   :config
+  (evil-set-initial-state 'neotree-mode 'emacs)
   (defun my-neotree-directory ()
     (interactive)
     (if (neo-global--window-exists-p)
