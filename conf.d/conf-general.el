@@ -527,7 +527,7 @@
   (defun helm-ag-project-or-here ()
     (interactive)
     (helm-do-ag
-     (or (projectile-project-root) default-directory)
+     (my-project-root-or-dir)
      (car (projectile-parse-dirconfig-file))))
   (defun helm-ag-here ()
     (interactive)
@@ -542,7 +542,7 @@
     "p" 'helm-git-grep-at-point))
 
 (use-package projectile
-  :commands (projectile-project-p projectile-project-root)
+  :commands my-project-root-or-dir
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
          ("C-c j b" . projectile-switch-to-buffer)
@@ -560,7 +560,9 @@
         projectile-switch-project-action 'projectile-dired
         projectile-track-known-projects-automatically nil)
   :config
-  (projectile-mode 1))
+  (projectile-mode 1)
+  (defun my-project-root-or-dir ()
+    (or (projectile-project-root) default-directory)))
 
 (use-package markdown-mode
   :defer t)
@@ -596,7 +598,7 @@
     (interactive)
     (if (neo-global--window-exists-p)
         (neotree-hide)
-      (neotree-dir (projectile-project-p)))))
+      (neotree-dir (my-project-root-or-dir)))))
 
 (use-package magit
   :bind ("<f12>" . magit-status)

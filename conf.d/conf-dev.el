@@ -125,7 +125,7 @@
     (interactive)
     (let ((dir (find-file-in-tree (file-name-directory default-directory)
                                   "compile_commands.json"
-                                  (projectile-project-p))))
+                                  (my-project-root-or-dir))))
       (if (equal dir nil)
           (message "You can make 'compile_commands.json' by 'bear make'.")
         (shell-command (concat "rc -J " dir))))))
