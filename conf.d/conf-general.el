@@ -154,8 +154,7 @@
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
-  :hook ((org-mode . my-org-mode-hook)
-         (org-export-before-processing-hook . my-org-inline-css-hook))
+  :hook (org-export-before-processing-hook . my-org-inline-css-hook)
   :bind (:map org-mode-map
          ("C-c a"   . org-agenda)
          ("C-c b"   . org-iswitchb)
@@ -173,6 +172,18 @@
     "ta" 'org-table-create
     "tl" 'org-tags-view
     "ts" 'org-set-tags)
+  (evil-define-key 'motion org-mode-map
+    (kbd "TAB") 'org-cycle
+    "gh"        'org-up-element
+    "gl"        'org-down-element
+    "gj"        'org-forward-element
+    "gk"        'org-backward-element)
+
+  (evil-declare-motion 'org-up-element)
+  (evil-declare-motion 'org-down-element)
+  (evil-declare-motion 'org-forward-element)
+  (evil-declare-motion 'org-backward-element)
+
   (defun org-insert-src-block (src-code-type)
     "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
     (interactive
@@ -189,8 +200,6 @@
       (insert "#+END_SRC\n")
       (line-move -2)
       (org-edit-src-code)))
-  (defun my-org-mode-hook ()
-    (define-key evil-motion-state-local-map (kbd "TAB") 'org-cycle))
   (defun my-org-inline-css-hook (exporter)
     (when (eq exporter 'html)
       (setq-local org-html-head-include-default-style nil)
