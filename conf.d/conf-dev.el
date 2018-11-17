@@ -178,8 +178,19 @@
 (use-package cider
   :commands cider-jack-in
   :config
-  (evil-set-initial-state 'cider-repl-mode       'emacs)
-  (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
+  (evil-set-initial-state 'cider-auto-test-mode           'emacs)
+  (evil-set-initial-state 'cider-browse-ns-mode           'emacs)
+  (evil-set-initial-state 'cider-browse-spec-example-mode 'emacs)
+  (evil-set-initial-state 'cider-browse-spec-mode         'emacs)
+  (evil-set-initial-state 'cider-browse-spec-view-mode    'emacs)
+  (evil-set-initial-state 'cider-docview-mode             'emacs)
+  (evil-set-initial-state 'cider-enlighten-mode           'emacs)
+  (evil-set-initial-state 'cider-inspector-mode           'emacs)
+  (evil-set-initial-state 'cider-popup-buffer-mode        'emacs)
+  (evil-set-initial-state 'cider-repl-history-mode        'emacs)
+  (evil-set-initial-state 'cider-repl-mode                'emacs)
+  (evil-set-initial-state 'cider-stacktrace-mode          'emacs)
+  (evil-set-initial-state 'cider-test-report-mode         'emacs)
   (setq cider-inject-dependencies-at-jack-in nil)
   (unbind-key "M-," cider-mode-map)
   (unbind-key "M-," cider-repl-mode-map)
