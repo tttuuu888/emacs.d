@@ -184,7 +184,11 @@
   (unbind-key "M-," cider-mode-map)
   (unbind-key "M-," cider-repl-mode-map)
   (bind-key "M-[" 'cider-pop-back cider-mode-map)
-  (bind-key "M-[" 'cider-pop-back cider-repl-mode-map))
+  (bind-key "M-[" 'cider-pop-back cider-repl-mode-map)
+  (evil-leader/set-key-for-mode 'clojure-mode
+    "z"  'cider-switch-to-repl-buffer)
+  (evil-leader/set-key-for-mode 'cider-repl-mode
+    "z"  'cider-switch-to-last-clojure-buffer))
 
 (use-package clj-refactor
   :disabled t
