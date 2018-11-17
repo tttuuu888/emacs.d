@@ -347,6 +347,7 @@
     "w"  'save-buffer
     "hb" 'describe-bindings
     "hk" 'describe-key
+    "hm" 'describe-mode
     "xr" 'read-only-mode
     "xv" 'evil-reload-file)
   (defun evil-sub-leader-mode ()
