@@ -236,6 +236,8 @@
                            (filename . "OrgMode")))
            ("Magit" (mode . magit-status-mode))
            ("Code" (derived-mode . prog-mode))
+           ("Shell" (or (mode . shell-mode)
+                        (mode . eshell-mode)))
            ("Dired" (mode . dired-mode))
            ("Help" (or (name . "\*Help\*")
                        (name . "\*Apropos\*")
