@@ -159,15 +159,18 @@
          (base (if next-week "++8" "++1"))
          (monday (org-read-date nil t base nil (org-read-date nil t "-sun")))
          (friday (time-add monday (* 4 24 3600)))
-         (month-of-monday (format-time-string "%m" monday))
-         (month-of-friday (format-time-string "%m" friday))
+         (month-of-monday (format-time-string "%-1m" monday))
+         (month-of-friday (format-time-string "%-1m" friday))
          (month-of-next-friday (if (equal month-of-monday month-of-friday)
                                    ""
-                                 (format "%s월 " month-of-friday)))
-         (start (format-time-string "%W주차  %m월 %d일 ~ " monday))
-         (end (format "%s%s"
+                                 (format "%2s월 " month-of-friday)))
+         (start (format "%2s주차  %2s월 %2s일 ~ "
+                        (format-time-string "%-1W" monday)
+                        (format-time-string "%-1m" monday)
+                        (format-time-string "%-1d" monday)))
+         (end (format "%s%2s일"
                       month-of-next-friday
-                      (format-time-string "%d일" friday))))
+                      (format-time-string "%-1d" friday))))
     (format "%s%s" start end)))
 
 (defun sk-insert-current-week-form ()
