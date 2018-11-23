@@ -22,10 +22,11 @@
  '(org-agenda-files (quote ("~/Dropbox/org/")))
  '(org-babel-load-languages
    (quote
-    ((shell . t)
-     (css . t)
+    ((css . t)
+     (emacs-lisp . t)
      (python . t)
-     (emacs-lisp . t))))
+     (plantuml . t)
+     (shell . t))))
  '(org-export-default-language "kr")
  '(org-export-headline-levels 2)
  '(org-export-time-stamp-file nil)

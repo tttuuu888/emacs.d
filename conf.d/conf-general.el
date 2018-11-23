@@ -154,7 +154,6 @@
 (use-package org
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
-  :hook (org-export-before-processing-hook . my-org-inline-css-hook)
   :bind (:map org-mode-map
          ("C-c a"   . org-agenda)
          ("C-c b"   . org-iswitchb)
@@ -162,13 +161,11 @@
          ("C-c r"   . org-remember)
          ("C-c t"   . org-table-create)
          ("C-c u"   . org-up-element)
-         ("C-c s e" . org-edit-src-code)
-         ("C-c s i" . org-insert-src-block))
+         ("C-c s e" . org-edit-src-code))
   :config
   (evil-leader/set-key-for-mode 'org-mode
     "cl" 'org-insert-link
     "se" 'org-edit-src-code
-    "si" 'org-insert-src-block
     "ta" 'org-table-create
     "tl" 'org-tags-view
     "ts" 'org-set-tags)
@@ -178,12 +175,19 @@
     "gl"        'org-down-element
     "gj"        'org-forward-element
     "gk"        'org-backward-element)
-
   (evil-declare-motion 'org-up-element)
   (evil-declare-motion 'org-down-element)
   (evil-declare-motion 'org-forward-element)
   (evil-declare-motion 'org-backward-element)
 
+  (add-to-list 'org-structure-template-alist
+               '("u" "#+BEGIN_SRC plantuml :file ?.png
+                    \n#+END_SRC"))
+  (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
+  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
+  (defun my-org-inline-image-hook ()
+    (when org-inline-image-overlays
+      (org-redisplay-inline-images)))
   (defun my-org-inline-css-hook (exporter)
     (when (eq exporter 'html)
       (setq-local org-html-head-include-default-style nil)
@@ -198,10 +202,14 @@
                           "</style>\n")))
     (when (eq exporter 'reveal)
       (setq-local org-export-with-toc nil)))
-  (setq org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
+  (setq org-confirm-babel-evaluate nil
+        org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
         org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                 "\\|"
-                                "\\(fn:[-_[:word:]]+\\)\\)")))
+                                "\\(fn:[-_[:word:]]+\\)\\)")
+        org-inline-image-overlays t
+        org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
+        org-startup-with-inline-images t))
 
 (use-package ibuffer
   :ensure nil
