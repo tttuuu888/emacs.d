@@ -24,8 +24,8 @@
    (quote
     ((css . t)
      (emacs-lisp . t)
-     (python . t)
      (plantuml . t)
+     (python . t)
      (shell . t))))
  '(org-export-default-language "kr")
  '(org-export-headline-levels 2)
