@@ -169,8 +169,8 @@
     "ta" 'org-table-create
     "tl" 'org-tags-view
     "ts" 'org-set-tags)
+  (define-key org-mode-map [tab] #'org-cycle)
   (evil-define-key 'motion org-mode-map
-    (kbd "TAB") 'org-cycle
     "gh"        'org-up-element
     "gl"        'org-down-element
     "gj"        'org-forward-element
