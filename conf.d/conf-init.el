@@ -28,7 +28,9 @@
                       :foreground linenum-foreground-color)
   (set-face-attribute 'line-number-current-line nil
                       :background (face-background 'highlight)
-                      :foreground (face-foreground 'default)))
+                      :foreground (face-foreground 'default))
+  (set-face-attribute 'vertical-border nil
+                      :background default-background-color))
 
 (when (and windowsp enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
