@@ -29,6 +29,8 @@
   (set-face-attribute 'line-number-current-line nil
                       :background (face-background 'highlight)
                       :foreground (face-foreground 'default))
+  (set-face-attribute 'fringe nil
+                      :background default-background-color)
   (set-face-attribute 'vertical-border nil
                       :background default-background-color))
 
