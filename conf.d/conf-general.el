@@ -207,7 +207,6 @@
         org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                 "\\|"
                                 "\\(fn:[-_[:word:]]+\\)\\)")
-        org-inline-image-overlays t
         org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
         org-startup-with-inline-images t))
 
