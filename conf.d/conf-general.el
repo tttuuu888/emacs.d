@@ -338,7 +338,6 @@
     "Q"  'kill-emacs
     "u"  'pop-to-mark-command
     "w"  'save-buffer
-    "hb" 'describe-bindings
     "hk" 'describe-key
     "hm" 'describe-mode
     "xr" 'read-only-mode
@@ -780,6 +779,7 @@
   :bind (("M-x"     . counsel-M-x)
          ("C-x d"   . counsel-find-file)
          ("C-x C-f" . counsel-find-file)
+         ("C-h b"   . counsel-descbinds)
          ("C-h v"   . counsel-describe-variable)
          ("C-h f"   . counsel-describe-function)
          :map minibuffer-local-map
@@ -790,6 +790,7 @@
     "d"     'counsel-find-file
     "f"     'counsel-find-file
     "r"     'counsel-recentf
+    "hb"    'counsel-descbinds
     "hv"    'counsel-describe-variable
     "hf"    'counsel-describe-function
     "jc"    'counsel-fzf-here)
