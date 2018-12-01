@@ -3,6 +3,7 @@
 ;;; Personal packages
 (use-package sk-mode-line
   :ensure nil
+  :demand t
   :config
   (sk-mode-line))
 
