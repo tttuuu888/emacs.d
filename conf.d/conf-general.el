@@ -358,12 +358,7 @@
          ("C-a" . move-beginning-of-line)
          ("C-e" . move-end-of-line)
          ("C-k" . kill-line)
-         :map evil-normal-state-map
-         ("j"   . evil-next-visual-line)
-         ("k"   . evil-previous-visual-line)
          :map evil-visual-state-map
-         ("j"   . evil-next-visual-line)
-         ("k"   . evil-previous-visual-line)
          ("p"   . evil-paste-pgvy)
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
@@ -390,6 +385,14 @@
     (call-interactively 'evil-paste-after)
     (evil-visual-restore)
     (call-interactively 'evil-yank))
+  (defun evil-swap-key (map key1 key2)
+    "Swap KEY1 and KEY2 in MAP"
+    (let  ((def1 (lookup-key map key1))
+           (def2 (lookup-key map key2)))
+      (define-key map key1 def2)
+      (define-key map key2 def1)))
+  (evil-swap-key evil-motion-state-map "j" "gj")
+  (evil-swap-key evil-motion-state-map "k" "gk")
   (evil-global-set-key 'normal "Y" (kbd "y$"))
   (evil-set-initial-state 'term-mode   'emacs)
   (evil-set-initial-state 'dired-mode  'emacs)
