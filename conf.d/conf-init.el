@@ -66,7 +66,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(setq use-package-always-ensure t
+(setq use-package-always-defer t
+      use-package-always-ensure t
       use-package-enable-imenu-support t)
 (require 'use-package)
 

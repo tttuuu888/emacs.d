@@ -70,7 +70,6 @@
 
 (use-package dired
   :ensure nil
-  :defer t
   :bind (:map dired-mode-map
          ("M-o"   . dired-omit-mode)
          ("j"     . dired-next-line)
@@ -85,6 +84,7 @@
                '((lambda () (< large-file-warning-threshold (buffer-size)))
                  . fundamental-mode))
   :config
+  (message "tp1")
   (require 'dired-x)
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
   (defun dired-visit-file-or-dir ()
@@ -254,7 +254,6 @@
 
 (use-package shell
   :ensure nil
-  :defer t
   :config
   (bind-key "C-c C-l" 'counsel-shell-history shell-mode-map)
   (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
@@ -264,7 +263,6 @@
 
 (use-package eshell
   :ensure nil
-  :defer t
   :config
   ;; Clear Eshell buffer
   (defun eshell/clear ()
@@ -317,7 +315,6 @@
 
 (use-package tramp
   :ensure nil
-  :defer t
   :config
   ;; TRAMP respect PATH variable on remote machine.
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
@@ -575,11 +572,9 @@
   (defun my-project-root-or-dir ()
     (or (projectile-project-root) default-directory)))
 
-(use-package markdown-mode
-  :defer t)
+(use-package markdown-mode)
 
-(use-package markdown-toc
-  :defer t)
+(use-package markdown-toc)
 
 (use-package ox-reveal
   :after org
@@ -634,7 +629,6 @@
   :commands smex)
 
 (use-package anzu
-  :defer t
   :init
   (defun isearch-anzu-advice (&rest args)
     (global-anzu-mode t))

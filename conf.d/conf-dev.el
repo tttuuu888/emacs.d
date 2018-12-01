@@ -3,7 +3,6 @@
 ;;; Built-in packages
 (use-package elec-pair
   :ensure nil
-  :defer t
   :hook (prog-mode . electric-pair-mode))
 
 (use-package octave
@@ -51,7 +50,6 @@
 
 (use-package gdb-mi
   :ensure nil
-  :defer t
   :init
   (advice-add 'gdb-setup-windows :after
               (lambda (&rest args)
@@ -71,12 +69,10 @@
 
 (use-package make-mode
   :ensure nil
-  :defer t
   :mode ("Makefile.*" . makefile-gmake-mode))
 
 (use-package which-func
   :ensure nil
-  :defer t
   :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
   :config
   (defun my-which-function-setup ()
@@ -87,12 +83,10 @@
 
 (use-package sh-script
   :ensure nil
-  :defer t
   :hook (sh-mode . (lambda () (sh-electric-here-document-mode -1))))
 
 ;;; External packages
 (use-package cff
-  :defer t
   :init
   (add-hook 'c-mode-common-hook
             (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
@@ -108,7 +102,6 @@
 
 (use-package rtags
   :disabled t
-  :defer t
   :commands my-rtags-index
   :init
   (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
@@ -135,8 +128,7 @@
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
 
-(use-package elpy
-  :defer t)
+(use-package elpy)
 
 (use-package paredit
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
@@ -255,12 +247,10 @@
 
 (use-package js2-refactor
   :disabled t
-  :defer t
   :config
   (js2r-add-keybindings-with-prefix "C-c C-n"))
 
 (use-package rjsx-mode
-  :defer t
   :init
   (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode)))
 
@@ -301,8 +291,7 @@
                 "go build -v && go test -v && go vet"))
   (add-hook 'go-mode-hook 'my-go-code-hook))
 
-(use-package format-all
-  :defer t)
+(use-package format-all)
 
 
 (provide 'conf-dev)
