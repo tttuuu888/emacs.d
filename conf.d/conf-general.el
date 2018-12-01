@@ -358,7 +358,12 @@
          ("C-a" . move-beginning-of-line)
          ("C-e" . move-end-of-line)
          ("C-k" . kill-line)
+         :map evil-normal-state-map
+         ("j"   . evil-next-visual-line)
+         ("k"   . evil-previous-visual-line)
          :map evil-visual-state-map
+         ("j"   . evil-next-visual-line)
+         ("k"   . evil-previous-visual-line)
          ("p"   . evil-paste-pgvy)
          :map evil-ex-completion-map
          ("C-a" . move-beginning-of-line)
@@ -499,8 +504,8 @@
          ("C-c C-s" . wgrep-save-all-buffers)))
 
 (use-package helm
-  :bind (("C-c i"   . helm-semantic-or-imenu)
-         ("C-c y"   . helm-show-kill-ring)
+  :bind (("M-y"     . helm-show-kill-ring)
+         ("C-c i"   . helm-semantic-or-imenu)
          ("C-x C-r" . helm-recentf)
          ("C-c h o" . helm-occur)
          ("C-c h r" . helm-resume))
