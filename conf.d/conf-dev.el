@@ -1,4 +1,4 @@
-;;; Developement settings
+;;; Developement settings -*- lexical-binding: t -*-
 
 ;;; Built-in packages
 (use-package elec-pair

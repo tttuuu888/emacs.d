@@ -1,4 +1,4 @@
-;;; sk-mode-line.el --- Simple modeline setting.
+;;; sk-mode-line.el --- Simple modeline setting. -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2017-2018 SeungKi Kim
 

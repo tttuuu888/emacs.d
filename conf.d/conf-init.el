@@ -1,4 +1,4 @@
-;;; Initial settings
+;;; Initial settings -*- lexical-binding: t -*-
 
 (defconst windowsp (eq system-type 'windows-nt) "t : Windows system")
 

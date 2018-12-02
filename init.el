@@ -1,4 +1,4 @@
-;; SK Emacs Setting
+;; SK Emacs Setting -*- lexical-binding: t -*-
 
 (let ((file-name-handler-alist nil)
       (gc-cons-threshold most-positive-fixnum))

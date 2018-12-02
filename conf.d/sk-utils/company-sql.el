@@ -1,4 +1,4 @@
-;;; company-sql.el --- Company mode backend for sql-mode
+;;; company-sql.el --- Company mode backend for sql-mode -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2018 SeungKi Kim
 

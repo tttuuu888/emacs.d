@@ -1,4 +1,4 @@
-;;; My various utils
+;;; My various utils -*- lexical-binding: t -*-
 
 (defun sharp-ifdef-insert (start end pre)
   (save-excursion

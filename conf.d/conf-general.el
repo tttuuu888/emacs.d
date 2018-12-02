@@ -1,4 +1,4 @@
-;;; General settings
+;;; General settings -*- lexical-binding: t -*-
 
 ;;; Personal packages
 (use-package sk-mode-line
