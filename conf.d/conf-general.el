@@ -85,7 +85,6 @@
                '((lambda () (< large-file-warning-threshold (buffer-size)))
                  . fundamental-mode))
   :config
-  (message "tp1")
   (require 'dired-x)
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
   (defun dired-visit-file-or-dir ()
@@ -403,8 +402,6 @@
 
 (use-package evil-visualstar
   :bind (:map evil-visual-state-map
-         ("/" . evil-visualstar/begin-search-forward)
-         ("?" . evil-visualstar/begin-search-backward)
          ("n" . evil-visualstar/begin-search-forward)
          ("N" . evil-visualstar/begin-search-backward))
   :config
