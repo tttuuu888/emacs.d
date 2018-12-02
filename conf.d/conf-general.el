@@ -412,9 +412,8 @@
   (global-evil-surround-mode 1))
 
 (use-package evil-commentary
-  :config
-  (evil-commentary-mode)
-  (evil-ex-define-cmd "gc" 'evil-commentary))
+  :init
+  (evil-commentary-mode))
 
 (use-package bind-key
   :init
