@@ -407,12 +407,8 @@
   :config
   (global-evil-visualstar-mode))
 
-(use-package evil-matchit
-  :config
-  (global-evil-matchit-mode 1))
-
 (use-package evil-surround
-  :config
+  :init
   (global-evil-surround-mode 1))
 
 (use-package evil-commentary
