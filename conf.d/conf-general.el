@@ -391,6 +391,7 @@
   (evil-swap-key evil-motion-state-map "j" "gj")
   (evil-swap-key evil-motion-state-map "k" "gk")
   (evil-global-set-key 'normal "Y" (kbd "y$"))
+  (evil-global-set-key 'motion "$" 'end-of-line)
   (evil-set-initial-state 'term-mode   'emacs)
   (evil-set-initial-state 'dired-mode  'emacs)
   (evil-set-initial-state 'shell-mode  'emacs)
