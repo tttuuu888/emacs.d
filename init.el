@@ -6,6 +6,7 @@
   (package-initialize)
   (setq package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
+          ;; ("org" . "https://orgmode.org/elpa/")
           ("melpa" . "http://melpa.org/packages/")))
 
   (add-to-list 'load-path "~/.emacs.d/conf.d/")
