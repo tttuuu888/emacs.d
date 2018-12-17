@@ -293,5 +293,18 @@
 
 (use-package format-all)
 
+(use-package plantuml-mode
+  :mode ("\\.puml\\'" . plantuml-mode)
+  :bind (:map plantuml-mode-map
+         ("TAB" . company-indent-or-complete-common)
+         ("C-c C-e" . plantuml-make-output))
+  :config
+  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (defun plantuml-make-output ()
+    (interactive)
+    (set-process-sentinel
+     (start-process "plantuml" nil "plantuml" (buffer-file-name))
+     (lambda (&rest args) (message "PlantUML process is done")))))
+
 
 (provide 'conf-dev)

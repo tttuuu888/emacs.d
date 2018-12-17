@@ -681,19 +681,6 @@
 (use-package yasnippet-snippets
   :after yasnippet)
 
-(use-package plantuml-mode
-  :mode ("\\.puml\\'" . plantuml-mode)
-  :bind (:map plantuml-mode-map
-         ("TAB" . company-indent-or-complete-common)
-         ("C-c C-e" . plantuml-make-output))
-  :config
-  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
-  (defun plantuml-make-output ()
-    (interactive)
-    (set-process-sentinel
-     (start-process "plantuml" nil "plantuml" (buffer-file-name))
-     (lambda (&rest args) (message "PlantUML process is done")))))
-
 (use-package ivy
   :bind (("C-x b"    . ivy-switch-buffer)
          :map minibuffer-inactive-mode-map
