@@ -544,7 +544,9 @@
     "p" 'helm-git-grep-at-point))
 
 (use-package projectile
-  :commands my-project-root-or-dir
+  :commands (my-project-root-or-dir
+             projectile-add-known-project
+             projectile-remove-known-project)
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
          ("C-c j b" . projectile-switch-to-buffer)
