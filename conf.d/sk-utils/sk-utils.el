@@ -31,7 +31,7 @@
                 (file-exists-p (concat project-root fname)))
            project-root)
           ((file-exists-p file) dir)
-          ((when parent) (find-file-in-tree parent fname))
+          (parent (find-file-in-tree parent fname))
           (t nil))))
 
 (defun sk-make ()
