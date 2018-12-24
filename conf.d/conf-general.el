@@ -164,6 +164,7 @@
          ("C-c s e" . org-edit-src-code))
   :config
   (evil-leader/set-key-for-mode 'org-mode
+    "cc" 'org-ctrl-c-ctrl-c
     "cl" 'org-insert-link
     "se" 'org-edit-src-code
     "ta" 'org-table-create
@@ -171,10 +172,10 @@
     "ts" 'org-set-tags)
   (define-key org-mode-map [tab] #'org-cycle)
   (evil-define-key 'motion org-mode-map
-    "gh"        'org-up-element
-    "gl"        'org-down-element
-    "gj"        'org-forward-element
-    "gk"        'org-backward-element)
+    "gh" 'org-up-element
+    "gl" 'org-down-element
+    "gj" 'org-forward-element
+    "gk" 'org-backward-element)
   (evil-declare-motion 'org-up-element)
   (evil-declare-motion 'org-down-element)
   (evil-declare-motion 'org-forward-element)
