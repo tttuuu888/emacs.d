@@ -109,10 +109,10 @@
   "Move the current line up or down by N lines."
   (interactive "p")
   (let* ((col (current-column))
-         (tmp1 (beginning-of-line))
+         (_ (beginning-of-line))
          (start (point))
-         (tmp2 (end-of-line))
-         (tmp3 (forward-char))
+         (_ (end-of-line))
+         (_ (forward-char))
          (end (point))
          (line-text (delete-and-extract-region start end)))
     (forward-line n)

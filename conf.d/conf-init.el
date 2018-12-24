@@ -1,7 +1,5 @@
 ;;; Initial settings -*- lexical-binding: t -*-
 
-(defconst windowsp (eq system-type 'windows-nt) "t : Windows system")
-
 ;; User Info
 (let ((name (getenv "USER_FULL_NAME"))
       (mail (getenv "USER_MAIL_ADDRESS")))
@@ -34,7 +32,7 @@
   (set-face-attribute 'vertical-border nil
                       :background default-background-color))
 
-(when (and windowsp enable-multibyte-characters)
+(when (and (eq system-type 'windows-nt) enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
 
 ;; y-or-n instead of yes-or-no
@@ -59,7 +57,7 @@
 
 ;; To prevent abnormal behavior of package-list-packages.
 (advice-add 'package-list-packages :before
-            (lambda (&rest args) (package-initialize)))
+            (lambda (&rest _) (package-initialize)))
 
 ;; use-package setting
 (unless (package-installed-p 'use-package)

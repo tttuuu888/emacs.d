@@ -51,7 +51,7 @@
   :ensure nil
   :init
   (advice-add 'gdb-setup-windows :after
-              (lambda (&rest args)
+              (lambda (&rest _)
                 (set-window-dedicated-p (selected-window) t)))
   :config
   (gdb-many-windows t)
@@ -135,7 +135,7 @@
          ("C-c <right>" . paredit-forward-slurp-sexp)
          ("C-c <left>"  . paredit-forward-barf-sexp))
   :config
-  (defun evil-paredit-kill (&optional ARGUMENT)
+  (defun evil-paredit-kill (&rest _)
     (interactive)
     (if (and (equal (point) (- (line-end-position) 1))
              (equal evil-state 'normal))
@@ -309,7 +309,7 @@
     (interactive)
     (set-process-sentinel
      (start-process "plantuml" nil "plantuml" (buffer-file-name))
-     (lambda (&rest args) (message "PlantUML process is done")))))
+     (lambda () (message "PlantUML process is done")))))
 
 
 (provide 'conf-dev)

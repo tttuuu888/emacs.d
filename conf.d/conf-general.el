@@ -38,7 +38,7 @@
          ("C-r" . redo+-redo))
   :config
   (global-undo-tree-mode -1)
-  (defun global-undo-tree-mode (&optional ARG) t)
+  (defun global-undo-tree-mode (&rest _) t)
   (defalias 'undo-tree-undo 'redo+-undo)
   (defalias 'undo-tree-redo 'redo+-redo))
 
@@ -144,7 +144,7 @@
         (?y "yes") (?n "no") (?a "all") (?q "quit"))))
 
   ;; win32 hiding gid, uid in dired mode
-  (when windowsp
+  (when (eq system-type 'windows-nt)
     (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity)
           ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))
 
@@ -378,7 +378,7 @@
     (interactive)
     (find-alternate-file (buffer-file-name)))
   ;; mouse disabled in evil
-  (defun evil-mouse-drag-track (start &optional opt) nil)
+  (defun evil-mouse-drag-track (&rest _) nil)
   (defun evil-paste-pgvy ()
     "Paste and restore visual block and yank."
     (interactive)
@@ -452,7 +452,7 @@
 (use-package company-tern
   :after tern
   :config
-  (defun advice-company-tern (&rest args)
+  (defun advice-company-tern (&rest _)
     (if (equal major-mode 'web-mode)
         (let ((web-mode-cur-language
                (web-mode-language-at-pos)))
@@ -626,7 +626,7 @@
 
 (use-package anzu
   :init
-  (defun isearch-anzu-advice (&rest args)
+  (defun isearch-anzu-advice (&rest _)
     (global-anzu-mode t))
   (advice-add #'isearch-forward :before #'isearch-anzu-advice)
   (advice-add #'isearch-backward :before #'isearch-anzu-advice)
