@@ -17,7 +17,6 @@
   :bind (:map python-mode-map
          ("TAB" . company-indent-or-complete-common))
   :config
-  (evil-set-initial-state 'inferior-python-mode 'emacs)
   (elpy-enable)
   (defun sk-toggle-python ()
     "Toggle between Python2 and Python3"

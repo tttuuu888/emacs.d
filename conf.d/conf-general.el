@@ -345,6 +345,7 @@
            (map (or mode-map evil-leader--default-map)))
       (evil-normalize-keymaps)
       (define-key evil-motion-state-local-map sub-leader map)
+      (define-key evil-insert-state-local-map sub-leader map)
       (define-key evil-emacs-state-local-map sub-leader map)))
   (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
   (setq evil-leader/no-prefix-mode-rx
@@ -393,10 +394,7 @@
   (evil-global-set-key 'normal "Y" (kbd "y$"))
   (evil-global-set-key 'motion "$" 'end-of-line)
   (evil-set-initial-state 'term-mode   'emacs)
-  (evil-set-initial-state 'dired-mode  'emacs)
-  (evil-set-initial-state 'shell-mode  'emacs)
-  (evil-set-initial-state 'eshell-mode 'emacs)
-  (evil-set-initial-state 'sql-interactive-mode 'emacs))
+  (evil-set-initial-state 'dired-mode  'emacs))
 
 (use-package evil-anzu
   :after anzu)
