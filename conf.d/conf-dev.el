@@ -251,7 +251,13 @@
 
 (use-package rjsx-mode
   :init
-  (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode)))
+  (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+  (add-hook 'find-file-hook
+            (lambda ()
+              (when
+                  (and (string-match "\\.js\\'" buffer-file-name)
+                       (find-file-in-tree default-directory "next.config.js"))
+                (rjsx-mode)))))
 
 (use-package emmet-mode
   :hook (web-mode js2-mode css-mode))

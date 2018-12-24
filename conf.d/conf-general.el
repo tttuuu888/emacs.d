@@ -13,7 +13,8 @@
              hide-ctrl-M izero-insert idef-insert move-line
              buffer-save-or-load sk-clang-complete-make
              sk-byte-recompile-conf-dir sk-insert-current-week-form
-             sk-insert-next-week-form tmux-new-pane-here)
+             sk-insert-next-week-form tmux-new-pane-here
+             find-file-in-tree)
   :bind (("<f5>"       . sk-make)
          ("C-<f5>"     . sk-rebuild)
          ("C-M-,"      . transpose-windows)
