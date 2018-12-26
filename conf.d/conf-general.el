@@ -256,9 +256,17 @@
 
 (use-package shell
   :ensure nil
+  :init
+  (defun my-shell-return ()
+    (interactive)
+    (evil-goto-line)
+    (evil-append-line 1))
   :config
-  (bind-key "C-c C-l" 'counsel-shell-history shell-mode-map)
   (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
+  (evil-define-key 'normal shell-mode-map
+    "gk" 'comint-previous-prompt
+    "gj" 'comint-next-prompt
+    (kbd "<RET>") 'my-shell-return)
   (defun my-shell-setup ()
     (setq-local company-minimum-prefix-length 3))
   (add-hook 'shell-mode-hook 'my-shell-setup))
@@ -266,19 +274,27 @@
 (use-package eshell
   :ensure nil
   :config
-  ;; Clear Eshell buffer
   (defun eshell/clear ()
+    "Clear Eshell buffer"
     (interactive)
     (let ((inhibit-read-only t))
       (erase-buffer)
       (execute-kbd-macro (kbd "<RET>"))))
+  (defun my-eshell-change-whole-line ()
+    (interactive)
+    (execute-kbd-macro (kbd "0C")))
   (defun my-eshell-setup ()
-    (progn
-      (setenv "TERM" "screen-256color")
-      (setq-local company-minimum-prefix-length 3)
-      (bind-keys :map eshell-mode-map
-                 ("TAB"     . completion-at-point)
-                 ("C-c C-l" . counsel-esh-history))))
+    (setenv "TERM" "screen-256color")
+    (setq-local company-minimum-prefix-length 3)
+    (evil-define-key 'insert eshell-mode-map
+      "TAB" 'completion-at-point
+      (kbd "C-a") 'eshell-bol)
+    (evil-define-key 'normal eshell-mode-map
+      "0" 'eshell-bol
+      "S" 'my-eshell-change-whole-line
+      "gk" 'eshell-previous-prompt
+      "gj" 'eshell-next-prompt
+      (kbd "<RET>") 'my-shell-return))
   (evil-leader/set-key-for-mode 'eshell-mode "l" 'counsel-esh-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
