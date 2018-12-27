@@ -127,7 +127,17 @@
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
 
-(use-package elpy)
+(use-package elpy
+  :config
+  (evil-leader/set-key-for-mode 'inferior-python-mode
+    "z"  'elpy-shell-switch-to-buffer)
+  (evil-leader/set-key-for-mode 'python-mode
+    "z"  'elpy-shell-switch-to-shell
+    "eb" 'elpy-shell-send-buffer
+    "ec" 'elpy-shell-send-defclass
+    "ee" 'elpy-shell-send-statement
+    "ef" 'elpy-shell-send-defun
+    "er" 'elpy-shell-send-region-or-buffer))
 
 (use-package paredit
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
