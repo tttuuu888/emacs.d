@@ -137,7 +137,11 @@
     "ec" 'elpy-shell-send-defclass
     "ee" 'elpy-shell-send-statement
     "ef" 'elpy-shell-send-defun
-    "er" 'elpy-shell-send-region-or-buffer))
+    "er" 'elpy-shell-send-region-or-buffer)
+  (evil-define-key 'normal inferior-python-mode-map
+    "gk" 'comint-previous-prompt
+    "gj" 'comint-next-prompt
+    (kbd "<RET>") 'my-shell-return))
 
 (use-package paredit
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
