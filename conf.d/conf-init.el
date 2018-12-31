@@ -15,7 +15,7 @@
 
 ;; Default color setting
 (let ((default-foreground-color (if window-system "Black"  "LightGray"))
-      (default-background-color (if window-system "Ivory2" "Gray23")))
+      (default-background-color (if window-system "Ivory2" "Gray18")))
   (set-face-attribute 'default nil
                       :background default-background-color
                       :foreground default-foreground-color)
