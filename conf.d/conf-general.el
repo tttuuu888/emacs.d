@@ -561,8 +561,8 @@
 
 (use-package projectile
   :commands (my-project-root-or-dir
-             projectile-add-known-project
-             projectile-remove-known-project)
+             sk-add-known-project
+             sk-remove-known-project)
   :bind (("C-c j d" . projectile-find-dir)
          ("C-c j k" . projectile-kill-buffers)
          ("C-c j b" . projectile-switch-to-buffer)
@@ -582,7 +582,15 @@
   :config
   (projectile-mode 1)
   (defun my-project-root-or-dir ()
-    (or (projectile-project-root) default-directory)))
+    (or (projectile-project-root) default-directory))
+  (defun sk-add-known-project (project-root)
+    "Make .projectile file and add the project to known projects list."
+    (interactive (list (read-directory-name "Add to known projects: ")))
+    (let ((pfile (concat project-root ".projectile")))
+      (unless (file-exists-p pfile)
+        (write-region "" nil pfile)))
+    (projectile-add-known-project project-root))
+  (defalias 'sk-remove-known-project 'projectile-remove-known-project))
 
 (use-package markdown-mode)
 
