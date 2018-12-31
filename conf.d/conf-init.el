@@ -14,19 +14,13 @@
     (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
 
 ;; Default color setting
-(let ((default-foreground-color (if window-system "Black"     "LightGray"))
-      (default-background-color (if window-system "Ivory2"    "Gray23"))
-      (linenum-foreground-color (if window-system "Gray50"    "Khaki4"))
-      (linenum-background-color (if window-system "Cornsilk2" "Gray26")))
+(let ((default-foreground-color (if window-system "Black"  "LightGray"))
+      (default-background-color (if window-system "Ivory2" "Gray23")))
   (set-face-attribute 'default nil
                       :background default-background-color
                       :foreground default-foreground-color)
-  (set-face-attribute 'line-number nil
-                      :background linenum-background-color
-                      :foreground linenum-foreground-color)
   (set-face-attribute 'line-number-current-line nil
-                      :background (face-background 'highlight)
-                      :foreground (face-foreground 'default))
+                      :weight 'bold)
   (set-face-attribute 'fringe nil
                       :background default-background-color)
   (set-face-attribute 'vertical-border nil
