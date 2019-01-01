@@ -24,7 +24,7 @@
 (defun sk-mode-line ()
   (set-face-attribute 'mode-line nil
                       :foreground "Gray2"
-                      :background "Darkseagreen"
+                      ;; :background "Darkseagreen"
                       :overline (face-background 'default)
                       :box nil)
   (set-face-attribute 'mode-line-inactive nil

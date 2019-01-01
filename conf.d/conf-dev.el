@@ -72,6 +72,7 @@
 
 (use-package which-func
   :ensure nil
+  :custom-face (which-func ((t (:foreground "Cyan3"))))
   :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
   :config
   (defun my-which-function-setup ()
