@@ -72,10 +72,12 @@
 
 (use-package which-func
   :ensure nil
-  :custom-face (which-func ((t (:foreground "Cyan3"))))
   :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
   :config
   (defun my-which-function-setup ()
+    (set-face-attribute 'which-func nil
+                        :foreground (face-foreground
+                                     'font-lock-function-name-face))
     (which-function-mode)
     (setq-local header-line-format
                 '((which-func-mode ("" which-func-format " "))))

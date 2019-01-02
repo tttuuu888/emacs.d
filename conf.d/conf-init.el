@@ -13,25 +13,33 @@
 (when window-system
     (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
 
-;; Default color setting
-(let ((default-foreground-color "Gray80")
-      (default-background-color "Gray23"))
-  (set-face-attribute 'default nil
-                      :foreground default-foreground-color
-                      :background default-background-color)
-  (set-face-attribute 'header-line nil
-                      :background "Gray20"
-                      :inverse-video nil
-                      :underline nil)
-  (set-face-attribute 'line-number-current-line nil
-                      :weight 'bold)
-  (set-face-attribute 'fringe nil
-                      :background default-background-color)
-  (set-face-attribute 'vertical-border nil
-                      :background default-background-color))
-
 (when (and (eq system-type 'windows-nt) enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
+
+;; Default color setting
+(defun my-theme-setting (&optional dark-theme)
+  (let ((default-foreground-color
+          (if (and (not dark-theme) window-system) "Black"  "Gray80"))
+        (default-background-color
+          (if (and (not dark-theme) window-system) "Ivory2" "Gray23")))
+    (set-face-attribute 'default nil
+                        :foreground default-foreground-color
+                        :background default-background-color)
+    (set-face-attribute 'header-line nil
+                        :background default-background-color
+                        :inverse-video nil
+                        :underline nil)
+    (set-face-attribute 'line-number-current-line nil
+                        :weight 'bold)
+    (set-face-attribute 'fringe nil
+                        :background default-background-color)
+    (set-face-attribute 'vertical-border nil
+                        :background default-background-color)))
+(defun sk-light-theme () (interactive) (my-theme-setting))
+(defun sk-dark-theme  () (interactive) (my-theme-setting t))
+
+;; Default dark theme
+(my-theme-setting t)
 
 ;; y-or-n instead of yes-or-no
 (fset 'yes-or-no-p 'y-or-n-p)
