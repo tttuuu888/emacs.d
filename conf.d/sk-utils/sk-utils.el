@@ -154,32 +154,33 @@
       (call-process "tmux" nil nil nil "new-window")
     (message "Tmux is not running!")))
 
-(defun get-current-or-next-week-form (&optional next-week)
-  (let* ((_ (require 'org))
-         (base (if next-week "++8" "++1"))
-         (monday (org-read-date nil t base nil (org-read-date nil t "-sun")))
-         (friday (time-add monday (* 4 24 3600)))
-         (month-of-monday (format-time-string "%-1m" monday))
-         (month-of-friday (format-time-string "%-1m" friday))
-         (month-of-next-friday (if (equal month-of-monday month-of-friday)
+(defun get-week-form (&optional offset date)
+  (let* ((_ (require 'cal-iso))
+         (d (calendar-absolute-from-gregorian
+             (or date (calendar-current-date offset))))
+         (day (% d 7))
+         (week-number (car (calendar-iso-from-absolute d)))
+         (monday (calendar-gregorian-from-absolute (- d (- day 1))))
+         (friday (calendar-gregorian-from-absolute (+ d (- 5 day))))
+         (month-of-next-friday (if (equal (car monday) (car friday))
                                    ""
-                                 (format "%2s월 " month-of-friday)))
-         (start (format "%2s주차  %2s월 %2s일 ~ "
-                        (format-time-string "%-1W" monday)
-                        (format-time-string "%-1m" monday)
-                        (format-time-string "%-1d" monday)))
-         (end (format "%s%2s일"
+                                 (format "%2d월 " (car friday))))
+         (start (format "%2d주차  %2d월 %2d일 ~ "
+                        week-number
+                        (car monday)
+                        (nth 1 monday)))
+         (end (format "%s%2d일"
                       month-of-next-friday
-                      (format-time-string "%-1d" friday))))
+                      (nth 1 friday))))
     (format "%s%s" start end)))
 
 (defun sk-insert-current-week-form ()
   (interactive)
-  (insert (get-current-or-next-week-form)))
+  (insert (get-week-form)))
 
 (defun sk-insert-next-week-form ()
   (interactive)
-  (insert (get-current-or-next-week-form t)))
+  (insert (get-week-form 7)))
 
 
 (provide 'sk-utils)
