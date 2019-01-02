@@ -447,6 +447,7 @@
              ("C-\\"             . toggle-korean-input-method)))
 
 (use-package company
+  :custom-face (company-tooltip ((t (:foreground "Black" :background "Yellow4"))))
   :init
   (global-company-mode 1)
   (setq company-idle-delay 0.1
