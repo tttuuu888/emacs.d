@@ -665,7 +665,7 @@
   :after org)
 
 (use-package korean-holidays
-  :config
+  :init
   (setq calendar-holidays korean-holidays))
 
 (use-package visual-regexp
