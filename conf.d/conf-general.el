@@ -54,18 +54,14 @@
 ;;; Built-in packages
 (use-package recentf
   :ensure nil
-  :after (:any ido ivy)
+  :hook (find-file . recentf-mode)
   :custom (recentf-max-saved-items 100)
   :config
-  (recentf-mode t)
   (add-to-list 'recentf-exclude
                (format "%s/\\.emacs\\.d/elpa/.*" (getenv "HOME"))))
 
 (use-package ido
   :ensure nil
-  :disabled t
-  :bind (("C-x d"   . ido-dired)
-         ("C-x C-f" . ido-find-file))
   :config
   (ivy-mode t)
   (defalias 'ido-completing-read 'ivy-completing-read))
@@ -636,9 +632,6 @@
   (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps)
   (setq magit-log-section-commit-count 5
         magit-completing-read-function #'ivy-completing-read))
-
-(use-package avy
-  :bind ("C-c C-SPC" . avy-goto-subword-1))
 
 (use-package expand-region
   :bind (("C-="   . er/expand-region)

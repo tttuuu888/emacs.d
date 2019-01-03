@@ -318,7 +318,7 @@
 (use-package plantuml-mode
   :mode ("\\.puml\\'" . plantuml-mode)
   :bind (:map plantuml-mode-map
-         ("TAB" . company-indent-or-complete-common)
+         ("TAB"     . company-indent-or-complete-common)
          ("C-c C-e" . plantuml-make-output))
   :config
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
