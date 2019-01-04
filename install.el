@@ -9,9 +9,8 @@
 (package-initialize)
 
 
-
 (defun install-function (&rest r)
-  (message (format "install : %s" command-line-args-left))
+  (print (format "SK install : %s" command-line-args-left))
   (dolist (pkg command-line-args-left)
     (let ((try-count 3))
       (while (> try-count 0)
@@ -42,6 +41,7 @@
 
 
 (defun init-function (&rest _)
+  (delete-directory "~/.emacs.d/elpa" t)
   (setq package-list (get-package-list))
 
   (print (format "%s packages will be installed." (length package-list)))
@@ -58,7 +58,7 @@
             (cl-subseq left-packages
                        0
                        (min (length left-packages) length-of-args)))
-      ;; (print (format "len arg: %s, lef pkg :%s, pkg : %s"
+      ;; (print (format "len arg: %s, left pkg :%s, pkg : %s"
       ;;                length-of-args left-packages packages))
       (setq left-packages (nthcdr length-of-args left-packages))
       (apply
@@ -76,18 +76,22 @@
         (dolist (proc proc-list)
           (when (process-live-p proc)
             (setq any-live-proc t)))
-        (let ((content
+        (let ((local-pkg-list left-packages)
+              (content
                (with-current-buffer output-buffer
                  (save-restriction
                    (widen)
                    (buffer-substring-no-properties
                     (point-min)
                     (point-max))))))
-          (dolist (pkg left-packages)
+          (dolist (pkg local-pkg-list)
             (when (string-match
                    (format "SK %s - Package is installed." pkg)
                    content)
-              (print (format "%s install .....done." pkg)))))
+              (princ (format "%s .....done.\n" pkg))
+              (setq left-packages (delete pkg left-packages)))))
+        ;; (with-current-buffer output-buffer
+        ;;   (message (buffer-substring 1 (point-max))))
         (sleep-for 2))))
   (message "Init done."))
 
