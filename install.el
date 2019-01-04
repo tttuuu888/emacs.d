@@ -19,6 +19,7 @@
         (package-install (intern pkg) t)))
     (print (format "SK %s - Package is installed." pkg))))
 
+
 (defun get-package-list ()
   (let ((pkg-list (list 'use-package))
         (package-list nil))
@@ -38,6 +39,7 @@
       (when (not (require pkg nil t))
         (add-to-list 'package-list (symbol-name pkg))))
     package-list))
+
 
 (defun init-function (&rest _)
   (setq package-list (get-package-list))
@@ -74,8 +76,18 @@
         (dolist (proc proc-list)
           (when (process-live-p proc)
             (setq any-live-proc t)))
-        ;; (with-current-buffer output-buffer
-        ;;   (message (buffer-substring 1 (point-max))))
+        (let ((content
+               (with-current-buffer output-buffer
+                 (save-restriction
+                   (widen)
+                   (buffer-substring-no-properties
+                    (point-min)
+                    (point-max))))))
+          (dolist (pkg left-packages)
+            (when (string-match
+                   (format "SK %s - Package is installed." pkg)
+                   content)
+              (print (format "%s install .....done." pkg)))))
         (sleep-for 2))))
   (message "Init done."))
 
