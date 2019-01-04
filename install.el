@@ -1,4 +1,4 @@
-;;; My emacs setting initializing script
+;;; Emacs setting initializing script
 ;;; start to initializing with below command.
 ;;; $ emacs -l ~/.emacs.d/install.el -batch -init
 
@@ -9,23 +9,14 @@
 (package-initialize)
 
 
-(defun install-function (&rest r)
-  (print (format "SK install : %s" command-line-args-left))
-  (dolist (pkg command-line-args-left)
-    (let ((try-count 3))
-      (while (> try-count 0)
-        (setq try-count (- try-count 1))
-        (package-install (intern pkg) t)))
-    (print (format "SK %s - Package is installed." pkg))))
-
-
 (defun get-package-list ()
   (let ((pkg-list (list 'use-package))
         (package-list nil))
     (require 'cl)
+    (package-refresh-contents)
     (add-to-list 'load-path "~/.emacs.d/conf.d/")
     (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
-    (package-refresh-contents)
+
     (defmacro use-package (package &rest args)
       (unless (or (memq :disabled args)
                   (memq :ensure args))
@@ -70,13 +61,13 @@
       (add-to-list 'proc-list (get-buffer-process output-buffer)))
 
     (let ((any-live-proc t)
-          (left-packages package-list))
+          (log-left-packages package-list))
       (while any-live-proc
         (setq any-live-proc nil)
         (dolist (proc proc-list)
           (when (process-live-p proc)
             (setq any-live-proc t)))
-        (let ((local-pkg-list left-packages)
+        (let ((local-pkg-list log-left-packages)
               (content
                (with-current-buffer output-buffer
                  (save-restriction
@@ -88,12 +79,24 @@
             (when (string-match
                    (format "SK %s - Package is installed." pkg)
                    content)
-              (princ (format "%s .....done.\n" pkg))
-              (setq left-packages (delete pkg left-packages)))))
+              (let* ((pkg-len (length pkg))
+                     (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
+                (princ (format "%s %s..done.\n" pkg padding)))
+              (setq log-left-packages (delete pkg log-left-packages)))))
         ;; (with-current-buffer output-buffer
         ;;   (message (buffer-substring 1 (point-max))))
         (sleep-for 2))))
   (message "Init done."))
+
+
+(defun install-function (&rest r)
+  ;; (print (format "install : %s" command-line-args-left))
+  (dolist (pkg command-line-args-left)
+    (let ((try-count 3))
+      (while (> try-count 0)
+        (setq try-count (- try-count 1))
+        (package-install (intern pkg) t)))
+    (print (format "SK %s - Package is installed." pkg))))
 
 
 (add-to-list 'command-switch-alist '("-install" . install-function))
