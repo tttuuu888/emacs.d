@@ -1,6 +1,22 @@
-;;; Emacs setting initializing script
-;;; start to initializing with below command.
-;;; $ emacs -l ~/.emacs.d/install.el -batch -init
+;;; install.el --- Parallel package install script
+
+;; Copyright (C) 2019 SeungKi Kim
+
+;; Author: SeungKi Kim <tttuuu888@gmail.com>
+;; URL: https://github.com/tttuuu888/.emacs.d
+;; Version: 0.3.0
+
+;;; Commentary
+
+;; This script installs packages with parallel processes.
+;; This script will work with below conditions.
+;; 1. All packages are maintained by 'use-package'
+;; 2. (setq use-package-always-ensure t) is included in config;
+;;    so that 'use-package' does not have ':ensure t' keyword.
+
+;; Usage:
+;; Start initializing with below command.
+;; $ emacs -l ~/.emacs.d/install.el -batch -init
 
 (setq package-archives
       '(("gnu"   . "http://elpa.gnu.org/packages/")
@@ -12,7 +28,6 @@
 (defun get-package-list ()
   (let ((pkg-list (list 'use-package))
         (package-list nil))
-    (require 'cl)
     (package-refresh-contents)
     (add-to-list 'load-path "~/.emacs.d/conf.d/")
     (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
@@ -32,6 +47,7 @@
 
 
 (defun init-function (&rest _)
+  (require 'cl)
   (delete-directory "~/.emacs.d/elpa" t)
   (setq package-list (get-package-list))
 
