@@ -65,7 +65,7 @@
                  content)
             (let* ((pkg-len (length pkg))
                    (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
-              (princ (format "%s %s..done.\n" pkg padding)))
+              (message (format "%s %s..done." pkg padding)))
             (setq log-left-packages (delete pkg log-left-packages)))))
       ;; (with-current-buffer output-buffer
       ;;   (message (buffer-substring 1 (point-max))))
@@ -77,21 +77,21 @@
   (delete-directory "~/.emacs.d/elpa" t)
   (package-refresh-contents)
 
-  (setq package-list (get-package-list))
-  (print (format "%s packages will be installed." (length package-list)))
-  ;; (print package-list)
+  (let* ((package-list (get-package-list))
+         (length-of-args (1+ (/ (length package-list) number-of-process)))
+         (left-packages package-list)
+         (packages nil)
+         (output-buffer (generate-new-buffer "install package"))
+         (proc-list nil))
+    (message (format "\n%s packages will be installed.\n" (length package-list)))
+    ;; (print package-list)
 
-  (let ((length-of-args (1+ (/ (length package-list) number-of-process)))
-        (left-packages package-list)
-        (packages nil)
-        (output-buffer (generate-new-buffer "install package"))
-        (proc-list nil))
     (while left-packages
       (setq packages
             (cl-subseq left-packages
                        0
                        (min (length left-packages) length-of-args)))
-      ;; (print (format "len : %s, pkg : %s" length-of-args packages))
+      ;; (message (format "len : %s, pkg : %s" length-of-args packages))
       (setq left-packages (nthcdr length-of-args left-packages))
       (apply
        #'start-process
@@ -101,18 +101,18 @@
        packages)
       (add-to-list 'proc-list (get-buffer-process output-buffer)))
 
-    (init-process-check package-list proc-list output-buffer))
-  (message "Init done."))
+    (init-process-check package-list proc-list output-buffer)
+    (message "Init done.")))
 
 
 (defun install-function (&rest r)
-  ;; (print (format "install : %s" command-line-args-left))
+  ;; (message (format "install : %s" command-line-args-left))
   (dolist (pkg command-line-args-left)
     (let ((try-count 3))
       (while (> try-count 0)
         (setq try-count (- try-count 1))
         (package-install (intern pkg) t)))
-    (print (format "SK %s - Package is installed." pkg))))
+    (message (format "SK %s - Package is installed." pkg))))
 
 
 (add-to-list 'command-switch-alist '("-install" . install-function))
