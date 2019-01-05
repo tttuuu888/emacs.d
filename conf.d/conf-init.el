@@ -61,10 +61,6 @@
 (defun package--save-selected-packages (&optional value)
   (when value (setq package-selected-packages value)))
 
-;; To prevent abnormal behavior of package-list-packages.
-(advice-add 'package-list-packages :before
-            (lambda (&rest _) (package-initialize)))
-
 ;; use-package setting
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)

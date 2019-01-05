@@ -3,11 +3,11 @@
 (let ((file-name-handler-alist nil)
       (gc-cons-threshold most-positive-fixnum))
 
-  (package-initialize)
   (setq package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
           ;; ("org" . "https://orgmode.org/elpa/")
           ("melpa" . "http://melpa.org/packages/")))
+  (package-initialize)
 
   (add-to-list 'load-path "~/.emacs.d/conf.d/")
   (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
