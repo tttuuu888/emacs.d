@@ -22,12 +22,14 @@
 
 (defvar number-of-process 8)
 
-(setq package-archives
-      '(("gnu"   . "http://elpa.gnu.org/packages/")
-        ("org"   . "https://orgmode.org/elpa/")
-        ("melpa" . "http://melpa.org/packages/")))
+(defun package-archives-init ()
+    (setq package-archives
+          '(("gnu"   . "http://elpa.gnu.org/packages/")
+            ("org"   . "https://orgmode.org/elpa/")
+            ("melpa" . "http://melpa.org/packages/")))
+  (package-initialize))
 
-(package-initialize)
+(package-archives-init)
 
 (defun get-package-list ()
   (let ((package-list (list 'use-package)))
@@ -41,6 +43,8 @@
     (defun package-refresh-contents (&rest _) nil)
 
     (load "~/.emacs.d/init.el")
+
+    (package-archives-init)
 
     package-list))
 
