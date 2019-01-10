@@ -70,46 +70,46 @@
                  (unless (package-installed-p pkg)
                    (let* ((tr (package-compute-transaction () (list (list pkg))))
                           (pkg-desc (car (last tr)))
-                          (deps (mapcar (lambda (x)
-                                          (if (package-installed-p (car x))
-                                              nil
-                                            (car x)))
-                                        (package-desc-reqs pkg-desc))))
-                     (remove nil deps))))
+                          (deps
+                           (seq-filter
+                            (lambda (x) (not (package-installed-p x)))
+                            (mapcar #'car (package-desc-reqs pkg-desc)))))
+                     deps)))
                dep-packages))))
         (setq dep-packages deps)
         (when deps
           (add-to-list 'result deps))))
-    result
-    ))
+    result))
+
+(defun print-package-installed (package)
+  (let* ((pkg-len (length pkg))
+         (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
+    (message (format "%s %s..done." pkg padding))))
+
+(defun packages-installed-p (left-packages output-buffer)
+  (let ((pkg-list left-packages)
+        (pkg-dirs (directory-files "~/.emacs.d/elpa")))
+    (dolist (pkg pkg-list)
+      (let ((directory
+             (car (seq-filter
+                   (lambda (x) (string= pkg (car (split-string x "-[0-9]"))))
+                   pkg-dirs))))
+        (when (and directory
+                   (seq-filter
+                    (lambda (f) (string-match "\.elc$" f))
+                    (directory-files (concat "~/.emacs.d/elpa/" directory))))
+          (print-package-installed pkg)
+          (setq left-packages (remove pkg left-packages))))))
+  left-packages)
 
 (defun init-process-check (package-list proc-list output-buffer)
-  (let ((any-live-proc t)
-        (log-left-packages (mapcar #'symbol-name package-list)))
-    (while any-live-proc
-      (setq any-live-proc nil)
-      (dolist (proc proc-list)
-        (when (process-live-p proc)
-          (setq any-live-proc t)))
-      (let ((local-pkg-list log-left-packages)
-            (content
-             (with-current-buffer output-buffer
-               (save-restriction
-                 (widen)
-                 (buffer-substring-no-properties
-                  (point-min)
-                  (point-max))))))
-            (dolist (pkg local-pkg-list)
-              (when (string-match
-                     (format "SK %s - Package is installed." pkg)
-                     content)
-                (let* ((pkg-len (length pkg))
-                       (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
-                  (message (format "%s %s..done." pkg padding)))
-                (setq log-left-packages (delete pkg log-left-packages)))))
+  (let ((left-packages (mapcar #'symbol-name package-list)))
+    (while (seq-filter (lambda (proc) (process-live-p proc)) proc-list)
+      (setq left-packages (packages-installed-p left-packages output-buffer))
       ;; (with-current-buffer output-buffer
       ;;   (message (buffer-substring 1 (point-max))))
-      (sleep-for 2))))
+      (sleep-for 1))
+    (packages-installed-p left-packages output-buffer)))
 
 (defun async-install-packages (package-list)
   (let* ((length-of-args (1+ (/ (length package-list) number-of-process)))
@@ -117,7 +117,6 @@
          (packages nil)
          (output-buffer (generate-new-buffer "install package"))
          (proc-list nil))
-
     (while left-packages
       (setq packages
             (mapcar #'symbol-name
@@ -150,11 +149,8 @@
 (defun install-function (&rest r)
   (dolist (pkg command-line-args-left)
     (dotimes (try-count 3)
-      (when (not (require (intern pkg) nil t))
-        (print (format "try %s for %s" try-count pkg))
-        (package-install (intern pkg) t)))
-    (when (require (intern pkg) nil t)
-      (message (format "SK %s - Package is installed." pkg)))))
+      (print (format "try %s for %s" try-count pkg))
+      (package-install (intern pkg) t))))
 
 
 (add-to-list 'command-switch-alist '("-install" . install-function))
