@@ -90,7 +90,7 @@
          (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
     (message (format "%s %s..done." pkg padding))))
 
-(defun packages-installed-p (left-packages output-buffer)
+(defun packages-installed-p (left-packages)
   (let ((pkg-list left-packages)
         (pkg-dirs (directory-files "~/.emacs.d/elpa")))
     (dolist (pkg pkg-list)
@@ -106,36 +106,34 @@
           (setq left-packages (remove pkg left-packages))))))
   left-packages)
 
-(defun init-process-check (package-list proc-list output-buffer)
+(defun init-process-check (package-list proc-list)
   (let ((left-packages (mapcar #'symbol-name package-list)))
     (while (seq-filter (lambda (proc) (process-live-p proc)) proc-list)
-      (setq left-packages (packages-installed-p left-packages output-buffer))
-      ;; (with-current-buffer output-buffer
-      ;;   (message (buffer-substring 1 (point-max))))
+      (setq left-packages (packages-installed-p left-packages))
       (sleep-for 1))
-    (packages-installed-p left-packages output-buffer)))
+    (packages-installed-p left-packages)))
 
 (defun async-install-packages (package-list)
-  (let* ((length-of-args (1+ (/ (length package-list) number-of-process)))
+  (let* ((default-args-len (1+ (/ (length package-list) number-of-process)))
          (left-packages package-list)
-         (packages nil)
          (output-buffer (generate-new-buffer "install package"))
          (proc-list nil))
     (while left-packages
-      (setq packages
-            (mapcar #'symbol-name
-                    (cl-subseq left-packages
-                               0
-                               (min (length left-packages) length-of-args))))
-      (setq left-packages (nthcdr length-of-args left-packages))
-      (apply
-       #'start-process
-       "Install"
-       output-buffer
-       "emacs" "-l" "~/.emacs.d/install.el" "-batch" "-install"
-       packages)
-      (add-to-list 'proc-list (get-buffer-process output-buffer)))
-    (init-process-check package-list proc-list output-buffer)))
+      (let* ((args-len (min default-args-len (length left-packages)))
+             (packages (mapcar #'symbol-name
+                               (cl-subseq left-packages 0 args-len))))
+        (setq left-packages (nthcdr args-len left-packages))
+        (apply
+         #'start-process
+         "Install"
+         output-buffer
+         "emacs" "-l" "~/.emacs.d/install.el" "-batch" "-install"
+         packages)
+        (add-to-list 'proc-list (get-buffer-process output-buffer)))
+      (init-process-check package-list proc-list)
+      ;; (with-current-buffer output-buffer
+      ;;   (message (buffer-substring 1 (point-max))))
+      )))
 
 (defun init-function (&rest _)
   (delete-directory "~/.emacs.d/elpa" t)
@@ -152,7 +150,7 @@
 
 (defun install-function (&rest r)
   (dolist (pkg command-line-args-left)
-    (dotimes (try-count 3)
+    (dotimes (try-count 2)
       (print (format "try %s for %s" try-count pkg))
       (package-install (intern pkg) t))))
 
