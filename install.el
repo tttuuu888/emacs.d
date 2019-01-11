@@ -33,10 +33,15 @@
 
 (defun get-package-list ()
   (let ((package-list (list 'use-package)))
-    (defmacro use-package (package &rest args)
-      (unless (or (memq :disabled args)
-                  (memq :ensure args))
-        `(add-to-list 'package-list ',package)))
+    (defmacro use-package (pkg &rest args)
+      (let ((ensure (memq :ensure args))
+            (disabled (cadr (memq :disabled args)))
+            (always-ensure (bound-and-true-p use-package-always-ensure)))
+        (unless (or (eq t disabled)
+                    (if always-ensure
+                        (and (car ensure) (eq nil (cadr ensure)))
+                      (eq nil (cadr ensure))))
+          `(add-to-list 'package-list ',pkg))))
 
     (provide 'use-package)
     (defun package-install (&rest _) nil)
