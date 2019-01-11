@@ -23,10 +23,10 @@
 (defvar number-of-process 8)
 
 (defun package-archives-init ()
-    (setq package-archives
-          '(("gnu"   . "http://elpa.gnu.org/packages/")
-            ("org"   . "https://orgmode.org/elpa/")
-            ("melpa" . "http://melpa.org/packages/")))
+  (setq package-archives
+        '(("gnu"   . "http://elpa.gnu.org/packages/")
+          ("org"   . "https://orgmode.org/elpa/")
+          ("melpa" . "http://melpa.org/packages/")))
   (package-initialize))
 
 (package-archives-init)
@@ -70,6 +70,7 @@
 (defun get-dependency-package-list ()
   (let* ((package-list (get-package-list))
          (dep-packages package-list)
+         (no-dep-packages (list))
          (result (list package-list)))
     (while dep-packages
       (let ((deps
@@ -83,11 +84,13 @@
                            (seq-filter
                             (lambda (x) (not (package-installed-p x)))
                             (mapcar #'car (package-desc-reqs pkg-desc)))))
+                     (unless deps (add-to-list 'no-dep-packages pkg))
                      deps)))
                dep-packages))))
         (setq dep-packages deps)
         (when deps
           (add-to-list 'result deps))))
+    (setcar (nthcdr 0 result) (append no-dep-packages (car result)))
     result))
 
 (defun print-package-installed (package)
@@ -134,11 +137,11 @@
          output-buffer
          "emacs" "-l" "~/.emacs.d/install.el" "-batch" "-install"
          packages)
-        (add-to-list 'proc-list (get-buffer-process output-buffer)))
-      (init-process-check package-list proc-list)
-      ;; (with-current-buffer output-buffer
-      ;;   (message (buffer-substring 1 (point-max))))
-      )))
+        (add-to-list 'proc-list (get-buffer-process output-buffer))))
+    (init-process-check package-list proc-list)
+    ;; (with-current-buffer output-buffer
+    ;;   (message (buffer-substring 1 (point-max))))
+    ))
 
 (defun init-function (&rest _)
   (delete-directory "~/.emacs.d/elpa" t)
