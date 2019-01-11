@@ -411,7 +411,8 @@
   (evil-set-initial-state 'dired-mode  'emacs))
 
 (use-package evil-anzu
-  :after anzu)
+  :after anzu
+  :demand t)
 
 (use-package evil-visualstar
   :bind (:map evil-visual-state-map
