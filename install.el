@@ -4,19 +4,18 @@
 
 ;; Author: SeungKi Kim <tttuuu888@gmail.com>
 ;; URL: https://github.com/tttuuu888/.emacs.d
-;; Version: 0.3.0
+;; Version: 0.4.0
 
 ;;; Commentary
 
-;; This script installs packages with parallel processes.
-;; This script will work with below conditions.
-;; 1. All packages are maintained by 'use-package'
-;; 2. (setq use-package-always-ensure t) is included in config;
-;;    so that 'use-package' does not have ':ensure t' keyword.
+;; This script installs all external packages managed by `use-package' as
+;; parallel processes.
 
 ;; Usage:
-;; Start initializing with below command.
-;; $ emacs -l ~/.emacs.d/install.el -batch -init
+;; Start parallel install with below command.
+;;  $ emacs -l ~/.emacs.d/install.el -batch -init
+
+;;; Code:
 
 (require 'cl)
 
@@ -100,7 +99,7 @@
 
 (defun packages-installed-p (left-packages)
   (let ((pkg-list left-packages)
-        (pkg-dirs (directory-files "~/.emacs.d/elpa")))
+        (pkg-dirs (directory-files package-user-dir)))
     (dolist (pkg pkg-list)
       (let ((directory
              (car (seq-filter
@@ -109,7 +108,9 @@
         (when (and directory
                    (seq-filter
                     (lambda (f) (string-match "\.elc$" f))
-                    (directory-files (concat "~/.emacs.d/elpa/" directory))))
+                    (directory-files
+                     (concat (file-name-as-directory package-user-dir)
+                             directory))))
           (print-package-installed pkg)
           (setq left-packages (remove pkg left-packages))))))
   left-packages)
@@ -144,7 +145,7 @@
     ))
 
 (defun init-function (&rest _)
-  (delete-directory "~/.emacs.d/elpa" t)
+  (delete-directory package-user-dir t)
   (package-refresh-contents)
   (let* ((deps-list (get-dependency-package-list))
          (packages-list (remove-duplicate-packages-in-depth deps-list))
