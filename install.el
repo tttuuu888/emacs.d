@@ -77,8 +77,9 @@
               (mapcan
                (lambda (pkg)
                  (unless (package-installed-p pkg)
-                   (let* ((tr (package-compute-transaction () (list (list pkg))))
-                          (pkg-desc (car (last tr)))
+                   (let* ((pkg-desc (car
+                                     (cdr
+                                      (assq pkg package-archive-contents))))
                           (deps
                            (seq-filter
                             (lambda (x) (not (package-installed-p x)))
