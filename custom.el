@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["black" "red3" "green3" "yellow3" "royal blue" "magenta3" "cyan3" "gray90"])
+   ["black" "red3" "green3" "yellow3" "dodger blue" "magenta3" "cyan3" "gray90"])
  '(backup-directory-alist (quote ((".*" . "/tmp/"))))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
