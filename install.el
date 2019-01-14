@@ -4,7 +4,7 @@
 
 ;; Author: SeungKi Kim <tttuuu888@gmail.com>
 ;; URL: https://github.com/tttuuu888/.emacs.d
-;; Version: 0.4.0
+;; Version: 0.5.0
 
 ;;; Commentary
 
@@ -61,36 +61,37 @@
           (dotimes (dep (length packages))
             (when (> dep base-depth)
               (let ((target-packages (nth-value dep result)))
-                (mapcar (lambda (x) (delete x target-packages)) base-packages)
+                (mapcar (lambda (x)
+                          (setq target-packages (delq x target-packages)))
+                        base-packages)
                 (setcar (nthcdr dep result) target-packages))))
           (remove-duplicate-packages-in-depth result (1+ base-depth)))
       packages)))
 
 (defun get-dependency-package-list ()
-  (let* ((package-list (get-package-list))
-         (dep-packages package-list)
+  (let* ((all-package-list (get-package-list))
+         (dep-packages all-package-list)
          (no-dep-packages (list))
-         (result (list package-list)))
+         (result (list (seq-filter (lambda (x) (not (package-installed-p x)))
+                                   all-package-list))))
     (while dep-packages
       (let ((deps
              (cl-delete-duplicates
               (mapcan
                (lambda (pkg)
-                 (unless (package-installed-p pkg)
-                   (let* ((pkg-desc (car
-                                     (cdr
-                                      (assq pkg package-archive-contents))))
-                          (deps
-                           (seq-filter
-                            (lambda (x) (not (package-installed-p x)))
-                            (mapcar #'car (package-desc-reqs pkg-desc)))))
-                     (unless deps (add-to-list 'no-dep-packages pkg))
-                     deps)))
+                 (let* ((desc (car (cdr (assq pkg package-archive-contents))))
+                        (reqs (seq-filter
+                               (lambda (x) (not (package-installed-p x)))
+                               (mapcar #'car (package-desc-reqs desc)))))
+                   (when (and (not reqs) (not (package-installed-p pkg)))
+                     (add-to-list 'no-dep-packages pkg))
+                   reqs))
                dep-packages))))
         (setq dep-packages deps)
-        (when deps
-          (add-to-list 'result deps))))
-    (setcar (nthcdr 0 result) (append no-dep-packages (car result)))
+        (when deps (add-to-list 'result deps))))
+    (when (or result no-dep-packages)
+      (setcar (nthcdr 0 result) (cl-delete-duplicates
+                                 (append no-dep-packages (car result)))))
     result))
 
 (defun print-package-installed (package)
@@ -146,7 +147,6 @@
     ))
 
 (defun init-function (&rest _)
-  (delete-directory package-user-dir t)
   (package-refresh-contents)
   (let* ((deps-list (get-dependency-package-list))
          (packages-list (remove-duplicate-packages-in-depth deps-list))
@@ -155,7 +155,6 @@
     (message (format "\n%s packages will be installed.\n" all-packages-count))
     (dolist (packages packages-list)
       (async-install-packages packages))
-
     (message "Init done.")))
 
 (defun install-function (&rest r)
