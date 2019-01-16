@@ -725,43 +725,34 @@
   :config
   (require 'subr-x)
   (ivy-mode t)
-  (defun ivy-buffer-transformer-sk (str)
+  (defun sk-ivy-buffer-transformer (str)
     (let* ((buf (get-buffer str))
+           (buf-dir (buffer-local-value 'default-directory buf))
+           (buf-mode (buffer-local-value 'major-mode buf))
            (mode (capitalize
-                  (string-remove-suffix "-mode"
-                                        (symbol-name (buffer-local-value
-                                                      'major-mode buf)))))
+                  (string-remove-suffix "-mode" (symbol-name buf-mode))))
            (max-path-len (max 0 (- (frame-width) 62)))
-           (path-dir (abbreviate-file-name
-                      (or
-                       (buffer-local-value 'default-directory buf)
-                       "~/")))
-           (path-file (buffer-file-name buf))
-           (path-choice (or (if path-file (abbreviate-file-name path-file))
-                            (if (or (string-match-p "shell" str)
-                                    (equal (buffer-local-value 'major-mode buf)
-                                           'dired-mode))
-                                path-dir)
-                            nil))
-           (path-prefix (if (equal (and path-choice
-                                        (substring path-choice 0 1))
-                                   "~")
+           (path-dir (abbreviate-file-name (or buf-dir "~/")))
+           (path-file (when-let ((name (buffer-file-name buf)))
+                        (abbreviate-file-name name)))
+           (path-opt (or path-file
+                         (when (or (string-match-p "shell" str)
+                                   (equal buf-mode 'dired-mode))
+                           path-dir)))
+           (path-prefix (if (string-prefix-p "~" path-opt)
                             "~/"
                           "/"))
-           (path-len (length path-choice))
+           (path-len (length path-opt))
            (path-mod (if (<= path-len max-path-len)
                          nil
-                       (string-remove-prefix
-                        (substring path-choice 0 (- path-len max-path-len))
-                        path-choice)))
+                       (substring path-opt (- path-len max-path-len) path-len)))
            (path (if path-mod
                      (concat path-prefix
                              "…"
                              (replace-regexp-in-string "^[^~/]*" "" path-mod))
-                   path-choice)))
+                   path-opt)))
       (format "%-35s %-20s %s" buf mode (or path ""))))
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-buffer-transformer-sk)
+  (ivy-set-display-transformer 'ivy-switch-buffer 'sk-ivy-buffer-transformer)
   (setq ivy-height 15
         ivy-height-alist '((t . 15))
         ivy-do-completion-in-region nil
