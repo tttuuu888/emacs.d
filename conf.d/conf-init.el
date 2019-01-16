@@ -6,13 +6,12 @@
   (when name (setq user-full-name name))
   (when mail (setq user-mail-address mail)))
 
-;; Hangul 3bulsik
-(setq default-korean-keyboard "3")
-
-;; Korean font
+;; D2Coding font apply
 (when window-system
-    (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
+  (mapc (lambda (f) (set-fontset-font t f (font-spec :name "D2Coding")))
+        '(hangul unicode)))
 
+;; Windows coding system setting
 (when (and (eq system-type 'windows-nt) enable-multibyte-characters)
   (prefer-coding-system 'utf-8))
 

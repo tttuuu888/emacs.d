@@ -52,6 +52,12 @@
 
 
 ;;; Built-in packages
+(use-package korea-util
+  :ensure nil
+  :init
+  (setq default-korean-keyboard "3")
+  (setup-korean-environment-internal))
+
 (use-package recentf
   :ensure nil
   :hook (find-file . recentf-mode)
