@@ -3,6 +3,13 @@
 (let ((file-name-handler-alist nil)
       (gc-cons-threshold most-positive-fixnum))
 
+  (when (member "-init" command-line-args)
+    (let ((output-buffer (generate-new-buffer "*Init*")))
+      (delete "-init" command-line-args)
+      (switch-to-buffer output-buffer)
+      (call-process "emacs" nil  output-buffer t
+                    "-l" "~/.emacs.d/install.el" "-batch" "-init")))
+
   (setq package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
           ;; ("org" . "https://orgmode.org/elpa/")

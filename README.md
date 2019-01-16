@@ -2,8 +2,8 @@
 This is my personal Emacs setting.  
 
 ## Setup ##
-    git clone https://github.com/tttuuu888/.emacs.d.git ~/.emacs.d
-    emacs -l ~/.emacs.d/install.el -batch -init
+    git clone https://github.com/tttuuu888/.emacs.d ~/.emacs.d
+    emacs -init
 
 ## Requirements ##
 Below programs are needed to use all features of this emacs setting.  

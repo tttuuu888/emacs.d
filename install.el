@@ -127,7 +127,7 @@
 (defun async-install-packages (package-list)
   (let* ((default-args-len (1+ (/ (length package-list) number-of-process)))
          (left-packages package-list)
-         (output-buffer (generate-new-buffer "install package"))
+         (output-buffer (generate-new-buffer "*install-packages*"))
          (proc-list nil))
     (while left-packages
       (let* ((args-len (min default-args-len (length left-packages)))
@@ -147,6 +147,7 @@
     ))
 
 (defun init-function (&rest _)
+  (delete "-init" command-line-args)
   (package-refresh-contents)
   (let* ((deps-list (get-dependency-package-list))
          (packages-list (remove-duplicate-packages-in-depth deps-list))
@@ -158,6 +159,7 @@
     (message "Init done.")))
 
 (defun install-function (&rest r)
+  (delete "-install" command-line-args)
   (dolist (pkg command-line-args-left)
     (dotimes (try-count 2)
       (print (format "try %s for %s" try-count pkg))
