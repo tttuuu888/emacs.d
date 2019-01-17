@@ -168,6 +168,7 @@
   :config
   (evil-leader/set-key-for-mode 'org-mode
     "cc" 'org-ctrl-c-ctrl-c
+    "ce" 'org-export-dispatch
     "cl" 'org-insert-link
     "se" 'org-edit-src-code
     "ta" 'org-table-create
