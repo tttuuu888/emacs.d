@@ -11,10 +11,6 @@
   (mapc (lambda (f) (set-fontset-font t f (font-spec :name "D2Coding")))
         '(hangul unicode)))
 
-;; Windows coding system setting
-(when (and (eq system-type 'windows-nt) enable-multibyte-characters)
-  (prefer-coding-system 'utf-8))
-
 ;; Default color setting
 (defun my-theme-setting (&optional dark-theme)
   (let ((default-foreground-color

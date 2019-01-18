@@ -145,11 +145,6 @@
       (pcase answer
         (?y "yes") (?n "no") (?a "all") (?q "quit"))))
 
-  ;; win32 hiding gid, uid in dired mode
-  (when (eq system-type 'windows-nt)
-    (setq ls-lisp-verbosity (delq 'uid ls-lisp-verbosity)
-          ls-lisp-verbosity (delq 'gid ls-lisp-verbosity)))
-
   (setq dired-listing-switches "-alh --group-directories-first"
         dired-omit-extensions '("~")
         dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
