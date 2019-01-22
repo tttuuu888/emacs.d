@@ -285,7 +285,6 @@
     (setenv "TERM" "screen-256color")
     (setq-local company-minimum-prefix-length 3)
     (evil-define-key 'insert eshell-mode-map
-      "TAB" 'completion-at-point
       (kbd "C-a") 'eshell-bol)
     (evil-define-key 'normal eshell-mode-map
       "0" 'eshell-bol
