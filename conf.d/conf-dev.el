@@ -73,15 +73,12 @@
 (use-package which-func
   :ensure nil
   :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
+  :custom-face (which-func ((t (:inherit font-lock-function-name-face))))
   :config
+  (setq which-func-unknown "N/A")
   (defun my-which-function-setup ()
-    (set-face-attribute 'which-func nil
-                        :foreground (face-foreground
-                                     'font-lock-function-name-face))
     (which-function-mode)
-    (setq-local header-line-format
-                '((which-func-mode ("" which-func-format " "))))
-    (setq which-func-unknown "N/A")))
+   (setq-local header-line-format 'which-func-format)))
 
 (use-package sh-script
   :ensure nil
