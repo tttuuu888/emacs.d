@@ -27,21 +27,6 @@
          ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
          ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
 
-(use-package redo+
-  :ensure nil
-  :bind (("C-." . redo+-redo)
-         ("M-_" . redo+-redo)
-         ("C-_" . redo+-undo)
-         ("C-/" . redo+-undo)
-         :map evil-normal-state-map
-         ("u"   . redo+-undo)
-         ("C-r" . redo+-redo))
-  :config
-  (global-undo-tree-mode -1)
-  (defun global-undo-tree-mode (&rest _) t)
-  (defalias 'undo-tree-undo 'redo+-undo)
-  (defalias 'undo-tree-redo 'redo+-redo))
-
 (use-package company-sql
   :ensure nil
   :hook ((sql-mode sql-interactive-mode) . my-sql-mode-hook)
@@ -505,7 +490,9 @@
 
 (use-package undo-tree
   :config
-  (require 'redo+))
+  (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs)
+  (evil-leader/set-key
+    "xu" 'undo-tree-visualize))
 
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
