@@ -765,12 +765,11 @@
          ("C-x C-f" . counsel-find-file)
          ("C-h b"   . counsel-descbinds)
          ("C-h v"   . counsel-describe-variable)
-         ("C-h f"   . counsel-describe-function)
-         :map minibuffer-local-map
-         ("C-r"     . counsel-minibuffer-history))
+         ("C-h f"   . counsel-describe-function))
   :init
   (evil-leader/set-key
     "<SPC>" 'counsel-M-x
+    "M-m"   'counsel-M-x
     "d"     'counsel-find-file
     "f"     'counsel-find-file
     "r"     'counsel-recentf
