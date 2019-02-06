@@ -319,12 +319,15 @@
          ("TAB"     . company-indent-or-complete-common)
          ("C-c C-e" . plantuml-make-output))
   :config
-  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+
+  (evil-leader/set-key-for-mode 'plantuml-mode
+    "ce" 'plantuml-make-output)
+  (setq plantuml-jar-path (getenv "PLANTUML_PATH"))
   (defun plantuml-make-output ()
     (interactive)
     (set-process-sentinel
      (start-process "plantuml" nil "plantuml" (buffer-file-name))
-     (lambda () (message "PlantUML process is done")))))
+     (lambda (&rest _) (message "PlantUML process is done")))))
 
 
 (provide 'conf-dev)
