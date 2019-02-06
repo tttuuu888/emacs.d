@@ -21,9 +21,10 @@
   (defun sk-toggle-python ()
     "Toggle between Python2 and Python3"
     (interactive)
-    (let ((python (if (equal elpy-rpc-python-command "python3")
-                      "python2"
-                    "python3")))
+    (let* ((ret (shell-command-to-string
+                 (concat elpy-rpc-python-command " --version")))
+           (ver (substring (cadr (split-string ret)) 0 1))
+           (python (if (equal ver "3") "python2" "python3")))
       (setq python-shell-interpreter python
             elpy-rpc-python-command python)
       (message (concat "Toggled to " python))))
