@@ -75,6 +75,13 @@
   :config
   (require 'dired-x)
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
+
+  (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
+  (evil-leader/set-key-for-mode 'dired-mode
+    "ee" 'wdired-change-to-wdired-mode
+    "ec" 'wdired-finish-edit
+    "eq" 'wdired-exit)
+
   (defun dired-visit-file-or-dir ()
     (interactive)
     (if (file-directory-p (dired-get-filename nil t))
