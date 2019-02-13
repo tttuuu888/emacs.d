@@ -158,6 +158,7 @@
     "ce" 'org-export-dispatch
     "cl" 'org-insert-link
     "se" 'org-edit-src-code
+    "si" 'org-insert-structure-template
     "ta" 'org-table-create
     "tl" 'org-tags-view
     "ts" 'org-set-tags)
@@ -172,9 +173,7 @@
   (evil-declare-motion 'org-forward-element)
   (evil-declare-motion 'org-backward-element)
 
-  (add-to-list 'org-structure-template-alist
-               '("u" "#+BEGIN_SRC plantuml :file ?.png
-                    \n#+END_SRC"))
+  (add-to-list 'org-structure-template-alist '("u" . "src plantuml %:file %?.png"))
   (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
   (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
   (defun my-org-inline-image-hook ()
