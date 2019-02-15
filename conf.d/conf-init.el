@@ -64,6 +64,7 @@
 (setq use-package-always-defer t
       use-package-always-ensure t
       use-package-enable-imenu-support t)
+(put :map 'lisp-indent-function 'defun)
 (require 'use-package)
 
 (require 'conf-general)

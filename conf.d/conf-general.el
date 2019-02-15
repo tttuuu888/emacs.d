@@ -60,26 +60,26 @@
 (use-package calendar
   :config
   :bind (:map calendar-mode-map
-         ("h"       . calendar-backward-day)
-         ("j"       . calendar-forward-week)
-         ("k"       . calendar-backward-week)
-         ("l"       . calendar-forward-day)
-         ("C-f"     . calendar-scroll-left-three-months)
-         ("C-b"     . calendar-scroll-right-three-months)
-         ("<left>"  . calendar-scroll-right)
-         ("<right>" . calendar-scroll-left)))
+          ("h"       . calendar-backward-day)
+          ("j"       . calendar-forward-week)
+          ("k"       . calendar-backward-week)
+          ("l"       . calendar-forward-day)
+          ("C-f"     . calendar-scroll-left-three-months)
+          ("C-b"     . calendar-scroll-right-three-months)
+          ("<left>"  . calendar-scroll-right)
+          ("<right>" . calendar-scroll-left)))
 
 (use-package dired
   :ensure nil
   :bind (:map dired-mode-map
-         ("M-o"   . dired-omit-mode)
-         ("j"     . dired-next-line)
-         ("k"     . dired-previous-line)
-         ("r"     . ora-dired-rsync)
-         ("/"     . evil-search-forward)
-         ("^"     . dired-up-and-close-dir)
-         ("<DEL>" . dired-up-and-close-dir)
-         ("<RET>" . dired-visit-file-or-dir))
+          ("M-o"   . dired-omit-mode)
+          ("j"     . dired-next-line)
+          ("k"     . dired-previous-line)
+          ("r"     . ora-dired-rsync)
+          ("/"     . evil-search-forward)
+          ("^"     . dired-up-and-close-dir)
+          ("<DEL>" . dired-up-and-close-dir)
+          ("<RET>" . dired-visit-file-or-dir))
   :init
   (add-to-list 'magic-mode-alist
                '((lambda () (< large-file-warning-threshold (buffer-size)))
@@ -157,13 +157,13 @@
   :ensure nil
   :mode ("\\.org\\'" . org-mode)
   :bind (:map org-mode-map
-         ("C-c a"   . org-agenda)
-         ("C-c b"   . org-iswitchb)
-         ("C-c l"   . org-store-link)
-         ("C-c r"   . org-remember)
-         ("C-c t"   . org-table-create)
-         ("C-c u"   . org-up-element)
-         ("C-c s e" . org-edit-src-code))
+          ("C-c a"   . org-agenda)
+          ("C-c b"   . org-iswitchb)
+          ("C-c l"   . org-store-link)
+          ("C-c r"   . org-remember)
+          ("C-c t"   . org-table-create)
+          ("C-c u"   . org-up-element)
+          ("C-c s e" . org-edit-src-code))
   :config
   (evil-leader/set-key-for-mode 'org-mode
     "cc" 'org-ctrl-c-ctrl-c
@@ -387,18 +387,18 @@
 
 (use-package evil
   :bind (:map evil-insert-state-map
-         ("C-a" . move-beginning-of-line)
-         ("C-e" . move-end-of-line)
-         ("C-k" . kill-line)
-         :map evil-visual-state-map
-         ("p"   . evil-paste-pgvy)
-         :map evil-ex-completion-map
-         ("C-a" . move-beginning-of-line)
-         ("C-b" . backward-char)
-         ("C-d" . delete-char)
-         ("C-k" . kill-line)
-         ("M-n" . next-complete-history-element)
-         ("M-p" . previous-complete-history-element))
+          ("C-a" . move-beginning-of-line)
+          ("C-e" . move-end-of-line)
+          ("C-k" . kill-line)
+          :map evil-visual-state-map
+          ("p"   . evil-paste-pgvy)
+          :map evil-ex-completion-map
+          ("C-a" . move-beginning-of-line)
+          ("C-b" . backward-char)
+          ("C-d" . delete-char)
+          ("C-k" . kill-line)
+          ("M-n" . next-complete-history-element)
+          ("M-p" . previous-complete-history-element))
   :custom
   (evil-want-C-u-scroll t)
   :init
@@ -437,8 +437,8 @@
 
 (use-package evil-visualstar
   :bind (:map evil-visual-state-map
-         ("n" . evil-visualstar/begin-search-forward)
-         ("N" . evil-visualstar/begin-search-backward))
+          ("n" . evil-visualstar/begin-search-forward)
+          ("N" . evil-visualstar/begin-search-backward))
   :config
   (global-evil-visualstar-mode))
 
@@ -532,8 +532,8 @@
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
   :bind (:map helm-git-grep-mode-map
-         ("C-c C-e" . wgrep-change-to-wgrep-mode)
-         ("C-c C-s" . wgrep-save-all-buffers)))
+          ("C-c C-e" . wgrep-change-to-wgrep-mode)
+          ("C-c C-s" . wgrep-save-all-buffers)))
 
 (use-package helm
   :bind (("M-y"     . helm-show-kill-ring)

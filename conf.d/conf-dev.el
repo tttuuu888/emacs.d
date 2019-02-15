@@ -15,7 +15,7 @@
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
   :bind (:map python-mode-map
-         ("TAB" . company-indent-or-complete-common))
+          ("TAB" . company-indent-or-complete-common))
   :config
   (elpy-enable)
   (defun sk-toggle-python ()
@@ -34,8 +34,8 @@
   :ensure nil
   :commands xref-find-reference-here
   :bind (:map xref--xref-buffer-mode-map
-         ("<return>" . xref-quit-and-goto-xref)
-         ("<RET>"    . xref-quit-and-goto-xref))
+          ("<return>" . xref-quit-and-goto-xref)
+          ("<RET>"    . xref-quit-and-goto-xref))
   :init
   (evil-define-key 'normal prog-mode-map
     "gd" 'xref-find-definitions
@@ -79,7 +79,7 @@
   (setq which-func-unknown "N/A")
   (defun my-which-function-setup ()
     (which-function-mode)
-   (setq-local header-line-format 'which-func-format)))
+    (setq-local header-line-format 'which-func-format)))
 
 (use-package sh-script
   :ensure nil
@@ -147,8 +147,8 @@
 (use-package paredit
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
   :bind (:map paredit-mode-map
-         ("C-c <right>" . paredit-forward-slurp-sexp)
-         ("C-c <left>"  . paredit-forward-barf-sexp))
+          ("C-c <right>" . paredit-forward-slurp-sexp)
+          ("C-c <left>"  . paredit-forward-barf-sexp))
   :config
   (defun evil-paredit-kill (&rest _)
     (interactive)
@@ -234,7 +234,7 @@
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
   :bind (:map web-mode-map
-         ("TAB" . company-indent-or-complete-common))
+          ("TAB" . company-indent-or-complete-common))
   :config
   (setq web-mode-style-padding 0
         web-mode-script-padding 0
@@ -252,7 +252,7 @@
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
   :bind (:map js2-mode-map
-         ("TAB" . company-indent-or-complete-common))
+          ("TAB" . company-indent-or-complete-common))
   :config
   (setq js2-basic-offset 2
         js2-strict-missing-semi-warning nil)
@@ -294,8 +294,8 @@
 (use-package go-mode
   :mode ("\\.go\\'" . go-mode)
   :bind (:map go-mode-map
-         ("M-." . godef-jump)
-         ("TAB" . company-indent-or-complete-common))
+          ("M-." . godef-jump)
+          ("TAB" . company-indent-or-complete-common))
   :config
   (evil-define-key 'normal go-mode-map
     "gd" 'godef-jump
@@ -316,8 +316,8 @@
 (use-package plantuml-mode
   :mode ("\\.puml\\'" . plantuml-mode)
   :bind (:map plantuml-mode-map
-         ("TAB"     . company-indent-or-complete-common)
-         ("C-c C-e" . plantuml-make-output))
+          ("TAB"     . company-indent-or-complete-common)
+          ("C-c C-e" . plantuml-make-output))
   :config
 
   (evil-leader/set-key-for-mode 'plantuml-mode
