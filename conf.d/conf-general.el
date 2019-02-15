@@ -772,13 +772,12 @@
           (ivy-switch-buffer . ivy-sort-function-buffer))))
 
 (use-package ivy-yasnippet
-  :after yasnippet
-  :bind (:map yas-minor-mode-map
-         ("C-c /" . ivy-yasnippet)
-         :map evil-normal-state-map
-         ("<SPC> /" . ivy-yasnippet))
+  :init
+  (evil-leader/set-key "/" 'ivy-yasnippet)
   :config
-  (advice-add 'ivy-yasnippet :before #'(lambda () (evil-insert-state))))
+  (advice-add 'ivy-yasnippet :before (lambda ()
+                                       (yas-minor-mode 1)
+                                       (evil-insert-state))))
 
 (use-package counsel
   :commands counsel-fzf-here
