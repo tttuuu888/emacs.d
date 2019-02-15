@@ -169,6 +169,9 @@
     "gl" 'org-down-element
     "gj" 'org-forward-element
     "gk" 'org-backward-element)
+  (evil-leader/set-key-minor-mode 'org-src-mode
+    "ec" 'org-edit-src-exit
+    "eq" 'org-edit-src-abort)
   (evil-declare-motion 'org-up-element)
   (evil-declare-motion 'org-down-element)
   (evil-declare-motion 'org-forward-element)
@@ -330,6 +333,7 @@
 ;;; External packages
 (use-package evil-leader
   :init
+  (defvar sk-evil-sub-leader "M-m")
   (global-evil-leader-mode)
   (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
@@ -347,7 +351,7 @@
     "xr" 'read-only-mode
     "xv" 'evil-reload-file)
   (defun evil-sub-leader-mode ()
-    (let* ((sub-leader (kbd "M-m"))
+    (let* ((sub-leader (kbd sk-evil-sub-leader))
            (mode-map (cdr (assoc major-mode evil-leader--mode-maps)))
            (map (or mode-map evil-leader--default-map)))
       (evil-normalize-keymaps)
@@ -355,6 +359,18 @@
       (define-key evil-insert-state-local-map sub-leader map)
       (define-key evil-emacs-state-local-map sub-leader map)))
   (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
+  (defun evil-local-leader-set-key (key def)
+    (evil-local-set-key 'motion (kbd (concat evil-leader/leader key)) def)
+    (evil-local-set-key 'motion (kbd (concat sk-evil-sub-leader " " key)) def))
+  (defun evil-leader/set-key-minor-mode (mode key def &rest bindings)
+    (while key
+      (add-hook
+       (intern (concat (symbol-name mode) "-hook"))
+       `(lambda ()
+          (evil-local-leader-set-key ,key (quote ,def))))
+      (setq key (pop bindings)
+            def (pop bindings))))
+  (put 'evil-leader/set-key-minor-mode 'lisp-indent-function 'defun)
   (setq evil-leader/no-prefix-mode-rx
         '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
 
