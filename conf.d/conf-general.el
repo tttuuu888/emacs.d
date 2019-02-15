@@ -639,6 +639,7 @@
 (use-package magit
   :bind ("<f12>" . magit-status)
   :config
+  (bind-key "<escape>" 'transient-quit-one transient-map)
   (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
   (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps)
   (setq magit-log-section-commit-count 5
