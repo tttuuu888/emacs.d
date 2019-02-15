@@ -57,6 +57,18 @@
   (ivy-mode t)
   (defalias 'ido-completing-read 'ivy-completing-read))
 
+(use-package calendar
+  :config
+  :bind (:map calendar-mode-map
+         ("h"       . calendar-backward-day)
+         ("j"       . calendar-forward-week)
+         ("k"       . calendar-backward-week)
+         ("l"       . calendar-forward-day)
+         ("C-f"     . calendar-scroll-left-three-months)
+         ("C-b"     . calendar-scroll-right-three-months)
+         ("<left>"  . calendar-scroll-right)
+         ("<right>" . calendar-scroll-left)))
+
 (use-package dired
   :ensure nil
   :bind (:map dired-mode-map
@@ -415,8 +427,9 @@
   (evil-swap-key evil-motion-state-map "k" "gk")
   (evil-global-set-key 'normal "Y" (kbd "y$"))
   (evil-global-set-key 'motion "$" 'end-of-line)
-  (evil-set-initial-state 'term-mode   'emacs)
-  (evil-set-initial-state 'dired-mode  'emacs))
+  (evil-set-initial-state 'calendar-mode 'emacs)
+  (evil-set-initial-state 'dired-mode 'emacs)
+  (evil-set-initial-state 'term-mode  'emacs))
 
 (use-package evil-anzu
   :after anzu
