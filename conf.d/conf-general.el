@@ -164,7 +164,6 @@
     "ts" 'org-set-tags)
   (evil-define-key 'motion org-mode-map
     (kbd "TAB") 'org-cycle
-    (kbd "C-i") 'org-cycle
     "gh" 'org-up-element
     "gl" 'org-down-element
     "gj" 'org-forward-element
