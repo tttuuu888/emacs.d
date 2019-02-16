@@ -275,7 +275,7 @@
                 (rjsx-mode)))))
 
 (use-package emmet-mode
-  :hook (web-mode js2-mode css-mode))
+  :hook ((web-mode js2-mode css-mode) . emmet-mode))
 
 (use-package tern
   :hook ((web-mode js2-mode css-mode) . my-tern-hook)
