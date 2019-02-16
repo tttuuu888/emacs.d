@@ -236,12 +236,37 @@
   :bind (:map web-mode-map
           ("TAB" . company-indent-or-complete-common))
   :config
+  (require 'cl)
   (setq web-mode-style-padding 0
         web-mode-script-padding 0
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-markup-indent-offset 2
         web-mode-enable-current-element-highlight t)
+  (defun tree-assoc (key tree)
+    (when (consp tree)
+      (destructuring-bind (x . y)  tree
+        (if (eql x key) tree
+          (or (tree-assoc key x) (tree-assoc key y))))))
+  (defmacro code-to-key (code)
+    `(key-description (vector ,code)))
+  (defun cc-map-to-evil-leader-map (mode ori1 ori2 con1 con2)
+    "Find bindings start with ori1 ori2 from mode-map and
+convert it to corresponding evil-leader map. For example, all
+bindings of C-c C-e X is converted to leader c e X by below:
+'(cc-map-to-evil-leader-map 3 5 c e)'"
+    (let* ((map (symbol-value (intern (concat (symbol-name mode) "-map"))))
+           (cc-maps (thread-last map (tree-assoc ori1) (tree-assoc ori2) cddr)))
+      (dolist (pair cc-maps)
+        (let ((key (car pair))
+              (func (cdr pair)))
+          (evil-leader/set-key-for-mode mode
+            (concat con1 con2 (code-to-key key)) func)))))
+  (cc-map-to-evil-leader-map 'web-mode 3 1 "c" "a")
+  (cc-map-to-evil-leader-map 'web-mode 3 2 "c" "b")
+  (cc-map-to-evil-leader-map 'web-mode 3 4 "c" "d")
+  (cc-map-to-evil-leader-map 'web-mode 3 5 "c" "e")
+  (cc-map-to-evil-leader-map 'web-mode 3 20 "c" "t")
   (defun my-web-mode-hook ()
     (setq-local
      company-backends
