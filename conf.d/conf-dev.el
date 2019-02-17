@@ -344,7 +344,6 @@ bindings of C-c C-e X is converted to leader c e X by below:
           ("TAB"     . company-indent-or-complete-common)
           ("C-c C-e" . plantuml-make-output))
   :config
-
   (evil-leader/set-key-for-mode 'plantuml-mode
     "ce" 'plantuml-make-output)
   (setq plantuml-jar-path (getenv "PLANTUML_PATH"))

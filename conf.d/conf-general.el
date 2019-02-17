@@ -188,9 +188,11 @@
   (evil-declare-motion 'org-forward-element)
   (evil-declare-motion 'org-backward-element)
 
-  (add-to-list 'org-structure-template-alist '("u" . "src plantuml %:file %?.png"))
-  (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
-  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
+  (dolist (mode '("js" "javascript"))
+    (add-to-list 'org-src-lang-modes `(,mode . js2)))
+  (dolist (mode '("css" "html" "vue" "web"))
+    (add-to-list 'org-src-lang-modes `(,mode . web)))
+
   (defun my-org-inline-image-hook ()
     (when org-inline-image-overlays
       (org-redisplay-inline-images)))
@@ -208,12 +210,15 @@
                           "</style>\n")))
     (when (eq exporter 'reveal)
       (setq-local org-export-with-toc nil)))
+  (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
+  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
+
   (setq org-confirm-babel-evaluate nil
         org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
         org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
                                 "\\|"
                                 "\\(fn:[-_[:word:]]+\\)\\)")
-        org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar"
+        org-plantuml-jar-path (getenv "PLANTUML_PATH")
         org-startup-with-inline-images t))
 
 (use-package ibuffer
