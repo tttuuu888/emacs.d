@@ -84,7 +84,7 @@
 (defun insert-date ()
   "Insert date at point."
   (interactive)
-  (insert (format-time-string "%Y-%m-%d %a")))
+  (insert (format-time-string "%Y-%m-%d %A")))
 
 (defun insert-date-and-time ()
   "Insert date at point."
