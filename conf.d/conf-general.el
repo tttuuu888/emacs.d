@@ -512,6 +512,11 @@
   :config
   (add-to-list 'company-backends 'company-go))
 
+(use-package company-ghc
+  :after haskell-mode
+  :config
+  (add-to-list 'company-backends 'company-ghc))
+
 (use-package irony
   :hook ((c++-mode c-mode objc-mode) . irony-mode)
   :config

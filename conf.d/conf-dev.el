@@ -354,5 +354,11 @@ bindings of C-c C-e X is converted to leader c e X by below:
      (start-process "plantuml" nil "plantuml" (buffer-file-name))
      (lambda (&rest _) (message "PlantUML process is done")))))
 
+(use-package haskell-mode
+  :hook (haskell-mode . my-haskell-mode-hook)
+  :config
+  (defun my-haskell-mode-hook ()
+    (setq-local tab-width 4)))
+
 
 (provide 'conf-dev)
