@@ -661,6 +661,10 @@
 
 (use-package magit
   :bind ("<f12>" . magit-status)
+  :init
+  (evil-leader/set-key
+    "gs" 'magit-status
+    "gb" 'magit-blame)
   :config
   (bind-key "<escape>" 'transient-quit-one transient-map)
   (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
