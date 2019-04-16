@@ -65,7 +65,21 @@
                 gdb-threads-mode-map))
     (bind-keys :map (symbol-value mm)
                ("j" . next-line)
-               ("k" . previous-line))))
+               ("k" . previous-line)))
+  (evil-leader/set-key-minor-mode 'gud-mode
+    "ab" 'gud-break
+    "ad" 'gud-remove
+    "af" 'gud-finish
+    "ai" 'gud-stempi
+    "aj" 'gud-jump
+    "al" 'gud-refresh
+    "an" 'gud-next
+    "ap" 'gud-print
+    "ar" 'gud-cont
+    "as" 'gud-step
+    "at" 'gud-tbreak
+    "au" 'gud-until
+    "aw" 'gud-watch))
 
 (use-package make-mode
   :ensure nil
