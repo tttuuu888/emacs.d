@@ -56,6 +56,9 @@
                 (set-window-dedicated-p (selected-window) t)))
   :config
   (gdb-many-windows t)
+  (defun my-gdb-history ()
+    (interactive)
+    (ivy-read "Symbol name: " (ring-elements comint-input-ring)))
   (dolist (mm '(gdb-edit-locals-map-1
                 gdb-locals-mode-map
                 gdb-locals-watch-map
@@ -69,6 +72,7 @@
   (evil-define-key 'normal gud-mode-map
     (kbd "<RET>") 'my-shell-return)
   (evil-leader/set-key-minor-mode 'gud-mode
+    "l"  'my-gdb-history
     "ab" 'gud-break
     "ad" 'gud-remove
     "af" 'gud-finish
