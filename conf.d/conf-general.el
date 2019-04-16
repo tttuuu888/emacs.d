@@ -266,13 +266,17 @@
 (use-package shell
   :ensure nil
   :config
-  (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
+  (defun my-shell-history ()
+    (interactive)
+    (my-shell-return)
+    (counsel-shell-history))
+  (defun my-shell-setup ()
+    (setq-local company-minimum-prefix-length 3))
+  (evil-leader/set-key-for-mode 'shell-mode "l" 'my-shell-history)
   (evil-define-key 'normal shell-mode-map
     "gk" 'comint-previous-prompt
     "gj" 'comint-next-prompt
     (kbd "<RET>") 'my-shell-return)
-  (defun my-shell-setup ()
-    (setq-local company-minimum-prefix-length 3))
   (add-hook 'shell-mode-hook 'my-shell-setup))
 
 (use-package eshell
@@ -287,6 +291,10 @@
   (defun my-eshell-change-whole-line ()
     (interactive)
     (execute-kbd-macro (kbd "0C")))
+  (defun my-eshell-history ()
+    (interactive)
+    (my-shell-return)
+    (counsel-esh-history))
   (defun my-eshell-setup ()
     (setenv "TERM" "screen-256color")
     (setq-local company-minimum-prefix-length 3)
@@ -300,10 +308,6 @@
       (kbd "M-p") '(lambda () (interactive) nil)
       (kbd "M-n") '(lambda () (interactive) nil)
       (kbd "<RET>") 'my-shell-return))
-  (defun my-eshell-history ()
-    (interactive)
-    (my-shell-return)
-    (counsel-esh-history))
   (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 

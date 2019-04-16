@@ -58,7 +58,9 @@
   (gdb-many-windows t)
   (defun my-gdb-history ()
     (interactive)
-    (ivy-read "Symbol name: " (ring-elements comint-input-ring)))
+    (my-shell-return)
+    (ivy-read "Symbol name: " (ring-elements comint-input-ring)
+              :action (lambda (cmd) (insert cmd))))
   (dolist (mm '(gdb-edit-locals-map-1
                 gdb-locals-mode-map
                 gdb-locals-watch-map
