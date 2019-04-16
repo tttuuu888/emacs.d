@@ -298,7 +298,11 @@
       "gk" 'eshell-previous-prompt
       "gj" 'eshell-next-prompt
       (kbd "<RET>") 'my-shell-return))
-  (evil-leader/set-key-for-mode 'eshell-mode "l" 'counsel-esh-history)
+  (defun my-eshell-history ()
+    (interactive)
+    (my-shell-return)
+    (counsel-esh-history))
+  (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
 (use-package cc-cmds
