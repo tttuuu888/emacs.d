@@ -66,6 +66,8 @@
     (bind-keys :map (symbol-value mm)
                ("j" . next-line)
                ("k" . previous-line)))
+  (evil-define-key 'normal gud-mode-map
+    (kbd "<RET>") 'my-shell-return)
   (evil-leader/set-key-minor-mode 'gud-mode
     "ab" 'gud-break
     "ad" 'gud-remove

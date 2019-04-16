@@ -265,11 +265,6 @@
 
 (use-package shell
   :ensure nil
-  :init
-  (defun my-shell-return ()
-    (interactive)
-    (evil-goto-line)
-    (evil-append-line 1))
   :config
   (evil-leader/set-key-for-mode 'shell-mode "l" 'counsel-shell-history)
   (evil-define-key 'normal shell-mode-map
@@ -411,6 +406,10 @@
   :config
   (add-hook 'evil-insert-state-entry-hook
             (lambda () (when buffer-read-only (read-only-mode -1))))
+  (defun my-shell-return ()
+    (interactive)
+    (evil-goto-line)
+    (evil-append-line 1))
   (defun evil-reload-file ()
     (interactive)
     (find-alternate-file (buffer-file-name)))
