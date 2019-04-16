@@ -255,7 +255,7 @@
     "Find bindings start with ori1 ori2 from mode-map and
 convert it to corresponding evil-leader map. For example, all
 bindings of C-c C-e X is converted to leader c e X by below:
-'(cc-map-to-evil-leader-map 3 5 c e)'"
+'(cc-map-to-evil-leader-map ?\C-c ?\C-e c e)'"
     (let* ((map (symbol-value (intern (concat (symbol-name mode) "-map"))))
            (cc-maps (thread-last map (tree-assoc ori1) (tree-assoc ori2) cddr)))
       (dolist (pair cc-maps)
@@ -263,11 +263,11 @@ bindings of C-c C-e X is converted to leader c e X by below:
               (func (cdr pair)))
           (evil-leader/set-key-for-mode mode
             (concat con1 con2 (code-to-key key)) func)))))
-  (cc-map-to-evil-leader-map 'web-mode 3 1 "c" "a")
-  (cc-map-to-evil-leader-map 'web-mode 3 2 "c" "b")
-  (cc-map-to-evil-leader-map 'web-mode 3 4 "c" "d")
-  (cc-map-to-evil-leader-map 'web-mode 3 5 "c" "e")
-  (cc-map-to-evil-leader-map 'web-mode 3 20 "c" "t")
+  (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-a "c" "a")
+  (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-b "c" "b")
+  (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-d "c" "d")
+  (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-e "c" "e")
+  (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-t "c" "t")
   (defun my-web-mode-hook ()
     (setq-local
      company-backends
