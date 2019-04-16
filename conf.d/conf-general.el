@@ -297,6 +297,8 @@
       "S" 'my-eshell-change-whole-line
       "gk" 'eshell-previous-prompt
       "gj" 'eshell-next-prompt
+      (kbd "M-p") '(lambda () (interactive) nil)
+      (kbd "M-n") '(lambda () (interactive) nil)
       (kbd "<RET>") 'my-shell-return))
   (defun my-eshell-history ()
     (interactive)
