@@ -56,11 +56,6 @@
                 (set-window-dedicated-p (selected-window) t)))
   :config
   (gdb-many-windows t)
-  (defun my-gdb-history ()
-    (interactive)
-    (my-shell-return)
-    (ivy-read "Symbol name: " (ring-elements comint-input-ring)
-              :action (lambda (cmd) (insert cmd))))
   (dolist (mm '(gdb-edit-locals-map-1
                 gdb-locals-mode-map
                 gdb-locals-watch-map
@@ -74,7 +69,7 @@
   (evil-define-key 'normal gud-mode-map
     (kbd "<RET>") 'my-shell-return)
   (evil-leader/set-key-minor-mode 'gud-mode
-    "l"  'my-gdb-history
+    "l"  'my-comint-history
     "ab" 'gud-break
     "ad" 'gud-remove
     "af" 'gud-finish
@@ -153,6 +148,7 @@
 (use-package elpy
   :config
   (evil-leader/set-key-for-mode 'inferior-python-mode
+    "l"  'my-comint-history
     "z"  'elpy-shell-switch-to-buffer)
   (evil-leader/set-key-for-mode 'python-mode
     "z"  'elpy-shell-switch-to-shell

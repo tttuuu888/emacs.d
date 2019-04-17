@@ -766,6 +766,11 @@
   :config
   (require 'subr-x)
   (ivy-mode t)
+  (defun my-comint-history ()
+    (interactive)
+    (my-shell-return)
+    (ivy-read "Symbol name: " (ring-elements comint-input-ring)
+              :action (lambda (cmd) (insert cmd))))
   (defun sk-ivy-buffer-transformer (str)
     (let* ((buf (get-buffer str))
            (buf-dir (buffer-local-value 'default-directory buf))
