@@ -126,29 +126,6 @@
       (other-window 1)
       (view-mode)))
 
-  (defun dired--yes-no-all-quit-help (prompt &optional help-msg)
-    "Rewritten function to get input of y,n,a,q,h keys.
-     This function is called when deleting folder recursively."
-    (let ((cursor-in-echo-area t)
-          (valid-answers (list ?y ?n ?a ?q))
-          (answer "")
-          (input-fn
-           (lambda ()
-             (read-key (propertize (format "%s [y, n, a, q, h] " prompt)
-                                   'face 'minibuffer-prompt)))))
-      (setq answer (funcall input-fn))
-      (when (equal answer ?h)
-        (with-help-window "*Help*"
-          (with-current-buffer "*Help*"
-            (insert (or help-msg dired-delete-help)))))
-      (while (not (member answer valid-answers))
-        (unless (equal answer ?h)
-          (message "Please answer `y' or `n' or `a' or `q'")
-          (sleep-for 2))
-        (setq answer (funcall input-fn)))
-      (pcase answer
-        (?y "yes") (?n "no") (?a "all") (?q "quit"))))
-
   (setq dired-listing-switches "-alh --group-directories-first"
         dired-omit-extensions '("~")
         dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
