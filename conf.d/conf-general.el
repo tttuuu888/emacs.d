@@ -250,7 +250,7 @@
   (defun my-shell-setup ()
     (setq-local company-minimum-prefix-length 3))
   (evil-leader/set-key-for-mode 'shell-mode "l" 'my-shell-history)
-  (evil-define-key 'normal shell-mode-map
+  (evil-define-key 'motion shell-mode-map
     "gk" 'comint-previous-prompt
     "gj" 'comint-next-prompt
     (kbd "<RET>") 'my-shell-return)
@@ -277,7 +277,7 @@
     (setq-local company-minimum-prefix-length 3)
     (evil-define-key 'insert eshell-mode-map
       (kbd "C-a") 'eshell-bol)
-    (evil-define-key 'normal eshell-mode-map
+    (evil-define-key 'motion eshell-mode-map
       "0" 'eshell-bol
       "S" 'my-eshell-change-whole-line
       "gk" 'eshell-previous-prompt
