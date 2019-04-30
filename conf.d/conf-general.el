@@ -743,7 +743,9 @@
   :config
   (require 'subr-x)
   (ivy-mode t)
-  (ivy-posframe-enable)
+  (when window-system
+    (ivy-posframe-enable)
+    (setq ivy-display-function #'ivy-posframe-display-at-frame-center))
   (defun my-comint-history ()
     (interactive)
     (my-shell-return)
@@ -786,8 +788,6 @@
         ivy-initial-inputs-alist nil
         ;; disable magic slash on non-match
         ivy-magic-slash-non-match-action nil
-        ;; use ivy-posframe
-        ivy-display-function #'ivy-posframe-display-at-frame-center
         ;; prefix match first
         ivy-sort-matches-functions-alist
         '((t . ivy--prefix-sort)
@@ -804,8 +804,7 @@
   :custom-face
   (ivy-posframe ((t (:background "#282a36")))))
 
-(use-package posframe
-  :ensure t)
+(use-package posframe)
 
 (use-package counsel
   :commands counsel-fzf-here
