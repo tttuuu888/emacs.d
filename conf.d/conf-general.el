@@ -90,9 +90,23 @@
 
   (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
   (evil-leader/set-key-for-mode 'dired-mode
+    "c"  'my-dired-copy-path            ; note. w - copy file name only
+    "C"  'my-dired-copy-filepath
     "ee" 'wdired-change-to-wdired-mode
     "ec" 'wdired-finish-edit
     "eq" 'wdired-exit)
+
+  (defun my-dired-copy-path ()
+    (interactive)
+    (let ((path (expand-file-name default-directory)))
+      (kill-new path)
+      (message "Copied path : %s" path)))
+
+  (defun my-dired-copy-filepath ()
+    (interactive)
+    (let ((path (dired-filename-at-point)))
+      (kill-new path)
+      (message "Copied path : %s" path)))
 
   (defun dired-visit-file-or-dir ()
     (interactive)
