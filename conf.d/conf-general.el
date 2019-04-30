@@ -743,6 +743,7 @@
   :config
   (require 'subr-x)
   (ivy-mode t)
+  (ivy-posframe-enable)
   (defun my-comint-history ()
     (interactive)
     (my-shell-return)
@@ -785,6 +786,8 @@
         ivy-initial-inputs-alist nil
         ;; disable magic slash on non-match
         ivy-magic-slash-non-match-action nil
+        ;; use ivy-posframe
+        ivy-display-function #'ivy-posframe-display-at-frame-center
         ;; prefix match first
         ivy-sort-matches-functions-alist
         '((t . ivy--prefix-sort)
@@ -797,6 +800,12 @@
   (advice-add 'ivy-yasnippet :before (lambda ()
                                        (yas-minor-mode 1)
                                        (evil-insert-state))))
+(use-package ivy-posframe
+  :custom-face
+  (ivy-posframe ((t (:background "#282a36")))))
+
+(use-package posframe
+  :ensure t)
 
 (use-package counsel
   :commands counsel-fzf-here
