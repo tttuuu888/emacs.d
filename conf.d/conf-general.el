@@ -542,11 +542,8 @@
     "i"  'helm-semantic-or-imenu
     "y"  'helm-show-kill-ring
     "ho" 'helm-occur
-    "hr" 'helm-resume
-    "jp" 'helm-ag-project-or-here
-    "jP" 'helm-ag-here)
+    "hr" 'helm-resume)
   :config
-  (helm-autoresize-mode 1)
   (setq helm-imenu-execute-action-at-once-if-one nil
         helm-split-window-default-side 'right
         helm-show-completion-display-function nil))
