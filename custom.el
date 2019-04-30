@@ -17,7 +17,6 @@
  '(font-use-system-font t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(line-spacing 2)
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(mouse-wheel-progressive-speed nil)
