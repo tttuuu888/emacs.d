@@ -813,7 +813,7 @@
                                        (evil-insert-state))))
 (use-package ivy-posframe
   :custom-face
-  (ivy-posframe ((t (:background "#282a36")))))
+  (ivy-posframe ((t (:background "#282a36" :foreground "Gray80")))))
 
 (use-package posframe)
 
