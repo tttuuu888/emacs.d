@@ -67,7 +67,7 @@
                ("j" . next-line)
                ("k" . previous-line)))
   (evil-define-key 'normal gud-mode-map
-    (kbd "<RET>") 'my-shell-return)
+    (kbd "RET") 'my-shell-return)
   (evil-leader/set-key-minor-mode 'gud-mode
     "l"  'my-comint-history
     "ab" 'gud-break
@@ -160,7 +160,7 @@
   (evil-define-key 'normal inferior-python-mode-map
     "gk" 'comint-previous-prompt
     "gj" 'comint-next-prompt
-    (kbd "<RET>") 'my-shell-return))
+    (kbd "RET") 'my-shell-return))
 
 (use-package paredit
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
@@ -219,7 +219,7 @@
   (bind-key "M-[" 'cider-pop-back cider-mode-map)
   (bind-key "M-[" 'cider-pop-back cider-repl-mode-map)
   (evil-define-key 'normal cider-repl-mode-map
-    (kbd "<RET>") 'my-shell-return)
+    (kbd "RET") 'my-shell-return)
   (evil-leader/set-key-for-mode 'clojure-mode
     "z"  'cider-switch-to-repl-buffer)
   (evil-leader/set-key-for-mode 'clojurescript-mode

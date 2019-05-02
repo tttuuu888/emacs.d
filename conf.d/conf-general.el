@@ -267,7 +267,7 @@
   (evil-define-key 'motion shell-mode-map
     "gk" 'comint-previous-prompt
     "gj" 'comint-next-prompt
-    (kbd "<RET>") 'my-shell-return)
+    (kbd "RET") 'my-shell-return)
   (add-hook 'shell-mode-hook 'my-shell-setup))
 
 (use-package eshell
@@ -298,7 +298,7 @@
       "gj" 'eshell-next-prompt
       (kbd "M-p") '(lambda () (interactive) nil)
       (kbd "M-n") '(lambda () (interactive) nil)
-      (kbd "<RET>") 'my-shell-return))
+      (kbd "RET") 'my-shell-return))
   (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
 
