@@ -266,7 +266,8 @@
   (evil-leader/set-key-for-mode 'shell-mode "l" 'my-shell-history)
   (evil-define-key 'motion shell-mode-map
     "gk" 'comint-previous-prompt
-    "gj" 'comint-next-prompt
+    "gj" 'comint-next-prompt)
+  (evil-define-key 'normal shell-mode-map
     (kbd "RET") 'my-shell-return)
   (add-hook 'shell-mode-hook 'my-shell-setup))
 
