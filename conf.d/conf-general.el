@@ -290,11 +290,10 @@
   (defun my-eshell-setup ()
     (setenv "TERM" "screen-256color")
     (setq-local company-minimum-prefix-length 3)
-    (evil-define-key 'insert eshell-mode-map
-      (kbd "C-a") 'eshell-bol)
+    (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
+    (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
     (evil-define-key 'motion eshell-mode-map
       "0" 'eshell-bol
-      "S" 'my-eshell-change-whole-line
       "gk" 'eshell-previous-prompt
       "gj" 'eshell-next-prompt
       (kbd "M-p") '(lambda () (interactive) nil)
