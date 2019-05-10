@@ -139,6 +139,7 @@
         (shell-command (concat "rc -J " dir))))))
 
 (use-package xcscope
+  :disabled t
   :hook ((c-mode-common asm-mode) . cscope-minor-mode)
   :config
   (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
