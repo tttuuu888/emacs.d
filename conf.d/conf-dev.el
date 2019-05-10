@@ -14,8 +14,6 @@
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :commands sk-toggle-python
-  :bind (:map python-mode-map
-          ("TAB" . company-indent-or-complete-common))
   :config
   (elpy-enable)
   (defun sk-toggle-python ()
@@ -252,8 +250,6 @@
   :mode (("\\.html\\'" . web-mode)
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
-  :bind (:map web-mode-map
-          ("TAB" . company-indent-or-complete-common))
   :config
   (require 'cl)
   (setq web-mode-style-padding 0
@@ -295,8 +291,6 @@ bindings of C-c C-e X is converted to leader c e X by below:
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
-  :bind (:map js2-mode-map
-          ("TAB" . company-indent-or-complete-common))
   :config
   (setq js2-basic-offset 2
         js2-strict-missing-semi-warning nil)
@@ -338,8 +332,7 @@ bindings of C-c C-e X is converted to leader c e X by below:
 (use-package go-mode
   :mode ("\\.go\\'" . go-mode)
   :bind (:map go-mode-map
-          ("M-." . godef-jump)
-          ("TAB" . company-indent-or-complete-common))
+          ("M-." . godef-jump))
   :config
   (evil-define-key 'normal go-mode-map
     "gd" 'godef-jump
@@ -360,7 +353,6 @@ bindings of C-c C-e X is converted to leader c e X by below:
 (use-package plantuml-mode
   :mode ("\\.puml\\'" . plantuml-mode)
   :bind (:map plantuml-mode-map
-          ("TAB"     . company-indent-or-complete-common)
           ("C-c C-e" . plantuml-make-output))
   :config
   (evil-leader/set-key-for-mode 'plantuml-mode

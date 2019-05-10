@@ -32,8 +32,7 @@
   :hook ((sql-mode sql-interactive-mode) . my-sql-mode-hook)
   :config
   (defun my-sql-mode-hook ()
-    (add-to-list 'company-backends 'company-sql)
-    (local-set-key (kbd "TAB") 'company-indent-or-complete-common)))
+    (add-to-list 'company-backends 'company-sql)))
 
 
 ;;; Built-in packages
@@ -525,7 +524,6 @@
       'irony-completion-at-point-async)
     (define-key irony-mode-map [remap complete-symbol]
       'irony-completion-at-point-async)
-    (local-set-key (kbd "TAB") 'company-indent-or-complete-common)
     (irony-cdb-autosetup-compile-options))
   (add-hook 'irony-mode-hook 'my-irony-mode-hook))
 
