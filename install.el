@@ -80,9 +80,10 @@
               (mapcan
                (lambda (pkg)
                  (let* ((desc (car (cdr (assq pkg package-archive-contents))))
-                        (reqs (seq-filter
-                               (lambda (x) (not (package-installed-p x)))
-                               (mapcar #'car (package-desc-reqs desc)))))
+                        (reqs (when desc
+                                (seq-filter
+                                 (lambda (x) (not (package-installed-p x)))
+                                 (mapcar #'car (package-desc-reqs desc))))))
                    (when (and (not reqs) (not (package-installed-p pkg)))
                      (add-to-list 'no-dep-packages pkg))
                    reqs))
