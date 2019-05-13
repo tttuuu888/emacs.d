@@ -66,8 +66,9 @@
                ("k" . previous-line)))
   (evil-define-key 'normal gud-mode-map
     (kbd "RET") 'my-shell-return)
-  (evil-leader/set-key-minor-mode 'gud-mode
-    "l"  'my-comint-history
+  (evil-leader/set-key-for-mode 'gud-mode
+    "l"  'my-comint-history)
+  (evil-leader/set-key-minor-mode 'gdb-many-windows
     "ab" 'gud-break
     "ad" 'gud-remove
     "af" 'gud-finish
