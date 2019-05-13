@@ -370,17 +370,14 @@
       (define-key evil-insert-state-local-map sub-leader map)
       (define-key evil-emacs-state-local-map sub-leader map)))
   (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
-  (defun evil-local-leader-set-key (key def)
-    (evil-local-set-key 'motion (kbd (concat evil-leader/leader key)) def)
-    (evil-local-set-key 'motion (kbd (concat sk-evil-sub-leader " " key)) def))
   (defun evil-leader/set-key-minor-mode (mode key def &rest bindings)
     (while key
-      (add-hook
-       (intern (concat (symbol-name mode) "-hook"))
-       `(lambda ()
-          (evil-local-leader-set-key ,key (quote ,def))))
-      (setq key (pop bindings)
-            def (pop bindings))))
+      (evil-define-minor-mode-key 'motion mode
+        (kbd (concat evil-leader/leader key)) def)
+      (evil-define-minor-mode-key 'motion mode
+        (kbd (concat sk-evil-sub-leader " " key)) def)
+    (setq key (pop bindings)
+          def (pop bindings))))
   (put 'evil-leader/set-key-minor-mode 'lisp-indent-function 'defun)
   (setq evil-leader/no-prefix-mode-rx
         '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
