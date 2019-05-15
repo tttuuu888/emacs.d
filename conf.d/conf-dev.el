@@ -184,6 +184,7 @@
       "k"  'evil-paredit-kill
       "eb" 'eval-buffer
       "ee" 'eval-last-sexp
+      "ef" 'eval-defun
       "er" 'eval-region)))
 
 (use-package clojure-mode
