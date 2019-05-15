@@ -32,23 +32,21 @@
    mode-line-format
    '("%e"
      (:eval
-      (let* ((seperator "｜") ;; seperator - fullwidth vertical line
-             (evil-info (if (and (featurep 'evil) evil-mode)
+      (let* ((evil-info (if (and (featurep 'evil) evil-mode)
                             (concat " " (upcase (symbol-name evil-state)))
                           ""))
              (buffer-info (concat " %* %I " current-input-method-title))
              (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
+             (git-branch (format-mode-line '(vc-mode vc-mode)))
              (vc-info (if vc-mode
-                          (concat seperator
-                                  (format-mode-line '(vc-mode vc-mode))
-                                  " ")
+                          (concat " (" (substring git-branch 5) ") ")
                         ""))
              (mode-info (propertize
                          (concat " " (format-mode-line mode-name) " ")
                          'face 'mode-line-inactive))
-             (line-info (format-mode-line " %l :%3c "))
-             (pos-info (format-mode-line " %p%%  "))
-             (right-info (concat line-info seperator pos-info))
+             (line-info (format-mode-line " %l,%3c  "))
+             (pos-info (format-mode-line "%p%% "))
+             (right-info (concat line-info pos-info))
              (right-length (length right-info))
              (center-fill (propertize
                            " "
