@@ -165,8 +165,12 @@
 (use-package paredit
   :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
   :bind (:map paredit-mode-map
-          ("C-c <right>" . paredit-forward-slurp-sexp)
-          ("C-c <left>"  . paredit-forward-barf-sexp))
+          ("M-b" . paredit-backward)
+          ("M-f" . paredit-forward)
+          ("M-n" . paredit-forward-up)
+          ("M-p" . paredit-backward-down)
+          ("C-c <left>"  . paredit-forward-barf-sexp)
+          ("C-c <right>" . paredit-forward-slurp-sexp))
   :config
   (defun evil-paredit-kill (&rest _)
     (interactive)
