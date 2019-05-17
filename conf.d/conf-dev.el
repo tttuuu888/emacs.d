@@ -18,9 +18,8 @@
   (evil-leader/set-key-for-mode 'octave-mode
     "z"  'sk-octave-buffer-repl-toggle
     "eb" 'octave-send-buffer
-    "ee" 'octave-send-block
+    "ee" 'octave-send-line
     "ef" 'octave-send-defun
-    "el" 'octave-send-line
     "er" 'octave-send-region))
 
 (use-package python
