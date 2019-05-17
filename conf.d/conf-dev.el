@@ -7,7 +7,21 @@
 
 (use-package octave
   :ensure nil
-  :mode ("\\.m\\'" . octave-mode))
+  :mode ("\\.m\\'" . octave-mode)
+  :config
+  (sk-switch-buffer-repl sk-octave-buffer-repl-toggle
+                         octave-mode
+                         inferior-octave-mode
+                         run-octave)
+  (evil-leader/set-key-for-mode 'inferior-octave-mode
+    "z" 'sk-octave-buffer-repl-toggle)
+  (evil-leader/set-key-for-mode 'octave-mode
+    "z"  'sk-octave-buffer-repl-toggle
+    "eb" 'octave-send-buffer
+    "ee" 'octave-send-block
+    "ef" 'octave-send-defun
+    "el" 'octave-send-line
+    "er" 'octave-send-region))
 
 (use-package python
   :ensure nil

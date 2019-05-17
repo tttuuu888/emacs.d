@@ -23,7 +23,27 @@
          ("<f7>"       . (lambda () (interactive) (buffer-save-or-load 7 t)))
          ("<f8>"       . (lambda () (interactive) (buffer-save-or-load 8 t)))
          ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
-         ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8)))))
+         ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8))))
+  :init
+  (defmacro sk-switch-buffer-repl (name mode repl run-repl)
+    (let ((last-mode (intern (concat "my-last-buffer-" (symbol-name mode))))
+          (last-repl (intern (concat "my-last-repl-" (symbol-name repl)))))
+      `(progn
+         (defvar ,last-mode "")
+         (defvar ,last-repl "")
+         (defun ,name ()
+           (interactive)
+           (cond ((equal major-mode ',mode)
+                  (setq ,last-mode (buffer-name))
+                  (if (get-buffer ,last-repl)
+                      (pop-to-buffer ,last-repl)
+                    (,run-repl)))
+                 ((equal major-mode ',repl)
+                  (setq ,last-repl (buffer-name))
+                  (if (get-buffer ,last-mode)
+                      (pop-to-buffer ,last-mode)
+                    nil))
+                 (t nil)))))))
 
 (use-package company-sql
   :ensure nil
