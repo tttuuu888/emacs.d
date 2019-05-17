@@ -25,6 +25,7 @@
    (quote
     ((css . t)
      (emacs-lisp . t)
+     (octave . t)
      (plantuml . t)
      (python . t)
      (shell . t))))
