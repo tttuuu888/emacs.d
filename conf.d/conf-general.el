@@ -163,7 +163,6 @@
 
 (use-package org
   :ensure nil
-  :mode ("\\.org\\'" . org-mode)
   :bind (:map org-mode-map
           ("C-c a"   . org-agenda)
           ("C-c b"   . org-iswitchb)

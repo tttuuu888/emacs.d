@@ -24,8 +24,6 @@
 
 (use-package python
   :ensure nil
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
   :commands sk-toggle-python
   :config
   (elpy-enable)
@@ -205,7 +203,6 @@
       "er" 'eval-region)))
 
 (use-package clojure-mode
-  :mode ("\\.clj\\'" . clojure-mode)
   :config
   (evil-define-key 'normal clojure-mode-map
     "gd" 'cider-find-dwim
@@ -350,7 +347,6 @@ bindings of C-c C-e X is converted to leader c e X by below:
     (yas-minor-mode)))
 
 (use-package go-mode
-  :mode ("\\.go\\'" . go-mode)
   :bind (:map go-mode-map
           ("M-." . godef-jump))
   :config
