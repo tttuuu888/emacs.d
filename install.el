@@ -34,12 +34,12 @@
   (let ((package-list (list 'use-package)))
     (defmacro use-package (pkg &rest args)
       (let ((ensure (memq :ensure args))
-            (disabled (cadr (memq :disabled args)))
+            (disabled (memq :disabled args))
             (always-ensure (bound-and-true-p use-package-always-ensure)))
-        (unless (or (eq t disabled)
+        (unless (or disabled
                     (if always-ensure
-                        (and (car ensure) (eq nil (cadr ensure)))
-                      (eq nil (cadr ensure))))
+                        (and ensure (eq nil (cadr ensure)))
+                      (or (not ensure) (eq nil (cadr ensure)))))
           `(add-to-list 'package-list ',pkg))))
 
     (provide 'use-package)
