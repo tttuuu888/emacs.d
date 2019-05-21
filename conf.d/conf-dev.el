@@ -26,6 +26,7 @@
   :ensure nil
   :commands sk-toggle-python
   :config
+  (setq imenu-create-index-function 'python-imenu-create-index)
   (elpy-enable)
   (defun sk-toggle-python ()
     "Toggle between Python2 and Python3"
@@ -36,8 +37,7 @@
            (python (if (equal ver "3") "python2" "python3")))
       (setq python-shell-interpreter python
             elpy-rpc-python-command python)
-      (message (concat "Toggled to " python))))
-  (setq imenu-create-index-function 'python-imenu-create-index))
+      (message (concat "Toggled to " python)))))
 
 (use-package xref
   :ensure nil
@@ -268,13 +268,13 @@
          ("\\.ejs\\'" . web-mode)
          ("\\.vue\\'" . web-mode))
   :config
-  (require 'cl)
   (setq web-mode-style-padding 0
         web-mode-script-padding 0
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2
         web-mode-markup-indent-offset 2
         web-mode-enable-current-element-highlight t)
+  (require 'cl)
   (defun tree-assoc (key tree)
     (when (consp tree)
       (destructuring-bind (x . y)  tree
@@ -350,12 +350,12 @@ bindings of C-c C-e X is converted to leader c e X by below:
   :bind (:map go-mode-map
           ("M-." . godef-jump))
   :config
+  (setq gofmt-command "goimports")
   (evil-define-key 'normal go-mode-map
     "gd" 'godef-jump
     "gp" 'xref-pop-marker-stack
     "gr" 'xref-find-reference-here
     "g[" 'xref-pop-marker-stack)
-  (setq gofmt-command "goimports")
   (defun my-go-code-hook ()
     (evil-normalize-keymaps)
     (make-local-variable 'before-save-hook)
@@ -371,9 +371,9 @@ bindings of C-c C-e X is converted to leader c e X by below:
   :bind (:map plantuml-mode-map
           ("C-c C-e" . plantuml-make-output))
   :config
+  (setq plantuml-jar-path (getenv "PLANTUML_PATH"))
   (evil-leader/set-key-for-mode 'plantuml-mode
     "ce" 'plantuml-make-output)
-  (setq plantuml-jar-path (getenv "PLANTUML_PATH"))
   (defun plantuml-make-output ()
     (interactive)
     (set-process-sentinel

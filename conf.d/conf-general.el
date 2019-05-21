@@ -102,6 +102,10 @@
                '((lambda () (< large-file-warning-threshold (buffer-size)))
                  . fundamental-mode))
   :config
+  (setq dired-listing-switches "-alh --group-directories-first"
+        dired-omit-extensions '("~")
+        dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
+
   (require 'dired-x)
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
 
@@ -155,11 +159,7 @@
       (async-shell-command command "*rsync*")
       ;; finally, switch to that window
       (other-window 1)
-      (view-mode)))
-
-  (setq dired-listing-switches "-alh --group-directories-first"
-        dired-omit-extensions '("~")
-        dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$"))
+      (view-mode))))
 
 (use-package org
   :ensure nil
@@ -172,6 +172,13 @@
           ("C-c u"   . org-up-element)
           ("C-c s e" . org-edit-src-code))
   :config
+  (setq org-confirm-babel-evaluate nil
+        org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
+        org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
+                                "\\|"
+                                "\\(fn:[-_[:word:]]+\\)\\)")
+        org-plantuml-jar-path (getenv "PLANTUML_PATH")
+        org-startup-with-inline-images t)
   (evil-leader/set-key-for-mode 'org-mode
     "cc" 'org-ctrl-c-ctrl-c
     "ce" 'org-export-dispatch
@@ -218,15 +225,7 @@
     (when (eq exporter 'reveal)
       (setq-local org-export-with-toc nil)))
   (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
-  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook)
-
-  (setq org-confirm-babel-evaluate nil
-        org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
-        org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
-                                "\\|"
-                                "\\(fn:[-_[:word:]]+\\)\\)")
-        org-plantuml-jar-path (getenv "PLANTUML_PATH")
-        org-startup-with-inline-images t))
+  (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
 
 (use-package ibuffer
   :ensure nil
@@ -235,7 +234,10 @@
   (evil-leader/set-key
     "xb" 'ibuffer)
   :config
-  (setq ibuffer-saved-filter-groups
+  (setq ibuffer-expert t
+        ibuffer-sorting-mode 'alphabetic
+        ibuffer-default-sorting-mode 'major-mode
+        ibuffer-saved-filter-groups
         '(("home"
            ("Emacs-config" (or (filename . ".emacs")
                                (filename . ".emacs.d")
@@ -251,9 +253,6 @@
            ("Help" (or (name . "\*Help\*")
                        (name . "\*Apropos\*")
                        (name . "\*info\*"))))))
-  (setq ibuffer-expert t
-        ibuffer-sorting-mode 'alphabetic
-        ibuffer-default-sorting-mode 'major-mode)
   (defun my-ibuffer-unmark-all ()
     "Unmark all immdiately"
     (interactive)
@@ -487,9 +486,9 @@
                 ((t (:foreground "Black" :background "Yellow3"))))
   :init
   (global-company-mode 1)
+  :config
   (setq company-idle-delay 0.1
         company-minimum-prefix-length 2)
-  :config
   (evil-define-key 'insert company-mode-map
     (kbd "TAB") 'company-indent-or-complete-common))
 
@@ -583,6 +582,8 @@
     "jp" 'helm-ag-project-or-here
     "jP" 'helm-ag-here)
   :config
+  (setq helm-ag-insert-at-point 'symbol
+        helm-ag-use-grep-ignore-list t)
   (defun helm-ag-project-or-here ()
     (interactive)
     (helm-do-ag
@@ -590,9 +591,7 @@
      (car (projectile-parse-dirconfig-file))))
   (defun helm-ag-here ()
     (interactive)
-    (helm-do-ag default-directory))
-  (setq helm-ag-insert-at-point 'symbol
-        helm-ag-use-grep-ignore-list t))
+    (helm-do-ag default-directory)))
 
 (use-package helm-git-grep
   :bind (("C-c p" . helm-git-grep-at-point))
@@ -616,11 +615,11 @@
     "jb" 'projectile-switch-to-buffer
     "js" 'projectile-switch-project
     "jS" 'projectile-save-project-buffers)
+  :config
   (setq projectile-completion-system 'ivy
         projectile-require-project-root nil
         projectile-switch-project-action 'projectile-dired
         projectile-track-known-projects-automatically nil)
-  :config
   (projectile-mode 1)
   (defun my-project-root-or-dir ()
     (or (projectile-project-root) default-directory))
@@ -675,11 +674,11 @@
     "gs" 'magit-status
     "gb" 'magit-blame)
   :config
+  (setq magit-log-section-commit-count 5
+        magit-completing-read-function #'ivy-completing-read)
   (bind-key "<escape>" 'transient-quit-one transient-map)
   (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
-  (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps)
-  (setq magit-log-section-commit-count 5
-        magit-completing-read-function #'ivy-completing-read))
+  (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps))
 
 (use-package expand-region
   :bind (("C-="   . er/expand-region)
@@ -730,6 +729,7 @@
     "jo" 'fzf
     "o"  'fzf-git-files)
   :config
+  (setq fzf/window-height 20)
   (require 'term)
   (defun term-send-esc ()
     "Send ESC in term mode."
@@ -739,8 +739,7 @@
   (define-key term-raw-map (kbd "<escape>") 'term-send-esc)
   (defun fzf-here ()
     (interactive)
-    (fzf/start default-directory))
-  (setq fzf/window-height 20))
+    (fzf/start default-directory)))
 
 (use-package yasnippet
   :commands yas-minor-mode
@@ -764,6 +763,19 @@
   (evil-leader/set-key
     "b" 'ivy-switch-buffer)
   :config
+  (setq ivy-height 15
+        ivy-height-alist '((t . 15))
+        ivy-do-completion-in-region nil
+        ivy-wrap t
+        ivy-fixed-height-minibuffer t
+        ;; Don't use ^ as initial input
+        ivy-initial-inputs-alist nil
+        ;; disable magic slash on non-match
+        ivy-magic-slash-non-match-action nil
+        ;; prefix match first
+        ivy-sort-matches-functions-alist
+        '((t . ivy--prefix-sort)
+          (ivy-switch-buffer . ivy-sort-function-buffer)))
   (require 'subr-x)
   (ivy-mode t)
   (when window-system
@@ -801,20 +813,7 @@
                              (replace-regexp-in-string "^[^~/]*" "" path-mod))
                    path-opt)))
       (format "%-35s %-20s %s" buf mode (or path ""))))
-  (ivy-set-display-transformer 'ivy-switch-buffer 'sk-ivy-buffer-transformer)
-  (setq ivy-height 15
-        ivy-height-alist '((t . 15))
-        ivy-do-completion-in-region nil
-        ivy-wrap t
-        ivy-fixed-height-minibuffer t
-        ;; Don't use ^ as initial input
-        ivy-initial-inputs-alist nil
-        ;; disable magic slash on non-match
-        ivy-magic-slash-non-match-action nil
-        ;; prefix match first
-        ivy-sort-matches-functions-alist
-        '((t . ivy--prefix-sort)
-          (ivy-switch-buffer . ivy-sort-function-buffer))))
+  (ivy-set-display-transformer 'ivy-switch-buffer 'sk-ivy-buffer-transformer))
 
 (use-package ivy-yasnippet
   :init
@@ -849,10 +848,10 @@
     "hf"    'counsel-describe-function
     "jc"    'counsel-fzf-here)
   :config
+  (setq ivy-height-alist '((t . 15)))
   (defun counsel-fzf-here ()
     (interactive)
-    (counsel-fzf nil default-directory))
-  (setq ivy-height-alist '((t . 15))))
+    (counsel-fzf nil default-directory)))
 
 (use-package which-key
   :init
