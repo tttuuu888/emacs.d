@@ -172,13 +172,36 @@
           ("C-c u"   . org-up-element)
           ("C-c s e" . org-edit-src-code))
   :config
-  (setq org-confirm-babel-evaluate nil
-        org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
-        org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
-                                "\\|"
-                                "\\(fn:[-_[:word:]]+\\)\\)")
-        org-plantuml-jar-path (getenv "PLANTUML_PATH")
-        org-startup-with-inline-images t)
+  (setq
+   org-agenda-files '("~/Dropbox/org/")
+   org-babel-load-languages '((css . t)
+                              (emacs-lisp . t)
+                              (octave . t)
+                              (plantuml . t)
+                              (python . t)
+                              (shell . t))
+   org-confirm-babel-evaluate nil
+   org-export-default-language "kr"
+   org-export-headline-levels 2
+   org-export-time-stamp-file nil
+   org-export-with-email t
+   org-export-with-section-numbers nil
+   org-export-with-sub-superscripts nil
+   org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
+   org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
+                           "\\|"
+                           "\\(fn:[-_[:word:]]+\\)\\)")
+   org-html-inline-image-rules
+   '(("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
+     ("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
+     ("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'"))
+   org-html-metadata-timestamp-format "%Y-%m-%d"
+   org-html-validation-link ""
+   org-latex-packages-alist '(("" "parskip" nil) ("" "kotex" nil))
+   org-log-done 'time
+   org-plantuml-jar-path (getenv "PLANTUML_PATH")
+   org-startup-indented t
+   org-startup-with-inline-images t)
   (evil-leader/set-key-for-mode 'org-mode
     "cc" 'org-ctrl-c-ctrl-c
     "ce" 'org-export-dispatch
