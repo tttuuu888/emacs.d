@@ -3,7 +3,13 @@
 ;;; Built-in packages
 (use-package elec-pair
   :ensure nil
-  :hook (prog-mode . electric-pair-mode))
+  :hook (prog-mode . electric-pair-mode)
+  :config
+  (defun electric-pair-delete-pair (arg &optional killp)
+    "Custom pair-delete. This will delete only the closing paren."
+    (interactive "*p\nP")
+    (forward-char)
+    (backward-delete-char-untabify arg killp)))
 
 (use-package octave
   :ensure nil
