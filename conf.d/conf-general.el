@@ -203,12 +203,16 @@
    org-startup-indented t
    org-startup-with-inline-images t)
   (evil-leader/set-key-for-mode 'org-mode
+    "ca" 'org-agenda
+    "cb" 'org-iswitchb
     "cc" 'org-ctrl-c-ctrl-c
     "ce" 'org-export-dispatch
-    "cl" 'org-insert-link
+    "ci" 'org-insert-link
+    "cl" 'org-store-link
+    "cr" 'org-remember
+    "ct" 'org-table-create
     "se" 'org-edit-src-code
     "si" 'org-insert-structure-template
-    "ta" 'org-table-create
     "tl" 'org-tags-view
     "ts" 'org-set-tags)
   (evil-define-key 'motion org-mode-map
