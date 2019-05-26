@@ -673,12 +673,14 @@
   :demand t
   :after org
   :config
-  (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
-        org-reveal-title-slide "<h1>%t</h1><h4>%a&nbsp(%e)</h4>"
+  (setq
+        org-reveal-center t
+        org-reveal-hlevel 2
         org-reveal-plugins '(classList markdown highlight zoom notes)
+        org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
         org-reveal-theme "moon"
-        org-reveal-transition nil
-        org-reveal-center nil))
+        org-reveal-title-slide "<h2>%t</h2><h4>%a&nbsp(%e)</h4>"
+        org-reveal-transition nil))
 
 (use-package neotree
   :commands my-neotree-directory
