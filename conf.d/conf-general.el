@@ -476,8 +476,8 @@
   (evil-set-initial-state 'term-mode  'emacs))
 
 (use-package evil-anzu
-  :after anzu
-  :demand t)
+  :demand t
+  :after anzu)
 
 (use-package evil-visualstar
   :bind (:map evil-visual-state-map
@@ -520,16 +520,19 @@
     (kbd "TAB") 'company-indent-or-complete-common))
 
 (use-package company-irony
+  :demand t
   :after irony
   :config
   (add-to-list 'company-backends 'company-irony))
 
 (use-package company-irony-c-headers
+  :demand t
   :after irony
   :config
   (add-to-list 'company-backends 'company-irony-c-headers))
 
 (use-package company-tern
+  :demand t
   :after tern
   :config
   (defun advice-company-tern (&rest _)
@@ -544,14 +547,17 @@
   (add-to-list 'company-backends 'company-tern))
 
 (use-package company-web
+  :demand t
   :after web-mode)
 
 (use-package company-go
+  :demand t
   :after go-mode
   :config
   (add-to-list 'company-backends 'company-go))
 
 (use-package company-ghc
+  :demand t
   :after haskell-mode
   :config
   (add-to-list 'company-backends 'company-ghc))
@@ -664,6 +670,7 @@
 (use-package markdown-toc)
 
 (use-package ox-reveal
+  :demand t
   :after org
   :config
   (setq org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
@@ -730,6 +737,7 @@
   (advice-remove #'isearch-backward #'isearch-anzu-advice))
 
 (use-package htmlize
+  :demand t
   :after org)
 
 (use-package korean-holidays
@@ -744,6 +752,7 @@
          ("gQ"    . vr/query-replace)))
 
 (use-package visual-regexp-steroids
+  :demand t
   :after visual-regexp)
 
 (use-package fzf
@@ -774,6 +783,7 @@
   (yas-reload-all))
 
 (use-package yasnippet-snippets
+  :demand t
   :after yasnippet)
 
 (use-package ivy
