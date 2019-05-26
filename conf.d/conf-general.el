@@ -672,9 +672,9 @@
 (use-package ox-reveal
   :demand t
   :after org
+  :custom (org-reveal-note-key-char nil)
   :config
-  (setq
-        org-reveal-center t
+  (setq org-reveal-center t
         org-reveal-hlevel 2
         org-reveal-plugins '(classList markdown highlight zoom notes)
         org-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0"
