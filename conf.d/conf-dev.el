@@ -180,7 +180,8 @@
     (kbd "RET") 'my-shell-return))
 
 (use-package paredit
-  :hook ((clojure-mode emacs-lisp-mode) . enable-paredit-mode)
+  :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode)
+         . enable-paredit-mode)
   :bind (:map paredit-mode-map
           ("M-b" . paredit-backward)
           ("M-f" . paredit-forward)
@@ -257,7 +258,14 @@
   (setq inferior-lisp-program "clisp"
         slime-contribs '(slime-fancy))
   :config
-  (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol))
+  (slime-setup '(slime-fancy slime-company))
+  (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol)
+  (unbind-key "M-," lisp-mode-map)
+  (unbind-key "M-," slime-editing-map)
+  (evil-define-key 'normal slime-repl-mode-map
+    "gd"        'slime-edit-definition
+    "gp"        'slime-pop-find-definition-stack
+    (kbd "RET") 'my-shell-return))
 
 (use-package geiser
   :commands geiser run-geiser

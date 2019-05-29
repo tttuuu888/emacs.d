@@ -562,6 +562,8 @@
   :config
   (add-to-list 'company-backends 'company-ghc))
 
+(use-package slime-company)
+
 (use-package irony
   :hook ((c++-mode c-mode objc-mode) . irony-mode)
   :config
