@@ -215,6 +215,7 @@
     "gp" 'cider-pop-back)
   (evil-leader/set-key-for-mode 'clojure-mode
     "k"  'evil-paredit-kill
+    "z"  'cider-switch-to-repl-buffer
     "eb" 'cider-eval-buffer
     "ee" 'cider-eval-last-sexp
     "er" 'cider-eval-region
@@ -237,12 +238,10 @@
   (evil-set-initial-state 'cider-test-report-mode         'emacs)
   (unbind-key "M-," cider-mode-map)
   (unbind-key "M-," cider-repl-mode-map)
-  (bind-key "M-[" 'cider-pop-back cider-mode-map)
-  (bind-key "M-[" 'cider-pop-back cider-repl-mode-map)
   (evil-define-key 'normal cider-repl-mode-map
-    (kbd "RET") 'my-shell-return)
-  (evil-leader/set-key-for-mode 'clojure-mode
-    "z"  'cider-switch-to-repl-buffer)
+    "gd"        'cider-find-dwim
+    "gp"        'cider-pop-back)
+    (kbd "RET") 'my-shell-return
   (evil-leader/set-key-for-mode 'clojurescript-mode
     "z"  'cider-switch-to-repl-buffer)
   (evil-leader/set-key-for-mode 'cider-repl-mode
