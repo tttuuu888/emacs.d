@@ -338,8 +338,8 @@
       "0" 'eshell-bol
       "gk" 'eshell-previous-prompt
       "gj" 'eshell-next-prompt
-      (kbd "M-p") '(lambda () (interactive) nil)
-      (kbd "M-n") '(lambda () (interactive) nil)
+      (kbd "M-p") (lambda () (interactive) nil)
+      (kbd "M-n") (lambda () (interactive) nil)
       (kbd "RET") 'my-shell-return))
   (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history)
   (add-hook 'eshell-mode-hook 'my-eshell-setup))
