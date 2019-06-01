@@ -399,5 +399,24 @@ bindings of C-c C-e X is converted to leader c e X by below:
   (defun my-haskell-mode-hook ()
     (setq-local tab-width 4)))
 
+(use-package restclient
+  :hook (restclient-mode . my-restclient-mode-hook)
+  :config
+  (defvar restclient-imenu-generic-expression
+    '(("GET" "^\\(GET\\)\\(.*\\)" 2)
+      ("PUT" "^\\(PUT\\)\\(.*\\)" 2)
+      ("POST" "^\\(POST\\)\\(.*\\)" 2)
+      ("DELETE" "^\\(DELETE\\)\\(.*\\)" 2)
+      ("Variables" "^:\\(.*\\)" 1)))
+  (defun my-restclient-mode-hook ()
+    (setq imenu-generic-expression restclient-imenu-generic-expression
+          imenu-case-fold-search nil))
+  (evil-leader/set-key-for-mode 'restclient-mode
+    "ec" 'restclient-http-send-current-raw
+    "ee" 'restclient-http-send-current-stay-in-window)
+  (evil-define-key 'motion restclient-mode-map
+    "gj" 'restclient-jump-next
+    "gk" 'restclient-jump-prev))
+
 
 (provide 'conf-dev)
