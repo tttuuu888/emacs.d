@@ -315,6 +315,7 @@
 
 (use-package eshell
   :ensure nil
+  :hook (eshell-mode . my-eshell-setup)
   :config
   (defun eshell/clear ()
     "Clear Eshell buffer"
@@ -331,18 +332,17 @@
     (counsel-esh-history))
   (defun my-eshell-setup ()
     (setenv "TERM" "screen-256color")
-    (setq-local company-minimum-prefix-length 3)
-    (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
-    (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
-    (evil-define-key 'motion eshell-mode-map
-      "0" 'eshell-bol
-      "gk" 'eshell-previous-prompt
-      "gj" 'eshell-next-prompt
-      (kbd "M-p") (lambda () (interactive) nil)
-      (kbd "M-n") (lambda () (interactive) nil)
-      (kbd "RET") 'my-shell-return))
-  (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history)
-  (add-hook 'eshell-mode-hook 'my-eshell-setup))
+    (setq-local company-minimum-prefix-length 3))
+  (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
+  (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
+  (evil-define-key 'motion eshell-mode-map
+    "0" 'eshell-bol
+    "gk" 'eshell-previous-prompt
+    "gj" 'eshell-next-prompt
+    (kbd "M-p") (lambda () (interactive) nil)
+    (kbd "M-n") (lambda () (interactive) nil)
+    (kbd "RET") 'my-shell-return)
+  (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history))
 
 (use-package cc-cmds
   :ensure nil
