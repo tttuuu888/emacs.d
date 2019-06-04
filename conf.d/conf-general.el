@@ -820,7 +820,7 @@
   (require 'subr-x)
   (ivy-mode t)
   (when window-system
-    (ivy-posframe-enable)
+    (ivy-posframe-mode 1)
     (setq ivy-display-function #'ivy-posframe-display-at-frame-center))
   (defun my-comint-history ()
     (interactive)
