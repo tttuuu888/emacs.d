@@ -332,9 +332,9 @@
     (counsel-esh-history))
   (defun my-eshell-setup ()
     (setenv "TERM" "screen-256color")
+    (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
     (setq-local company-minimum-prefix-length 3))
   (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
-  (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
   (evil-define-key 'motion eshell-mode-map
     "0" 'eshell-bol
     "gk" 'eshell-previous-prompt
