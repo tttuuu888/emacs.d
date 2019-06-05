@@ -820,8 +820,7 @@
   (require 'subr-x)
   (ivy-mode t)
   (when window-system
-    (ivy-posframe-mode 1)
-    (setq ivy-display-function #'ivy-posframe-display-at-frame-center))
+    (ivy-posframe-mode 1))
   (defun my-comint-history ()
     (interactive)
     (my-shell-return)
@@ -865,7 +864,13 @@
                                        (evil-insert-state))))
 (use-package ivy-posframe
   :custom-face
-  (ivy-posframe ((t (:background "#282a36" :foreground "Gray80")))))
+  (ivy-posframe ((t (:background "#282a36" :foreground "Gray80"))))
+  :config
+  (setq ivy-posframe-display-functions-alist
+        '((complete-symbol . nil)
+          (ivy-yasnippet   . nil)
+          (swiper          . nil)
+          (t               . ivy-posframe-display-at-frame-center))))
 
 (use-package posframe)
 
