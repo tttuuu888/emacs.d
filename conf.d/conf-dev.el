@@ -118,6 +118,19 @@
   :ensure nil
   :hook (sh-mode . (lambda () (sh-electric-here-document-mode -1))))
 
+(use-package scheme
+  :ensure nil
+  :config
+  (evil-leader/set-key-for-mode 'geiser-repl-mode
+    "z"  'switch-to-geiser)
+  (evil-leader/set-key-for-mode 'scheme-mode
+    "k"  'evil-paredit-kill
+    "z"  'switch-to-geiser
+    "eb" 'geiser-eval-buffer
+    "ee" 'geiser-eval-last-sexp
+    "ef" 'geiser-eval-definition
+    "er" 'geiser-eval-region))
+
 ;;; External packages
 (use-package cff
   :init

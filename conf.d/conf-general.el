@@ -37,7 +37,7 @@
                   (setq ,last-mode (buffer-name))
                   (if (get-buffer ,last-repl)
                       (pop-to-buffer ,last-repl)
-                    (,run-repl)))
+                    (call-interactively ',run-repl)))
                  ((equal major-mode ',repl)
                   (setq ,last-repl (buffer-name))
                   (if (get-buffer ,last-mode)
