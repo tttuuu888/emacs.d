@@ -130,6 +130,16 @@
     "ef" 'geiser-eval-definition
     "er" 'geiser-eval-region))
 
+(use-package elisp-mode
+  :ensure nil
+  :config
+  (dolist (mm '(emacs-lisp-mode lisp-interaction-mode))
+    (evil-leader/set-key-for-mode mm
+      "eb" 'eval-buffer
+      "ee" 'eval-last-sexp
+      "ef" 'eval-defun
+      "er" 'eval-region)))
+
 ;;; External packages
 (use-package cff
   :init
@@ -214,13 +224,7 @@
       (call-interactively 'paredit-kill)))
   (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill)
   (evil-leader/set-key-minor-mode 'paredit-mode
-    "k"  'evil-paredit-kill)
-  (dolist (mm '(emacs-lisp-mode lisp-interaction-mode))
-    (evil-leader/set-key-for-mode mm
-      "eb" 'eval-buffer
-      "ee" 'eval-last-sexp
-      "ef" 'eval-defun
-      "er" 'eval-region)))
+    "k"  'evil-paredit-kill))
 
 (use-package clojure-mode
   :config
