@@ -124,7 +124,6 @@
   (evil-leader/set-key-for-mode 'geiser-repl-mode
     "z"  'switch-to-geiser)
   (evil-leader/set-key-for-mode 'scheme-mode
-    "k"  'evil-paredit-kill
     "z"  'switch-to-geiser
     "eb" 'geiser-eval-buffer
     "ee" 'geiser-eval-last-sexp
@@ -193,7 +192,7 @@
     (kbd "RET") 'my-shell-return))
 
 (use-package paredit
-  :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode)
+  :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode geiser-repl-mode)
          . enable-paredit-mode)
   :bind (:map paredit-mode-map
           ("M-b" . paredit-backward)
@@ -214,9 +213,10 @@
           (evil-forward-char))
       (call-interactively 'paredit-kill)))
   (evil-define-key 'insert paredit-mode-map (kbd "C-k") 'paredit-kill)
+  (evil-leader/set-key-minor-mode 'paredit-mode
+    "k"  'evil-paredit-kill)
   (dolist (mm '(emacs-lisp-mode lisp-interaction-mode))
     (evil-leader/set-key-for-mode mm
-      "k"  'evil-paredit-kill
       "eb" 'eval-buffer
       "ee" 'eval-last-sexp
       "ef" 'eval-defun
@@ -228,7 +228,6 @@
     "gd" 'cider-find-dwim
     "gp" 'cider-pop-back)
   (evil-leader/set-key-for-mode 'clojure-mode
-    "k"  'evil-paredit-kill
     "z"  'cider-switch-to-repl-buffer
     "eb" 'cider-eval-buffer
     "ee" 'cider-eval-last-sexp
@@ -283,7 +282,7 @@
 (use-package geiser
   :commands geiser run-geiser
   :init
-  (setq geiser-active-implementations '(chicken guile))
+  (setq geiser-active-implementations '(chicken guile racket))
   (remove-hook 'scheme-mode-hook 'geiser-mode--maybe-activate)
   :config
   (geiser-mode--maybe-activate)
