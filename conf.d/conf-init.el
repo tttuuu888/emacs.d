@@ -6,11 +6,6 @@
   (when name (setq user-full-name name))
   (when mail (setq user-mail-address mail)))
 
-;; D2Coding font apply
-(when window-system
-  (mapc (lambda (f) (set-fontset-font t f (font-spec :name "D2Coding")))
-        '(hangul unicode)))
-
 ;; Default color setting
 (defun my-theme-setting (&optional dark-theme)
   (let ((default-foreground-color
@@ -42,17 +37,17 @@
 ;; M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
 
-;; Remove whitespace before save file.
+;; Remove whitespace before saving the file.
 (add-hook 'before-save-hook
           (lambda () (when (derived-mode-p 'prog-mode)
                        (delete-trailing-whitespace))))
 
 ;; global-auto-revert-mode
 (add-hook 'find-file-hook
-          (lambda () (when (not (global-auto-revert-mode))
-                       (global-auto-revert-mode t))))
+          (lambda () (unless (global-auto-revert-mode)
+                      (global-auto-revert-mode 1))))
 
-;; To prevent custom.el file changed.
+;; Prevents custom.el file changes.
 (defun package--save-selected-packages (&optional value)
   (when value (setq package-selected-packages value)))
 

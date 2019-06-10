@@ -58,6 +58,9 @@
   :ensure nil
   :init
   (setq default-korean-keyboard "3")
+  (when window-system
+    (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
+    (set-fontset-font t 'unicode (font-spec :name "D2Coding")))
   (setup-korean-environment-internal))
 
 (use-package recentf
@@ -71,7 +74,7 @@
 (use-package ido
   :ensure nil
   :config
-  (ivy-mode t)
+  (ivy-mode 1)
   (defalias 'ido-completing-read 'ivy-completing-read))
 
 (use-package calendar
@@ -354,12 +357,12 @@
 (use-package paren
   :ensure nil
   :init
-  (show-paren-mode t))
+  (show-paren-mode 1))
 
 (use-package hl-line
   :ensure nil
   :init
-  (global-hl-line-mode t))
+  (global-hl-line-mode 1))
 
 (use-package ansi-color
   :ensure nil
@@ -731,7 +734,7 @@
 (use-package anzu
   :init
   (defun isearch-anzu-advice (&rest _)
-    (global-anzu-mode t))
+    (global-anzu-mode 1))
   (advice-add #'isearch-forward :before #'isearch-anzu-advice)
   (advice-add #'isearch-backward :before #'isearch-anzu-advice)
   :config
@@ -818,7 +821,7 @@
         '((t . ivy--prefix-sort)
           (ivy-switch-buffer . ivy-sort-function-buffer)))
   (require 'subr-x)
-  (ivy-mode t)
+  (ivy-mode 1)
   (when window-system
     (ivy-posframe-mode 1))
   (defun my-comint-history ()
