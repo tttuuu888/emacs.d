@@ -797,10 +797,12 @@
   :bind (("C-x b"    . ivy-switch-buffer)
          :map minibuffer-inactive-mode-map
          ("<escape>" . abort-recursive-edit)
+         ("M-,"      . abort-recursive-edit)
          :map minibuffer-local-map
-         ("<escape>" . abort-recursive-edit)
+         ("M-,"      . abort-recursive-edit)
          :map ivy-minibuffer-map
          ("<escape>" . minibuffer-keyboard-quit)
+         ("M-,"      . abort-recursive-edit)
          ("C-j"      . ivy-partial)
          ("TAB"      . ivy-alt-done))
   :init
