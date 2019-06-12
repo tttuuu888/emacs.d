@@ -513,6 +513,7 @@
   :init
   (global-company-mode 1)
   :config
+  (setq company-idle-delay 0.3)
   (evil-define-key 'insert company-mode-map
     (kbd "TAB") 'company-indent-or-complete-common))
 
