@@ -306,15 +306,12 @@
     (interactive)
     (my-shell-return)
     (counsel-shell-history))
-  (defun my-shell-setup ()
-    (setq-local company-minimum-prefix-length 3))
   (evil-leader/set-key-for-mode 'shell-mode "l" 'my-shell-history)
   (evil-define-key 'motion shell-mode-map
     "gk" 'comint-previous-prompt
     "gj" 'comint-next-prompt)
   (evil-define-key 'normal shell-mode-map
-    (kbd "RET") 'my-shell-return)
-  (add-hook 'shell-mode-hook 'my-shell-setup))
+    (kbd "RET") 'my-shell-return))
 
 (use-package eshell
   :ensure nil
@@ -335,7 +332,6 @@
     (counsel-esh-history))
   (defun my-eshell-setup ()
     (setenv "TERM" "screen-256color")
-    (setq-local company-minimum-prefix-length 3)
     (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
     (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
     (evil-define-key 'motion eshell-mode-map
@@ -517,8 +513,6 @@
   :init
   (global-company-mode 1)
   :config
-  (setq company-idle-delay 0.1
-        company-minimum-prefix-length 2)
   (evil-define-key 'insert company-mode-map
     (kbd "TAB") 'company-indent-or-complete-common))
 
