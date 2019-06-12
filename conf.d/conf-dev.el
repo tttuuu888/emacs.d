@@ -121,10 +121,15 @@
 (use-package scheme
   :ensure nil
   :config
+  (require 'geiser)
+  (sk-switch-buffer-repl sk-scheme-buffer-repl-toggle
+                         scheme-mode
+                         geiser-repl-mode
+                         run-geiser)
   (evil-leader/set-key-for-mode 'geiser-repl-mode
-    "z"  'switch-to-geiser)
+    "z"  'sk-scheme-buffer-repl-toggle)
   (evil-leader/set-key-for-mode 'scheme-mode
-    "z"  'switch-to-geiser
+    "z"  'sk-scheme-buffer-repl-toggle
     "eb" 'geiser-eval-buffer
     "ee" 'geiser-eval-last-sexp
     "ef" 'geiser-eval-definition
