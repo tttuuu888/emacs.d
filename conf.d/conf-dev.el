@@ -418,7 +418,15 @@ bindings of C-c C-e X is converted to leader c e X by below:
   :hook (haskell-mode . my-haskell-mode-hook)
   :config
   (defun my-haskell-mode-hook ()
-    (setq-local tab-width 4)))
+    (setq-local tab-width 4))
+  (sk-switch-buffer-repl sk-haskell-buffer-repl-toggle
+                         haskell-mode
+                         inferior-haskell-mode
+                         run-haskell)
+  (evil-leader/set-key-for-mode 'inferior-haskell-mode
+    "z" 'sk-haskell-buffer-repl-toggle)
+  (evil-leader/set-key-for-mode 'haskell-mode
+    "z" 'sk-haskell-buffer-repl-toggle))
 
 (use-package restclient
   :hook (restclient-mode . my-restclient-mode-hook)
