@@ -594,7 +594,9 @@
          ("C-c i"   . helm-semantic-or-imenu)
          ("C-x C-r" . helm-recentf)
          ("C-c h o" . helm-occur)
-         ("C-c h r" . helm-resume))
+         ("C-c h r" . helm-resume)
+         :map helm-map
+         ("<escape>". helm-keyboard-quit))
   :init
   (evil-leader/set-key
     "i"  'helm-semantic-or-imenu
