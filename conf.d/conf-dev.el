@@ -258,8 +258,6 @@
   (evil-set-initial-state 'cider-repl-history-mode        'emacs)
   (evil-set-initial-state 'cider-stacktrace-mode          'emacs)
   (evil-set-initial-state 'cider-test-report-mode         'emacs)
-  (unbind-key "M-," cider-mode-map)
-  (unbind-key "M-," cider-repl-mode-map)
   (evil-define-key 'normal cider-repl-mode-map
     "gd"        'cider-find-dwim
     "gp"        'cider-pop-back)
@@ -281,8 +279,6 @@
   :config
   (slime-setup '(slime-fancy slime-company))
   (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol)
-  (unbind-key "M-," lisp-mode-map)
-  (unbind-key "M-," slime-editing-map)
   (evil-define-key 'normal slime-repl-mode-map
     "gd"        'slime-edit-definition
     "gp"        'slime-pop-find-definition-stack
@@ -294,8 +290,7 @@
   (setq geiser-active-implementations '(chicken guile racket))
   (remove-hook 'scheme-mode-hook 'geiser-mode--maybe-activate)
   :config
-  (geiser-mode--maybe-activate)
-  (unbind-key "M-," geiser-mode-map))
+  (geiser-mode--maybe-activate))
 
 (use-package web-mode
   :mode (("\\.html\\'" . web-mode)

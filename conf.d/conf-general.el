@@ -56,6 +56,7 @@
 ;;; Built-in packages
 (use-package korea-util
   :ensure nil
+  :bind ("C-\\" . toggle-korean-input-method)
   :init
   (setq default-korean-keyboard "3")
   (when window-system
@@ -495,17 +496,21 @@
 
 (use-package bind-key
   :init
-  (bind-keys ("<mouse-1>"        . nil)
-             ("<mouse-3>"        . nil)
-             ("<down-mouse-1>"   . nil)
-             ("<down-mouse-3>"   . nil)
-             ("<drag-mouse-1>"   . nil)
-             ("<drag-mouse-3>"   . nil)
-             ("<C-down-mouse-1>" . nil)
-             ("<M-down-mouse-1>" . nil)
-             ("<S-down-mouse-1>" . nil)
-             ("M-,"              . other-window)
-             ("C-\\"             . toggle-korean-input-method)))
+  (bind-keys* ("<mouse-1>"        . nil)
+              ("<mouse-3>"        . nil)
+              ("<down-mouse-1>"   . nil)
+              ("<down-mouse-3>"   . nil)
+              ("<drag-mouse-1>"   . nil)
+              ("<drag-mouse-3>"   . nil)
+              ("<C-down-mouse-1>" . nil)
+              ("<M-down-mouse-1>" . nil)
+              ("<S-down-mouse-1>" . nil)
+              ("M-,"              . my-other-window))
+  (defun my-other-window ()
+    (interactive)
+    (if (minibufferp)
+        (abort-recursive-edit)
+      (call-interactively 'other-window))))
 
 (use-package company
   :custom-face (company-tooltip
@@ -794,12 +799,8 @@
   :bind (("C-x b"    . ivy-switch-buffer)
          :map minibuffer-inactive-mode-map
          ("<escape>" . abort-recursive-edit)
-         ("M-,"      . abort-recursive-edit)
-         :map minibuffer-local-map
-         ("M-,"      . abort-recursive-edit)
          :map ivy-minibuffer-map
          ("<escape>" . minibuffer-keyboard-quit)
-         ("M-,"      . abort-recursive-edit)
          ("C-j"      . ivy-partial)
          ("TAB"      . ivy-alt-done))
   :init
