@@ -10,11 +10,12 @@
       (call-process "emacs" nil  output-buffer t
                     "-l" "~/.emacs.d/install.el" "-batch" "-init")))
 
+  (package-initialize)
+
   (setq package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
-          ;; ("org" . "https://orgmode.org/elpa/")
+          ("org" . "https://orgmode.org/elpa/")
           ("melpa" . "http://melpa.org/packages/")))
-  (package-initialize)
 
   (add-to-list 'load-path "~/.emacs.d/conf.d/")
   (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
@@ -23,4 +24,7 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
 
-  (require 'conf-init))
+  (require 'conf-init)
+
+  ;; after init
+  (setq package--initialized nil))
