@@ -218,6 +218,8 @@
     "si" 'org-insert-structure-template
     "tl" 'org-tags-view
     "ts" 'org-set-tags)
+  (evil-define-key 'insert org-mode-map
+    (kbd "<tab>") 'company-indent-or-complete-common)
   (evil-define-key 'motion org-mode-map
     (kbd "TAB") 'org-cycle
     "gh" 'org-up-element
