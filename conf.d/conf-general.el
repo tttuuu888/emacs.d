@@ -113,10 +113,9 @@
   (require 'dired-x)
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
 
-  (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
   (evil-leader/set-key-for-mode 'dired-mode
-    "c"  'my-dired-copy-path            ; note. w - copy file name only
-    "C"  'my-dired-copy-filepath
+    "c"  'my-dired-copy-path            ; copy current folder path
+    "C"  'my-dired-copy-filepath        ; copy selected file path
     "ee" 'wdired-change-to-wdired-mode
     "ec" 'wdired-finish-edit
     "eq" 'wdired-exit)
@@ -444,6 +443,7 @@
   :init
   (evil-mode)
   :config
+  (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
   (add-hook 'evil-insert-state-entry-hook
             (lambda () (when buffer-read-only (read-only-mode -1))))
   (defun my-shell-return ()
