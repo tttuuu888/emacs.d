@@ -811,7 +811,6 @@
   :config
   (setq ivy-height 15
         ivy-height-alist '((t . 15))
-        ivy-do-completion-in-region nil
         ivy-wrap t
         ivy-fixed-height-minibuffer t
         ;; Don't use ^ as initial input
