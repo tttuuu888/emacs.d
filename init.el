@@ -3,6 +3,14 @@
 (let ((file-name-handler-alist nil)
       (gc-cons-threshold most-positive-fixnum))
 
+  (if (not window-system)
+      (custom-set-variables '(tool-bar-lines nil)
+                            '(menu-bar-mode nil)
+                            '(scroll-bar-mode nil))
+    (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
+    (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
+    (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
+
   (when (member "-init" command-line-args)
     (let ((output-buffer (generate-new-buffer "*Init*")))
       (delete "-init" command-line-args)
