@@ -22,8 +22,8 @@
 
   (setq package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
-          ("org" . "https://orgmode.org/elpa/")
-          ("melpa" . "http://melpa.org/packages/")))
+          ("melpa" . "http://melpa.org/packages/")
+          ("org"   . "https://orgmode.org/elpa/")))
 
   (add-to-list 'load-path "~/.emacs.d/conf.d/")
   (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
