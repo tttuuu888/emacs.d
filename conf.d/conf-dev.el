@@ -160,6 +160,21 @@
   (evil-define-key 'motion ggtags-navigation-mode-map
     (kbd "RET") 'ggtags-navigation-mode-done))
 
+(use-package irony
+  :hook ((c++-mode c-mode objc-mode) . irony-mode)
+  :config
+  (defun my-irony-mode-hook ()
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async)
+    (irony-cdb-autosetup-compile-options))
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook))
+
+(use-package flycheck
+  :disabled t
+  :hook ((c-mode c++-mode) . flycheck-mode))
+
 (use-package rtags
   :disabled t
   :commands my-rtags-index
