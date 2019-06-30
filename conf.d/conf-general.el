@@ -372,6 +372,7 @@
 
 (use-package display-line-numbers
   :ensure nil
+  :custom-face (line-number-current-line ((t (:weight bold))))
   :hook ((find-file prog-mode) . display-line-numbers-mode)
   :config
   (setq-default display-line-numbers-width 3

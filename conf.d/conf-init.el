@@ -8,23 +8,16 @@
 
 ;; Default color setting
 (defun my-theme-setting (&optional dark-theme)
-  (let ((default-foreground-color
-          (if (and (not dark-theme) window-system) "Black"  "Gray80"))
-        (default-background-color
-          (if (and (not dark-theme) window-system) "Ivory2" "Gray23")))
+  (let ((fg-color (if (or dark-theme (not window-system)) "Gray80" "Black"))
+        (bg-color (if (or dark-theme (not window-system)) "Gray23" "Ivory2")))
     (set-face-attribute 'default nil
-                        :foreground default-foreground-color
-                        :background default-background-color)
-    (set-face-attribute 'header-line nil
-                        :background default-background-color
-                        :inverse-video nil
-                        :underline nil)
-    (set-face-attribute 'line-number-current-line nil
-                        :weight 'bold)
+                        :foreground fg-color :background bg-color)
     (set-face-attribute 'fringe nil
-                        :background default-background-color)
+                        :background bg-color)
+    (set-face-attribute 'header-line nil
+                        :background bg-color :underline nil)
     (set-face-attribute 'vertical-border nil
-                        :background default-background-color)))
+                        :background bg-color)))
 (defun sk-light-theme () (interactive) (my-theme-setting))
 (defun sk-dark-theme  () (interactive) (my-theme-setting t))
 
