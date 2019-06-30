@@ -44,7 +44,7 @@
 
 ;; global-auto-revert-mode
 (add-hook 'find-file-hook
-          (lambda () (unless (global-auto-revert-mode)
+          (lambda () (unless global-auto-revert-mode
                       (global-auto-revert-mode 1))))
 
 ;; Prevents custom.el file changes.

@@ -4,9 +4,9 @@
       (gc-cons-threshold most-positive-fixnum))
 
   (if (not window-system)
-      (custom-set-variables '(tool-bar-lines nil)
-                            '(menu-bar-mode nil)
-                            '(scroll-bar-mode nil))
+      (custom-set-variables '(menu-bar-mode nil)
+                            '(scroll-bar-mode nil)
+                            '(tool-bar-lines nil))
     (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
     (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
     (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
@@ -19,7 +19,6 @@
                     "-l" "~/.emacs.d/install.el" "-batch" "-init")))
 
   (package-initialize)
-
   (setq package-archives
         '(("gnu"   . "http://elpa.gnu.org/packages/")
           ("melpa" . "http://melpa.org/packages/")
