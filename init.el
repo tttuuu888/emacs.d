@@ -6,7 +6,7 @@
   (if (not window-system)
       (custom-set-variables '(menu-bar-mode nil)
                             '(scroll-bar-mode nil)
-                            '(tool-bar-lines nil))
+                            '(tool-bar-mode nil))
     (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
     (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
     (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
