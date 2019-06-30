@@ -30,12 +30,6 @@
 ;; M-up, M-down, M-left, and M-right keys.
 (windmove-default-keybindings 'meta)
 
-;; Remove whitespace before saving the file.
-(add-hook 'before-save-hook
-          (lambda () (when (derived-mode-p 'prog-mode)
-                       (delete-trailing-whitespace))))
-
-
 ;; Prevents custom.el file changes.
 (defun package--save-selected-packages (&optional value)
   (when value (setq package-selected-packages value)))

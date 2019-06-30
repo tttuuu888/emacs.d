@@ -1,6 +1,17 @@
 ;;; Developement settings -*- lexical-binding: t -*-
 
 ;;; Built-in packages
+(use-package prog-mode
+  :ensure nil
+  :config
+  (evil-define-key 'normal prog-mode-map
+    "gd" 'xref-find-definitions
+    "gp" 'xref-pop-marker-stack
+    "gr" 'xref-find-reference-here
+    "g[" 'xref-pop-marker-stack)
+  (add-hook 'before-save-hook (lambda () (when (derived-mode-p 'prog-mode)
+                                           (delete-trailing-whitespace)))))
+
 (use-package elec-pair
   :ensure nil
   :hook (prog-mode . electric-pair-mode)
@@ -51,12 +62,6 @@
   :bind (:map xref--xref-buffer-mode-map
           ("<return>" . xref-quit-and-goto-xref)
           ("<RET>"    . xref-quit-and-goto-xref))
-  :init
-  (evil-define-key 'normal prog-mode-map
-    "gd" 'xref-find-definitions
-    "gp" 'xref-pop-marker-stack
-    "gr" 'xref-find-reference-here
-    "g[" 'xref-pop-marker-stack)
   :config
   (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
   (defun xref-find-reference-here ()
