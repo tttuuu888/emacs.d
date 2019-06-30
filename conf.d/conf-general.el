@@ -385,6 +385,11 @@
   ;; TRAMP respect PATH variable on remote machine.
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
+(use-package autorevert
+  :hook (find-file . global-auto-revert-mode)
+  :config
+  (remove-hook 'find-file-hook 'global-auto-revert-mode))
+
 
 ;;; External packages
 (use-package evil-leader
