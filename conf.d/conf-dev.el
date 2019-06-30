@@ -280,8 +280,8 @@
   (evil-set-initial-state 'cider-test-report-mode         'emacs)
   (evil-define-key 'normal cider-repl-mode-map
     "gd"        'cider-find-dwim
-    "gp"        'cider-pop-back)
-    (kbd "RET") 'my-shell-return
+    "gp"        'cider-pop-back
+    (kbd "RET") 'my-shell-return)
   (evil-leader/set-key-for-mode 'clojurescript-mode
     "z"  'cider-switch-to-repl-buffer)
   (evil-leader/set-key-for-mode 'cider-repl-mode
