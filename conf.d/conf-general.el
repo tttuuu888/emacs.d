@@ -521,8 +521,8 @@
       (call-interactively 'other-window))))
 
 (use-package company
-  :custom-face (company-tooltip
-                ((t (:foreground "Black" :background "Yellow3"))))
+  :custom-face
+  (company-tooltip ((t (:foreground "Black" :background "Yellow3"))))
   :init
   (global-company-mode 1)
   :config

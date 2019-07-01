@@ -444,6 +444,7 @@ bindings of C-c C-e X is converted to leader c e X by below:
     "z" 'sk-haskell-buffer-repl-toggle))
 
 (use-package restclient
+  :mode ("\\.rest\\'" . restclient-mode)
   :hook (restclient-mode . my-restclient-mode-hook)
   :config
   (defvar restclient-imenu-generic-expression
