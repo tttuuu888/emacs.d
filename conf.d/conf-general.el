@@ -144,23 +144,28 @@
       (dired-up-directory other-window)
       (kill-buffer dir)))
 
-  (defun ora-dired-rsync (dest)
-    (interactive
-     (list (read-file-name "Rsync to:" (dired-dwim-target-directory))))
-    ;; store all selected files into "files" list
-    (let ((files (dired-get-marked-files nil current-prefix-arg))
-          (command "rsync -ahrvzP ")
-          (prefix (if (string-match-p ".@.*:" dest)
-                      dest
-                    (shell-quote-argument (expand-file-name dest)))))
-      ;; add all selected file names as arguments to the rsync command
-      (dolist (file files)
-        (setq command (concat command (shell-quote-argument file) " ")))
-      ;; append the destination
-      (setq command (concat command prefix))
-      ;; run the async shell command
-      (async-shell-command command "*rsync*")
-      ;; finally, switch to that window
+  (defun ora-dired-rsync (&optional arg)
+    (interactive "P")
+    (let* ((dest (read-file-name "Rsync to: " (dired-dwim-target-directory)))
+           (files (dired-get-marked-files nil current-prefix-arg))
+           (regex "\\(^/scp.?:\\)\\|\\(^/ssh.?:\\)")
+           (prefix (cond ((string-match-p regex dest)
+                          (replace-regexp-in-string regex "" dest))
+                         ((string-match-p ".@.*:" dest) dest)
+                         (t (expand-file-name dest))))
+           (cmd (concat "rsync -ahrsvzP "
+                        (mapconcat
+                         (lambda (f)
+                           (concat
+                            "\"" (replace-regexp-in-string regex "" f) "\"" ))
+                         files " ")
+                        " \"" prefix "\""))
+           (remote-p (string-match-p regex default-directory))
+           (default-directory (if remote-p "~/" default-directory)))
+      ;; Run rsync in home folder if remote-p.
+      ;; Available for local to local, local to remote, remote to local.
+      ;; Remote to remote is not available.
+      (async-shell-command cmd "*rsync*")
       (other-window 1)
       (view-mode))))
 
