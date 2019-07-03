@@ -397,6 +397,10 @@
   :config
   (remove-hook 'find-file-hook 'global-auto-revert-mode))
 
+(use-package view
+  :ensure nil
+  :hook (view-mode . evil-motion-state))
+
 
 ;;; External packages
 (use-package evil-leader
