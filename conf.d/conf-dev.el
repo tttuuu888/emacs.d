@@ -20,7 +20,7 @@
     "Custom pair-delete. Delete a closing braket in case of (|),
 delete a pair of inner braket in case of ((|))."
     (interactive "*p\nP")
-    (if (memq (char-after (1+ (point))) '(?\) ?\" ?\] ?\$))
+    (if (memq (char-after (1+ (point))) '(?\) ?\" ?\] ?\} ?\$))
         (delete-char 1)
       (forward-char))
     (backward-delete-char-untabify arg killp)))
