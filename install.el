@@ -43,10 +43,11 @@
           `(add-to-list 'package-list ',pkg))))
 
     (provide 'use-package)
-    (defun package-install (&rest _) nil)
-    (defun package-refresh-contents (&rest _) nil)
-
-    (load "~/.emacs.d/init.el")
+    (cl-letf (((symbol-function 'package-install)
+               (lambda (&rest _) nil))
+              ((symbol-function 'package-refresh-contents)
+               (lambda (&rest _)) nil))
+      (load "~/.emacs.d/init.el"))
 
     (package-archives-init)
 
@@ -154,9 +155,11 @@
          (packages-list (remove-duplicate-packages-in-depth deps-list))
          (all-packages-count (length (apply #'append packages-list))))
     ;; (print packages-list)
-    (message (format "\n%s packages will be installed.\n" all-packages-count))
-    (dolist (packages packages-list)
-      (async-install-packages packages))
+    (if (zerop all-packages-count)
+        (message (format "\nAll packages are already installed.\n"))
+      (message (format "\n%s packages will be installed.\n" all-packages-count))
+      (dolist (packages packages-list)
+        (async-install-packages packages)))
     (message "Init done.")))
 
 (defun install-function (&rest r)
