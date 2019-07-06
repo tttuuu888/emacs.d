@@ -54,7 +54,7 @@
                (lambda (&rest _) nil))
               ((symbol-function 'package-refresh-contents)
                (lambda (&rest _)) nil))
-      (load "~/.emacs.d/init.el"))
+      (load (expand-file-name "init.el" user-emacs-directory)))
 
     (package-archives-init)
 
@@ -149,7 +149,7 @@
          "Install"
          output-buffer
          "emacs" "-l"
-         (expand-file-name (concat user-emacs-directory "pinstall.el"))
+         (expand-file-name "pinstall.el" user-emacs-directory)
          "-batch" "-install"
          packages)
         (add-to-list 'proc-list (get-buffer-process output-buffer))))
