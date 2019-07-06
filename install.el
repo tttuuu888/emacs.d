@@ -19,7 +19,14 @@
 
 (require 'cl)
 
-(defvar number-of-process 8)
+(defvar min-number-of-process 4)
+
+(defun get-proper-process-number ()
+  (let* ((ret (shell-command-to-string "grep processor /proc/cpuinfo"))
+         (num (if (equal ret "")
+                  min-number-of-process
+                (* 2 (1+ (string-to-number (car (last (split-string ret)))))))))
+    (max num min-number-of-process)))
 
 (defun package-archives-init ()
   (setq package-archives
@@ -101,8 +108,8 @@
          (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
     (message (format "%s %s..done." pkg padding))))
 
-(defun packages-installed-p (left-packages)
-  (let ((pkg-list left-packages)
+(defun packages-installed-p (remained-packages)
+  (let ((pkg-list remained-packages)
         (pkg-dirs (directory-files package-user-dir)))
     (dolist (pkg pkg-list)
       (let ((directory
@@ -116,31 +123,34 @@
                      (concat (file-name-as-directory package-user-dir)
                              directory))))
           (print-package-installed pkg)
-          (setq left-packages (remove pkg left-packages))))))
-  left-packages)
+          (setq remained-packages (remove pkg remained-packages))))))
+  remained-packages)
 
 (defun init-process-check (package-list proc-list)
-  (let ((left-packages (mapcar #'symbol-name package-list)))
+  (let ((remained-packages (mapcar #'symbol-name package-list)))
     (while (seq-filter (lambda (proc) (process-live-p proc)) proc-list)
-      (setq left-packages (packages-installed-p left-packages))
-      (sleep-for 1))
-    (packages-installed-p left-packages)))
+      (setq remained-packages (packages-installed-p remained-packages))
+      (sleep-for 0.5))
+    (packages-installed-p remained-packages)))
 
 (defun async-install-packages (package-list)
-  (let* ((default-args-len (1+ (/ (length package-list) number-of-process)))
-         (left-packages package-list)
+  (let* ((process-number (get-proper-process-number))
+         (default-args-len (1+ (/ (length package-list) process-number)))
+         (remained-packages package-list)
          (output-buffer (generate-new-buffer "*install-packages*"))
          (proc-list nil))
-    (while left-packages
-      (let* ((args-len (min default-args-len (length left-packages)))
+    (while remained-packages
+      (let* ((args-len (min default-args-len (length remained-packages)))
              (packages (mapcar #'symbol-name
-                               (cl-subseq left-packages 0 args-len))))
-        (setq left-packages (nthcdr args-len left-packages))
+                               (cl-subseq remained-packages 0 args-len))))
+        (setq remained-packages (nthcdr args-len remained-packages))
         (apply
          #'start-process
          "Install"
          output-buffer
-         "emacs" "-l" "~/.emacs.d/install.el" "-batch" "-install"
+         "emacs" "-l"
+         (expand-file-name (concat user-emacs-directory "install.el"))
+         "-batch" "-install"
          packages)
         (add-to-list 'proc-list (get-buffer-process output-buffer))))
     (init-process-check package-list proc-list)
