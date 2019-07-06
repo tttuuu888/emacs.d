@@ -1,10 +1,10 @@
-;;; install.el --- Parallel package install script
+;;; pinstall.el --- Parallel package install script
 
 ;; Copyright (C) 2019 SeungKi Kim
 
 ;; Author: SeungKi Kim <tttuuu888@gmail.com>
 ;; URL: https://github.com/tttuuu888/.emacs.d
-;; Version: 0.5.0
+;; Version: 0.6.0
 
 ;;; Commentary
 
@@ -13,7 +13,7 @@
 
 ;; Usage:
 ;; Start parallel install with below command.
-;;  $ emacs -l ~/.emacs.d/install.el -batch -init
+;;  $ emacs -l ~/.emacs.d/pinstall.el -batch -init
 
 ;;; Code:
 
@@ -149,7 +149,7 @@
          "Install"
          output-buffer
          "emacs" "-l"
-         (expand-file-name (concat user-emacs-directory "install.el"))
+         (expand-file-name (concat user-emacs-directory "pinstall.el"))
          "-batch" "-install"
          packages)
         (add-to-list 'proc-list (get-buffer-process output-buffer))))

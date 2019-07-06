@@ -16,7 +16,7 @@
       (delete "-init" command-line-args)
       (switch-to-buffer output-buffer)
       (call-process "emacs" nil  output-buffer t
-                    "-l" "~/.emacs.d/install.el" "-batch" "-init")))
+                    "-l" "~/.emacs.d/pinstall.el" "-batch" "-init")))
 
   (package-initialize)
   (setq package-archives
