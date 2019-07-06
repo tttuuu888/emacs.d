@@ -393,9 +393,7 @@
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 (use-package autorevert
-  :hook (find-file . global-auto-revert-mode)
-  :config
-  (remove-hook 'find-file-hook 'global-auto-revert-mode))
+  :hook (find-file . global-auto-revert-mode))
 
 (use-package view
   :ensure nil
