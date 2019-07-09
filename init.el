@@ -1,37 +1,13 @@
 ;; SK Emacs Setting -*- lexical-binding: t -*-
 
 (let ((file-name-handler-alist nil)
-      (gc-cons-threshold most-positive-fixnum))
+      (gc-cons-threshold most-positive-fixnum)
+      (sk-config-el  (expand-file-name "config.el"  user-emacs-directory))
+      (sk-config-org (expand-file-name "config.org" user-emacs-directory)))
 
-  (if (not window-system)
-      (custom-set-variables '(menu-bar-mode nil)
-                            '(scroll-bar-mode nil)
-                            '(tool-bar-mode nil))
-    (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
-    (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-    (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
+  (when (or (not (file-exists-p sk-config-el))
+            (file-newer-than-file-p sk-config-org sk-config-el))
+    (require 'org)
+    (org-babel-tangle-file sk-config-org))
 
-  (when (member "-init" command-line-args)
-    (let ((output-buffer (generate-new-buffer "*Init*")))
-      (delete "-init" command-line-args)
-      (switch-to-buffer output-buffer)
-      (call-process "emacs" nil  output-buffer t
-                    "-l" "~/.emacs.d/pinstall.el" "-batch" "-init")))
-
-  (package-initialize)
-  (setq package-archives
-        '(("gnu"   . "http://elpa.gnu.org/packages/")
-          ("melpa" . "http://melpa.org/packages/")
-          ("org"   . "https://orgmode.org/elpa/")))
-
-  (add-to-list 'load-path "~/.emacs.d/conf.d/")
-  (add-to-list 'load-path "~/.emacs.d/conf.d/sk-utils/")
-
-  ;; custom file
-  (setq custom-file "~/.emacs.d/custom.el")
-  (load custom-file)
-
-  (require 'conf-init)
-
-  ;; after init
-  (setq package--initialized nil))
+  (require 'config sk-config-el))

@@ -4,7 +4,7 @@
 
 ;; Author: SeungKi Kim <tttuuu888@gmail.com>
 ;; URL: https://github.com/tttuuu888/.emacs.d
-;; Version: 0.6.0
+;; Version: 0.7.0
 
 ;;; Commentary
 
@@ -12,14 +12,22 @@
 ;; parallel processes.
 
 ;; Usage:
-;; Start parallel install with below command.
+;; To start `pinstall' from shell, use below command:
+;;
 ;;  $ emacs -l ~/.emacs.d/pinstall.el -batch -init
+;;
+;; To start `pinstall' from .emacs file, use as below:
+;;
+;;  (require 'pinstall)
+;;  (pinstall-init)
 
 ;;; Code:
-
 (require 'cl)
 
 (defvar min-number-of-process 4)
+
+(defconst pinstall-file load-file-name)
+(defconst pinstall-dir (file-name-directory pinstall-file))
 
 (defun get-proper-process-number ()
   (let* ((ret (shell-command-to-string "grep processor /proc/cpuinfo"))
@@ -34,8 +42,6 @@
           ("org"   . "https://orgmode.org/elpa/")
           ("melpa" . "http://melpa.org/packages/")))
   (package-initialize))
-
-(package-archives-init)
 
 (defun get-package-list ()
   (let ((package-list (list 'use-package)))
@@ -54,7 +60,7 @@
                (lambda (&rest _) nil))
               ((symbol-function 'package-refresh-contents)
                (lambda (&rest _)) nil))
-      (load (expand-file-name "init.el" user-emacs-directory)))
+      (load (expand-file-name "init.el" pinstall-dir)))
 
     (package-archives-init)
 
@@ -104,9 +110,9 @@
     result))
 
 (defun print-package-installed (package)
-  (let* ((pkg-len (length pkg))
+  (let* ((pkg-len (length package))
          (padding (make-string (max 1 (- 25 pkg-len)) ?.)))
-    (message (format "%s %s..done." pkg padding))))
+    (message (format "%s %s..done." package padding))))
 
 (defun packages-installed-p (remained-packages)
   (let ((pkg-list remained-packages)
@@ -149,7 +155,7 @@
          "Install"
          output-buffer
          "emacs" "-l"
-         (expand-file-name "pinstall.el" user-emacs-directory)
+         pinstall-file
          "-batch" "-install"
          packages)
         (add-to-list 'proc-list (get-buffer-process output-buffer))))
@@ -160,6 +166,7 @@
 
 (defun init-function (&rest _)
   (delete "-init" command-line-args)
+  (package-archives-init)
   (package-refresh-contents)
   (let* ((deps-list (get-dependency-package-list))
          (packages-list (remove-duplicate-packages-in-depth deps-list))
@@ -174,6 +181,7 @@
 
 (defun install-function (&rest r)
   (delete "-install" command-line-args)
+  (package-archives-init)
   (dolist (pkg command-line-args-left)
     (dotimes (try-count 2)
       (print (format "try %s for %s" try-count pkg))
@@ -182,3 +190,14 @@
 
 (add-to-list 'command-switch-alist '("-install" . install-function))
 (add-to-list 'command-switch-alist '("-init" . init-function))
+
+
+;;;###autoload
+(defun pinstall-init ()
+  (let ((output-buffer (generate-new-buffer "*Init*")))
+    (switch-to-buffer output-buffer)
+    (call-process "emacs" nil  output-buffer t
+                  "-l" pinstall-file "-batch" "-init")))
+
+
+(provide 'pinstall)
