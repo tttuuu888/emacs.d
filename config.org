@@ -2,10 +2,10 @@
 #+author: SeungKi Kim
 #+email: tttuuu888@gmail.com
 
-* SK Emacs setting
+* About
 This is my personal Emacs setting.
-* init.el
-=init.el= will generate =config.el= from =config.org=. And then it will load
+* Init.el
+=init.el= will generate =config.el= from =config.org= and then will load
 =config.el=.
 
 =file-name-handler-alist= will be set to =nil= and =gc-cons-threshold= will be
@@ -14,7 +14,7 @@ time.
 
 All the other settings will be located in =config.org=.
 * Initial settings
-** commentary
+** Commentary
 This comment will be added on the top of =config.el=.
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;; config.el --- generated from config.org -*- lexical-binding: t -*-
@@ -22,7 +22,7 @@ This comment will be added on the top of =config.el=.
   ;;; Code:
 #+END_SRC
 
-** emacs -init
+** Emacs -init
 If Emacs is executed with an =-init= argument, =parallel install= process is
 performed.
 
@@ -43,7 +43,10 @@ performed.
     (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
     (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
 #+END_SRC
-** package initialize
+** Package initialize
+Process =package-initialize= first and set =package-archives= for boot time
+speed up. =package--initialized= would be set to =nil= at the end of boot up.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (package-initialize)
   (setq package-archives
@@ -52,14 +55,20 @@ performed.
           ("org"   . "https://orgmode.org/elpa/")))
 #+END_SRC
 
-** custom file
+** Custom file
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
 #+END_SRC
 
-* My utilites
-** user-emacs-directory setting
+** User-emacs-directory setting
+At this point, =user-emacs-directory= is set in order to =~/.emacs.d/.local/= to
+hide all package local files.  From this point, =user-emacs-directory= is set to
+=~/.emacs.d/.local/= so that all package local files would be hidden under the
+path.
+
+=emacs-config-dir= would be used instead of =user-emacs-directory=.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defvar emacs-config-dir user-emacs-directory)
   (setq user-emacs-directory (expand-file-name "~/.emacs.d/.local/"))
@@ -67,7 +76,10 @@ performed.
     (make-directory-internal user-emacs-directory))
 #+END_SRC
 
-** user info
+** User information
+If =USER_FULL_NAME= and =USER_MAIL_ADDRESS= environment variables exist, update
+=user_full_name= and =user_mail_address= variables.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (let ((name (getenv "USER_FULL_NAME"))
         (mail (getenv "USER_MAIL_ADDRESS")))
@@ -75,7 +87,9 @@ performed.
     (when mail (setq user-mail-address mail)))
 #+END_SRC
 
-** color setting
+** Color setting
+Simple color setting function which has 'dark' and 'light' theme.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun my-theme-setting (&optional dark-theme)
     (let ((fg-color (if (or dark-theme (not window-system)) "Gray80" "Black"))
@@ -90,27 +104,38 @@ performed.
                           :background bg-color)))
   (defun sk-light-theme () (interactive) (my-theme-setting))
   (defun sk-dark-theme  () (interactive) (my-theme-setting t))
+#+END_SRC
 
-  ;; Default dark theme
+Enable dark theme.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
   (my-theme-setting t)
 #+END_SRC
 
-** yes-or-no -> y-or-n
+** Yes-or-no -> y-or-n
+Use =y-or-n= instead of =yes-or-no=.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
 ** M-up, M-down, M-left, and M-right keys.
+M-up,down,left,right keys for moving to windows.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (windmove-default-keybindings 'meta)
 #+END_SRC
 
 ** Prevents custom.el file changes.
+Stop Emacs default functionality saving installed packages list in =custom.el= file.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun package--save-selected-packages (&optional value)
     (when value (setq package-selected-packages value)))
 #+END_SRC
-** sk-mode-line
+** SK-mode-line
+Simple mode line setting function.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun sk-mode-line ()
     (set-face-attribute 'mode-line nil
@@ -154,10 +179,16 @@ performed.
            mode-info
            center-fill
            right-info))))))
+#+END_SRC
 
+Enable =sk-mode-line=.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
   (sk-mode-line)
 #+END_SRC
-** sk-utils
+** SK-utils
+Various useful functions.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun sharp-ifdef-insert (start end pre)
     (save-excursion
@@ -259,7 +290,8 @@ performed.
 
   ;; Hide ^M
   (defun hide-ctrl-M ()
-    "Hides the disturbing '^M' showing up in files containing mixed UNIX and DOS line endings."
+    "Hides the disturbing '^M' showing up in files containing mixed
+  UNIX and DOS line endings."
     (interactive)
     (setq buffer-display-table (make-display-table))
     (aset buffer-display-table ?\^M []))
@@ -340,31 +372,6 @@ performed.
   (defun sk-insert-next-week-form ()
     (interactive)
     (insert (get-week-form 7)))
-#+END_SRC
-** use-package
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-
-  (setq use-package-always-defer t
-        use-package-always-ensure t
-        use-package-enable-imenu-support t)
-  (put :map 'lisp-indent-function 'defun)
-  (require 'use-package)
-#+END_SRC
-* General settings
-#+BEGIN_SRC emacs-lisp :tangle yes
-  ;;; Personal packages
-  (bind-keys* ("<f5>"       . sk-make)
-              ("C-<f5>"     . sk-rebuild)
-              ("C-M-,"      . transpose-windows)
-              ("M-S-<up>"   . (lambda () (interactive) (move-line -1)))
-              ("M-S-<down>" . (lambda () (interactive) (move-line  1)))
-              ("<f7>"       . (lambda () (interactive) (buffer-save-or-load 7 t)))
-              ("<f8>"       . (lambda () (interactive) (buffer-save-or-load 8 t)))
-              ("C-<f7>"     . (lambda () (interactive) (buffer-save-or-load 7)))
-              ("C-<f8>"     . (lambda () (interactive) (buffer-save-or-load 8))))
 
   (defmacro sk-switch-buffer-repl (name mode repl run-repl)
     (let ((last-mode (intern (concat "my-last-buffer-" (symbol-name mode))))
@@ -385,7 +392,31 @@ performed.
                       (pop-to-buffer ,last-mode)
                     nil))
                  (t nil))))))
+#+END_SRC
+** Use-package
+Install =use-package= if not exists. Set some default settings for
+=use-package=.
 
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (setq use-package-always-defer t
+        use-package-always-ensure t
+        use-package-enable-imenu-support t)
+  (put :map 'lisp-indent-function 'defun)
+#+END_SRC
+
+Load =use-package=. From this point, only =use-package= will be used for
+settings.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'use-package)
+#+END_SRC
+* General settings
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;;; Personal packages
   (use-package evil-leader
     :init
     (defvar sk-evil-sub-leader "M-m")
@@ -855,16 +886,26 @@ performed.
 
   (use-package bind-key
     :init
-    (bind-keys* ("<mouse-1>"        . nil)
-                ("<mouse-3>"        . nil)
-                ("<down-mouse-1>"   . nil)
-                ("<down-mouse-3>"   . nil)
-                ("<drag-mouse-1>"   . nil)
-                ("<drag-mouse-3>"   . nil)
-                ("<C-down-mouse-1>" . nil)
-                ("<M-down-mouse-1>" . nil)
-                ("<S-down-mouse-1>" . nil)
-                ("M-,"              . my-other-window))
+    (bind-keys*
+     ("<mouse-1>"        . nil)
+     ("<mouse-3>"        . nil)
+     ("<down-mouse-1>"   . nil)
+     ("<down-mouse-3>"   . nil)
+     ("<drag-mouse-1>"   . nil)
+     ("<drag-mouse-3>"   . nil)
+     ("<C-down-mouse-1>" . nil)
+     ("<M-down-mouse-1>" . nil)
+     ("<S-down-mouse-1>" . nil)
+     ("M-,"              . my-other-window)
+     ("<f5>"             . sk-make)
+     ("C-<f5>"           . sk-rebuild)
+     ("C-M-,"            . transpose-windows)
+     ("M-S-<up>"         . (lambda () (interactive) (move-line -1)))
+     ("M-S-<down>"       . (lambda () (interactive) (move-line  1)))
+     ("<f7>"             . (lambda () (interactive) (buffer-save-or-load 7 t)))
+     ("<f8>"             . (lambda () (interactive) (buffer-save-or-load 8 t)))
+     ("C-<f7>"           . (lambda () (interactive) (buffer-save-or-load 7)))
+     ("C-<f8>"           . (lambda () (interactive) (buffer-save-or-load 8))))
     (defun my-other-window ()
       (interactive)
       (if (minibufferp)
@@ -1256,7 +1297,7 @@ performed.
     :init
     (which-key-mode))
 #+END_SRC
-* Developement settings
+* Development settings
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;; Built-in packages
   (use-package prog-mode
@@ -1725,11 +1766,17 @@ performed.
       "gk" 'restclient-jump-prev))
 #+END_SRC
 * End
-** after init
+** After init
+Set =package--initialized= to =nil= to prevent that all the packages from
+=package-list-packages= become new packages. Still it is required to execute
+=M-x package-initialize= manually in some cases.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq package--initialized nil)
 #+END_SRC
-** provide
+** Provide a feature
+Make =config.el= available to load by =require=.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (provide 'config)
 #+END_SRC
