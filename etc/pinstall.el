@@ -27,7 +27,6 @@
 (defvar min-number-of-process 4)
 
 (defconst pinstall-file load-file-name)
-(defconst pinstall-dir (file-name-directory pinstall-file))
 
 (defun get-proper-process-number ()
   (let* ((ret (shell-command-to-string "grep processor /proc/cpuinfo"))
@@ -60,7 +59,7 @@
                (lambda (&rest _) nil))
               ((symbol-function 'package-refresh-contents)
                (lambda (&rest _)) nil))
-      (load (expand-file-name "init.el" pinstall-dir)))
+      (load "~/.emacs.d/init.el"))
 
     (package-archives-init)
 
