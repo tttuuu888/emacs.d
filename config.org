@@ -70,6 +70,12 @@ path.
     (make-directory-internal user-emacs-directory))
 #+END_SRC
 
+Set =emacs-etc-dir= to indicate a folder containing extra files.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defvar emacs-etc-dir (expand-file-name "etc/" emacs-config-dir))
+#+END_SRC
+
 ** Custom file
 =custom.el= will be saved under =~/.emacs.d/.local/= but will not be used.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -539,6 +545,7 @@ settings.
 
   (use-package company-sql
     :ensure nil
+    :load-path emacs-etc-dir
     :hook ((sql-mode sql-interactive-mode) . my-sql-mode-hook)
     :config
     (defun my-sql-mode-hook ()
@@ -747,7 +754,7 @@ settings.
                             "<!--/*--><![CDATA[/*><!--*/\n"
                             (with-temp-buffer
                               (insert-file-contents
-                               "~/.emacs.d/conf.d/sk-utils/org.css")
+                               (expand-file-name "org.css" emacs-etc-dir))
                               (buffer-string))
                             "/*]]>*/-->\n"
                             "</style>\n")))
