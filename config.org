@@ -74,6 +74,8 @@ Set =emacs-etc-dir= to indicate a folder containing extra files.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defvar emacs-etc-dir (expand-file-name "etc/" emacs-config-dir))
+  (unless (file-exists-p emacs-etc-dir)
+    (make-directory-internal emacs-etc-dir))
 #+END_SRC
 
 ** Custom file
