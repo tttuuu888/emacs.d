@@ -1134,6 +1134,7 @@ settings.
 
   (use-package magit
     :bind ("<f12>" . magit-status)
+    :hook (with-editor-mode . evil-normal-state)
     :init
     (evil-leader/set-key
       "gs" 'magit-status
@@ -1141,6 +1142,9 @@ settings.
     :config
     (setq magit-log-section-commit-count 5
           magit-completing-read-function #'ivy-completing-read)
+    (evil-leader/set-key-minor-mode 'with-editor-mode
+      "cc" 'with-editor-finish
+      "ck" 'with-editor-cancel)
     (bind-key "<escape>" 'transient-quit-one transient-map)
     (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
     (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps))
