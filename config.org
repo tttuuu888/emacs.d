@@ -55,12 +55,6 @@ speed up. =package--initialized= would be set to =nil= at the end of boot up.
           ("org"   . "https://orgmode.org/elpa/")))
 #+END_SRC
 
-** Custom file
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (setq custom-file "~/.emacs.d/custom.el")
-  (load custom-file)
-#+END_SRC
-
 ** User-emacs-directory setting
 At this point, =user-emacs-directory= is set in order to =~/.emacs.d/.local/= to
 hide all package local files.  From this point, =user-emacs-directory= is set to
@@ -74,6 +68,47 @@ path.
   (setq user-emacs-directory (expand-file-name "~/.emacs.d/.local/"))
   (unless (file-exists-p user-emacs-directory)
     (make-directory-internal user-emacs-directory))
+#+END_SRC
+
+** Custom file
+=custom.el= will be saved under =~/.emacs.d/.local/= but will not be used.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+#+END_SRC
+
+Instead of using =custom.el=, insert the contents of the file directly here.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ansi-color-names-vector
+     ["black" "red3" "green3" "yellow3" "dodger blue" "magenta3" "cyan3" "gray90"])
+   '(backup-directory-alist (quote ((".*" . "/tmp/"))))
+   '(blink-cursor-mode nil)
+   '(c-basic-offset 4)
+   '(c-default-style "bsd")
+   '(completion-styles (quote (basic partial-completion emacs22 initials)))
+   '(css-indent-offset 2)
+   '(diary-file "~/Dropbox/org/diary")
+   '(ediff-split-window-function (quote split-window-horizontally))
+   '(fill-column 80)
+   '(font-use-system-font t)
+   '(indent-tabs-mode nil)
+   '(inhibit-startup-screen t)
+   '(make-backup-files nil)
+   '(mouse-wheel-progressive-speed nil)
+   '(password-cache-expiry 900)
+   '(send-mail-function (quote smtpmail-send-it))
+   '(size-indication-mode t)
+   '(split-height-threshold nil)
+   '(split-width-threshold 140)
+   '(tab-always-indent (quote complete))
+   '(tab-width 4)
+   '(use-file-dialog nil)
+   '(vc-follow-symlinks nil))
 #+END_SRC
 
 ** User information
@@ -126,13 +161,6 @@ M-up,down,left,right keys for moving to windows.
   (windmove-default-keybindings 'meta)
 #+END_SRC
 
-** Prevents custom.el file changes.
-Stop Emacs default functionality saving installed packages list in =custom.el= file.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (defun package--save-selected-packages (&optional value)
-    (when value (setq package-selected-packages value)))
-#+END_SRC
 ** SK-mode-line
 Simple mode line setting function.
 
