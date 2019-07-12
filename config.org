@@ -517,8 +517,6 @@ settings.
     (defun evil-reload-file ()
       (interactive)
       (find-alternate-file (buffer-file-name)))
-    ;; mouse disabled in evil
-    (defun evil-mouse-drag-track (&rest _) nil)
     (defun evil-paste-pgvy ()
       "Paste and restore visual block and yank."
       (interactive)
@@ -1528,7 +1526,6 @@ settings.
     :config
     (require 'helm-utils)
     (require 'helm-rtags)
-    (require 'sk-utils)
     (setq rtags-autostart-diagnostics t
           rtags-use-helm t)
     (rtags-enable-standard-keybindings)
@@ -1545,9 +1542,7 @@ settings.
 
   (use-package xcscope
     :disabled t
-    :hook ((c-mode-common asm-mode) . cscope-minor-mode)
-    :config
-    (bind-key "<mouse-3>" 'nil cscope-minor-mode-keymap))
+    :hook ((c-mode-common asm-mode) . cscope-minor-mode))
 
   (use-package elpy
     :config
@@ -1729,7 +1724,6 @@ settings.
       "gp" 'tern-pop-find-definition
       "gr" 'xref-find-reference-here
       "g[" 'xref-pop-marker-stack)
-    (bind-key "M-," 'other-window tern-mode-keymap)
     (defun my-tern-hook ()
       (evil-normalize-keymaps)
       (tern-mode)
