@@ -366,10 +366,6 @@ Various useful functions.
         (window-configuration-to-register num)
         (message (concat "Windows are saved to F" (number-to-string num))))))
 
-  (defun sk-byte-recompile-conf-dir ()
-    (interactive)
-    (byte-recompile-directory "~/.emacs.d/conf.d" 0))
-
   (defun tmux-running-p ()
     "Check if tmux is currently running or not."
     (zerop (process-file "tmux" nil nil nil "has-session")))
