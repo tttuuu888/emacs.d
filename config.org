@@ -56,10 +56,8 @@ speed up. =package--initialized= would be set to =nil= at the end of boot up.
 #+END_SRC
 
 ** User-emacs-directory setting
-At this point, =user-emacs-directory= is set in order to =~/.emacs.d/.local/= to
-hide all package local files.  From this point, =user-emacs-directory= is set to
-=~/.emacs.d/.local/= so that all package local files would be hidden under the
-path.
+From this point, =user-emacs-directory= is set to =~/.emacs.d/.local/= so that
+all package local files would be hidden under the path.
 
 =emacs-config-dir= would be used instead of =user-emacs-directory=.
 
@@ -449,7 +447,7 @@ settings.
 #+END_SRC
 * General settings
 #+BEGIN_SRC emacs-lisp :tangle yes
-  ;;; Personal packages
+  ;;; Evil-leader and evil
   (use-package evil-leader
     :init
     (defvar sk-evil-sub-leader "M-m")
@@ -542,6 +540,7 @@ settings.
     (evil-set-initial-state 'term-mode  'emacs))
 
 
+  ;;; Personal packages
   (use-package company-sql
     :ensure nil
     :load-path emacs-etc-dir
