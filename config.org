@@ -235,21 +235,18 @@ Various useful functions.
         (goto-char end2) (end-of-line) (insert "\n#endif")
         (goto-char start) (beginning-of-line) (insert pre "\n"))))
 
-  ;; #if 0 ~ #endif insert for the area
   (defun izero-insert (start end)
     "Intesrt #if 0 at the beginning of region and #endif at the end of region"
     (interactive "r")
     (sharp-ifdef-insert start end "#if 0"))
 
-  ;; #ifdef ~ #endif insert for the area
   (defun idef-insert (start end in)
-    "Intesrt #if 0 at the beginning of region and #endif at the end of region"
+    "Intesrt #ifdef at the beginning of region and #endif at the end of region"
     (interactive "r\nsDefine : ")
     (sharp-ifdef-insert start end (concat "#ifdef " in)))
 
-
-  ;; build functions
   (defun find-file-in-tree (dir fname &optional project-root)
+    "Find a file looking up to the HOME folder or root folder."
     (let ((file (concat dir fname))
           (parent (unless (or (equal "~" dir) (equal "/" dir))
                     (file-name-directory (directory-file-name dir)))))
@@ -281,7 +278,7 @@ Various useful functions.
         (compile (concat "export LANG=en_US && make -C " dir " clean")))))
 
   (defun sk-rebuild ()
-    "Find a Makefile path and perform rebuild(clean and make)"
+    "Find a Makefile path, clean the project and rebuild it."
     (interactive)
     (let ((dir (find-file-in-tree default-directory
                                   "Makefile"
@@ -293,6 +290,7 @@ Various useful functions.
           (compile (concat "export LANG=en_US && make -j8 -C " dir))))))
 
   (defun sk-clang-complete-make ()
+    "Generate .clange_complete file."
     (interactive)
     (let ((file "./.clang_complete")
           (includes
@@ -313,7 +311,7 @@ Various useful functions.
     (insert (format-time-string "%Y-%m-%d %A")))
 
   (defun insert-date-and-time ()
-    "Insert date at point."
+    "Insert date and time at point."
     (interactive)
     (insert (format-time-string "%Y-%m-%d %a %p %l:%M")))
 
@@ -324,7 +322,6 @@ Various useful functions.
           (buffer-list))
     (delete-other-windows))
 
-  ;; Hide ^M
   (defun hide-ctrl-M ()
     "Hides the disturbing '^M' showing up in files containing mixed
   UNIX and DOS line endings."
@@ -349,6 +346,7 @@ Various useful functions.
       (forward-char col)))
 
   (defun transpose-windows ()
+    "Swap positions of 2 windows."
     (interactive)
     (let ((this-buffer (window-buffer (selected-window)))
           (other-buffer (prog2
@@ -373,9 +371,11 @@ Various useful functions.
     (byte-recompile-directory "~/.emacs.d/conf.d" 0))
 
   (defun tmux-running-p ()
+    "Check if tmux is currently running or not."
     (zerop (process-file "tmux" nil nil nil "has-session")))
 
   (defun tmux-new-pane-here ()
+    "Open tmux pane of the current path."
     (interactive)
     (if (tmux-running-p)
         (call-process "tmux" nil nil nil "new-window")
@@ -410,6 +410,7 @@ Various useful functions.
     (insert (get-week-form 7)))
 
   (defmacro sk-switch-buffer-repl (name mode repl run-repl)
+    "Create NAME function which switch between a file of MODE and a REPL."
     (let ((last-mode (intern (concat "my-last-buffer-" (symbol-name mode))))
           (last-repl (intern (concat "my-last-repl-" (symbol-name repl)))))
       `(progn
