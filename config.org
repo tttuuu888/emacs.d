@@ -290,16 +290,9 @@ Various useful functions.
     "Generate .clange_complete file."
     (interactive)
     (let ((file "./.clang_complete")
-          (includes
-           (mapcar (lambda (x) (concat "-I" x "\n"))
-                   (split-string
-                    (shell-command-to-string
-                     "find -type f -name '*.h' -printf '%h\n' | sort -u")))))
-      (when (file-exists-p file)
-        (delete-file file))
-      (write-region "" nil file)
-      (mapc (lambda (x) (append-to-file x nil file)) includes)))
-
+          (includes (shell-command-to-string
+                     "find -type f -name '*.h' -printf '-I%h\n' | sort -u")))
+      (write-region includes nil file)))
 
   (defun insert-date ()
     "Insert date at point."
