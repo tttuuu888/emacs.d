@@ -283,9 +283,8 @@ Various useful functions.
                                   (my-project-root-or-dir))))
       (if (equal dir nil)
           (message "Makefile is not found")
-        (progn
-          (call-process "make" nil nil nil "-C" dir "clean")
-          (compile (concat "export LANG=en_US && make -j8 -C " dir))))))
+        (call-process "make" nil nil nil "-C" dir "clean")
+        (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
 
   (defun sk-clang-complete-make ()
     "Generate .clange_complete file."
@@ -296,11 +295,10 @@ Various useful functions.
                    (split-string
                     (shell-command-to-string
                      "find -type f -name '*.h' -printf '%h\n' | sort -u")))))
-      (progn
-        (when (file-exists-p file)
-          (delete-file file))
-        (write-region "" nil file)
-        (mapc (lambda (x) (append-to-file x nil file)) includes))))
+      (when (file-exists-p file)
+        (delete-file file))
+      (write-region "" nil file)
+      (mapc (lambda (x) (append-to-file x nil file)) includes)))
 
 
   (defun insert-date ()
@@ -360,9 +358,8 @@ Various useful functions.
         (progn
           (jump-to-register num)
           (message (concat "Windows are Restored by F" (number-to-string num))))
-      (progn
-        (window-configuration-to-register num)
-        (message (concat "Windows are saved to F" (number-to-string num))))))
+      (window-configuration-to-register num)
+      (message (concat "Windows are saved to F" (number-to-string num)))))
 
   (defun tmux-running-p ()
     "Check if tmux is currently running or not."
