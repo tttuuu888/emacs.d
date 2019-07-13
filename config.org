@@ -404,7 +404,9 @@ Various useful functions.
     (insert (get-week-form 7)))
 
   (defmacro sk-switch-buffer-repl (name mode repl run-repl)
-    "Create NAME function which switch between a file of MODE and a REPL."
+    "Create NAME function which switch between a file of MODE and a
+  REPL. Open REPL with RUN-REPL function if REPL is not yet
+  opened."
     (let ((last-mode (intern (concat "my-last-buffer-" (symbol-name mode))))
           (last-repl (intern (concat "my-last-repl-" (symbol-name repl)))))
       `(progn
