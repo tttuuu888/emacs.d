@@ -24,6 +24,7 @@
   body .title {
     text-align: center;
     font-size: 32pt;
+    line-height: 1;
   }
 
   #org-div-home-and-up{
