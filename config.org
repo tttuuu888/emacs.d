@@ -337,14 +337,10 @@ Various useful functions.
   (defun transpose-windows ()
     "Swap positions of 2 windows."
     (interactive)
-    (let ((this-buffer (window-buffer (selected-window)))
-          (other-buffer (prog2
-                            (other-window +1)
-                            (window-buffer (selected-window))
-                          (other-window -1))))
-      (switch-to-buffer other-buffer)
-      (switch-to-buffer-other-window this-buffer)
-      (other-window -1)))
+    (let ((buffer1 (window-buffer (selected-window)))
+          (buffer2 (window-buffer (select-window (next-window)))))
+      (switch-to-buffer buffer1)
+      (switch-to-buffer-other-window buffer2)))
 
   (defun buffer-save-or-load (num &optional restore)
     (if restore
