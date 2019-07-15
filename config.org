@@ -287,7 +287,7 @@ Various useful functions.
         (compile (concat "export LANG=en_US && make -j8 -C " dir)))))
 
   (defun sk-clang-complete-make ()
-    "Generate .clange_complete file."
+    "Generate .clang_complete file."
     (interactive)
     (let ((file "./.clang_complete")
           (includes (shell-command-to-string
