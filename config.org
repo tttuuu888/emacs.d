@@ -228,7 +228,7 @@ Various useful functions.
     (save-excursion
       (let ((end2 (if (and (equal evil-state 'visual)
                            (equal end (line-beginning-position)))
-                      (- end 1)
+                      (1- end)
                     end)))
         (goto-char end2) (end-of-line) (insert "\n#endif")
         (goto-char start) (beginning-of-line) (insert pre "\n"))))
@@ -321,13 +321,10 @@ Various useful functions.
   (defun move-line (n)
     "Move the current line up or down by N lines."
     (interactive "p")
-    (let* ((col (current-column))
-           (_ (beginning-of-line))
-           (start (point))
-           (_ (end-of-line))
-           (_ (forward-char))
-           (end (point))
-           (line-text (delete-and-extract-region start end)))
+    (let ((col (current-column))
+          (line-text
+           (delete-and-extract-region (line-beginning-position)
+                                      (line-beginning-position 2))))
       (forward-line n)
       (insert line-text)
       ;; restore point to original column in moved line
