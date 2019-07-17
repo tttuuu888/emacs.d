@@ -688,6 +688,7 @@ settings.
      org-latex-packages-alist '(("" "parskip" nil) ("" "kotex" nil))
      org-log-done 'time
      org-plantuml-jar-path (getenv "PLANTUML_PATH")
+     org-src-window-setup 'current-window
      org-startup-indented t
      org-startup-with-inline-images t)
     (evil-leader/set-key-for-mode 'org-mode
@@ -878,6 +879,11 @@ settings.
   (use-package view
     :ensure nil
     :hook (view-mode . evil-motion-state))
+
+  (use-package flymake
+    :ensure nil
+    :config
+    (evil-set-initial-state 'flymake-diagnostics-buffer-mode 'emacs))
 
 
   ;;; External packages
