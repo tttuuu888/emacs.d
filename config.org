@@ -467,6 +467,8 @@ settings.
           (kbd (concat evil-leader/leader key)) def)
         (evil-define-minor-mode-key 'motion mode
           (kbd (concat sk-evil-sub-leader " " key)) def)
+        (evil-define-minor-mode-key 'insert mode
+          (kbd (concat sk-evil-sub-leader " " key)) def)
       (setq key (pop bindings)
             def (pop bindings))))
     (put 'evil-leader/set-key-minor-mode 'lisp-indent-function 'defun)
