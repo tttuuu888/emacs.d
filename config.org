@@ -861,7 +861,8 @@ settings.
   (use-package display-line-numbers
     :ensure nil
     :custom-face
-    (line-number-current-line ((t (:inherit 'line-number :weight bold))))
+    (line-number ((t (:foreground "gray51"))))
+    (line-number-current-line ((t (:inherit 'default))))
     :hook
     ((find-file prog-mode) . display-line-numbers-mode)
     :config
