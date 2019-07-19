@@ -520,7 +520,7 @@ settings.
     (evil-swap-key evil-motion-state-map "k" "gk")
     (evil-global-set-key 'normal "Y" (kbd "y$"))
     (evil-global-set-key 'motion "$" 'end-of-line)
-    (dolist (m '(calendar-mode dired-mode term-mode image-mode))
+    (dolist (m '(image-mode term-mode))
       (evil-set-initial-state m 'emacs)))
 
 
@@ -560,7 +560,6 @@ settings.
     (defalias 'ido-completing-read 'ivy-completing-read))
 
   (use-package calendar
-    :config
     :bind (:map calendar-mode-map
             ("h"       . calendar-backward-day)
             ("j"       . calendar-forward-week)
@@ -569,7 +568,9 @@ settings.
             ("C-f"     . calendar-scroll-left-three-months)
             ("C-b"     . calendar-scroll-right-three-months)
             ("<left>"  . calendar-scroll-right)
-            ("<right>" . calendar-scroll-left)))
+            ("<right>" . calendar-scroll-left))
+    :config
+    (evil-set-initial-state 'calendar-mode 'emacs))
 
   (use-package dired
     :ensure nil
@@ -594,6 +595,7 @@ settings.
     (require 'dired-x)
     (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
 
+    (evil-set-initial-state 'dired-mode 'emacs)
     (evil-leader/set-key-for-mode 'dired-mode
       "c"  'my-dired-copy-path            ; copy current folder path
       "C"  'my-dired-copy-filepath        ; copy selected file path
