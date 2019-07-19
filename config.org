@@ -520,9 +520,8 @@ settings.
     (evil-swap-key evil-motion-state-map "k" "gk")
     (evil-global-set-key 'normal "Y" (kbd "y$"))
     (evil-global-set-key 'motion "$" 'end-of-line)
-    (evil-set-initial-state 'calendar-mode 'emacs)
-    (evil-set-initial-state 'dired-mode 'emacs)
-    (evil-set-initial-state 'term-mode  'emacs))
+    (dolist (m '(calendar-mode dired-mode term-mode image-mode))
+      (evil-set-initial-state m 'emacs)))
 
 
   ;;; Personal packages
