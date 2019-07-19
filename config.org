@@ -560,6 +560,7 @@ settings.
     (defalias 'ido-completing-read 'ivy-completing-read))
 
   (use-package calendar
+    :ensure nil
     :bind (:map calendar-mode-map
             ("h"       . calendar-backward-day)
             ("j"       . calendar-forward-week)
