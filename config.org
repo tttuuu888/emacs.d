@@ -1099,7 +1099,7 @@ settings.
           org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
           org-reveal-theme "moon"
           org-reveal-title-slide "<h2>%t</h2><h4>%a&nbsp(%e)</h4>"
-          org-reveal-transition nil))
+          org-reveal-transition "none"))
 
   (use-package neotree
     :commands my-neotree-directory
