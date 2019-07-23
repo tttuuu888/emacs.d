@@ -553,7 +553,7 @@ settings.
     :custom (recentf-max-saved-items 100)
     :config
     (add-to-list 'recentf-exclude
-                 (format "%s/\\.emacs\\.d/elpa/.*" (getenv "HOME"))))
+                 (expand-file-name "~/\\.emacs\\.d/elpa/.*")))
 
   (use-package ido
     :ensure nil
