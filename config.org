@@ -439,6 +439,7 @@ settings.
     (global-evil-leader-mode)
     (evil-leader/set-leader "<SPC>")
     (evil-leader/set-key
+      "<escape>" 'keyboard-quit
       "0"  'delete-window
       "1"  'delete-other-windows
       "2"  'split-window-below
