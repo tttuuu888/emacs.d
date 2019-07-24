@@ -465,6 +465,8 @@ settings.
       (while key
         (evil-define-minor-mode-key 'motion mode
           (kbd (concat evil-leader/leader key)) def)
+        (evil-define-minor-mode-key 'emacs mode
+          (kbd (concat sk-evil-sub-leader " " key)) def)
         (evil-define-minor-mode-key 'motion mode
           (kbd (concat sk-evil-sub-leader " " key)) def)
         (evil-define-minor-mode-key 'insert mode
