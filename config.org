@@ -928,6 +928,8 @@ settings.
      ("<C-down-mouse-1>" . nil)
      ("<M-down-mouse-1>" . nil)
      ("<S-down-mouse-1>" . nil)
+     ("C-c <escape>"     . keyboard-quit)
+     ("C-x <escape>"     . keyboard-quit)
      ("M-,"              . my-other-window)
      ("<f5>"             . sk-make)
      ("C-<f5>"           . sk-rebuild)
