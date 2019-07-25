@@ -803,7 +803,9 @@ settings.
       (interactive)
       (my-shell-return)
       (counsel-shell-history))
-    (evil-leader/set-key-for-mode 'shell-mode "l" 'my-shell-history)
+    (evil-leader/set-key-for-mode 'shell-mode
+      "l"  'my-shell-history
+      "cc" 'comint-interrupt-subjob)
     (evil-define-key 'motion shell-mode-map
       "gk" 'comint-previous-prompt
       "gj" 'comint-next-prompt)
@@ -832,13 +834,15 @@ settings.
       (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
       (evil-define-key 'normal eshell-mode-map "S" 'my-eshell-change-whole-line)
       (evil-define-key 'motion eshell-mode-map
-        "0" 'eshell-bol
+        "0"  'eshell-bol
         "gk" 'eshell-previous-prompt
         "gj" 'eshell-next-prompt
         (kbd "M-p") (lambda () (interactive) nil)
         (kbd "M-n") (lambda () (interactive) nil)
         (kbd "RET") 'my-shell-return))
-    (evil-leader/set-key-for-mode 'eshell-mode "l" 'my-eshell-history))
+    (evil-leader/set-key-for-mode 'eshell-mode
+      "l"  'my-eshell-history
+      "cc" 'eshell-interrupt-process))
 
   (use-package cc-cmds
     :ensure nil
