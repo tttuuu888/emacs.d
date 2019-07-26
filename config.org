@@ -449,6 +449,7 @@ settings.
       "Q"  'kill-emacs
       "u"  'pop-to-mark-command
       "w"  'save-buffer
+      "cc" (kbd "\C-c\C-c")
       "hk" 'describe-key
       "hm" 'describe-mode
       "xr" 'read-only-mode
@@ -703,7 +704,6 @@ settings.
     (evil-leader/set-key-for-mode 'org-mode
       "ca" 'org-agenda
       "cb" 'org-iswitchb
-      "cc" 'org-ctrl-c-ctrl-c
       "ce" 'org-export-dispatch
       "ci" 'org-insert-link
       "cl" 'org-store-link
@@ -804,8 +804,7 @@ settings.
       (my-shell-return)
       (counsel-shell-history))
     (evil-leader/set-key-for-mode 'shell-mode
-      "l"  'my-shell-history
-      "cc" 'comint-interrupt-subjob)
+      "l"  'my-shell-history)
     (evil-define-key 'motion shell-mode-map
       "gk" 'comint-previous-prompt
       "gj" 'comint-next-prompt)
@@ -841,8 +840,7 @@ settings.
         (kbd "M-n") (lambda () (interactive) nil)
         (kbd "RET") 'my-shell-return))
     (evil-leader/set-key-for-mode 'eshell-mode
-      "l"  'my-eshell-history
-      "cc" 'eshell-interrupt-process))
+      "l"  'my-eshell-history))
 
   (use-package cc-cmds
     :ensure nil
@@ -1144,7 +1142,6 @@ settings.
     (setq magit-log-section-commit-count 5
           magit-completing-read-function #'ivy-completing-read)
     (evil-leader/set-key-minor-mode 'with-editor-mode
-      "cc" 'with-editor-finish
       "ck" 'with-editor-cancel)
     (bind-key "<escape>" 'transient-quit-one transient-map)
     (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
