@@ -712,8 +712,8 @@ settings.
       "cl" 'org-store-link
       "cr" 'org-remember
       "ct" 'org-table-create
-      "se" 'org-edit-src-code
-      "si" 'org-insert-structure-template
+      "ee" 'org-edit-src-code
+      "ei" 'org-insert-structure-template
       "tl" 'org-tags-view
       "ts" 'org-set-tags)
     (evil-define-key 'insert org-mode-map
