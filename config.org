@@ -737,6 +737,9 @@ settings.
     (dolist (mode '("css" "html" "vue" "web"))
       (add-to-list 'org-src-lang-modes `(,mode . web)))
 
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 org-babel-load-languages)
+
     (defun my-org-inline-image-hook ()
       (when org-inline-image-overlays
         (org-redisplay-inline-images)))
