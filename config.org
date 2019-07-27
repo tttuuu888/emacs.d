@@ -450,6 +450,9 @@ settings.
       "u"  'pop-to-mark-command
       "w"  'save-buffer
       "cc" (kbd "\C-c\C-c")
+      "se" 'eshell
+      "ss" 'shell
+      "st" 'tmux-new-pane-here
       "hk" 'describe-key
       "hm" 'describe-mode
       "xr" 'read-only-mode
