@@ -947,7 +947,9 @@ settings.
      ("<f7>"             . (lambda () (interactive) (buffer-save-or-load 7 t)))
      ("<f8>"             . (lambda () (interactive) (buffer-save-or-load 8 t)))
      ("C-<f7>"           . (lambda () (interactive) (buffer-save-or-load 7)))
-     ("C-<f8>"           . (lambda () (interactive) (buffer-save-or-load 8))))
+     ("C-<f8>"           . (lambda () (interactive) (buffer-save-or-load 8)))
+     :map minibuffer-local-map
+     ("<escape>"         . minibuffer-keyboard-quit))
     (defun my-other-window ()
       (interactive)
       (if (minibufferp)
