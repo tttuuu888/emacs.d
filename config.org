@@ -671,7 +671,7 @@ settings.
             ("C-c r"   . org-remember)
             ("C-c t"   . org-table-create)
             ("C-c u"   . org-up-element)
-            ("C-c s e" . org-edit-src-code))
+            ("C-c e e" . org-edit-src-code))
     :config
     (setq
      org-agenda-files '("~/Dropbox/org/")
