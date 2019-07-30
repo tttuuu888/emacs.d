@@ -560,7 +560,7 @@ settings.
     :custom (recentf-max-saved-items 100)
     :config
     (add-to-list 'recentf-exclude
-                 (expand-file-name "~/\\.emacs\\.d/elpa/.*")))
+                 (expand-file-name "elpa/.*" emacs-config-dir)))
 
   (use-package ido
     :ensure nil
