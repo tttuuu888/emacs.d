@@ -1027,6 +1027,8 @@ settings.
            ("C-x C-r" . helm-recentf)
            ("C-c h o" . helm-occur)
            ("C-c h r" . helm-resume)
+           :map minibuffer-local-map
+           ("M-l"     . helm-minibuffer-history)
            :map helm-map
            ("<escape>". helm-keyboard-quit))
     :init
