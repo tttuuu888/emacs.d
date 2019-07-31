@@ -476,8 +476,8 @@ settings.
           (kbd (concat sk-evil-sub-leader " " key)) def)
         (evil-define-minor-mode-key 'insert mode
           (kbd (concat sk-evil-sub-leader " " key)) def)
-      (setq key (pop bindings)
-            def (pop bindings))))
+        (setq key (pop bindings)
+              def (pop bindings))))
     (put 'evil-leader/set-key-minor-mode 'lisp-indent-function 'defun)
     (setq evil-leader/no-prefix-mode-rx
           '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
@@ -876,7 +876,7 @@ settings.
   (use-package display-line-numbers
     :ensure nil
     :custom-face
-    (line-number ((t (:foreground "gray51"))))
+    (line-number ((t (:foreground "gray51" :inherit 'default))))
     (line-number-current-line ((t (:inherit 'default))))
     :hook
     ((find-file prog-mode) . display-line-numbers-mode)
