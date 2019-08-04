@@ -1308,7 +1308,11 @@ settings.
                                          (evil-insert-state))))
   (use-package ivy-posframe
     :custom-face
-    (ivy-posframe ((t (:background "#282a36" :foreground "Gray80"))))
+    (ivy-posframe
+     ((((class color) (min-colors 88) (background light))
+       (:background "ivory3" :foreground "black"))
+      (((class color) (min-colors 88) (background dark))
+       (:background "#282a36" :foreground "gray80"))))
     :config
     (setq ivy-posframe-display-functions-alist
           '((complete-symbol . nil)
