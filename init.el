@@ -7,6 +7,7 @@
 
   (when (or (not (file-exists-p sk-config-el))
             (file-newer-than-file-p sk-config-org sk-config-el))
+    (package-initialize)
     (require 'org)
     (org-babel-tangle-file sk-config-org))
 
