@@ -1660,7 +1660,6 @@ settings.
   (use-package geiser
     :commands geiser run-geiser
     :init
-    (setq geiser-active-implementations '(chicken guile racket))
     (remove-hook 'scheme-mode-hook 'geiser-mode--maybe-activate)
     :config
     (geiser-mode--maybe-activate))
