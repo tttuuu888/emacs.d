@@ -1652,9 +1652,26 @@ settings.
     :config
     (slime-setup '(slime-fancy slime-company))
     (setq slime-completion-at-point-functions 'slime-fuzzy-complete-symbol)
-    (evil-define-key 'normal slime-repl-mode-map
-      "gd"        'slime-edit-definition
-      "gp"        'slime-pop-find-definition-stack
+    (sk-switch-buffer-repl sk-slime-buffer-repl-toggle
+                           lisp-mode
+                           slime-repl-mode
+                           slime)
+    (evil-leader/set-key-minor-mode 'slime-mode
+      "z"  'sk-slime-buffer-repl-toggle
+      "eb" 'slime-eval-buffer
+      "ee" 'slime-eval-last-expression
+      "ef" 'slime-eval-defun
+      "er" 'slime-eval-region)
+    (evil-leader/set-key-for-mode 'slime-repl-mode
+      "z"  'sk-slime-buffer-repl-toggle)
+    (evil-define-key 'motion slime-mode-map
+      "gd" 'slime-edit-definition
+      "gp" 'slime-pop-find-definition-stack)
+    (evil-define-key 'motion slime-repl-mode-map
+      "gj" 'slime-repl-next-prompt
+      "gk" 'slime-repl-previous-prompt
+      "gd" 'slime-edit-definition
+      "gp" 'slime-pop-find-definition-stack
       (kbd "RET") 'my-shell-return))
 
   (use-package geiser
