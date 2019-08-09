@@ -1313,8 +1313,10 @@ settings.
        (:background "ivory3" :foreground "black"))
       (((class color) (min-colors 88) (background dark))
        (:background "#282a36" :foreground "gray80"))))
+    (ivy-posframe-border ((t (:inherit ivy-posframe))))
     :config
-    (setq ivy-posframe-display-functions-alist
+    (setq ivy-posframe-border-width 20
+          ivy-posframe-display-functions-alist
           '((complete-symbol . nil)
             (ivy-yasnippet   . nil)
             (swiper          . nil)
