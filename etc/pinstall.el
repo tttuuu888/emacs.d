@@ -16,7 +16,7 @@
 ;;
 ;;  $ emacs -l ~/.emacs.d/pinstall.el -batch -init
 ;;
-;; To start `pinstall' from .emacs file, use as below:
+;; To start `pinstall' directly in emacs, use as below:
 ;;
 ;;  (require 'pinstall)
 ;;  (pinstall-init)
