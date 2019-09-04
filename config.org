@@ -1276,7 +1276,7 @@ settings.
              (buf-mode (buffer-local-value 'major-mode buf))
              (mode (capitalize
                     (string-remove-suffix "-mode" (symbol-name buf-mode))))
-             (max-path-len (max 0 (- (frame-width) 62)))
+             (max-path-len (max 0 (- (frame-width) 63)))
              (path-dir (abbreviate-file-name (or buf-dir "~/")))
              (path-file (when-let ((name (buffer-file-name buf)))
                           (abbreviate-file-name name)))
