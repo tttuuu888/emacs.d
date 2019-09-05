@@ -591,6 +591,7 @@ settings.
             ("r"     . ora-dired-rsync)
             ("/"     . evil-search-forward)
             ("^"     . dired-up-and-close-dir)
+            ("bp"    . my-dired-pdf-size-down)
             ("<DEL>" . dired-up-and-close-dir)
             ("<RET>" . dired-visit-file-or-dir))
     :init
@@ -660,7 +661,24 @@ settings.
         ;; Remote to remote is not available.
         (async-shell-command cmd "*rsync*")
         (other-window 1)
-        (view-mode))))
+        (view-mode)))
+
+    (defun my-dired-pdf-size-down ()
+      (interactive)
+      (let ((display-buffer-alist
+             (list (cons
+                    "\\*Async Shell Command\\*.*"
+                    (cons #'display-buffer-no-window nil))))
+            (file (dired-filename-at-point))
+            (temp (make-temp-file ".temp" nil ".pdf")))
+        (if (not (equal (file-name-extension file) "pdf"))
+            (message "Not a PDF file.")
+          (async-shell-command
+           (concat
+            "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 "
+            "-dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -dPrinted=false "
+            "-sOutputFile=" temp " " file " && "
+            "mv " temp " " file))))))
 
   (use-package org
     :ensure nil
