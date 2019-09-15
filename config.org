@@ -1850,6 +1850,16 @@ settings.
     (evil-define-key 'motion restclient-mode-map
       "gj" 'restclient-jump-next
       "gk" 'restclient-jump-prev))
+
+  (use-package eglot
+    :config
+    (require 'projectile)
+    (defun my-projectile-project-find (dir)
+      (let ((root (projectile-project-root dir)))
+        (and root (cons 'transient root))))
+    (add-to-list 'eglot-server-programs
+                 '((c++-mode c-mode) "clangd"))
+    (add-to-list 'project-find-functions 'my-projectile-project-find))
 #+END_SRC
 * End
 ** After init
