@@ -1860,6 +1860,8 @@ settings.
     (add-to-list 'eglot-server-programs
                  '((c++-mode c-mode) "clangd"))
     (add-to-list 'project-find-functions 'my-projectile-project-find))
+
+  (use-package rust-mode)
 #+END_SRC
 * End
 ** After init
