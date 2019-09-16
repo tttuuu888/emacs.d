@@ -1861,7 +1861,8 @@ settings.
                  '((c++-mode c-mode) "clangd"))
     (add-to-list 'project-find-functions 'my-projectile-project-find))
 
-  (use-package rust-mode)
+  (use-package rust-mode
+    :hook (rust-mode . eglot-ensure))
 #+END_SRC
 * End
 ** After init
