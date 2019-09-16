@@ -919,7 +919,11 @@ settings.
   (use-package flymake
     :ensure nil
     :config
-    (evil-set-initial-state 'flymake-diagnostics-buffer-mode 'emacs))
+    (evil-set-initial-state 'flymake-diagnostics-buffer-mode 'emacs)
+    (evil-define-key 'motion flymake-mode-map
+      "]e" 'flymake-goto-next-error
+      "[e" 'flymake-goto-prev-error))
+
 
 
   ;;; External packages
