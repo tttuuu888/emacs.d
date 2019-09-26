@@ -1325,9 +1325,9 @@ settings.
     :init
     (evil-leader/set-key "/" 'ivy-yasnippet)
     :config
-    (advice-add 'ivy-yasnippet :before (lambda ()
-                                         (yas-minor-mode 1)
-                                         (evil-insert-state))))
+    (yas-minor-mode 1)
+    (advice-add 'ivy-yasnippet :after (lambda () (evil-insert-state))))
+
   (use-package ivy-posframe
     :custom-face
     (ivy-posframe
