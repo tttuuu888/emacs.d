@@ -1230,9 +1230,9 @@ settings.
            ("C-c o"   . fzf-git-files))
     :init
     (evil-leader/set-key
+      "o"  'fzf-git-files
       "jh" 'fzf-here
-      "jo" 'fzf
-      "o"  'fzf-git-files)
+      "jo" 'fzf)
     :config
     (setq fzf/window-height 20)
     (require 'term)
@@ -1285,9 +1285,10 @@ settings.
       (ivy-posframe-mode 1))
     (defun my-comint-history ()
       (interactive)
-      (my-shell-return)
-      (ivy-read "Symbol name: " (ring-elements comint-input-ring)
-                :action (lambda (cmd) (insert cmd))))
+      (ivy-read "History: " (ring-elements comint-input-ring)
+                :action (lambda (cmd)
+                          (my-shell-return)
+                          (insert cmd))))
     (defun sk-ivy-buffer-transformer (str)
       (let* ((buf (get-buffer str))
              (buf-dir (buffer-local-value 'default-directory buf))
@@ -1407,7 +1408,7 @@ settings.
                            inferior-octave-mode
                            run-octave)
     (evil-leader/set-key-for-mode 'inferior-octave-mode
-      "z" 'sk-octave-buffer-repl-toggle)
+      "z"  'sk-octave-buffer-repl-toggle)
     (evil-leader/set-key-for-mode 'octave-mode
       "z"  'sk-octave-buffer-repl-toggle
       "eb" 'octave-send-buffer
@@ -1692,10 +1693,10 @@ settings.
       (kbd "RET") 'my-shell-return))
 
   (use-package geiser
-    :init
-    (remove-hook 'scheme-mode-hook 'geiser-mode--maybe-activate)
     :config
-    (geiser-mode--maybe-activate))
+    (evil-define-key 'normal geiser-repl-mode-map
+      "gj" 'comint-next-prompt
+      "gk" 'comint-previous-prompt))
 
   (use-package web-mode
     :mode (("\\.html\\'" . web-mode)
