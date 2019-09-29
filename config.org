@@ -359,8 +359,12 @@ Various useful functions.
       (message "Tmux is not running!")))
 
   (defun get-week-form (&optional offset date)
-    (let* ((_ (require 'cal-iso))
-           (d (calendar-absolute-from-gregorian
+    "Create a specific form with the week number and the date. DATE
+  is a list of the form (month day year). OFFSET is a integer
+  number. DATE takes precedence over OFFSET when both are
+  provided."
+    (require 'cal-iso)
+    (let* ((d (calendar-absolute-from-gregorian
                (or date (calendar-current-date offset))))
            (day (% d 7))
            (week-number (car (calendar-iso-from-absolute d)))
