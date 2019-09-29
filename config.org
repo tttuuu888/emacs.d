@@ -1191,8 +1191,7 @@ settings.
         (org-save-outline-visibility t
           (funcall action)))))
 
-  (use-package smex
-    :commands smex)
+  (use-package smex)
 
   (use-package anzu
     :init
@@ -1248,7 +1247,6 @@ settings.
       (fzf/start default-directory)))
 
   (use-package yasnippet
-    :commands yas-minor-mode
     :config
     (add-to-list 'yas-snippet-dirs (expand-file-name "snippets/" emacs-etc-dir))
     (yas-reload-all))
@@ -1323,7 +1321,7 @@ settings.
     :init
     (evil-leader/set-key "/" 'ivy-yasnippet)
     :config
-    (yas-minor-mode 1)
+    (advice-add 'ivy-yasnippet :before (lambda () (yas-minor-mode 1)))
     (advice-add 'ivy-yasnippet :after (lambda () (evil-insert-state))))
 
   (use-package ivy-posframe
@@ -1639,7 +1637,6 @@ settings.
       "ex" 'cider-eval-last-sexp-and-replace))
 
   (use-package cider
-    :commands cider-jack-in
     :config
     (evil-set-initial-state 'cider-auto-test-mode           'emacs)
     (evil-set-initial-state 'cider-browse-ns-mode           'emacs)
@@ -1667,7 +1664,6 @@ settings.
     :mode ("\\.clj\\'" . clojure-mode))
 
   (use-package sly
-    :commands sly
     :init
     (setq inferior-lisp-program "sbcl")
     :config
@@ -1696,7 +1692,6 @@ settings.
       (kbd "RET") 'my-shell-return))
 
   (use-package geiser
-    :commands geiser run-geiser
     :init
     (remove-hook 'scheme-mode-hook 'geiser-mode--maybe-activate)
     :config
