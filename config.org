@@ -737,7 +737,7 @@ settings.
       "ee" 'org-edit-src-code
       "ei" 'org-insert-structure-template
       "tl" 'org-tags-view
-      "ts" 'org-set-tags)
+      "ts" 'org-set-tags-command)
     (evil-define-key 'insert org-mode-map
       (kbd "<tab>") 'company-indent-or-complete-common)
     (evil-define-key 'motion org-mode-map
