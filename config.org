@@ -1365,7 +1365,8 @@ settings.
       "hf"    'counsel-describe-function
       "jc"    'counsel-fzf-here)
     :config
-    (setq ivy-height-alist '((t . 15)))
+    (setq ivy-initial-inputs-alist nil
+          ivy-height-alist '((t . 15)))
     (defun counsel-fzf-here ()
       (interactive)
       (counsel-fzf nil default-directory)))
