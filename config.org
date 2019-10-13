@@ -1858,6 +1858,11 @@ settings.
         (and root (cons 'transient root))))
     (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
     (add-to-list 'project-find-functions 'my-projectile-project-find)
+    (advice-add 'projectile-kill-buffers :before
+                (lambda ()
+                  (when (eglot--current-server)
+                    (call-interactively 'eglot-shutdown
+                                        (eglot--current-server)))))
     (evil-define-key 'normal eglot-mode-map
       "gh" 'eglot-help-at-point))
 
