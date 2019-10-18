@@ -1777,6 +1777,7 @@ settings.
   (use-package tern
     :hook ((web-mode js2-mode css-mode) . my-tern-hook)
     :config
+    (setq tern-command '("tern" "--no-port-file"))
     (evil-define-key 'normal tern-mode-keymap
       "gd" 'tern-find-definition
       "gp" 'tern-pop-find-definition
