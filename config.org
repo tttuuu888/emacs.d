@@ -612,8 +612,8 @@ settings.
 
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-leader/set-key-for-mode 'dired-mode
-      "c"  'my-dired-copy-path            ; copy current folder path
-      "C"  'my-dired-copy-filepath        ; copy selected file path
+      "cy"  'my-dired-copy-path            ; copy current folder path
+      "cY"  'my-dired-copy-filepath        ; copy selected file path
       "ee" 'wdired-change-to-wdired-mode
       "ec" 'wdired-finish-edit
       "eq" 'wdired-exit)
@@ -704,6 +704,26 @@ settings.
                                 (python . t)
                                 (shell . t))
      org-confirm-babel-evaluate nil
+     org-capture-templates
+     '(("t" "Todo" entry
+        (file+headline "~/Dropbox/org/notes.org" "ToDos")
+        "* TODO %?\n%U" :empty-lines 1)
+       ("T" "Todo with Clipboard" entry
+        (file+headline "~/Dropbox/org/notes.org" "ToDos")
+        "* TODO %?\n%U\n   %c" :empty-lines 1)
+       ("n" "Note" entry
+        (file+headline "~/Dropbox/org/notes.org" "Notes")
+        "* %?\n%U" :empty-lines 1)
+       ("N" "Note with Clipboard" entry
+        (file+headline "~/Dropbox/org/notes.org" "Notes")
+        "* %?\n%U\n   %c" :empty-lines 1)
+       ("e" "Event" entry
+        (file+headline  "~/Dropbox/org/notes.org" "Events")
+        "* %?\n%U" :empty-lines 1)
+       ("E" "Event With Clipboard" entry
+        (file+headline  "~/Dropbox/org/notes.org" "Events")
+        "* %?\n%U\n   %c" :empty-lines 1))
+     org-default-notes-file "~/Dropbox/org/notes.org"
      org-export-default-language "kr"
      org-export-headline-levels 2
      org-export-time-stamp-file nil
@@ -732,12 +752,14 @@ settings.
       "ce" 'org-export-dispatch
       "ci" 'org-insert-link
       "cl" 'org-store-link
-      "cr" 'org-remember
       "ct" 'org-table-create
       "ee" 'org-edit-src-code
       "ei" 'org-insert-structure-template
       "tl" 'org-tags-view
       "ts" 'org-set-tags-command)
+    (evil-leader/set-key-minor-mode 'org-capture-mode
+      "ck" 'org-capture-kill
+      "cw" 'org-capture-refile)
     (evil-define-key 'insert org-mode-map
       (kbd "<tab>") 'company-indent-or-complete-common)
     (evil-define-key 'motion org-mode-map
@@ -1364,6 +1386,7 @@ settings.
       "d"     'counsel-find-file
       "f"     'counsel-find-file
       "r"     'counsel-recentf
+      "cr"    'counsel-org-capture
       "hb"    'counsel-descbinds
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
