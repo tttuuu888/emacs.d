@@ -696,7 +696,9 @@ settings.
             ("C-c e e" . org-edit-src-code))
     :config
     (setq
-     org-agenda-files '("~/Dropbox/org/")
+     my-org-path "~/Dropbox/org/"
+     my-org-note-file (expand-file-name "notes.org" my-org-path)
+     org-agenda-files (list my-org-path)
      org-babel-load-languages '((css . t)
                                 (emacs-lisp . t)
                                 (octave . t)
@@ -705,25 +707,25 @@ settings.
                                 (shell . t))
      org-confirm-babel-evaluate nil
      org-capture-templates
-     '(("t" "Todo" entry
-        (file+headline "~/Dropbox/org/notes.org" "ToDos")
+     `(("t" "Todo" entry
+        (file+headline ,my-org-note-file "ToDos")
         "* TODO %?\n%U" :empty-lines 1)
        ("T" "Todo with Clipboard" entry
-        (file+headline "~/Dropbox/org/notes.org" "ToDos")
+        (file+headline ,my-org-note-file  "ToDos")
         "* TODO %?\n%U\n   %c" :empty-lines 1)
        ("n" "Note" entry
-        (file+headline "~/Dropbox/org/notes.org" "Notes")
+        (file+headline ,my-org-note-file "Notes")
         "* %?\n%U" :empty-lines 1)
        ("N" "Note with Clipboard" entry
-        (file+headline "~/Dropbox/org/notes.org" "Notes")
+        (file+headline ,my-org-note-file "Notes")
         "* %?\n%U\n   %c" :empty-lines 1)
        ("e" "Event" entry
-        (file+headline  "~/Dropbox/org/notes.org" "Events")
+        (file+headline  ,my-org-note-file "Events")
         "* %?\n%U" :empty-lines 1)
        ("E" "Event With Clipboard" entry
-        (file+headline  "~/Dropbox/org/notes.org" "Events")
+        (file+headline  ,my-org-note-file "Events")
         "* %?\n%U\n   %c" :empty-lines 1))
-     org-default-notes-file "~/Dropbox/org/notes.org"
+     org-default-notes-file my-org-note-file
      org-export-default-language "kr"
      org-export-headline-levels 2
      org-export-time-stamp-file nil
