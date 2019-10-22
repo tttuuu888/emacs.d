@@ -469,7 +469,7 @@ settings.
         (define-key evil-motion-state-local-map sub-leader map)
         (define-key evil-insert-state-local-map sub-leader map)
         (define-key evil-emacs-state-local-map sub-leader map)))
-    (add-hook 'evil-local-mode-hook #'evil-sub-leader-mode t)
+    (add-hook 'evil-local-mode-hook 'evil-sub-leader-mode t)
     (defun evil-leader/set-key-minor-mode (mode key def &rest bindings)
       (while key
         (evil-define-minor-mode-key 'motion mode
@@ -844,9 +844,9 @@ settings.
        ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
        (t (format "%8d" (buffer-size)))))
     (add-hook 'ibuffer-mode-hook
-              '(lambda ()
-                 (ibuffer-auto-mode 1)
-                 (ibuffer-switch-to-saved-filter-groups "home"))))
+              (lambda ()
+                (ibuffer-auto-mode 1)
+                (ibuffer-switch-to-saved-filter-groups "home"))))
 
   (use-package shell
     :ensure nil
@@ -938,6 +938,7 @@ settings.
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
   (use-package autorevert
+    :ensure nil
     :hook (find-file . global-auto-revert-mode))
 
   (use-package view
