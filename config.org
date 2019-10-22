@@ -1601,36 +1601,6 @@ settings.
       (irony-cdb-autosetup-compile-options))
     (add-hook 'irony-mode-hook 'my-irony-mode-hook))
 
-  (use-package flycheck
-    :disabled t
-    :hook ((c-mode c++-mode) . flycheck-mode))
-
-  (use-package rtags
-    :disabled t
-    :commands my-rtags-index
-    :init
-    (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-    :config
-    (require 'helm-utils)
-    (require 'helm-rtags)
-    (setq rtags-autostart-diagnostics t
-          rtags-use-helm t)
-    (rtags-enable-standard-keybindings)
-    (rtags-start-process-unless-running)
-    (add-hook 'kill-emacs-hook 'rtags-quit-rdm)
-    (defun my-rtags-index ()
-      (interactive)
-      (let ((dir (find-file-in-tree (file-name-directory default-directory)
-                                    "compile_commands.json"
-                                    (my-project-root-or-dir))))
-        (if (equal dir nil)
-            (message "You can make 'compile_commands.json' by 'bear make'.")
-          (shell-command (concat "rc -J " dir))))))
-
-  (use-package xcscope
-    :disabled t
-    :hook ((c-mode-common asm-mode) . cscope-minor-mode))
-
   (use-package paredit
     :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode geiser-repl-mode)
            . enable-paredit-mode)
