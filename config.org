@@ -1671,6 +1671,7 @@ settings.
     :config
     (setq sly-mrepl-history-file-name (expand-file-name ".sly-mrepl-history"
                                                         user-emacs-directory))
+    (evil-set-initial-state 'sly-inspector-mode 'emacs)
     (evil-set-initial-state 'sly-db-mode 'emacs)
     (sk-switch-buffer-repl sk-sly-buffer-repl-toggle
                            lisp-mode
