@@ -642,8 +642,8 @@ settings.
         (dired-up-directory other-window)
         (kill-buffer dir)))
 
-    (defun ora-dired-rsync (&optional arg)
-      (interactive "P")
+    (defun ora-dired-rsync ()
+      (interactive)
       (let* ((dest (read-file-name "Rsync to: " (dired-dwim-target-directory)))
              (files (dired-get-marked-files nil current-prefix-arg))
              (regex "\\(^/scp.?:\\)\\|\\(^/ssh.?:\\)")
