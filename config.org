@@ -1208,7 +1208,8 @@ settings.
       "ck" 'with-editor-cancel)
     (bind-key "<escape>" 'transient-quit-one transient-map)
     (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
-    (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps))
+    (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps)
+    (add-hook 'with-editor-mode-hook 'flyspell-mode))
 
   (use-package expand-region
     :bind (("C-="   . er/expand-region)
