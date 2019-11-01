@@ -612,8 +612,8 @@ settings.
 
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-leader/set-key-for-mode 'dired-mode
-      "cy"  'my-dired-copy-path            ; copy current folder path
-      "cY"  'my-dired-copy-filepath        ; copy selected file path
+      "cy" 'my-dired-copy-path            ; copy current folder path
+      "cY" 'my-dired-copy-filepath        ; copy selected file path
       "ee" 'wdired-change-to-wdired-mode
       "ec" 'wdired-finish-edit
       "eq" 'wdired-exit)
