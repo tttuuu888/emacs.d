@@ -1705,7 +1705,9 @@ settings.
     :config
     (evil-define-key 'normal geiser-repl-mode-map
       "gj" 'comint-next-prompt
-      "gk" 'comint-previous-prompt))
+      "gk" 'comint-previous-prompt)
+    (advice-add 'run-geiser :before
+                (lambda (impl) (geiser-impl--set-buffer-implementation impl))))
 
   (use-package web-mode
     :mode (("\\.html\\'" . web-mode)
