@@ -700,6 +700,9 @@ settings.
             ("C-c t"   . org-table-create)
             ("C-c u"   . org-up-element)
             ("C-c e e" . org-edit-src-code))
+    :init
+    (evil-leader/set-key
+      "ca" 'org-agenda)
     :config
     (setq
      my-org-path "~/Dropbox/org/"
@@ -755,7 +758,6 @@ settings.
      org-startup-indented t
      org-startup-with-inline-images t)
     (evil-leader/set-key-for-mode 'org-mode
-      "ca" 'org-agenda
       "cb" 'org-switchb
       "ce" 'org-export-dispatch
       "ci" 'org-insert-link
