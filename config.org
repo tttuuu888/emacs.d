@@ -1395,7 +1395,7 @@ settings.
   (use-package posframe)
 
   (use-package counsel
-    :commands counsel-fzf-here
+    :commands (counsel-fzf-here my-counsel-switch-to-shell-buffer)
     :bind (("M-x"     . counsel-M-x)
            ("C-x d"   . counsel-find-file)
            ("C-x C-f" . counsel-find-file)
@@ -1413,13 +1413,22 @@ settings.
       "hb"    'counsel-descbinds
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
-      "jc"    'counsel-fzf-here)
+      "jc"    'counsel-fzf-here
+      "sb"    'my-counsel-switch-to-shell-buffer)
     :config
     (setq ivy-initial-inputs-alist nil
           ivy-height-alist '((t . 15)))
     (defun counsel-fzf-here ()
       (interactive)
-      (counsel-fzf nil default-directory)))
+      (counsel-fzf nil default-directory))
+    (defun my-counsel-switch-to-shell-buffer ()
+      "Switch to a shell buffer, or create one."
+      (interactive)
+      (ivy-read "Shell buffer: "
+                (append (counsel--buffers-with-mode #'shell-mode)
+                        (counsel--buffers-with-mode #'eshell-mode))
+                :action #'counsel--switch-to-shell
+                :caller 'ivy-switch-buffer)))
 
   (use-package which-key
     :init
