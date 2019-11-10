@@ -1637,8 +1637,6 @@ settings.
     :bind (:map paredit-mode-map
             ("M-b" . paredit-backward)
             ("M-f" . paredit-forward)
-            ("M-n" . paredit-forward-up)
-            ("M-p" . paredit-backward-down)
             ("C-c <left>"  . paredit-forward-barf-sexp)
             ("C-c <right>" . paredit-forward-slurp-sexp))
     :config
