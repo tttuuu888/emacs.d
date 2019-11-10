@@ -988,7 +988,10 @@ settings.
 
   (use-package evil-surround
     :init
-    (global-evil-surround-mode 1))
+    (global-evil-surround-mode 1)
+    :config
+    (evil-define-key 'visual evil-surround-mode-map
+      "gs" 'evil-surround-region))
 
   (use-package evil-commentary
     :init
