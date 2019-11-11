@@ -477,14 +477,12 @@ settings.
     (add-hook 'evil-local-mode-hook 'evil-sub-leader-mode t)
     (defun evil-leader/set-key-minor-mode (mode key def &rest bindings)
       (while key
-        (evil-define-minor-mode-key 'motion mode
-          (kbd (concat evil-leader/leader key)) def)
-        (evil-define-minor-mode-key 'emacs mode
-          (kbd (concat sk-evil-sub-leader " " key)) def)
-        (evil-define-minor-mode-key 'motion mode
-          (kbd (concat sk-evil-sub-leader " " key)) def)
-        (evil-define-minor-mode-key 'insert mode
-          (kbd (concat sk-evil-sub-leader " " key)) def)
+        (let ((k1 (kbd (concat evil-leader/leader key)))
+              (k2 (kbd (concat sk-evil-sub-leader " " key))))
+          (evil-define-minor-mode-key 'motion mode k1 def)
+          (evil-define-minor-mode-key 'motion mode k2 def)
+          (evil-define-minor-mode-key 'insert mode k2 def)
+          (evil-define-minor-mode-key 'emacs mode k2 def))
         (setq key (pop bindings)
               def (pop bindings))))
     (put 'evil-leader/set-key-minor-mode 'lisp-indent-function 'defun)
