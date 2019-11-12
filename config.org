@@ -770,6 +770,9 @@ settings.
       "ei" 'org-insert-structure-template
       "tl" 'org-tags-view
       "ts" 'org-set-tags-command)
+    (evil-leader/set-key-minor-mode 'org-src-mode
+      "ec" 'org-edit-src-exit
+      "eq" 'org-edit-src-abort)
     (evil-leader/set-key-minor-mode 'org-capture-mode
       "ck" 'org-capture-kill
       "cw" 'org-capture-refile)
@@ -781,9 +784,6 @@ settings.
       "gl" 'org-down-element
       "gj" 'org-forward-element
       "gk" 'org-backward-element)
-    (evil-leader/set-key-minor-mode 'org-src-mode
-      "ec" 'org-edit-src-exit
-      "eq" 'org-edit-src-abort)
     (evil-declare-motion 'org-up-element)
     (evil-declare-motion 'org-down-element)
     (evil-declare-motion 'org-forward-element)
