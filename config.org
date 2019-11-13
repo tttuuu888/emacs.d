@@ -1643,13 +1643,10 @@ settings.
     :config
     (defun evil-paredit-kill (&rest _)
       (interactive)
-      (if (and (equal (point) (- (line-end-position) 1))
-               (equal evil-state 'normal))
-          (progn
-            (evil-append 1)
-            (call-interactively 'paredit-kill)
-            (evil-normal-state nil)
-            (evil-forward-char))
+      (let ((evil-execute-in-emacs-state-buffer t)
+            (pos (point)))
+        (when (equal pos (1- (line-end-position)))
+          (goto-char (1+ pos)))
         (call-interactively 'paredit-kill)))
     (defun my-evil-paredit-next-bracket (n direction)
       "Move to the next Nth bracket or quote with DIRECTION."
