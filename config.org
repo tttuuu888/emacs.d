@@ -866,12 +866,8 @@ settings.
     (evil-leader/set-key
       "ss" 'shell)
     :config
-    (defun my-shell-history ()
-      (interactive)
-      (my-shell-return)
-      (counsel-shell-history))
     (evil-leader/set-key-for-mode 'shell-mode
-      "l"  'my-shell-history)
+      "l"  'my-comint-history)
     (evil-define-key 'motion shell-mode-map
       "gk" 'comint-previous-prompt
       "gj" 'comint-next-prompt)
@@ -896,8 +892,7 @@ settings.
       (execute-kbd-macro (kbd "0C")))
     (defun my-eshell-history ()
       (interactive)
-      (my-shell-return)
-      (counsel-esh-history))
+      (my-comint-history eshell-history-ring))
     (defun my-eshell-setup ()
       (setenv "TERM" "screen-256color")
       (evil-define-key 'insert eshell-mode-map (kbd "C-a") 'eshell-bol)
@@ -1336,12 +1331,11 @@ settings.
     (ivy-mode 1)
     (when window-system
       (ivy-posframe-mode 1))
-    (defun my-comint-history ()
+    (defun my-comint-history (&optional ring)
       (interactive)
-      (ivy-read "History: " (ring-elements comint-input-ring)
-                :action (lambda (cmd)
-                          (my-shell-return)
-                          (insert cmd))))
+      (let ((input-ring (if ring ring comint-input-ring)))
+        (ivy-read "History: " (ivy-history-contents input-ring)
+                  :action (lambda (cmd) (my-shell-return) (insert cmd)))))
     (defun sk-ivy-buffer-transformer (str)
       (let* ((buf (get-buffer str))
              (buf-dir (buffer-local-value 'default-directory buf))
