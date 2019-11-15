@@ -1723,6 +1723,7 @@ settings.
     (setq sly-mrepl-history-file-name (expand-file-name ".sly-mrepl-history"
                                                         user-emacs-directory))
     (evil-set-initial-state 'sly-inspector-mode 'emacs)
+    (evil-set-initial-state 'sly-xref-mode 'emacs)
     (evil-set-initial-state 'sly-db-mode 'emacs)
     (advice-add 'sly-popup-buffer-mode :after
                 (lambda (&rest _) (evil-emacs-state)))
@@ -1740,12 +1741,14 @@ settings.
     (evil-define-key 'normal sly-mode-map
       "gd" 'sly-edit-definition
       "gh" 'sly-documentation
-      "gp" 'sly-pop-find-definition-stack)
+      "gp" 'sly-pop-find-definition-stack
+      "gr" 'sly-edit-uses)
     (evil-define-key 'normal sly-mrepl-mode-map
       "gj" 'sly-mrepl-next-prompt
       "gk" 'sly-mrepl-previous-prompt
       "gd" 'sly-edit-definition
       "gp" 'sly-pop-find-definition-stack
+      "gr" 'sly-edit-uses
       (kbd "RET") 'my-shell-return))
 
   (use-package geiser
