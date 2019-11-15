@@ -1727,8 +1727,12 @@ settings.
     (evil-set-initial-state 'sly-db-mode 'emacs)
     (advice-add 'sly-popup-buffer-mode :after
                 (lambda (&rest _) (evil-emacs-state)))
+    (defun my-sly-mrepl ()
+      (interactive)
+      (call-interactively
+       (if (sly-connected-p) 'sly-mrepl 'sly)))
     (evil-leader/set-key-minor-mode 'sly-mode
-      "z"  'sly-mrepl
+      "z"  'my-sly-mrepl
       "eb" 'sly-eval-buffer
       "ee" 'sly-eval-last-expression
       "ef" 'sly-eval-defun
