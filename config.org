@@ -1720,17 +1720,14 @@ settings.
     :init
     (setq inferior-lisp-program "sbcl")
     :config
-    (setq sly-mrepl-history-file-name (expand-file-name ".sly-mrepl-history"
-                                                        user-emacs-directory))
-    (evil-set-initial-state 'sly-inspector-mode 'emacs)
-    (evil-set-initial-state 'sly-xref-mode 'emacs)
-    (evil-set-initial-state 'sly-db-mode 'emacs)
-    (advice-add 'sly-popup-buffer-mode :after
-                (lambda (&rest _) (evil-emacs-state)))
+    (setq sly-mrepl-history-file-name
+          (expand-file-name ".sly-mrepl-history" user-emacs-directory))
+    (evil-set-initial-state 'sly-db-mode          'emacs)
+    (evil-set-initial-state 'sly-inspector-mode   'emacs)
+    (evil-set-initial-state 'sly-xref-mode        'emacs)
     (defun my-sly-mrepl ()
       (interactive)
-      (call-interactively
-       (if (sly-connected-p) 'sly-mrepl 'sly)))
+      (call-interactively (if (sly-connected-p) 'sly-mrepl 'sly)))
     (evil-leader/set-key-minor-mode 'sly-mode
       "z"  'my-sly-mrepl
       "eb" 'sly-eval-buffer
@@ -1753,7 +1750,9 @@ settings.
       "gd" 'sly-edit-definition
       "gp" 'sly-pop-find-definition-stack
       "gr" 'sly-edit-uses
-      (kbd "RET") 'my-shell-return))
+      (kbd "RET") 'my-shell-return)
+    (evil-define-minor-mode-key 'normal 'sly-popup-buffer-mode
+      "q"  'quit-window))
 
   (use-package geiser
     :config
