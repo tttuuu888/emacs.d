@@ -1726,12 +1726,8 @@ settings.
     (evil-set-initial-state 'sly-db-mode 'emacs)
     (advice-add 'sly-popup-buffer-mode :after
                 (lambda (&rest _) (evil-emacs-state)))
-    (sk-switch-buffer-repl sk-sly-buffer-repl-toggle
-                           lisp-mode
-                           sly-mrepl-mode
-                           sly)
     (evil-leader/set-key-minor-mode 'sly-mode
-      "z"  'sk-sly-buffer-repl-toggle
+      "z"  'sly-mrepl
       "eb" 'sly-eval-buffer
       "ee" 'sly-eval-last-expression
       "ef" 'sly-eval-defun
@@ -1739,7 +1735,8 @@ settings.
       "es" 'sly-mrepl-sync)
     (evil-leader/set-key-for-mode 'sly-mrepl-mode
       "l"  'my-comint-history
-      "z"  'sk-sly-buffer-repl-toggle)
+      "z"  'sly-switch-to-most-recent
+      "es" 'sly-mrepl-set-package)
     (evil-define-key 'normal sly-mode-map
       "gd" 'sly-edit-definition
       "gh" 'sly-documentation
