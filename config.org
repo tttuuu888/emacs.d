@@ -1735,7 +1735,8 @@ settings.
       "eb" 'sly-eval-buffer
       "ee" 'sly-eval-last-expression
       "ef" 'sly-eval-defun
-      "er" 'sly-eval-region)
+      "er" 'sly-eval-region
+      "es" 'sly-mrepl-sync)
     (evil-leader/set-key-for-mode 'sly-mrepl-mode
       "l"  'my-comint-history
       "z"  'sk-sly-buffer-repl-toggle)
