@@ -1910,7 +1910,9 @@ settings.
       "ee" 'restclient-http-send-current-stay-in-window)
     (evil-define-key 'motion restclient-mode-map
       "gj" 'restclient-jump-next
-      "gk" 'restclient-jump-prev))
+      "gk" 'restclient-jump-prev)
+    (evil-define-minor-mode-key 'normal 'restclient-response-mode
+      "q"  'quit-window))
 
   (use-package eglot
     :config
