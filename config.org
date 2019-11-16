@@ -1244,11 +1244,8 @@ settings.
     (setq calendar-holidays korean-holidays))
 
   (use-package visual-regexp
-    :bind (("C-c r" . vr/replace)
-           ("C-c q" . vr/query-replace)
-           :map evil-motion-state-map
-           ("gR"    . vr/replace)
-           ("gQ"    . vr/query-replace)))
+    :bind (("C-c r r" . vr/replace)
+           ("C-c r q" . vr/query-replace)))
 
   (use-package visual-regexp-steroids
     :demand t
