@@ -1577,6 +1577,12 @@ settings.
         "ef" 'eval-defun
         "er" 'eval-region)))
 
+  (use-package sql
+    :ensure nil
+    :config
+    (evil-leader/set-key-for-mode 'sql-interactive-mode
+      "l" 'my-comint-history))
+
   ;;; External packages
   (use-package cff
     :init
