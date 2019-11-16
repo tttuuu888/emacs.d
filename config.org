@@ -470,6 +470,7 @@ settings.
         (define-key evil-emacs-state-local-map sub-leader map)))
     (add-hook 'evil-local-mode-hook 'evil-sub-leader-mode t)
     (defun evil-leader/set-key-minor-mode (mode key def &rest bindings)
+      (declare (indent defun))
       (while key
         (let ((k1 (kbd (concat evil-leader/leader key)))
               (k2 (kbd (concat sk-evil-sub-leader " " key))))
@@ -479,7 +480,6 @@ settings.
           (evil-define-minor-mode-key 'emacs mode k2 def))
         (setq key (pop bindings)
               def (pop bindings))))
-    (put 'evil-leader/set-key-minor-mode 'lisp-indent-function 'defun)
     (setq evil-leader/no-prefix-mode-rx
           '("magit-.*-mode" "gnus-.*-mode" "package-.*-mode" "dired-mode")))
 
