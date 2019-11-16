@@ -1221,14 +1221,7 @@ settings.
            ("C-c =" . er/expand-region))
     :init
     (evil-leader/set-key
-      "=" 'er/expand-region)
-    :config
-    ;; redefine the function to ignore error
-    (defun er/save-org-mode-excursion (action)
-      "Save outline visibility while expanding in org-mode"
-      (ignore-errors
-        (org-save-outline-visibility t
-          (funcall action)))))
+      "=" 'er/expand-region))
 
   (use-package smex)
 
