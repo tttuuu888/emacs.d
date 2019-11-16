@@ -182,15 +182,12 @@ Simple mode line setting function.
      mode-line-format
      '("%e"
        (:eval
-        (let* ((evil-info (if (and (featurep 'evil) evil-mode)
-                              (concat " " (upcase (symbol-name evil-state)))
-                            ""))
+        (let* ((evil-info (and (featurep 'evil) evil-mode
+                               (concat " " (upcase (symbol-name evil-state)))))
                (buffer-info (concat " %* %I " current-input-method-title))
                (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
                (git-branch (format-mode-line '(vc-mode vc-mode)))
-               (vc-info (if vc-mode
-                            (concat " (" (substring git-branch 5) ") ")
-                          ""))
+               (vc-info (and vc-mode (concat " (" (substring git-branch 5) ") ")))
                (mode-info (propertize
                            (concat " " (format-mode-line mode-name) " ")
                            'face 'mode-line-inactive))
@@ -205,14 +202,9 @@ Simple mode line setting function.
                              `((space :align-to
                                       (- (+ right right-fringe right-margin)
                                          ,right-length))))))
-          (concat
-           evil-info
-           buffer-info
-           buffer-name
-           vc-info
-           mode-info
-           center-fill
-           right-info))))))
+          (concat evil-info buffer-info buffer-name vc-info mode-info
+                  center-fill
+                  right-info))))))
 #+END_SRC
 
 Enable =sk-mode-line=.
