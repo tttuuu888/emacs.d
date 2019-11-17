@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: erd
+# key: erd
+# --
+@startuml
+skinparam defaultFontName D2Coding
+hide methods
+hide stereotypes
+!define table(x) class x << (T,#FFAAAA) >>
+
+/' example
+table(post) {
+        id          INTEGER
+        --
+        author_id   INTEGER
+        title       VARCHAR[128]
+        content     TEXT
+}
+table(author) {
+        id          INTEGER
+        --
+        name        VARCHAR[24]
+}
+post::author_id --> author::id
+post -[hidden] author '/
+
+$0
+
+@enduml
