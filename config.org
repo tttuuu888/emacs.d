@@ -1570,12 +1570,20 @@ settings.
   (use-package elisp-mode
     :ensure nil
     :config
+    (defun my-describe-symbol-at-point ()
+      (interactive)
+      (describe-symbol (symbol-at-point)))
     (dolist (mm '(emacs-lisp-mode lisp-interaction-mode))
       (evil-leader/set-key-for-mode mm
         "eb" 'eval-buffer
         "ee" 'eval-last-sexp
         "ef" 'eval-defun
-        "er" 'eval-region)))
+        "er" 'eval-region))
+    (evil-define-key 'normal emacs-lisp-mode-map
+      "gh" 'my-describe-symbol-at-point)
+    (evil-define-key 'normal lisp-interaction-mode-map
+      "gh" 'my-describe-symbol-at-point))
+
 
   (use-package sql
     :ensure nil
