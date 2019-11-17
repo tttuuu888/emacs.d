@@ -11,15 +11,15 @@ hide stereotypes
 /' example
 table(post) {
         id          INTEGER
-        --
+        ..
         author_id   INTEGER
-        title       VARCHAR[128]
+        title       VARCHAR(128)
         content     TEXT
 }
 table(author) {
         id          INTEGER
-        --
-        name        VARCHAR[24]
+        ..
+        name        VARCHAR(24)
 }
 post::author_id --> author::id
 post -[hidden] author '/
