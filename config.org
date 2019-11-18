@@ -1919,6 +1919,8 @@ settings.
 
   (use-package rust-mode
     :hook (rust-mode . eglot-ensure))
+
+  (use-package lua-mode)
 #+END_SRC
 * End
 ** After init
