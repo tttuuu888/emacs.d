@@ -1112,6 +1112,7 @@ settings.
       "jP" 'helm-ag-here)
     :config
     (setq helm-ag-insert-at-point 'symbol
+          helm-ag-base-command "ag --nocolor --nogroup --follow"
           helm-ag-use-grep-ignore-list t)
     (defun helm-ag-project-or-here ()
       (interactive)
