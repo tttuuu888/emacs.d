@@ -673,9 +673,7 @@ settings.
     (defun my-dired-pdf-size-down ()
       (interactive)
       (let ((display-buffer-alist
-             (list (cons
-                    "\\*Async Shell Command\\*.*"
-                    (cons #'display-buffer-no-window nil))))
+             '(("\\*Async Shell Command\\*.*" display-buffer-no-window)))
             (file (dired-filename-at-point))
             (temp (make-temp-file ".temp" nil ".pdf")))
         (if (not (equal (file-name-extension file) "pdf"))
