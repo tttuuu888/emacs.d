@@ -926,7 +926,7 @@ settings.
   (use-package display-line-numbers
     :ensure nil
     :custom-face
-    (line-number ((t (:foreground "gray51" :inherit 'default))))
+    (line-number ((t :foreground "gray51" :inherit 'default)))
     (line-number-current-line ((t (:inherit 'default))))
     :hook
     ((find-file prog-mode) . display-line-numbers-mode)
@@ -1016,7 +1016,7 @@ settings.
 
   (use-package company
     :custom-face
-    (company-tooltip ((t (:foreground "Black" :background "Yellow3"))))
+    (company-tooltip ((t :foreground "Black" :background "Yellow3")))
     :init
     (global-company-mode 1)
     :config
@@ -1358,9 +1358,9 @@ settings.
     :custom-face
     (ivy-posframe
      ((((class color) (min-colors 88) (background light))
-       (:background "ivory3" :foreground "black"))
+       :background "ivory3" :foreground "black")
       (((class color) (min-colors 88) (background dark))
-       (:background "#282a36" :foreground "gray80"))))
+       :background "#282a36" :foreground "gray80")))
     (ivy-posframe-border ((t (:inherit ivy-posframe))))
     :config
     (setq ivy-posframe-border-width 20
@@ -1540,7 +1540,7 @@ settings.
   (use-package which-func
     :ensure nil
     :hook ((c-mode-common python-mode js-mode) . my-which-function-setup)
-    :custom-face (which-func ((t (:inherit font-lock-function-name-face))))
+    :custom-face (which-func ((t :inherit font-lock-function-name-face)))
     :config
     (setq which-func-unknown "N/A")
     (defun my-which-function-setup ()
