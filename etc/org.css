@@ -40,7 +40,7 @@
     right: 0em;
     top: 0em;
     background: white;
-    line-height: 12pt;
+    line-height: 11pt;
     text-align: right;
     box-shadow: 0 0 1em #777777;
     -webkit-box-shadow: 0 0 1em #777777;
@@ -52,7 +52,7 @@
     overflow: auto; }
   #table-of-contents h2 {
     margin-top: 0.8em;
-    font-size: 13pt;
+    font-size: 12pt;
     max-width: 9em;
     border: 0;
     font-weight: normal;
@@ -67,6 +67,8 @@
     display: block;
     padding: 0.5em;
     margin-top: -1.5em; }
+  #table-of-contents ul {
+    padding-left: 30px; }
 
   #license {
     background-color: #eeeeee;
