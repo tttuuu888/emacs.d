@@ -1646,7 +1646,7 @@ settings.
           (goto-char (nth 8 (paredit-current-parse-state)))
           (and forward (forward-sexp 1))
           (setq arg (- arg (if forward 1 -1))))
-        (unless (re-search-forward "(\\|)\\|\\[\\|\\]\\|\"" nil t arg)
+        (unless (re-search-forward "(\\|)\\|\\[\\|\\]" nil t arg)
           (goto-char pos))))
     (defun sk-evil-paredit-forward-braket (&optional n)
       (interactive "p")
