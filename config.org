@@ -550,9 +550,7 @@ settings.
     (setq default-korean-keyboard "3")
     (when window-system
       (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
-      (set-fontset-font "fontset-default"
-                        'greek-iso8859-7
-                        '("Unifont Upper" . "iso10646-1")))
+      (set-fontset-font t 'unicode (font-spec :name "Unifont Upper")))
     (setup-korean-environment-internal))
 
   (use-package recentf
