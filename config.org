@@ -1713,6 +1713,9 @@ settings.
       (call-interactively (if (sly-connected-p) 'sly-mrepl 'sly)))
     (evil-leader/set-key-minor-mode 'sly-mode
       "z"  'my-sly-mrepl
+      "cb" 'sly-compile-file
+      "cf" 'sly-compile-defun
+      "cr" 'sly-compile-region
       "eb" 'sly-eval-buffer
       "ee" 'sly-eval-last-expression
       "ef" 'sly-eval-defun
