@@ -1705,9 +1705,11 @@ settings.
     :config
     (setq sly-mrepl-history-file-name
           (expand-file-name ".sly-mrepl-history" user-emacs-directory))
-    (evil-set-initial-state 'sly-db-mode          'emacs)
-    (evil-set-initial-state 'sly-inspector-mode   'emacs)
-    (evil-set-initial-state 'sly-xref-mode        'emacs)
+    (evil-set-initial-state 'sly-db-mode                'emacs)
+    (evil-set-initial-state 'sly-inspector-mode         'emacs)
+    (evil-set-initial-state 'sly-stickers--replay-mode  'emacs)
+    (evil-set-initial-state 'sly-xref-mode              'emacs)
+    (evil-set-initial-state 'sly-xref-mode              'emacs)
     (defun my-sly-mrepl ()
       (interactive)
       (call-interactively (if (sly-connected-p) 'sly-mrepl 'sly)))
