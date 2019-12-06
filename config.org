@@ -1712,15 +1712,20 @@ settings.
       (interactive)
       (call-interactively (if (sly-connected-p) 'sly-mrepl 'sly)))
     (evil-leader/set-key-minor-mode 'sly-mode
-      "z"  'my-sly-mrepl
-      "cb" 'sly-compile-file
-      "cf" 'sly-compile-defun
-      "cr" 'sly-compile-region
-      "eb" 'sly-eval-buffer
-      "ee" 'sly-eval-last-expression
-      "ef" 'sly-eval-defun
-      "er" 'sly-eval-region
-      "es" 'sly-mrepl-sync)
+      "z"   'my-sly-mrepl
+      "cb"  'sly-compile-file
+      "cf"  'sly-compile-defun
+      "cr"  'sly-compile-region
+      "eb"  'sly-eval-buffer
+      "ee"  'sly-eval-last-expression
+      "ef"  'sly-eval-defun
+      "er"  'sly-eval-region
+      "es"  'sly-mrepl-sync
+      "csd" 'sly-stickers-clear-defun-stickers
+      "csk" 'sly-stickers-clear-buffer-stickers
+      "csr" 'sly-stickers-replay
+      "css" 'sly-stickers-dwim
+      "csF" 'sly-stickers-forget)
     (evil-leader/set-key-for-mode 'sly-mrepl-mode
       "l"  'my-comint-history
       "z"  'sly-switch-to-most-recent
