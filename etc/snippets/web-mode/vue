@@ -13,6 +13,10 @@ export default {
   name: '$0',
   components: {
   },
+  props: {
+  },
+  computed: {
+  },
   methods: {
   },
   data () {
@@ -21,6 +25,8 @@ export default {
     }
   },
   created () {
+  },
+  mounted () {
   },
 }
 </script>
