@@ -1314,8 +1314,10 @@ settings.
     (defun my-comint-history (&optional ring)
       (interactive)
       (let ((input-ring (if ring ring comint-input-ring)))
-        (ivy-read "History: " (ivy-history-contents input-ring)
-                  :action (lambda (cmd) (my-shell-return) (insert cmd)))))
+        (cl-letf (((symbol-function 'ivy-completion-in-region-action)
+                   (lambda (cmd) (my-shell-return) (insert cmd))))
+          (counsel--browse-history input-ring
+                                   :caller #'counsel-shell-history))))
     (defun sk-ivy-buffer-transformer (str)
       (let* ((buf (get-buffer str))
              (buf-dir (buffer-local-value 'default-directory buf))
