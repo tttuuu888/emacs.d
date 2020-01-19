@@ -549,8 +549,8 @@ settings.
     :init
     (setq default-korean-keyboard "3")
     (when window-system
-      (set-fontset-font t 'hangul (font-spec :name "D2Coding"))
-      (set-fontset-font t 'unicode (font-spec :name "Unifont Upper")))
+      (set-fontset-font t 'unicode (font-spec :name "Unifont Upper"))
+      (set-fontset-font t 'hangul (font-spec :name "D2Coding")))
     (setup-korean-environment-internal))
 
   (use-package recentf
