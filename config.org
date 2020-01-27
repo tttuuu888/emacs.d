@@ -1796,6 +1796,11 @@ settings.
     (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-d "c" "d")
     (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-e "c" "e")
     (cc-map-to-evil-leader-map 'web-mode ?\C-c ?\C-t "c" "t")
+    (evil-leader/set-key-for-mode 'web-mode
+      "cf" 'web-mode-fold-or-unfold
+      "cl" 'web-mode-file-link
+      "cn" 'web-mode-navigate
+      "cw" 'web-mode-whitespaces-show)
     (defun my-web-mode-hook ()
       (setq-local
        company-backends
