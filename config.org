@@ -1751,7 +1751,8 @@ settings.
 
   (use-package geiser
     :config
-    (setq geiser-repl-history-filename
+    (setq geiser-chicken-binary "chicken-csi"
+          geiser-repl-history-filename
           (expand-file-name ".geiser_history" user-emacs-directory))
     (evil-define-key 'normal geiser-repl-mode-map
       "gj" 'comint-next-prompt
