@@ -1345,7 +1345,10 @@ settings.
                                (replace-regexp-in-string "^[^~/]*" "" path-mod))
                      path-opt)))
         (format "%-35s %-20s %s" buf mode (or path ""))))
-    (ivy-set-display-transformer 'ivy-switch-buffer 'sk-ivy-buffer-transformer))
+    (ivy-set-display-transformer 'ivy-switch-buffer 'sk-ivy-buffer-transformer)
+    (ivy-set-actions
+     'projectile-switch-project
+     '(("d" (lambda (p) (projectile-remove-known-project p)) "delete"))))
 
   (use-package ivy-yasnippet
     :init
