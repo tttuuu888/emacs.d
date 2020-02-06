@@ -1928,7 +1928,7 @@ settings.
                   (when (eglot-current-server)
                     (call-interactively
                      'eglot-shutdown '((eglot-current-server) t)))))
-    (evil-define-key 'normal eglot-mode-map
+    (evil-define-minor-mode-key 'normal 'eglot--managed-mode
       "gh" 'eglot-help-at-point))
 
   (use-package rust-mode
