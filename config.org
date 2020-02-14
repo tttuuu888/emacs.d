@@ -400,6 +400,18 @@ Various useful functions.
                 (when (get-buffer last-mode)
                     (pop-to-buffer last-mode)))
                (t nil)))))
+
+  (let ((cnt 0))
+    (defmacro sk-defer-init (&rest body)
+      "Defer BODY until the very first command after init."
+      (declare (indent defun))
+      (let ((name (intern (format "sk-defer-init-%d" (setq cnt (1+ cnt))))))
+        `(progn
+           (defun ,name ()
+             ,@body
+             (remove-hook 'pre-command-hook ',name)
+             (unintern ',name nil))
+           (add-hook 'pre-command-hook #',name)))))
 #+END_SRC
 ** Use-package
 Install =use-package= if not exists. Set some default settings for
@@ -901,7 +913,7 @@ settings.
   (use-package paren
     :ensure nil
     :init
-    (show-paren-mode 1))
+    (sk-defer-init (show-paren-mode 1)))
 
   (use-package hl-line
     :ensure nil
@@ -968,14 +980,14 @@ settings.
 
   (use-package evil-surround
     :init
-    (global-evil-surround-mode 1)
+    (sk-defer-init (global-evil-surround-mode 1))
     :config
     (evil-define-key 'visual evil-surround-mode-map
       "gs" 'evil-surround-region))
 
   (use-package evil-commentary
     :init
-    (evil-commentary-mode))
+    (sk-defer-init (evil-commentary-mode 1)))
 
   (use-package bind-key
     :init
@@ -1013,7 +1025,7 @@ settings.
     :custom-face
     (company-tooltip ((t :foreground "Black" :background "Yellow3")))
     :init
-    (global-company-mode 1)
+    (sk-defer-init (global-company-mode 1))
     :config
     (setq company-idle-delay 0.3)
     (evil-define-key 'insert company-mode-map
@@ -1221,13 +1233,10 @@ settings.
 
   (use-package anzu
     :init
-    (defun isearch-anzu-advice (&rest _)
-      (global-anzu-mode 1))
-    (advice-add #'isearch-forward :before #'isearch-anzu-advice)
+    (sk-defer-init (global-anzu-mode 1))
     :config
     (setq anzu-search-threshold 1000
-          anzu-replace-threshold 1000)
-    (advice-remove #'isearch-forward #'isearch-anzu-advice))
+          anzu-replace-threshold 1000))
 
   (use-package htmlize
     :demand t
@@ -1410,7 +1419,7 @@ settings.
 
   (use-package which-key
     :init
-    (which-key-mode))
+    (sk-defer-init (which-key-mode 1)))
 #+END_SRC
 * Development settings
 #+BEGIN_SRC emacs-lisp :tangle yes
