@@ -1417,7 +1417,12 @@ settings.
                 (append (counsel--buffers-with-mode #'shell-mode)
                         (counsel--buffers-with-mode #'eshell-mode))
                 :action #'counsel--switch-to-shell
-                :caller 'ivy-switch-buffer)))
+                :caller 'ivy-switch-buffer))
+    (ivy-set-actions
+     'counsel-shell-history
+     '(("d" (lambda (x) (ring-remove comint-input-ring
+                                     (ring-member comint-input-ring (car x))))
+        "delete"))))
 
   (use-package which-key
     :init
