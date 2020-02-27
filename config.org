@@ -1865,17 +1865,10 @@ settings.
       (yas-minor-mode)))
 
   (use-package go-mode
-    :bind (:map go-mode-map
-            ("M-." . godef-jump))
+    :hook (go-mode . eglot-ensure)
     :config
     (setq gofmt-command "goimports")
-    (evil-define-key 'normal go-mode-map
-      "gd" 'godef-jump
-      "gp" 'xref-pop-marker-stack
-      "gr" 'xref-find-reference-here
-      "g[" 'xref-pop-marker-stack)
     (defun my-go-code-hook ()
-      (evil-normalize-keymaps)
       (make-local-variable 'before-save-hook)
       (add-hook 'before-save-hook 'gofmt-before-save)
       (setq-local compile-command
@@ -1939,6 +1932,7 @@ settings.
       (let ((root (projectile-project-root dir)))
         (and root (cons 'transient root))))
     (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+    (add-to-list 'eglot-server-programs '(go-mode "gopls"))
     (add-to-list 'project-find-functions 'my-projectile-project-find)
     (advice-add 'projectile-kill-buffers :before
                 (lambda ()
