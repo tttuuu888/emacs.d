@@ -56,6 +56,10 @@
     (prefix (and (or (eq major-mode 'sql-interactive-mode)
                      (eq major-mode 'sql-mode))
                  (not (company-in-string-or-comment))
+                 (let ((stab  (copy-syntax-table)))
+                   (with-syntax-table stab
+                     (modify-syntax-entry ?. "_")
+                     (not (string-prefix-p "." (thing-at-point 'symbol)))))
                  (company-grab-symbol)))
     (candidates
     (cl-remove-if-not
