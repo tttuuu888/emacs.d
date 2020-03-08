@@ -918,7 +918,7 @@ settings.
   (use-package hl-line
     :ensure nil
     :init
-    (global-hl-line-mode 1))
+    (sk-defer-init (global-hl-line-mode 1)))
 
   (use-package ansi-color
     :ensure nil
