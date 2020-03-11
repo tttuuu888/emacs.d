@@ -1493,7 +1493,11 @@ settings.
         (setq python-shell-interpreter python)
         (message (concat "Toggled to " python))))
     (sk-switch-buffer-repl sk-python-buffer-repl-toggle
-      python-mode inferior-python-mode run-python)
+      python-mode inferior-python-mode
+      (lambda ()
+        (interactive)
+        (call-interactively 'run-python)
+        (other-window 1)))
     (evil-leader/set-key-for-mode 'inferior-python-mode
       "l"  'my-comint-history
       "z"  'sk-python-buffer-repl-toggle)
