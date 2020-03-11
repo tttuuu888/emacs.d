@@ -381,13 +381,17 @@ Various useful functions.
     (interactive)
     (insert (get-week-form 7)))
 
-  (defmacro sk-switch-buffer-repl (name mode repl run-repl)
+  (defmacro sk-switch-buffer-repl (name mode repl run-repl &optional nobind)
     "Create NAME function which switch between a file of MODE and a
   REPL. Open REPL with RUN-REPL function if REPL is not yet
-  opened."
+  opened. Evil-Leader z binding will be added to toggle MODE and
+  REPL buffer unless NOBIND is not nil."
     (declare (indent defun))
     `(let ((last-mode "")
            (last-repl ""))
+       (unless ,nobind
+         (evil-leader/set-key-for-mode ',mode "z" ',name)
+         (evil-leader/set-key-for-mode ',repl "z" ',name))
        (defun ,name ()
          (interactive)
          (cond ((equal major-mode ',mode)
@@ -398,7 +402,7 @@ Various useful functions.
                ((equal major-mode ',repl)
                 (setq last-repl (buffer-name))
                 (when (get-buffer last-mode)
-                    (pop-to-buffer last-mode)))
+                  (pop-to-buffer last-mode)))
                (t nil)))))
 
   (let ((cnt 0))
@@ -1466,10 +1470,7 @@ settings.
     :config
     (sk-switch-buffer-repl sk-octave-buffer-repl-toggle
       octave-mode inferior-octave-mode run-octave)
-    (evil-leader/set-key-for-mode 'inferior-octave-mode
-      "z"  'sk-octave-buffer-repl-toggle)
     (evil-leader/set-key-for-mode 'octave-mode
-      "z"  'sk-octave-buffer-repl-toggle
       "eb" 'octave-send-buffer
       "ee" 'octave-send-line
       "ef" 'octave-send-defun
@@ -1499,10 +1500,8 @@ settings.
         (call-interactively 'run-python)
         (other-window 1)))
     (evil-leader/set-key-for-mode 'inferior-python-mode
-      "l"  'my-comint-history
-      "z"  'sk-python-buffer-repl-toggle)
+      "l"  'my-comint-history)
     (evil-leader/set-key-for-mode 'python-mode
-      "z"  'sk-python-buffer-repl-toggle
       "eb" 'python-shell-send-buffer
       "ee" 'python-shell-send-defun
       "ef" 'python-shell-send-defun
@@ -1579,10 +1578,7 @@ settings.
     (require 'geiser)
     (sk-switch-buffer-repl sk-scheme-buffer-repl-toggle
       scheme-mode geiser-repl-mode run-geiser)
-    (evil-leader/set-key-for-mode 'geiser-repl-mode
-      "z"  'sk-scheme-buffer-repl-toggle)
     (evil-leader/set-key-for-mode 'scheme-mode
-      "z"  'sk-scheme-buffer-repl-toggle
       "eb" 'geiser-eval-buffer
       "ee" 'geiser-eval-last-sexp
       "ef" 'geiser-eval-definition
@@ -1900,11 +1896,7 @@ settings.
     (defun my-haskell-mode-hook ()
       (setq-local tab-width 4))
     (sk-switch-buffer-repl sk-haskell-buffer-repl-toggle
-      haskell-mode inferior-haskell-mode run-haskell)
-    (evil-leader/set-key-for-mode 'inferior-haskell-mode
-      "z" 'sk-haskell-buffer-repl-toggle)
-    (evil-leader/set-key-for-mode 'haskell-mode
-      "z" 'sk-haskell-buffer-repl-toggle))
+      haskell-mode inferior-haskell-mode run-haskell))
 
   (use-package restclient
     :mode ("\\.rest\\'" . restclient-mode)
