@@ -864,9 +864,6 @@ settings.
     :config
     (evil-leader/set-key-for-mode 'shell-mode
       "l"  'my-comint-history)
-    (evil-define-key 'motion shell-mode-map
-      "gk" 'comint-previous-prompt
-      "gj" 'comint-next-prompt)
     (evil-define-key 'normal shell-mode-map
       (kbd "RET") 'my-shell-return))
 
@@ -965,6 +962,24 @@ settings.
     (evil-define-key 'motion flymake-mode-map
       "]e" 'flymake-goto-next-error
       "[e" 'flymake-goto-prev-error))
+
+  (use-package comint
+    :ensure nil
+    :commands my-comint-history
+    :config
+    (defun my-comint-history (&optional ring)
+      (interactive)
+      (let ((input-ring (if ring ring comint-input-ring)))
+        (cl-letf (((symbol-function 'ivy-completion-in-region-action)
+                   (lambda (cmd) (my-shell-return) (insert cmd))))
+          (counsel--browse-history input-ring
+                                   :caller #'counsel-shell-history))))
+
+    (evil-leader/set-key-for-mode 'comint-mode
+      "l"  'my-comint-history)
+    (evil-define-key 'normal comint-mode-map
+      "gj" 'comint-next-prompt
+      "gk" 'comint-previous-prompt))
 
 
 
@@ -1319,13 +1334,6 @@ settings.
     (ivy-mode 1)
     (when window-system
       (ivy-posframe-mode 1))
-    (defun my-comint-history (&optional ring)
-      (interactive)
-      (let ((input-ring (if ring ring comint-input-ring)))
-        (cl-letf (((symbol-function 'ivy-completion-in-region-action)
-                   (lambda (cmd) (my-shell-return) (insert cmd))))
-          (counsel--browse-history input-ring
-                                   :caller #'counsel-shell-history))))
     (defun sk-ivy-buffer-transformer (str)
       (let* ((buf (get-buffer str))
              (buf-dir (buffer-local-value 'default-directory buf))
@@ -1499,8 +1507,6 @@ settings.
       "ef" 'python-shell-send-defun
       "er" 'python-shell-send-region)
     (evil-define-key 'normal inferior-python-mode-map
-      "gk" 'comint-previous-prompt
-      "gj" 'comint-next-prompt
       (kbd "RET") 'my-shell-return))
 
   (use-package xref
@@ -1773,9 +1779,6 @@ settings.
     (setq geiser-chicken-binary "chicken-csi"
           geiser-repl-history-filename
           (expand-file-name ".geiser_history" user-emacs-directory))
-    (evil-define-key 'normal geiser-repl-mode-map
-      "gj" 'comint-next-prompt
-      "gk" 'comint-previous-prompt)
     (advice-add 'run-geiser :before
                 (lambda (impl) (geiser-impl--set-buffer-implementation impl))))
 
