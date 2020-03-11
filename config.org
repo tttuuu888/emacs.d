@@ -512,10 +512,6 @@ settings.
     (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
     (add-hook 'evil-insert-state-entry-hook
               (lambda () (when buffer-read-only (read-only-mode -1))))
-    (defun my-shell-return ()
-      (interactive)
-      (evil-goto-line)
-      (evil-append-line 1))
     (defun evil-reload-file ()
       (interactive)
       (find-alternate-file (buffer-file-name)))
@@ -863,9 +859,7 @@ settings.
       "ss" 'shell)
     :config
     (evil-leader/set-key-for-mode 'shell-mode
-      "l"  'my-comint-history)
-    (evil-define-key 'normal shell-mode-map
-      (kbd "RET") 'my-shell-return))
+      "l"  'my-comint-history))
 
   (use-package eshell
     :ensure nil
@@ -974,13 +968,16 @@ settings.
                    (lambda (cmd) (my-shell-return) (insert cmd))))
           (counsel--browse-history input-ring
                                    :caller #'counsel-shell-history))))
-
+    (defun my-shell-return ()
+      (interactive)
+      (evil-goto-line)
+      (evil-append-line 1))
     (evil-leader/set-key-for-mode 'comint-mode
       "l"  'my-comint-history)
     (evil-define-key 'normal comint-mode-map
       "gj" 'comint-next-prompt
-      "gk" 'comint-previous-prompt))
-
+      "gk" 'comint-previous-prompt
+      (kbd "RET") 'my-shell-return))
 
 
   ;;; External packages
@@ -1505,9 +1502,7 @@ settings.
       "eb" 'python-shell-send-buffer
       "ee" 'python-shell-send-defun
       "ef" 'python-shell-send-defun
-      "er" 'python-shell-send-region)
-    (evil-define-key 'normal inferior-python-mode-map
-      (kbd "RET") 'my-shell-return))
+      "er" 'python-shell-send-region))
 
   (use-package xref
     :ensure nil
@@ -1539,8 +1534,6 @@ settings.
       (bind-keys :map (symbol-value mm)
                  ("j" . next-line)
                  ("k" . previous-line)))
-    (evil-define-key 'normal gud-mode-map
-      (kbd "RET") 'my-shell-return)
     (evil-leader/set-key-for-mode 'gud-mode
       "l"  'my-comint-history)
     (evil-leader/set-key-minor-mode 'gdb-many-windows
