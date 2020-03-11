@@ -890,7 +890,7 @@ settings.
         "gj" 'eshell-next-prompt
         (kbd "M-p") (lambda () (interactive) nil)
         (kbd "M-n") (lambda () (interactive) nil)
-        (kbd "RET") 'my-shell-return))
+        (kbd "RET") 'my-comint-return))
     (evil-leader/set-key-for-mode 'eshell-mode
       "l"  'my-eshell-history))
 
@@ -965,10 +965,10 @@ settings.
       (interactive)
       (let ((input-ring (if ring ring comint-input-ring)))
         (cl-letf (((symbol-function 'ivy-completion-in-region-action)
-                   (lambda (cmd) (my-shell-return) (insert cmd))))
+                   (lambda (cmd) (my-comint-return) (insert cmd))))
           (counsel--browse-history input-ring
                                    :caller #'counsel-shell-history))))
-    (defun my-shell-return ()
+    (defun my-comint-return ()
       (interactive)
       (evil-goto-line)
       (evil-append-line 1))
@@ -977,7 +977,7 @@ settings.
     (evil-define-key 'normal comint-mode-map
       "gj" 'comint-next-prompt
       "gk" 'comint-previous-prompt
-      (kbd "RET") 'my-shell-return))
+      (kbd "RET") 'my-comint-return))
 
 
   ;;; External packages
@@ -1709,7 +1709,7 @@ settings.
     (evil-define-key 'normal cider-repl-mode-map
       "gd"        'cider-find-dwim
       "gp"        'cider-pop-back
-      (kbd "RET") 'my-shell-return)
+      (kbd "RET") 'my-comint-return)
     (evil-leader/set-key-for-mode 'clojurescript-mode
       "z"  'cider-switch-to-repl-buffer)
     (evil-leader/set-key-for-mode 'cider-repl-mode
@@ -1763,7 +1763,7 @@ settings.
       "gd" 'sly-edit-definition
       "gp" 'sly-pop-find-definition-stack
       "gr" 'sly-edit-uses
-      (kbd "RET") 'my-shell-return)
+      (kbd "RET") 'my-comint-return)
     (evil-define-minor-mode-key 'normal 'sly-popup-buffer-mode
       "q"  'quit-window))
 
