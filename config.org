@@ -1684,14 +1684,21 @@ settings.
   (use-package clojure-mode
     :config
     (evil-define-key 'normal clojure-mode-map
-      "gd" 'cider-find-dwim
-      "gp" 'cider-pop-back)
+      "gd"  'cider-find-dwim
+      "gp"  'cider-pop-back)
     (evil-leader/set-key-for-mode 'clojure-mode
-      "z"  'cider-switch-to-repl-buffer
-      "eb" 'cider-eval-buffer
-      "ee" 'cider-eval-last-sexp
-      "er" 'cider-eval-region
-      "ex" 'cider-eval-last-sexp-and-replace))
+      "z"   'cider-switch-to-repl-buffer
+      "eb"  'cider-eval-buffer
+      "ee"  'cider-eval-last-sexp
+      "ef"  'cider-eval-defun-at-point
+      "er"  'cider-eval-region
+      "epf" 'cider-pprint-eval-defun-at-point
+      "epp" 'cider-pprint-eval-last-sexp
+      "esb" 'cider-browse-ns
+      "esf" 'cider-find-ns
+      "ess" 'cider-repl-set-ns
+      "evv" 'cider-eval-sexp-at-point
+      "evx" 'cider-eval-last-sexp-and-replace))
 
   (use-package cider
     :config
@@ -1703,7 +1710,6 @@ settings.
     (evil-set-initial-state 'cider-docview-mode             'emacs)
     (evil-set-initial-state 'cider-enlighten-mode           'emacs)
     (evil-set-initial-state 'cider-inspector-mode           'emacs)
-    (evil-set-initial-state 'cider-popup-buffer-mode        'emacs)
     (evil-set-initial-state 'cider-repl-history-mode        'emacs)
     (evil-set-initial-state 'cider-stacktrace-mode          'emacs)
     (evil-set-initial-state 'cider-test-report-mode         'emacs)
@@ -1711,6 +1717,8 @@ settings.
       "gd"        'cider-find-dwim
       "gp"        'cider-pop-back
       (kbd "RET") 'my-comint-return)
+    (evil-define-minor-mode-key 'normal 'cider-popup-buffer-mode
+      "q"  'quit-window)
     (evil-leader/set-key-for-mode 'clojurescript-mode
       "z"  'cider-switch-to-repl-buffer)
     (evil-leader/set-key-for-mode 'cider-repl-mode
