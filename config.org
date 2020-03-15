@@ -1697,6 +1697,11 @@ settings.
       "esb" 'cider-browse-ns
       "esf" 'cider-find-ns
       "ess" 'cider-repl-set-ns
+      "eta" 'cider-test-rerun-test
+      "etn" 'cider-test-run-ns-tests
+      "etp" 'cider-test-run-project-tests
+      "etr" 'cider-test-rerun-failed-tests
+      "ett" 'cider-test-run-test
       "evv" 'cider-eval-sexp-at-point
       "evx" 'cider-eval-last-sexp-and-replace))
 
