@@ -44,7 +44,7 @@ performed.
 #+END_SRC
 ** Package initialize
 Process =package-initialize= first and set =package-archives= for boot time
-speed up. =package--initialized= would be set to =nil= at the end of boot up.
+speed up. =package-initialize= should be called again after boot up.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (package-initialize)
@@ -981,6 +981,9 @@ settings.
       "gk" 'comint-previous-prompt
       (kbd "RET") 'my-comint-return))
 
+  (use-package package
+    :init
+    (sk-defer-init (package-initialize)))
 
   ;;; External packages
   (use-package evil-anzu
@@ -1971,14 +1974,6 @@ settings.
   (use-package lua-mode)
 #+END_SRC
 * End
-** After init
-Set =package--initialized= to =nil= to prevent that all the packages from
-=package-list-packages= become new packages. Still it is required to execute
-=M-x package-initialize= manually in some cases.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (setq package--initialized nil)
-#+END_SRC
 ** Provide a feature
 Make =config.el= available to load by =require=.
 
