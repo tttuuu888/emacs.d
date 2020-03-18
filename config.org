@@ -752,15 +752,18 @@ settings.
      org-plantuml-jar-path (getenv "PLANTUML_PATH")
      org-src-window-setup 'current-window
      org-startup-indented t
-     org-startup-with-inline-images t)
+     org-startup-with-inline-images t
+     org-todo-keywords
+     '((sequence "TODO(t)" "PROG(p)" "WAIT(w)" "|" "DONE(d)" "KILL(k)")))
     (evil-leader/set-key-for-mode 'org-mode
       "cb" 'org-switchb
       "ce" 'org-export-dispatch
       "ci" 'org-insert-link
       "cl" 'org-store-link
-      "ct" 'org-table-create
+      "ct" 'org-todo
       "ee" 'org-edit-src-code
       "ei" 'org-insert-structure-template
+      "tc" 'org-table-create
       "tl" 'org-tags-view
       "ts" 'org-set-tags-command)
     (evil-leader/set-key-minor-mode 'org-src-mode
