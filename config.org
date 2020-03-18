@@ -756,16 +756,19 @@ settings.
      org-todo-keywords
      '((sequence "TODO(t)" "PROG(p)" "WAIT(w)" "|" "DONE(d)" "KILL(k)")))
     (evil-leader/set-key-for-mode 'org-mode
-      "cb" 'org-switchb
-      "ce" 'org-export-dispatch
-      "ci" 'org-insert-link
-      "cl" 'org-store-link
-      "ct" 'org-todo
-      "ee" 'org-edit-src-code
-      "ei" 'org-insert-structure-template
-      "tc" 'org-table-create
-      "tl" 'org-tags-view
-      "ts" 'org-set-tags-command)
+      "cb"  'org-switchb
+      "ce"  'org-export-dispatch
+      "ci"  'org-insert-link
+      "cl"  'org-store-link
+      "ct"  'org-todo
+      "ee"  'org-edit-src-code
+      "ei"  'org-insert-structure-template
+      "tc"  'org-table-create
+      "tl"  'org-tags-view
+      "ts"  'org-set-tags-command
+      "cdd" 'org-deadline
+      "cds" 'org-schedule
+      "cd." 'org-time-stamp)
     (evil-leader/set-key-minor-mode 'org-src-mode
       "ec" 'org-edit-src-exit
       "eq" 'org-edit-src-abort)
