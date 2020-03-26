@@ -1969,6 +1969,9 @@ settings.
   (use-package eglot
     :config
     (require 'projectile)
+    (defun eglot--update-doc (string &rest _)
+      "Display only the first line of STRING as an ElDoc message."
+      (eldoc-message (car (split-string string "\n"))))
     (defun my-projectile-project-find (dir)
       (let ((root (projectile-project-root dir)))
         (and root (cons 'transient root))))
