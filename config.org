@@ -1499,7 +1499,8 @@ settings.
             ("M-<left>"  . python-indent-shift-left)
             ("M-<right>" . python-indent-shift-right))
     :config
-    (setq imenu-create-index-function 'python-imenu-create-index)
+    (setq imenu-create-index-function 'python-imenu-create-index
+          python-indent-guess-indent-offset nil)
     (defun sk-toggle-python ()
       "Toggle between Python2 and Python3"
       (interactive)
