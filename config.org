@@ -62,7 +62,7 @@ all package local files would be hidden under the path.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defvar emacs-config-dir user-emacs-directory)
-  (setq user-emacs-directory (expand-file-name "~/.emacs.d/.local/"))
+  (setq user-emacs-directory (expand-file-name ".local/" emacs-config-dir))
   (unless (file-exists-p user-emacs-directory)
     (make-directory-internal user-emacs-directory))
 #+END_SRC
