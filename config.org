@@ -726,10 +726,14 @@ settings.
                                 (shell . t))
      org-confirm-babel-evaluate nil
      org-capture-templates
-     `(("t" "Todo" entry (file+headline ,my-org-note "ToDos") "* TODO %?\n%U")
-       ("w" "Wait" entry (file+headline ,my-org-note "ToDos") "* WAIT %?\n%t")
-       ("n" "Note" entry (file+headline ,my-org-note "Notes") "* %?\n%U")
-       ("e" "Event" entry (file+headline  ,my-org-note "Events") "* %?\n%U"))
+     `(("t" "Todo" entry (file+headline ,my-org-note "ToDos")
+        "* TODO %?\n%U" :empty-lines 1)
+       ("w" "Wait" entry (file+headline ,my-org-note "ToDos")
+        "* WAIT %?\n%t" :empty-lines 1)
+       ("n" "Note" entry (file+headline ,my-org-note "Notes")
+        "* %?\n%U" :empty-lines 1)
+       ("e" "Event" entry (file+headline ,my-org-note "Events")
+        "* %?\n%U" :empty-lines 1))
      org-default-notes-file my-org-note
      org-export-default-language "kr"
      org-export-headline-levels 2
@@ -761,6 +765,7 @@ settings.
       "ci"  'org-insert-link
       "cl"  'org-store-link
       "ct"  'org-todo
+      "cw"  'org-refile
       "ee"  'org-edit-src-code
       "ei"  'org-insert-structure-template
       "tc"  'org-table-create
