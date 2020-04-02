@@ -716,7 +716,7 @@ settings.
     :config
     (setq
      my-org-path "~/Dropbox/org/"
-     my-org-note-file (expand-file-name "notes.org" my-org-path)
+     my-org-note (expand-file-name "notes.org" my-org-path)
      org-agenda-files (list my-org-path)
      org-babel-load-languages '((css . t)
                                 (emacs-lisp . t)
@@ -726,25 +726,11 @@ settings.
                                 (shell . t))
      org-confirm-babel-evaluate nil
      org-capture-templates
-     `(("t" "Todo" entry
-        (file+headline ,my-org-note-file "ToDos")
-        "* TODO %?\n%U" :empty-lines 1)
-       ("T" "Todo with Clipboard" entry
-        (file+headline ,my-org-note-file  "ToDos")
-        "* TODO %?\n%U\n   %c" :empty-lines 1)
-       ("n" "Note" entry
-        (file+headline ,my-org-note-file "Notes")
-        "* %?\n%U" :empty-lines 1)
-       ("N" "Note with Clipboard" entry
-        (file+headline ,my-org-note-file "Notes")
-        "* %?\n%U\n   %c" :empty-lines 1)
-       ("e" "Event" entry
-        (file+headline  ,my-org-note-file "Events")
-        "* %?\n%U" :empty-lines 1)
-       ("E" "Event With Clipboard" entry
-        (file+headline  ,my-org-note-file "Events")
-        "* %?\n%U\n   %c" :empty-lines 1))
-     org-default-notes-file my-org-note-file
+     `(("t" "Todo" entry (file+headline ,my-org-note "ToDos") "* TODO %?\n%U")
+       ("w" "Wait" entry (file+headline ,my-org-note "ToDos") "* WAIT %?\n%t")
+       ("n" "Note" entry (file+headline ,my-org-note "Notes") "* %?\n%U")
+       ("e" "Event" entry (file+headline  ,my-org-note "Events") "* %?\n%U"))
+     org-default-notes-file my-org-note
      org-export-default-language "kr"
      org-export-headline-levels 2
      org-export-time-stamp-file nil
