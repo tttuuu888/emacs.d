@@ -525,21 +525,7 @@ settings.
     (evil-global-set-key 'normal "Y" (kbd "y$"))
     (evil-global-set-key 'motion "$" 'end-of-line)
     (dolist (m '(image-mode term-mode diff-mode))
-      (evil-set-initial-state m 'emacs))
-
-    (defconst evil-n-insert-notice '(:eval (evil-n-insert--update-mode-line)))
-    (advice-add #'evil-insert-state :before
-                (lambda (&rest _)
-                  (setq mode-line-format
-                        (cons evil-n-insert-notice mode-line-format))))
-    (add-hook 'evil-insert-state-exit-hook
-              (lambda ()
-                (setq mode-line-format
-                      (delete evil-n-insert-notice mode-line-format))))
-    (defun evil-n-insert--update-mode-line ()
-      (when (> evil-insert-count 1)
-        (propertize (format "%dx" evil-insert-count)
-                    'face '(:foreground "red" :weight bold)))))
+      (evil-set-initial-state m 'emacs)))
 
 
   ;;; Personal packages
