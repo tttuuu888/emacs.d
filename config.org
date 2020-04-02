@@ -1721,6 +1721,7 @@ settings.
       "ee"  'cider-eval-last-sexp
       "ef"  'cider-eval-defun-at-point
       "er"  'cider-eval-region
+      "epc" 'cider-pprint-eval-last-sexp-to-comment
       "epf" 'cider-pprint-eval-defun-at-point
       "epp" 'cider-pprint-eval-last-sexp
       "esb" 'cider-browse-ns
