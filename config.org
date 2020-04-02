@@ -33,15 +33,6 @@ performed.
     (pinstall-init))
 #+END_SRC
 
-** Remove menu-bar, tool-bar, scroll-bar
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (if (not window-system)
-      (custom-set-variables '(menu-bar-mode nil)
-                            '(scroll-bar-mode nil))
-    (add-to-list 'default-frame-alist '(menu-bar-lines . 0))
-    (add-to-list 'default-frame-alist '(tool-bar-lines . 0))
-    (add-to-list 'default-frame-alist '(vertical-scroll-bars)))
-#+END_SRC
 ** Package initialize
 Process =package-initialize= first and set =package-archives= for boot time
 speed up. =package-initialize= should be called again after boot up.
@@ -99,14 +90,17 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    '(indent-tabs-mode nil)
    '(inhibit-startup-screen t)
    '(make-backup-files nil)
+   '(menu-bar-mode nil)
    '(mouse-wheel-progressive-speed nil)
    '(password-cache-expiry 900)
+   '(scroll-bar-mode nil)
    '(send-mail-function (quote smtpmail-send-it))
    '(size-indication-mode t)
    '(split-height-threshold nil)
    '(split-width-threshold 140)
    '(tab-always-indent (quote complete))
    '(tab-width 4)
+   '(tool-bar-mode nil)
    '(use-file-dialog nil)
    '(vc-follow-symlinks nil))
 #+END_SRC
