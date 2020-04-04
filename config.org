@@ -575,7 +575,12 @@ settings.
             ("<left>"  . calendar-scroll-right)
             ("<right>" . calendar-scroll-left))
     :config
-    (setq diary-file "~/Dropbox/org/diary")
+    (setq calendar-date-display-form
+          '((format "%s-%.2d-%.2d%s" year
+                    (string-to-number month)
+                    (string-to-number day)
+                    (if dayname (concat " " dayname) "")))
+          diary-file "~/Dropbox/org/diary")
     (evil-set-initial-state 'calendar-mode 'emacs))
 
   (use-package dired
