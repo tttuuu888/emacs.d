@@ -1399,6 +1399,7 @@ settings.
       "f"     'counsel-find-file
       "r"     'counsel-recentf
       "cr"    'counsel-org-capture
+      "cr"    'counsel-compile
       "hb"    'counsel-descbinds
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
