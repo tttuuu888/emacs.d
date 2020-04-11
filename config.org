@@ -1490,8 +1490,7 @@ settings.
       python-mode inferior-python-mode
       (lambda ()
         (interactive)
-        (call-interactively 'run-python)
-        (other-window 1)))
+        (pop-to-buffer (process-buffer (call-interactively 'run-python)))))
     (evil-leader/set-key-for-mode 'inferior-python-mode
       "l"  'my-comint-history)
     (evil-leader/set-key-for-mode 'python-mode
