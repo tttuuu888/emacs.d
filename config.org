@@ -1906,7 +1906,8 @@ settings.
     :bind (:map plantuml-mode-map
             ("C-c C-e" . plantuml-make-output))
     :config
-    (setq plantuml-jar-path (getenv "PLANTUML_PATH"))
+    (setq plantuml-default-exec-mode 'jar
+          plantuml-jar-path (getenv "PLANTUML_PATH"))
     (evil-leader/set-key-for-mode 'plantuml-mode
       "ce" 'plantuml-make-output)
     (defun plantuml-make-output ()
