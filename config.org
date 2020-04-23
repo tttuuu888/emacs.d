@@ -1229,7 +1229,22 @@ settings.
     (bind-key "<escape>" 'transient-quit-one transient-map)
     (evil-make-overriding-map magit-blame-read-only-mode-map 'normal)
     (add-hook 'magit-blame-mode-hook 'evil-normalize-keymaps)
-    (add-hook 'with-editor-mode-hook 'flyspell-mode))
+    (add-hook 'with-editor-mode-hook 'flyspell-mode)
+    (defun magit-svn-rebase (&rest _)
+      "Run $ git svn rebase"
+      (interactive)
+      (magit-run-git-async "svn" "rebase"))
+    (defun magit-svn-dcommit (&rest _)
+      "Run $ git svn dcommit"
+      (interactive)
+      (magit-run-git-async "svn" "dcommit"))
+    (if (or (transient--layout-member "v" 'magit-pull)
+            (transient--layout-member "v" 'magit-push))
+        (error "Layout conflict occured!")
+      (transient-append-suffix 'magit-push "m"
+        '("v" "git svn dcommit" magit-svn-dcommit))
+      (transient-append-suffix 'magit-pull "e"
+        '("v" "git svn rebase" magit-svn-rebase))))
 
   (use-package expand-region
     :bind (("C-="   . er/expand-region)
