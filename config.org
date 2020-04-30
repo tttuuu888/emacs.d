@@ -1052,21 +1052,6 @@ settings.
     :config
     (add-to-list 'company-backends 'company-irony-c-headers))
 
-  (use-package company-tern
-    :demand t
-    :after tern
-    :config
-    (defun advice-company-tern (&rest _)
-      (if (equal major-mode 'web-mode)
-          (let ((web-mode-cur-language
-                 (web-mode-language-at-pos)))
-            (if (or (string= web-mode-cur-language "javascript")
-                    (string= web-mode-cur-language "jsx"))
-                (unless tern-mode (tern-mode))
-              (if tern-mode (tern-mode -1))))))
-    (advice-add 'company-tern :before #'advice-company-tern)
-    (add-to-list 'company-backends 'company-tern))
-
   (use-package company-web
     :demand t
     :after web-mode)
@@ -1854,20 +1839,15 @@ settings.
       "cf" 'web-mode-fold-or-unfold
       "cl" 'web-mode-file-link
       "cn" 'web-mode-navigate
-      "cw" 'web-mode-whitespaces-show)
-    (defun my-web-mode-hook ()
-      (setq-local
-       company-backends
-       '(company-tern company-web-html company-yasnippet company-files)))
-    (add-hook 'web-mode-hook 'my-web-mode-hook))
+      "cw" 'web-mode-whitespaces-show))
 
   (use-package js2-mode
     :mode (("\\.js\\'" . js2-mode)
            ("\\.jsx\\'" . js2-jsx-mode))
+    :hook (js2-mode . eglot-ensure)
     :config
     (setq js2-basic-offset 2
           js2-strict-missing-semi-warning nil)
-    (add-to-list 'company-backends 'company-tern)
     (add-hook 'js2-mode-hook (lambda () (js2-imenu-extras-mode))))
 
   (use-package js2-refactor
@@ -1887,20 +1867,6 @@ settings.
 
   (use-package emmet-mode
     :hook ((web-mode js2-mode css-mode) . emmet-mode))
-
-  (use-package tern
-    :hook ((web-mode js2-mode css-mode) . my-tern-hook)
-    :config
-    (setq tern-command '("tern" "--no-port-file"))
-    (evil-define-key 'normal tern-mode-keymap
-      "gd" 'tern-find-definition
-      "gp" 'tern-pop-find-definition
-      "gr" 'xref-find-reference-here
-      "g[" 'xref-pop-marker-stack)
-    (defun my-tern-hook ()
-      (evil-normalize-keymaps)
-      (tern-mode)
-      (yas-minor-mode)))
 
   (use-package go-mode
     :hook (go-mode . eglot-ensure)
