@@ -1607,6 +1607,11 @@ settings.
     :config
     (setq c-basic-offset 4
           c-default-style "bsd"))
+
+  (use-package compile
+    :ensure nil
+    :config
+    (evil-add-hjkl-bindings compilation-mode-map))
 #+END_SRC
 * Development packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
