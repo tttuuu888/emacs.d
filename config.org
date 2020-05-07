@@ -4,7 +4,7 @@
 
 * About
 This is my personal Emacs setting.
-* Init.el
+
 =init.el= will generate =config.el= from =config.org= and then will load
 =config.el=.
 
@@ -16,6 +16,7 @@ All the other settings will be located in =config.org=.
 * Initial settings
 ** Commentary
 This comment will be added on the top of =config.el=.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;;; config.el --- generated from config.org -*- lexical-binding: t -*-
   ;;
@@ -68,6 +69,7 @@ Set =emacs-etc-dir= to indicate a folder containing extra files.
 
 ** Custom file
 =custom.el= will be saved under =~/.emacs.d/.local/= but will not be used.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 #+END_SRC
@@ -200,6 +202,7 @@ Enable =sk-mode-line=.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (sk-mode-line)
 #+END_SRC
+
 ** SK-utils
 Various useful functions.
 
@@ -406,6 +409,7 @@ Various useful functions.
              (unintern ',name nil))
            (add-hook 'pre-command-hook #',name)))))
 #+END_SRC
+
 ** Use-package
 Install =use-package= if not exists. Set some default settings for
 =use-package=.
@@ -427,6 +431,7 @@ settings.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (require 'use-package)
 #+END_SRC
+
 * Evil and Evil-leader packages
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package evil-leader
