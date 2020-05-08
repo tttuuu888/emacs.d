@@ -337,9 +337,10 @@ Various useful functions.
   (defun tmux-new-pane-here ()
     "Open tmux pane of the current path."
     (interactive)
-    (if (tmux-running-p)
-        (call-process "tmux" nil nil nil "new-window")
-      (message "Tmux is not running!")))
+    (if (not (tmux-running-p))
+        (message "Tmux is not running!")
+      (call-process "tmux" nil nil nil "new-window")
+      (message "New tmux pane is opened.")))
 
   (defun get-week-form (&optional offset date)
     "Create a specific form with the week number and the date. DATE
