@@ -1103,6 +1103,7 @@ settings.
       "ho" 'helm-occur
       "hr" 'helm-resume)
     :config
+    (require 'helm-files)
     (setq helm-imenu-execute-action-at-once-if-one nil
           helm-split-window-default-side 'right
           helm-show-completion-display-function nil))
