@@ -1294,8 +1294,6 @@ settings.
 
   (use-package yasnippet
     :commands yas-expand
-    :init
-    (evil-define-key 'insert prog-mode-map (kbd "M-j") 'yas-expand)
     :config
     (advice-add 'yas-expand :before (lambda () (yas-minor-mode 1)))
     (add-to-list 'yas-snippet-dirs (expand-file-name "snippets/" emacs-etc-dir))
