@@ -1404,7 +1404,7 @@ settings.
       "d"     'counsel-find-file
       "f"     'counsel-find-file
       "r"     'counsel-recentf
-      "cr"    'counsel-org-capture
+      "cx"    'counsel-org-capture
       "hb"    'counsel-descbinds
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
