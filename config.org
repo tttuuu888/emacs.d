@@ -1264,7 +1264,11 @@ settings.
 
   (use-package visual-regexp
     :bind (("C-c r r" . vr/replace)
-           ("C-c r q" . vr/query-replace)))
+           ("C-c r q" . vr/query-replace))
+    :init
+    (evil-leader/set-key
+      "crr" 'vr/replace
+      "crq" 'vr/query-replace))
 
   (use-package visual-regexp-steroids
     :demand t
