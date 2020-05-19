@@ -1398,7 +1398,9 @@ settings.
   (use-package posframe)
 
   (use-package counsel
-    :commands (counsel-fzf-here my-counsel-switch-to-shell-buffer)
+    :commands (counsel-fzf-here
+               counsel--browse-history
+               my-counsel-switch-shell-buffer)
     :bind (("M-x"     . counsel-M-x)
            ("C-x d"   . counsel-find-file)
            ("C-x C-f" . counsel-find-file)
@@ -1417,7 +1419,7 @@ settings.
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
       "jc"    'counsel-fzf-here
-      "sb"    'my-counsel-switch-to-shell-buffer)
+      "sb"    'my-counsel-switch-shell-buffer)
     :config
     (setq ivy-initial-inputs-alist nil
           ivy-height-alist '((t . 15)))
