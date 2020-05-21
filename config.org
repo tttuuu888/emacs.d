@@ -1426,7 +1426,7 @@ settings.
     (defun counsel-fzf-here ()
       (interactive)
       (counsel-fzf nil default-directory))
-    (defun my-counsel-switch-to-shell-buffer ()
+    (defun my-counsel-switch-shell-buffer ()
       "Switch to a shell buffer, or create one."
       (interactive)
       (ivy-read "Shell buffer: "
