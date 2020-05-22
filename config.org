@@ -1645,7 +1645,9 @@ settings.
       (kbd "RET") 'ggtags-navigation-mode-done))
 
   (use-package irony
-    :hook ((c++-mode c-mode objc-mode) . irony-mode))
+    :hook ((c++-mode c-mode objc-mode) . irony-mode)
+    :config
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
   (use-package paredit
     :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode geiser-repl-mode
