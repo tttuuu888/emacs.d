@@ -1047,6 +1047,8 @@ settings.
     (sk-defer-init (global-company-mode 1))
     :config
     (setq company-idle-delay 0.3)
+    (define-key company-active-map (kbd "C-n") 'company-select-next)
+    (define-key company-active-map (kbd "C-p") 'company-select-previous)
     (evil-define-key 'insert company-mode-map
       (kbd "TAB") 'company-indent-or-complete-common))
 
