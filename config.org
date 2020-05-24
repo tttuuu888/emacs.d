@@ -143,6 +143,13 @@ Enable dark theme.
   (my-theme-setting t)
 #+END_SRC
 
+** Unicode font setting
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (when window-system
+    (set-fontset-font t 'unicode "Unifont")
+    (set-fontset-font t '(#x10000 . #xFFFFF) "Unifont Upper")
+    (set-fontset-font t 'hangul "D2Coding"))
+#+END_SRC
 ** Yes-or-no -> y-or-n
 Use =y-or-n= instead of =yes-or-no=.
 
@@ -575,9 +582,6 @@ settings.
     :bind ("C-\\" . toggle-korean-input-method)
     :init
     (setq default-korean-keyboard "3")
-    (when window-system
-      (set-fontset-font t 'unicode (font-spec :name "Unifont"))
-      (set-fontset-font t 'hangul (font-spec :name (font-get-system-font))))
     (setup-korean-environment-internal))
 
   (use-package recentf
