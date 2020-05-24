@@ -576,6 +576,7 @@ settings.
     :init
     (setq default-korean-keyboard "3")
     (when window-system
+      (set-fontset-font t 'unicode (font-spec :name "Symbola"))
       (set-fontset-font t 'hangul (font-spec :name (font-get-system-font))))
     (setup-korean-environment-internal))
 
