@@ -122,9 +122,9 @@ If =USER_FULL_NAME= and =USER_MAIL_ADDRESS= environment variables exist, update
 Simple color setting function which has 'dark' and 'light' theme.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (defun my-theme-setting (&optional dark-theme)
-    (let ((fg-color (if (or dark-theme (not window-system)) "Gray80" "Black"))
-          (bg-color (if (or dark-theme (not window-system)) "Gray23" "Ivory2")))
+  (defun my-theme-setting (&optional light-theme)
+    (let ((fg-color (if light-theme "Black"  "Gray80"))
+          (bg-color (if light-theme "Ivory2" "Gray23")))
       (set-face-attribute 'default nil
                           :foreground fg-color :background bg-color)
       (set-face-attribute 'fringe nil
@@ -133,19 +133,19 @@ Simple color setting function which has 'dark' and 'light' theme.
                           :background bg-color :underline nil)
       (set-face-attribute 'vertical-border nil
                           :background bg-color)))
-  (defun sk-light-theme () (interactive) (my-theme-setting))
-  (defun sk-dark-theme  () (interactive) (my-theme-setting t))
+  (defun sk-light-theme () (interactive) (my-theme-setting t))
+  (defun sk-dark-theme  () (interactive) (my-theme-setting))
 #+END_SRC
 
 Enable dark theme.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (my-theme-setting t)
+  (my-theme-setting)
 #+END_SRC
 
 ** Unicode font setting
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (when window-system
+  (when (display-graphic-p)
     (set-fontset-font t 'unicode "Unifont")
     (set-fontset-font t '(#x10000 . #xFFFFF) "Unifont Upper")
     (set-fontset-font t 'hangul "D2Coding"))
@@ -1343,7 +1343,7 @@ settings.
             (ivy-switch-buffer . ivy-sort-function-buffer)))
     (require 'subr-x)
     (ivy-mode 1)
-    (when window-system
+    (when (display-graphic-p)
       (ivy-posframe-mode 1))
     (defun sk-ivy-buffer-transformer (str)
       (let* ((buf (get-buffer str))
