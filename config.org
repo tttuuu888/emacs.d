@@ -1347,12 +1347,12 @@ settings.
       (ivy-posframe-mode 1))
     (defun sk-ivy-buffer-transformer (str)
       (let* ((buf (get-buffer str))
+             (buf-len (length str))
              (buf-dir (buffer-local-value 'default-directory buf))
              (buf-mode (buffer-local-value 'major-mode buf))
              (mode (capitalize
                     (string-remove-suffix "-mode" (symbol-name buf-mode))))
-             (max-path-len (max 0
-                                (- (frame-width) 65 (max 0 (- (length str) 35)))))
+             (max-path-len (max 0 (- (frame-width) 65 (max 0 (- buf-len 35)))))
              (path-dir (abbreviate-file-name (or buf-dir "~/")))
              (path-file (when-let ((name (buffer-file-name buf)))
                           (abbreviate-file-name name)))
@@ -1367,12 +1367,14 @@ settings.
              (path-mod (if (<= path-len max-path-len)
                            nil
                          (substring path-opt (- path-len max-path-len) path-len)))
+             (path-margin (max 0 (- 20 (max 0 (- buf-len 35)))))
              (path (if path-mod
                        (concat path-prefix
                                "…"
                                (replace-regexp-in-string "^[^~/]*" "" path-mod))
-                     path-opt)))
-        (format "%-35s %-20s %s" buf mode (or path ""))))
+                     path-opt))
+             (form (concat "%-35s  %-" (int-to-string path-margin) "s  %s")))
+        (format form buf mode (or path ""))))
     (ivy-set-display-transformer 'ivy-switch-buffer 'sk-ivy-buffer-transformer)
     (ivy-set-actions
      'projectile-switch-project
