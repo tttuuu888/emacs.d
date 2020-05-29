@@ -86,7 +86,6 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    '(blink-cursor-mode nil)
    '(completion-styles (quote (basic partial-completion emacs22 initials)))
    '(css-indent-offset 2)
-   '(ediff-split-window-function (quote split-window-horizontally))
    '(fill-column 80)
    '(font-use-system-font t)
    '(indent-tabs-mode nil)
@@ -1040,7 +1039,9 @@ settings.
                          (:background "light grey"))
                         (((class color) (min-colors 88) (background dark))
                          (:background "gray55"))))
-    (ediff-fine-diff-B ((t (:background "#229922")))))
+    (ediff-fine-diff-B ((t (:background "#229922"))))
+    :custom
+    (ediff-split-window-function 'split-window-horizontally))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
