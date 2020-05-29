@@ -1009,6 +1009,38 @@ settings.
   (use-package package
     :init
     (sk-defer-init (package-initialize)))
+
+  (use-package ediff
+    :custom-face
+    (ediff-odd-diff-A ((((class color) (min-colors 88) (background light))
+                        (:background "grey"))
+                       (((class color) (min-colors 88) (background dark))
+                        (:background "gray35"))))
+    (ediff-odd-diff-B ((((class color) (min-colors 88) (background light))
+                        (:background "light grey"))
+                       (((class color) (min-colors 88) (background dark))
+                        (:background "gray55"))))
+    (ediff-odd-diff-C ((((class color) (min-colors 88) (background light))
+                        (:background "grey"))
+                       (((class color) (min-colors 88) (background dark))
+                        (:background "gray35"))))
+    (ediff-even-diff-Ancestor ((((class color) (min-colors 88) (background light))
+                                (:background "grey"))
+                               (((class color) (min-colors 88) (background dark))
+                                (:background "gray35"))))
+    (ediff-even-diff-A ((((class color) (min-colors 88) (background light))
+                         (:background "light grey"))
+                        (((class color) (min-colors 88) (background dark))
+                         (:background "gray55"))))
+    (ediff-even-diff-B ((((class color) (min-colors 88) (background light))
+                         (:background "grey"))
+                        (((class color) (min-colors 88) (background dark))
+                         (:background "gray35"))))
+    (ediff-even-diff-C ((((class color) (min-colors 88) (background light))
+                         (:background "light grey"))
+                        (((class color) (min-colors 88) (background dark))
+                         (:background "gray55"))))
+    (ediff-fine-diff-B ((t (:background "#229922")))))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
