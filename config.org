@@ -211,12 +211,14 @@ Various useful functions.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun sharp-ifdef-insert (start end pre)
     (save-excursion
-      (let ((end2 (if (and (equal evil-state 'visual)
-                           (equal end (line-beginning-position)))
-                      (1- end)
-                    end)))
-        (goto-char end2) (end-of-line) (insert "\n#endif")
-        (goto-char start) (beginning-of-line) (insert pre "\n"))))
+      (goto-char (1- end))
+      (end-of-line)
+      (unless (equal (point) (line-beginning-position))
+        (insert "\n"))
+      (insert "#endif")
+      (goto-char start)
+      (beginning-of-line)
+      (insert pre "\n")))
 
   (defun izero-insert (start end)
     "Intesrt #if 0 at the beginning of region and #endif at the end of region"
