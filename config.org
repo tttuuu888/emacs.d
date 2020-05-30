@@ -1038,8 +1038,9 @@ settings.
                         (((class color) (min-colors 88) (background dark))
                          (:background "gray55"))))
     (ediff-fine-diff-B ((t (:background "#229922"))))
-    :custom
-    (ediff-split-window-function 'split-window-horizontally))
+    :config
+    (setq ediff-split-window-function 'split-window-horizontally
+          ediff-window-setup-function 'ediff-setup-windows-plain))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
