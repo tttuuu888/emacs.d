@@ -1037,7 +1037,10 @@ settings.
                          (:background "light grey"))
                         (((class color) (min-colors 88) (background dark))
                          (:background "gray55"))))
-    (ediff-fine-diff-B ((t (:background "#229922"))))
+    (ediff-fine-diff-B ((((class color) (min-colors 88) (background light))
+                         (:background "#aaffaa"))
+                        (((class color) (min-colors 88) (background dark))
+                         (:background "#227722"))))
     :config
     (setq ediff-split-window-function 'split-window-horizontally
           ediff-window-setup-function 'ediff-setup-windows-plain))
