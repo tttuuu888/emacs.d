@@ -168,12 +168,8 @@ Simple mode line setting function.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun sk-mode-line ()
-    (set-face-attribute 'mode-line nil
-                        :foreground "Gray2"
-                        :box nil)
-    (set-face-attribute 'mode-line-inactive nil
-                        :foreground "Gray55"
-                        :box nil)
+    (set-face-attribute 'mode-line nil :box nil)
+    (set-face-attribute 'mode-line-inactive nil :box nil)
     (setq-default
      mode-line-format
      '("%e"
