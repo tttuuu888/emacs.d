@@ -1214,27 +1214,6 @@ settings.
           org-reveal-title-slide "<h2>%t</h2><h4>%a&nbsp(%e)</h4>"
           org-reveal-transition "none"))
 
-  (use-package neotree
-    :commands my-neotree-directory
-    :bind (("C-c n" . my-neotree-directory)
-           :map neotree-mode-map
-           ("u" . neotree-select-up-node)
-           ("y" . (lambda ()
-                    "Copy the absolute path of the node at point."
-                    (interactive)
-                    (message "Copied path : %s"
-                             (neotree-copy-filepath-to-yank-ring)))))
-    :init
-    (evil-leader/set-key
-      "n" 'my-neotree-directory)
-    :config
-    (evil-set-initial-state 'neotree-mode 'emacs)
-    (defun my-neotree-directory ()
-      (interactive)
-      (if (neo-global--window-exists-p)
-          (neotree-hide)
-        (neotree-dir (my-project-root-or-dir)))))
-
   (use-package magit
     :bind ("<f12>" . magit-status)
     :hook (with-editor-mode . evil-normal-state)
@@ -1290,18 +1269,6 @@ settings.
   (use-package korean-holidays
     :init
     (setq calendar-holidays korean-holidays))
-
-  (use-package visual-regexp
-    :bind (("C-c r r" . vr/replace)
-           ("C-c r q" . vr/query-replace))
-    :init
-    (evil-leader/set-key
-      "crr" 'vr/replace
-      "crq" 'vr/query-replace))
-
-  (use-package visual-regexp-steroids
-    :demand t
-    :after visual-regexp)
 
   (use-package fzf
     :bind (("C-c j o" . fzf)
