@@ -1415,9 +1415,6 @@ settings.
     :config
     (setq ivy-initial-inputs-alist nil
           ivy-height-alist '((t . 15)))
-    (defun counsel-up-directory ()
-      (ivy--cd (ivy--parent-dir (expand-file-name ivy--directory)))
-      (ivy--exhibit))
     (defun counsel-fzf-here ()
       (interactive)
       (counsel-fzf nil default-directory))
