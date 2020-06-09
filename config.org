@@ -516,7 +516,9 @@ settings.
               (lambda () (when buffer-read-only (read-only-mode -1))))
     (defun evil-reload-file ()
       (interactive)
-      (find-alternate-file (buffer-file-name)))
+      (let ((p (point)))
+        (find-alternate-file (buffer-file-name))
+        (goto-char p)))
     (defun evil-paste-pgvy ()
       "Paste and restore visual block and yank."
       (interactive)
