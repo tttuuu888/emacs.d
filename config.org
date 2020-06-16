@@ -221,17 +221,17 @@ Various useful functions.
       (insert pre "\n")))
 
   (defun izero-insert (start end)
-    "Intesrt #if 0 at the beginning of region and #endif at the end of region"
+    "Wrap a region with #if 0 and #endif."
     (interactive "r")
     (sharp-ifdef-insert start end "#if 0"))
 
   (defun idef-insert (start end in)
-    "Intesrt #ifdef at the beginning of region and #endif at the end of region"
+    "Wrap a region with #ifdef and #endif."
     (interactive "r\nsDefine : ")
     (sharp-ifdef-insert start end (concat "#ifdef " in)))
 
   (defun find-file-in-tree (dir fname)
-    "Find a file looking up to the HOME folder or root folder."
+    "Find a file up to the HOME folder or root folder."
     (let ((file (expand-file-name fname dir))
           (parent (unless (or (equal "~/" dir) (equal "/" dir))
                     (file-name-directory (directory-file-name dir)))))
