@@ -1113,6 +1113,7 @@ settings.
            ("C-c h r" . helm-resume)
            :map minibuffer-local-map
            ("M-l"     . helm-minibuffer-history)
+           ("M-y"     . yank-pop)
            :map helm-map
            ("<escape>". helm-keyboard-quit))
     :init
@@ -1364,6 +1365,8 @@ settings.
     (advice-add 'ivy-yasnippet :after (lambda () (evil-insert-state))))
 
   (use-package ivy-posframe
+    :bind (:map ivy-posframe-mode-map
+            ("M-y" . yank-pop))
     :custom-face
     (ivy-posframe
      ((((background light)) :background "ivory3" :foreground "black")
