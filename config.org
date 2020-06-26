@@ -1949,6 +1949,8 @@ settings.
     :hook (rust-mode . eglot-ensure))
 
   (use-package lua-mode)
+
+  (use-package cmake-mode)
 #+END_SRC
 * End
 ** Provide a feature
