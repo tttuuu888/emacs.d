@@ -1616,9 +1616,8 @@ settings.
 * Development packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package cff
-    :init
-    (add-hook 'c-mode-common-hook
-              (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
+    :hook (c-mode-common
+           . (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
 
   (use-package ggtags
     :hook ((c-mode-common asm-mode) . ggtags-mode))
@@ -1849,14 +1848,13 @@ settings.
     (js2r-add-keybindings-with-prefix "C-c C-n"))
 
   (use-package rjsx-mode
+    :hook (find-file-hook
+           . (lambda ()
+               (and (string-match "\\.js\\'" buffer-file-name)
+                    (find-file-in-tree default-directory "next.config.js")
+                    (rjsx-mode))))
     :init
-    (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
-    (add-hook 'find-file-hook
-              (lambda ()
-                (when
-                    (and (string-match "\\.js\\'" buffer-file-name)
-                         (find-file-in-tree default-directory "next.config.js"))
-                  (rjsx-mode)))))
+    (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode)))
 
   (use-package emmet-mode
     :hook ((web-mode js2-mode css-mode) . emmet-mode))
