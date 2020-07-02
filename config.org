@@ -1621,13 +1621,7 @@ settings.
               (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
 
   (use-package ggtags
-    :hook ((c-mode-common asm-mode) . ggtags-mode)
-    :config
-    (evil-define-key 'normal ggtags-mode-map
-      "gd" 'ggtags-find-tag-dwim
-      "gr" 'ggtags-find-reference)
-    (evil-define-key 'motion ggtags-navigation-mode-map
-      (kbd "RET") 'ggtags-navigation-mode-done))
+    :hook ((c-mode-common asm-mode) . ggtags-mode))
 
   (use-package irony
     :hook ((c++-mode c-mode objc-mode) . irony-mode)
