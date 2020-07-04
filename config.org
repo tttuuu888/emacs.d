@@ -1936,7 +1936,12 @@ settings.
       "gh" 'eglot-help-at-point))
 
   (use-package rust-mode
-    :hook (rust-mode . eglot-ensure))
+    :hook (rust-mode . eglot-ensure)
+    :config
+    (evil-leader/set-key-for-mode 'rust-mode
+      "ee" 'rust-compile
+      "er" 'rust-run
+      "et" 'rust-test))
 
   (use-package lua-mode)
 
