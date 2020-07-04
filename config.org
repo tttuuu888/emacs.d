@@ -719,7 +719,7 @@ settings.
             ("C-c e e" . org-edit-src-code))
     :init
     (evil-leader/set-key
-      "ca" 'org-agenda)
+      "na" 'org-agenda)
     :config
     (setq
      my-org-path "~/Dropbox/org/"
@@ -1399,11 +1399,11 @@ settings.
       "d"     'counsel-find-file
       "f"     'counsel-find-file
       "r"     'counsel-recentf
-      "cx"    'counsel-org-capture
       "hb"    'counsel-descbinds
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
       "jc"    'counsel-fzf-here
+      "nx"    'counsel-org-capture
       "sb"    'my-counsel-switch-shell-buffer)
     :config
     (setq ivy-initial-inputs-alist nil
