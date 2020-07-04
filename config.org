@@ -1611,6 +1611,7 @@ settings.
   (use-package compile
     :ensure nil
     :config
+    (setq compilation-scroll-output t)
     (evil-add-hjkl-bindings compilation-mode-map))
 #+END_SRC
 * Development packages - external
