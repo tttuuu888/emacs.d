@@ -1505,6 +1505,7 @@ settings.
             ("<return>" . xref-quit-and-goto-xref)
             ("<RET>"    . xref-quit-and-goto-xref))
     :config
+    (remove-hook 'xref-backend-functions #'etags--xref-backend)
     (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
     (defun xref-find-reference-here ()
       (interactive)
