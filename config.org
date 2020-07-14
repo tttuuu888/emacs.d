@@ -1375,9 +1375,9 @@ settings.
     :config
     (setq ivy-posframe-border-width 20
           ivy-posframe-display-functions-alist
-          '((complete-symbol . nil)
-            (ivy-yasnippet   . nil)
-            (swiper          . nil)
+          '((complete-symbol . ivy-posframe-display-at-point)
+            (ivy-yasnippet   . ivy-display-function-fallback)
+            (swiper          . ivy-display-function-fallback)
             (t               . ivy-posframe-display-at-frame-center))))
 
   (use-package posframe)
