@@ -994,10 +994,12 @@ settings.
       (kbd "RET") 'my-comint-return))
 
   (use-package package
+    :ensure nil
     :init
     (sk-defer-init (package-initialize)))
 
   (use-package ediff
+    :ensure nil
     :custom-face
     (ediff-odd-diff-A ((((background light)) (:background "grey"))
                        (((background dark)) (:background "gray35"))))
