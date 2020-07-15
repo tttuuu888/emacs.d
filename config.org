@@ -1020,6 +1020,11 @@ settings.
     :config
     (setq ediff-split-window-function 'split-window-horizontally
           ediff-window-setup-function 'ediff-setup-windows-plain))
+
+  (use-package eldoc
+    :ensure nil
+    :config
+    (setq eldoc-echo-area-use-multiline-p 2))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1922,10 +1927,6 @@ settings.
   (use-package eglot
     :config
     (require 'projectile)
-    (defun eglot--update-doc (string &rest _)
-      "Display only the first line of STRING as an ElDoc message."
-      (when string
-        (eldoc-message (car (split-string string "\n")))))
     (defun my-projectile-project-find (dir)
       (let ((root (projectile-project-root dir)))
         (and root (cons 'transient root))))
@@ -1936,7 +1937,7 @@ settings.
                     (call-interactively
                      'eglot-shutdown '((eglot-current-server) t)))))
     (evil-define-minor-mode-key 'normal 'eglot--managed-mode
-      "gh" 'eglot-help-at-point))
+      "gh" 'eldoc-doc-buffer))
 
   (use-package rust-mode
     :hook (rust-mode . eglot-ensure)
