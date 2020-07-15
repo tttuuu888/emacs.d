@@ -500,6 +500,7 @@ settings.
     (evil-mode)
     :config
     (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
+    (push '("*eldoc*" . emacs) evil-buffer-regexps)
     (add-hook 'evil-insert-state-entry-hook
               (lambda () (when buffer-read-only (read-only-mode -1))))
     (defun evil-reload-file ()
