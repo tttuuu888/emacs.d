@@ -951,8 +951,7 @@ settings.
     :config
     (setq tramp-auto-save-directory "/tmp/tramp/"
           tramp-chunksize 2000
-          tramp-histfile-override (expand-file-name ".tramp_history"
-                                                    user-emacs-directory))
+          tramp-histfile-override t)
     ;; TRAMP respect PATH variable on remote machine.
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
