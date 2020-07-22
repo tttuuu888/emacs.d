@@ -528,7 +528,7 @@ settings.
     (evil-global-set-key 'normal "U" 'undo-at-here)
     (evil-global-set-key 'normal "Y" (kbd "y$"))
     (evil-global-set-key 'motion "$" 'end-of-line)
-    (dolist (m '(image-mode term-mode diff-mode))
+    (dolist (m '(image-mode diff-mode))
       (evil-set-initial-state m 'emacs)))
 
   (use-package evil-anzu
@@ -912,6 +912,13 @@ settings.
         (kbd "RET") 'my-comint-return))
     (evil-leader/set-key-for-mode 'eshell-mode
       "l"  'my-eshell-history))
+
+  (use-package term
+    :ensure nil
+    :custom-face
+    (term-color-blue ((t :foreground "blue4" :background "blue4")))
+    :config
+    (evil-set-initial-state 'term-mode 'emacs))
 
   (use-package paren
     :ensure nil
