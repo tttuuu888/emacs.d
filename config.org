@@ -1031,7 +1031,7 @@ settings.
   (use-package eldoc
     :ensure nil
     :config
-    (setq eldoc-echo-area-use-multiline-p 2))
+    (setq eldoc-echo-area-use-multiline-p 1))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
