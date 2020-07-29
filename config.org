@@ -252,7 +252,7 @@ Various useful functions.
             (use-process (call-process-shell-command scmd))
             (t (compile scmd)))))
 
-  (defun sk-make ()
+  (defun sk-build ()
     (interactive)
     (my-sbin-process "build.sh"))
 
@@ -1054,7 +1054,7 @@ settings.
      ("C-c <escape>"     . keyboard-quit)
      ("C-x <escape>"     . keyboard-quit)
      ("M-,"              . my-other-window)
-     ("<f5>"             . sk-make)
+     ("<f5>"             . sk-build)
      ("C-<f5>"           . sk-rebuild)
      ("C-M-,"            . transpose-windows)
      ("M-S-<up>"         . (lambda () (interactive) (move-line -1)))
