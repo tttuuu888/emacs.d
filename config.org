@@ -237,7 +237,7 @@ Various useful functions.
                     (file-name-directory (directory-file-name dir)))))
       (cond ((file-exists-p file)
              (if return-include-file file dir))
-            (parent (find-file-in-tree parent filename))
+            (parent (find-file-in-tree parent filename return-include-file))
             (t nil))))
 
   (defun my-sbin-process (script &optional use-process)
