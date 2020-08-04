@@ -632,7 +632,7 @@ settings.
           dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..+$")
 
     (require 'dired-x)
-    (add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
+    (add-hook 'dired-mode-hook 'dired-omit-mode)
 
     (evil-set-initial-state 'dired-mode 'emacs)
     (evil-leader/set-key-for-mode 'dired-mode
