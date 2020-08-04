@@ -962,7 +962,7 @@ settings.
     :config
     (setq tramp-auto-save-directory "/tmp/tramp/"
           tramp-chunksize 2000
-          tramp-histfile-override t)
+          tramp-histfile-override nil)
     ;; TRAMP respect PATH variable on remote machine.
     (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
