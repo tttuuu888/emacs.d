@@ -1510,11 +1510,13 @@ settings.
       (lambda ()
         (interactive)
         (pop-to-buffer (process-buffer (call-interactively 'run-python)))))
-    (defun my-python-shell-send-line-or-region ()
-      (interactive)
+    (defun my-python-shell-send-line-or-region (n)
+      (interactive "p")
       (if (region-active-p)
           (call-interactively 'python-shell-send-region)
-        (python-shell-send-region (line-beginning-position) (line-end-position))))
+        (python-shell-send-region
+         (line-beginning-position) (line-end-position n)))
+      (setq deactivate-mark t))
     (evil-leader/set-key-for-mode 'inferior-python-mode
       "l"  'my-comint-history)
     (evil-leader/set-key-for-mode 'python-mode
