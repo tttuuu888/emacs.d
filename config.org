@@ -1492,8 +1492,8 @@ settings.
     :hook (python-mode . eglot-ensure)
     :commands sk-toggle-python
     :bind (:map python-mode-map
-            ("M-<left>"  . python-indent-shift-left)
-            ("M-<right>" . python-indent-shift-right))
+            ("S-<left>"  . python-indent-shift-left)
+            ("S-<right>" . python-indent-shift-right))
     :config
     (setq imenu-create-index-function 'python-imenu-create-index
           python-indent-guess-indent-offset-verbose nil)
