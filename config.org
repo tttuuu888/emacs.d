@@ -1829,10 +1829,9 @@ settings.
           web-mode-code-indent-offset 2
           web-mode-markup-indent-offset 2
           web-mode-enable-current-element-highlight t)
-    (require 'cl)
     (defun tree-assoc (key tree)
       (when (consp tree)
-        (destructuring-bind (x . y)  tree
+        (cl-destructuring-bind (x . y)  tree
           (if (eql x key) tree
             (or (tree-assoc key x) (tree-assoc key y))))))
     (defmacro code-to-key (code)
