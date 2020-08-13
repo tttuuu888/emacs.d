@@ -1183,6 +1183,8 @@ settings.
            ("C-c j b" . projectile-switch-to-buffer)
            ("C-c j s" . projectile-switch-project)
            ("C-c j S" . projectile-save-project-buffers))
+    :hook (c-mode-common
+           . (lambda () (local-set-key (kbd "M-o") 'projectile-find-other-file)))
     :init
     (evil-leader/set-key
       "jd" 'projectile-find-dir
@@ -1645,10 +1647,6 @@ settings.
 #+END_SRC
 * Development packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package cff
-    :hook (c-mode-common
-           . (lambda () (local-set-key (kbd "M-o") 'cff-find-other-file))))
-
   (use-package ggtags
     :hook ((c-mode-common asm-mode) . ggtags-mode))
 
