@@ -1672,34 +1672,10 @@ settings.
         (when (equal pos (1- (line-end-position)))
           (goto-char (1+ pos)))
         (call-interactively 'paredit-kill)))
-    (defun my-evil-paredit-next-bracket (n direction)
-      "Move to the next Nth bracket or quote with DIRECTION."
-      (let* ((evil-execute-in-emacs-state-buffer t)
-             (pos (point))
-             (forward (> direction 0))
-             (arg (if forward n (- n))))
-        (and forward
-             (member (line-end-position) (list pos (1+ pos)))
-             (goto-char (line-beginning-position 2)))
-        (when (paredit-in-string-p)
-          (goto-char (nth 8 (paredit-current-parse-state)))
-          (and forward (forward-sexp 1))
-          (setq arg (- arg (if forward 1 -1))))
-        (unless (re-search-forward "(\\|)\\|\\[\\|\\]" nil t arg)
-          (goto-char pos))))
-    (defun sk-evil-paredit-forward-braket (&optional n)
-      (interactive "p")
-      (my-evil-paredit-next-bracket n 1))
-    (defun sk-evil-paredit-backward-braket (&optional n)
-      (interactive "p")
-      (my-evil-paredit-next-bracket n -1))
     (evil-leader/set-key-minor-mode 'paredit-mode
       "k"  'evil-paredit-kill)
     (evil-define-key 'insert paredit-mode-map
-      (kbd "C-k") 'paredit-kill)
-    (evil-define-key 'motion paredit-mode-map
-      "]b" 'sk-evil-paredit-forward-braket
-      "[b" 'sk-evil-paredit-backward-braket))
+      (kbd "C-k") 'paredit-kill))
 
   (use-package clojure-mode
     :config
