@@ -194,6 +194,16 @@ pre.a:hover {
   overflow-y: visible;
 }
 
+.footnotes {
+  font-size:1.2rem;
+  border-top: 1px solid #ddd;
+  border-bottom: 0;
+}
+
+.footdef {
+    line-height: 0.6rem;
+}
+
 /* TOC inspired by http://jashkenas.github.com/coffee-script */
 #table-of-contents {
   font-size: 10pt;
