@@ -1602,7 +1602,7 @@ settings.
       scheme-mode geiser-repl-mode run-geiser)
     (evil-leader/set-key-for-mode 'scheme-mode
       "eb" 'geiser-eval-buffer
-      "ee" 'geiser-eval-last-sexp
+      "ee" 'my-geiser-eval-last-sexp-or-region
       "ef" 'geiser-eval-definition
       "er" 'geiser-eval-region))
 
@@ -1793,7 +1793,16 @@ settings.
           geiser-repl-history-filename
           (expand-file-name ".geiser_history" user-emacs-directory))
     (advice-add 'run-geiser :before
-                (lambda (impl) (geiser-impl--set-buffer-implementation impl))))
+                (lambda (impl) (geiser-impl--set-buffer-implementation impl)))
+    (defun my-geiser-eval-last-sexp-or-region (n)
+      (interactive "p")
+      (let* ((evil-execute-in-emacs-state-buffer t)
+             (pos (1+ (point)))
+             (back (save-excursion (goto-char pos) (backward-sexp) (point))))
+        (if (region-active-p)
+            (call-interactively 'geiser-eval-region)
+          (geiser-eval-region back pos)))
+      (setq deactivate-mark t)))
 
   (use-package web-mode
     :mode (("\\.html\\'" . web-mode)
