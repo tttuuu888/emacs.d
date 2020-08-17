@@ -1791,7 +1791,9 @@ settings.
     :config
     (setq geiser-chicken-binary "chicken-csi"
           geiser-repl-history-filename
-          (expand-file-name ".geiser_history" user-emacs-directory)))
+          (expand-file-name ".geiser_history" user-emacs-directory))
+    (advice-add 'run-geiser :before
+                (lambda (impl) (geiser-impl--set-buffer-implementation impl))))
 
   (use-package web-mode
     :mode (("\\.html\\'" . web-mode)
