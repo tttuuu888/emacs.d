@@ -1599,7 +1599,7 @@ settings.
     :config
     (require 'geiser)
     (sk-switch-buffer-repl sk-scheme-buffer-repl-toggle
-      scheme-mode geiser-repl-mode run-geiser)
+      scheme-mode geiser-repl-mode sk-geiser-repl)
     (evil-leader/set-key-for-mode 'scheme-mode
       "eb" 'geiser-eval-buffer
       "ee" 'my-geiser-eval-last-sexp-or-region
@@ -1788,12 +1788,11 @@ settings.
       "q"  'quit-window))
 
   (use-package geiser
+    :commands sk-geiser-repl
     :config
     (setq geiser-chicken-binary "chicken-csi"
           geiser-repl-history-filename
           (expand-file-name ".geiser_history" user-emacs-directory))
-    (advice-add 'run-geiser :before
-                (lambda (impl) (geiser-impl--set-buffer-implementation impl)))
     (defun my-geiser-eval-last-sexp-or-region (n)
       (interactive "p")
       (let* ((evil-execute-in-emacs-state-buffer t)
@@ -1802,7 +1801,11 @@ settings.
         (if (region-active-p)
             (call-interactively 'geiser-eval-region)
           (geiser-eval-region back pos)))
-      (setq deactivate-mark t)))
+      (setq deactivate-mark t))
+    (defun sk-geiser-repl ()
+      (interactive)
+      (geiser-set-scheme)
+      (geiser-mode-switch-to-repl nil)))
 
   (use-package web-mode
     :mode (("\\.html\\'" . web-mode)
