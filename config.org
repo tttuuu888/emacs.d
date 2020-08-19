@@ -1796,7 +1796,7 @@ settings.
     (defun my-geiser-eval-last-sexp-or-region (n)
       (interactive "p")
       (let* ((evil-execute-in-emacs-state-buffer t)
-             (pos (1+ (point)))
+             (pos (min (1+ (point)) (point-max)))
              (back (save-excursion (goto-char pos) (backward-sexp) (point))))
         (if (region-active-p)
             (call-interactively 'geiser-eval-region)
