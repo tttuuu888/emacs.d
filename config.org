@@ -754,10 +754,6 @@ settings.
      org-export-with-email t
      org-export-with-section-numbers nil
      org-export-with-sub-superscripts nil
-     org-footnote-definition-re "^\\[fn:[-_[:word:]]+\\]"
-     org-footnote-re (concat "\\[\\(?:fn:\\([-_[:word:]]+\\)?:"
-                             "\\|"
-                             "\\(fn:[-_[:word:]]+\\)\\)")
      org-html-inline-image-rules
      '(("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
        ("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
