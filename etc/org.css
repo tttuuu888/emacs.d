@@ -195,14 +195,17 @@ pre.a:hover {
 }
 
 .footnotes {
-  font-size:1.2rem;
+  font-size:1.1rem;
   border-top: 1px solid #ddd;
   border-bottom: 0;
+  margin-block-end: 0.5rem;
 }
 
-.footdef {
-    line-height: 0.6rem;
+.footpara {
+  display: inline;
+  padding-left: 0;
 }
+
 
 /* TOC inspired by http://jashkenas.github.com/coffee-script */
 #table-of-contents {
