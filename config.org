@@ -1893,6 +1893,7 @@ settings.
             ("C-c C-e" . plantuml-make-output))
     :config
     (setq plantuml-default-exec-mode 'jar
+          plantuml-indent-level 4
           plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
     (evil-leader/set-key-for-mode 'plantuml-mode
       "ce" 'plantuml-make-output)
