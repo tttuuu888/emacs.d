@@ -22,7 +22,6 @@
 ;;  (pinstall-init)
 
 ;;; Code:
-(require 'cl)
 
 (defvar min-number-of-process 4)
 
@@ -68,12 +67,12 @@
 (defun remove-duplicate-packages-in-depth (packages &optional depth)
   (let* ((result packages)
          (base-depth (if depth depth 0))
-         (base-packages (nth-value base-depth packages)))
+         (base-packages (nth base-depth packages)))
     (if (< base-depth (length packages))
         (progn
           (dotimes (dep (length packages))
             (when (> dep base-depth)
-              (let ((target-packages (nth-value dep result)))
+              (let ((target-packages (nth dep result)))
                 (mapcar (lambda (x)
                           (setq target-packages (delq x target-packages)))
                         base-packages)
