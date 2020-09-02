@@ -618,7 +618,7 @@ settings.
             ("j"     . dired-next-line)
             ("k"     . dired-previous-line)
             ("r"     . ora-dired-rsync)
-            ("/"     . evil-search-forward)
+            ("/"     . swiper)
             ("^"     . dired-up-and-close-dir)
             ("bp"    . my-dired-pdf-size-down)
             ("<DEL>" . dired-up-and-close-dir)
