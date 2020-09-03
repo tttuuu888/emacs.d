@@ -761,6 +761,8 @@ settings.
      org-html-metadata-timestamp-format "%Y-%m-%d"
      org-html-validation-link ""
      org-latex-packages-alist '(("" "parskip" nil) ("" "kotex" nil))
+     org-latex-title-command "\\maketitle \\clearpage"
+     org-latex-toc-command "\\tableofcontents \\clearpage"
      org-log-done 'time
      org-plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar"
      org-src-window-setup 'current-window
