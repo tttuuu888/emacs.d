@@ -732,6 +732,7 @@ settings.
      my-org-note (expand-file-name "notes.org" my-org-path)
      org-agenda-files (list my-org-path)
      org-babel-load-languages '((css . t)
+                                (gnuplot . t)
                                 (emacs-lisp . t)
                                 (octave . t)
                                 (plantuml . t)
@@ -1956,6 +1957,8 @@ settings.
   (use-package lua-mode)
 
   (use-package cmake-mode)
+
+  (use-package gnuplot)
 #+END_SRC
 * End
 ** Provide a feature
