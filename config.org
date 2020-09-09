@@ -533,7 +533,7 @@ settings.
     (evil-global-set-key 'normal "U" 'undo-at-here)
     (evil-global-set-key 'normal "Y" (kbd "y$"))
     (evil-global-set-key 'motion "$" 'end-of-line)
-    (dolist (m '(image-mode diff-mode))
+    (dolist (m '(image-mode diff-mode special-mode))
       (evil-set-initial-state m 'emacs)))
 
   (use-package evil-anzu
