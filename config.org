@@ -1035,6 +1035,15 @@ settings.
     :ensure nil
     :config
     (setq eldoc-echo-area-use-multiline-p 1))
+
+  (use-package help-mode
+    :ensure nil
+    :config
+    (evil-define-key 'motion help-mode-map
+      "q"  'quit-window
+      "[g" 'help-go-back
+      "]g" 'help-go-forward
+      (kbd "<tab>") 'forward-button))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
