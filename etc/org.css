@@ -12,11 +12,9 @@ body {
   line-height: 140%;
   color: black;
   margin-top: 0;
-}
-body #content {
   max-width: 50rem;
   background-color: white;
-  padding: 1rem;
+  padding: 2rem;
 }
 body .title {
   text-align: center;
@@ -28,20 +26,24 @@ body .title {
 
 h1 {
   font-size:2.5rem;
-  padding: 0.5rem 0 0.5rem 0;
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 h2 {
-  margin-top: 2.0rem;
   font-size:1.5rem;
   line-height:1.0rem;
-  padding:0.8rem 0 0.8rem 0;
+  padding-top: 3rem;
+  padding-bottom: 0.5rem;
   color: black;
   border-bottom: 1px solid #ddd;
+  margin-bottom: 0.5rem;
 }
 
 h3 {
   font-size:1.3rem;
+  padding-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 a {text-decoration: none; font-weight: 400;}
@@ -61,19 +63,18 @@ a:hover {text-decoration: underline;}
 }
 
 .tag {
-
-}
-
-table {
-  border: none;
-}
-
-td {
-  border: none;
 }
 
 th {
-  border: none;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+  background: #ffffff;
 }
 
 code {
@@ -105,10 +106,6 @@ pre {
   padding: 1rem;
   border: 2px solid #dddddd;
   overflow: auto;
-}
-
-p {
-  padding: 0 1rem;
 }
 
 .builtin {
@@ -183,15 +180,14 @@ pre.a:hover {
 
 #postamble {
   opacity: 0.8;
-  padding: 1.0rem;
-  background-color: #ffffff;
+  padding-top: 1.0rem;
   line-height:50%
 }
 
 .src {
   background-color: #ffffee;
-  overflow-x: scroll;
-  overflow-y: visible;
+  overflow: auto;
+  padding: 0.5rem;
 }
 
 .footnotes {
