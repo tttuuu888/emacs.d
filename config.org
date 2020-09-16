@@ -1238,8 +1238,7 @@ settings.
     :after org
     :custom (org-reveal-note-key-char nil)
     :config
-    (setq org-reveal-center t
-          org-reveal-hlevel 2
+    (setq org-reveal-hlevel 2
           org-reveal-plugins '(classList markdown highlight zoom notes)
           org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
           org-reveal-theme "moon"
