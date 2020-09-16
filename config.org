@@ -827,9 +827,22 @@ settings.
                                (expand-file-name "org.css" emacs-etc-dir))
                               (buffer-string))
                             "/*]]>*/-->\n"
-                            "</style>\n")))
-      (when (eq exporter 'reveal)
-        (setq-local org-export-with-toc nil)))
+                            "</style>\n"))
+        (setq-local
+         org-html-head-extra
+         (concat
+          org-html-head-extra
+          (apply #'format
+                 (append
+                  (list
+                   (concat "<style type=\"text/css\">\n"
+                           "  .src {background-color: %s; color: %s;}\n"
+                           "</style>"))
+                  (mapcar (lambda (x)
+                            (apply #'color-rgb-to-hex
+                                   (append (color-name-to-rgb x) '(2))))
+                          (list (face-background 'default)
+                                (face-foreground 'default)))))))))
     (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
     (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
 
