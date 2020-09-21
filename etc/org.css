@@ -8,7 +8,7 @@ html {
 
 body {
   font-family:sans-serif;
-  font-size: 1.0rem
+  font-size: 1.0rem;
   line-height: 140%;
   color: black;
   margin-top: 0;
@@ -86,6 +86,12 @@ code {
   border: 1px solid #DEDEDE;
   padding: 0px 0.2rem;
 }
+
+.src {
+  overflow: auto;
+  padding: 0.5rem;
+}
+
 
 img {
   border: none;
@@ -185,11 +191,6 @@ pre.a:hover {
   opacity: 0.8;
   padding-top: 1.0rem;
   line-height:50%
-}
-
-.src {
-  overflow: auto;
-  padding: 0.5rem;
 }
 
 .footnotes {
