@@ -755,6 +755,7 @@ settings.
      org-export-with-email t
      org-export-with-section-numbers nil
      org-export-with-sub-superscripts nil
+     org-export-with-toc 1
      org-html-inline-image-rules
      '(("file" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
        ("http" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'")
