@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  font-family:sans-serif;
-  font-size: 1.0rem;
+  font-family: sans-serif;
+  font-size: 1rem;
   line-height: 140%;
   color: black;
   margin: auto;
@@ -24,14 +24,14 @@ body .title {
 }
 
 h1 {
-  font-size:2.5rem;
+  font-size: 2.5rem;
   padding-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 h2 {
-  font-size:1.5rem;
-  line-height:1.0rem;
+  font-size: 1.5rem;
+  line-height: 1rem;
   padding-top: 3rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid;
@@ -39,17 +39,25 @@ h2 {
 }
 
 h3 {
-  font-size:1.3rem;
+  font-size: 1.3rem;
   padding-top: 0.5rem;
   margin-bottom: 0rem;
 }
 
-a {text-decoration: none; font-weight: 400;}
-a:visited {text-decoration: none; font-weight: 400;}
-a:hover {text-decoration: underline;}
+a {
+  text-decoration: none;
+  font-weight: 400;
+}
+a:visited {
+  text-decoration: none;
+  font-weight: 400;
+}
+a:hover {
+  text-decoration: underline;
+}
 
 .todo {
-  color: #CA0000;
+  color: #ca0000;
 }
 
 .done {
@@ -78,7 +86,7 @@ tr:nth-child(odd) {
 code {
   font-size: 100%;
   color: black;
-  border: 1px solid #DEDEDE;
+  border: 1px solid #dedede;
   padding: 0px 0.2rem;
 }
 
@@ -87,14 +95,13 @@ code {
   padding: 0.5rem;
 }
 
-
 img {
   border: none;
 }
 
 .share img {
-  opacity: .4;
-  -moz-opacity: .4;
+  opacity: 0.4;
+  -moz-opacity: 0.4;
   filter: alpha(opacity=40);
 }
 
@@ -184,12 +191,12 @@ pre.a:hover {
 
 #postamble {
   opacity: 0.8;
-  padding-top: 1.0rem;
-  line-height:50%
+  padding-top: 1rem;
+  line-height: 50%;
 }
 
 .footnotes {
-  font-size:1.1rem;
+  font-size: 1.1rem;
   border-top: 1px solid #ddd;
   border-bottom: 0;
   margin-block-end: 0.5rem;
