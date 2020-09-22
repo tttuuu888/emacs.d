@@ -47,6 +47,7 @@ h3 {
 a {
   text-decoration: none;
   font-weight: 400;
+  color: #0366d6;
 }
 a:visited {
   text-decoration: none;
@@ -86,8 +87,9 @@ tr:nth-child(odd) {
 code {
   font-size: 100%;
   color: black;
-  border: 1px solid #dedede;
-  padding: 0px 0.2rem;
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.2rem;
+  background-color: #dedede;
 }
 
 .src {
