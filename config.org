@@ -1614,18 +1614,6 @@ settings.
     :ensure nil
     :hook (sh-mode . (lambda () (sh-electric-here-document-mode -1))))
 
-  (use-package scheme
-    :ensure nil
-    :config
-    (require 'geiser)
-    (sk-switch-buffer-repl sk-scheme-buffer-repl-toggle
-      scheme-mode geiser-repl-mode sk-geiser-repl)
-    (evil-leader/set-key-for-mode 'scheme-mode
-      "eb" 'geiser-eval-buffer
-      "ee" 'my-geiser-eval-last-sexp-or-region
-      "ef" 'geiser-eval-definition
-      "er" 'geiser-eval-region))
-
   (use-package elisp-mode
     :ensure nil
     :config
@@ -1825,7 +1813,14 @@ settings.
     (defun sk-geiser-repl ()
       (interactive)
       (geiser-set-scheme)
-      (geiser-mode-switch-to-repl nil)))
+      (geiser-mode-switch-to-repl nil))
+    (sk-switch-buffer-repl sk-scheme-buffer-repl-toggle
+      scheme-mode geiser-repl-mode sk-geiser-repl)
+    (evil-leader/set-key-for-mode 'scheme-mode
+      "eb" 'geiser-eval-buffer
+      "ee" 'my-geiser-eval-last-sexp-or-region
+      "ef" 'geiser-eval-definition
+      "er" 'geiser-eval-region))
 
   (use-package web-mode
     :mode (("\\.html\\'" . web-mode)
