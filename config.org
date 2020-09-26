@@ -768,6 +768,7 @@ settings.
      org-log-done 'time
      org-plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar"
      org-src-window-setup 'current-window
+     org-startup-folded t
      org-startup-indented t
      org-startup-with-inline-images t
      org-todo-keywords
