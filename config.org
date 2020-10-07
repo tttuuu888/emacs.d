@@ -1094,11 +1094,15 @@ settings.
     (sk-defer-init (global-company-mode 1))
     :config
     (setq company-idle-delay 0.3)
+    (defun my-company-abort ()
+      (when (company--active-p)
+        (company-cancel 'abort)))
     (defun my-company-yas-expand ()
       (interactive)
       (yas-minor-mode-on)
       (let ((company-backends '(company-yasnippet)))
         (company-complete-common)))
+    (add-hook 'evil-insert-state-exit-hook #'my-company-abort)
     (define-key company-active-map (kbd "C-n") 'company-select-next)
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
     (evil-define-key 'insert company-mode-map
@@ -1325,7 +1329,7 @@ settings.
       (fzf/start default-directory)))
 
   (use-package yasnippet
-    :commands yas-expand
+    :commands yas-expand yas-minor-mode-on
     :config
     (advice-add 'yas-expand :before (lambda () (yas-minor-mode-on)))
     (let ((my-yasnippet-dir (expand-file-name "snippets/" emacs-etc-dir)))
@@ -1405,8 +1409,8 @@ settings.
     :init
     (evil-leader/set-key "/" 'ivy-yasnippet)
     :config
-    (advice-add 'ivy-yasnippet :before (lambda () (yas-minor-mode 1)))
-    (advice-add 'ivy-yasnippet :after (lambda () (evil-insert-state))))
+    (advice-add 'ivy-yasnippet :before 'yas-minor-mode-on)
+    (advice-add 'ivy-yasnippet :after 'evil-insert-state))
 
   (use-package ivy-posframe
     :bind (:map ivy-posframe-mode-map
