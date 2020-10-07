@@ -1321,9 +1321,11 @@ settings.
   (use-package yasnippet
     :commands yas-expand
     :config
+    (add-to-list 'company-backends 'company-yasnippet)
     (advice-add 'yas-expand :before (lambda () (yas-minor-mode 1)))
-    (add-to-list 'yas-snippet-dirs (expand-file-name "snippets/" emacs-etc-dir))
-    (yas-reload-all))
+    (let ((my-yasnippet-dir (expand-file-name "snippets/" emacs-etc-dir)))
+      (add-to-list 'yas-snippet-dirs my-yasnippet-dir)
+      (yas-load-directory my-yasnippet-dir t)))
 
   (use-package yasnippet-snippets
     :demand t
