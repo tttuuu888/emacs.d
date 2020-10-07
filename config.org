@@ -1094,9 +1094,15 @@ settings.
     (sk-defer-init (global-company-mode 1))
     :config
     (setq company-idle-delay 0.3)
+    (defun my-company-yas-expand ()
+      (interactive)
+      (yas-minor-mode-on)
+      (let ((company-backends '(company-yasnippet)))
+        (company-complete-common)))
     (define-key company-active-map (kbd "C-n") 'company-select-next)
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
     (evil-define-key 'insert company-mode-map
+      (kbd "M-/") 'my-company-yas-expand
       (kbd "TAB") 'company-indent-or-complete-common))
 
   (use-package company-irony
@@ -1321,8 +1327,7 @@ settings.
   (use-package yasnippet
     :commands yas-expand
     :config
-    (add-to-list 'company-backends 'company-yasnippet)
-    (advice-add 'yas-expand :before (lambda () (yas-minor-mode 1)))
+    (advice-add 'yas-expand :before (lambda () (yas-minor-mode-on)))
     (let ((my-yasnippet-dir (expand-file-name "snippets/" emacs-etc-dir)))
       (add-to-list 'yas-snippet-dirs my-yasnippet-dir)
       (yas-load-directory my-yasnippet-dir t)))
