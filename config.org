@@ -500,6 +500,7 @@ settings.
             ("M-n" . next-complete-history-element)
             ("M-p" . previous-complete-history-element))
     :custom
+    (evil-undo-system 'undo-tree)
     (evil-want-C-u-scroll t)
     :init
     (evil-mode)
@@ -1138,6 +1139,8 @@ settings.
     (add-to-list 'company-backends 'company-ghc))
 
   (use-package undo-tree
+    :init
+    (sk-defer-init (global-undo-tree-mode 1))
     :config
     (evil-set-initial-state 'undo-tree-visualizer-mode 'emacs)
     (evil-leader/set-key
