@@ -797,14 +797,14 @@ settings.
     (evil-leader/set-key-minor-mode 'org-capture-mode
       "ck" 'org-capture-kill
       "cw" 'org-capture-refile)
-    (evil-define-key 'insert org-mode-map
-      (kbd "TAB") 'org-cycle)
     (evil-define-key 'motion org-mode-map
       (kbd "TAB") 'org-cycle
       "gh" 'org-up-element
       "gl" 'org-down-element
       "gj" 'org-forward-element
       "gk" 'org-backward-element)
+    (add-hook 'org-mode-hook
+              (lambda () (evil-local-set-key 'motion (kbd "TAB") 'org-cycle)))
     (evil-declare-motion 'org-up-element)
     (evil-declare-motion 'org-down-element)
     (evil-declare-motion 'org-forward-element)
