@@ -804,7 +804,9 @@ settings.
       "gj" 'org-forward-element
       "gk" 'org-backward-element)
     (add-hook 'org-mode-hook
-              (lambda () (evil-local-set-key 'motion (kbd "TAB") 'org-cycle)))
+              (lambda ()
+                (evil-local-set-key 'insert (kbd "<tab>") 'my-org-tab)
+                (evil-local-set-key 'insert (kbd "TAB") 'my-org-tab)))
     (evil-declare-motion 'org-up-element)
     (evil-declare-motion 'org-down-element)
     (evil-declare-motion 'org-forward-element)
@@ -817,7 +819,11 @@ settings.
 
     (org-babel-do-load-languages 'org-babel-load-languages
                                  org-babel-load-languages)
-
+    (defun my-org-tab (arg)
+      (interactive "P")
+      (if (org-at-table-p)
+          (org-cycle arg)
+        (company-indent-or-complete-common arg)))
     (defun my-org-inline-image-hook ()
       (when org-inline-image-overlays
         (org-redisplay-inline-images)))
