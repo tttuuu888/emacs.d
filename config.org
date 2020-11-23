@@ -1971,6 +1971,7 @@ settings.
     (defun my-projectile-project-find (dir)
       (let ((root (projectile-project-root dir)))
         (and root (cons 'transient root))))
+    (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
     (add-to-list 'project-find-functions 'my-projectile-project-find)
     (advice-add 'projectile-kill-buffers :before
                 (lambda ()
