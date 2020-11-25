@@ -1246,9 +1246,7 @@ settings.
       (projectile-add-known-project project-root))
     (defalias 'sk-remove-known-project 'projectile-remove-known-project))
 
-  (use-package markdown-mode
-    :custom-face
-    (markdown-code-face ((t (:family "D2Coding")))))
+  (use-package markdown-mode)
 
   (use-package markdown-toc)
 
