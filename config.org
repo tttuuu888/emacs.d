@@ -95,7 +95,6 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    '(menu-bar-mode nil)
    '(mouse-wheel-progressive-speed nil)
    '(password-cache-expiry 900)
-   '(resize-mini-windows nil)
    '(scroll-bar-mode nil)
    '(send-mail-function (quote smtpmail-send-it))
    '(size-indication-mode t)
