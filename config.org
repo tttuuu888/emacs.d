@@ -144,11 +144,13 @@ Enable dark theme.
 #+END_SRC
 ** Font setting
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (defvar sk-font "D2Coding")
+
   (when (display-graphic-p)
     (set-fontset-font t 'unicode "Unifont")
     (set-fontset-font t '(#x10000 . #xFFFFF) "Unifont Upper")
-    (set-fontset-font t 'hangul "D2Coding")
-    (set-face-attribute 'fixed-pitch nil :font "D2Coding"))
+    (set-fontset-font t 'hangul sk-font)
+    (set-face-attribute 'fixed-pitch nil :family sk-font))
 #+END_SRC
 ** Yes-or-no -> y-or-n
 Use =y-or-n= instead of =yes-or-no=.
