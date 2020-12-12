@@ -554,6 +554,8 @@ settings.
     :init
     (sk-defer-init (global-evil-surround-mode 1))
     :config
+    (setq-default evil-surround-pairs-alist
+                  (push '(?` . ("`" . "`")) evil-surround-pairs-alist))
     (evil-define-key 'visual evil-surround-mode-map
       "gs" 'evil-surround-region))
 
