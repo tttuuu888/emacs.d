@@ -1272,7 +1272,7 @@ settings.
     :init
     (evil-leader/set-key
       "gs" 'magit-status
-      "gb" 'magit-blame)
+      "gd" 'magit-file-dispatch)
     :config
     (setq magit-log-section-commit-count 5
           magit-completing-read-function #'ivy-completing-read)
