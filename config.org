@@ -1944,8 +1944,23 @@ settings.
     :config
     (defun my-haskell-mode-hook ()
       (setq-local tab-width 4))
-    (sk-switch-buffer-repl sk-haskell-buffer-repl-toggle
-      haskell-mode inferior-haskell-mode run-haskell))
+    (defun my-haskell-interactive-history ()
+      (interactive)
+      (my-comint-history 'haskell-interactive-mode-history))
+    (evil-define-key 'normal haskell-mode-map
+      "gd" 'haskell-mode-jump-to-def
+      "gh" 'haskell-process-do-info)
+    (evil-define-key 'normal haskell-interactive-mode-map
+      "gd" 'haskell-mode-jump-to-def
+      "gj" 'haskell-interactive-mode-prompt-next
+      "gk" 'haskell-interactive-mode-prompt-previous
+      (kbd "RET") 'my-comint-return)
+    (evil-leader/set-key-for-mode 'haskell-mode
+      "z"  'haskell-interactive-switch
+      "ef" 'haskell-process-load-file)
+    (evil-leader/set-key-for-mode 'haskell-interactive-mode
+      "l" 'my-haskell-interactive-history
+      "z" 'haskell-interactive-switch-back))
 
   (use-package restclient
     :mode ("\\.rest\\'" . restclient-mode)
