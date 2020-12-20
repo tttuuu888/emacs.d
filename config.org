@@ -1948,6 +1948,8 @@ settings.
       (interactive)
       (my-comint-history 'haskell-interactive-mode-history))
     (evil-define-key 'normal haskell-mode-map
+      "]e" 'haskell-goto-next-error
+      "[e" 'haskell-goto-prev-error
       "gd" 'haskell-mode-jump-to-def
       "gh" 'haskell-process-do-info)
     (evil-define-key 'normal haskell-interactive-mode-map
