@@ -1950,6 +1950,14 @@ settings.
     (defun my-haskell-interactive-history ()
       (interactive)
       (my-comint-history 'haskell-interactive-mode-history))
+    (defun my-haskell-prompt-prev (&optional arg)
+      (interactive "^p")
+      (dotimes (_ (or arg 1))
+        (haskell-interactive-mode-prompt-previous)))
+    (defun my-haskell-prompt-next (&optional arg)
+      (interactive "^p")
+      (dotimes (_ (or arg 1))
+        (haskell-interactive-mode-prompt-next)))
     (evil-define-key 'normal haskell-mode-map
       "]e" 'haskell-goto-next-error
       "[e" 'haskell-goto-prev-error
@@ -1957,8 +1965,8 @@ settings.
       "gh" 'haskell-process-do-info)
     (evil-define-key 'normal haskell-interactive-mode-map
       "gd" 'haskell-mode-jump-to-def
-      "gj" 'haskell-interactive-mode-prompt-next
-      "gk" 'haskell-interactive-mode-prompt-previous
+      "gj" 'my-haskell-prompt-next
+      "gk" 'my-haskell-prompt-prev
       (kbd "RET") 'my-comint-return)
     (evil-leader/set-key-for-mode 'haskell-mode
       "z"  'haskell-interactive-switch
