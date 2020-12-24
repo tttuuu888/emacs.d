@@ -1947,9 +1947,13 @@ settings.
     :config
     (defun my-haskell-mode-hook ()
       (setq-local tab-width 4))
-    (defun my-haskell-interactive-history ()
+    (defun my-haskell-prompt-history ()
       (interactive)
       (my-comint-history 'haskell-interactive-mode-history))
+    (defun my-haskell-prompt-kill-whole-line ()
+      (interactive)
+      (haskell-interactive-mode-bol)
+      (execute-kbd-macro "C"))
     (defun my-haskell-prompt-prev (&optional arg)
       (interactive "^p")
       (dotimes (_ (or arg 1))
@@ -1964,6 +1968,7 @@ settings.
       "gd" 'haskell-mode-jump-to-def
       "gh" 'haskell-process-do-info)
     (evil-define-key 'normal haskell-interactive-mode-map
+      "S"  'my-haskell-prompt-kill-whole-line
       "gd" 'haskell-mode-jump-to-def
       "gj" 'my-haskell-prompt-next
       "gk" 'my-haskell-prompt-prev
@@ -1972,7 +1977,7 @@ settings.
       "z"  'haskell-interactive-switch
       "ef" 'haskell-process-load-file)
     (evil-leader/set-key-for-mode 'haskell-interactive-mode
-      "l" 'my-haskell-interactive-history
+      "l" 'my-haskell-prompt-history
       "z" 'haskell-interactive-switch-back))
 
   (use-package restclient
