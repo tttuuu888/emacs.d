@@ -1968,6 +1968,7 @@ settings.
       "gd" 'haskell-mode-jump-to-def
       "gh" 'haskell-process-do-info)
     (evil-define-key 'normal haskell-interactive-mode-map
+      "0"  'haskell-interactive-mode-bol
       "S"  'my-haskell-prompt-kill-whole-line
       "gd" 'haskell-mode-jump-to-def
       "gj" 'my-haskell-prompt-next
