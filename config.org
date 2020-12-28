@@ -1944,9 +1944,21 @@ settings.
 
   (use-package haskell-mode
     :hook (haskell-mode . my-haskell-mode-hook)
+    :bind (:map haskell-mode-map
+            ("M-j" . my-haskell-newline-and-indent-or-guard))
     :config
     (defun my-haskell-mode-hook ()
       (setq-local tab-width 4))
+    (defun my-haskell-newline-and-indent-or-guard ()
+      (interactive)
+      (if (nth 4 (syntax-ppss))         ; if in comment area
+          (default-indent-new-line)
+        (let ((ch (save-excursion
+                    (back-to-indentation)
+                    (char-after (point)))))
+          (haskell-indentation-newline-and-indent)
+          (when (equal ch ?|)
+            (insert "| ")))))
     (defun my-haskell-prompt-history ()
       (interactive)
       (my-comint-history 'haskell-interactive-mode-history))
