@@ -1716,7 +1716,7 @@ settings.
       "gp"  'cider-pop-back
       "ghc" 'cider-clojuredocs
       "ghe" 'cider-apropos-documentation-select
-      "ghh" 'my-cider-doc
+      "ghh" 'cider-doc
       "ghj" 'cider-javadoc
       "ghw" 'cider-clojuredocs-web)
     (evil-leader/set-key-for-mode 'clojure-mode
@@ -1737,11 +1737,7 @@ settings.
       "etr" 'cider-test-rerun-failed-tests
       "ett" 'cider-test-run-test
       "evv" 'cider-eval-sexp-at-point
-      "evx" 'cider-eval-last-sexp-and-replace)
-    (defun my-cider-doc ()
-      (interactive)
-      (cider-ensure-connected)
-      (cider-doc-lookup (thing-at-point 'symbol))))
+      "evx" 'cider-eval-last-sexp-and-replace))
 
   (use-package cider
     :config
