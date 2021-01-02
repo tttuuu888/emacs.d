@@ -2040,6 +2040,8 @@ settings.
   (use-package cmake-mode)
 
   (use-package gnuplot)
+
+  (use-package yaml-mode)
 #+END_SRC
 * End
 ** Provide a feature
