@@ -371,8 +371,17 @@ Various useful functions.
       (and file
            (file-exists-p file)
            (zerop (call-process "git" nil nil nil
-                                "ls-files" "--error-unmatch"
-                                file)))))
+                                "ls-files" "--error-unmatch" file)))))
+
+  (defun git-branch-of-file (file)
+    (when (git-tracked-file-p file)
+      (let* ((default-directory (file-name-directory file))
+             (branch (shell-command-to-string "git branch --show-current"))
+             (hash (when (equal branch "")
+                     (shell-command-to-string "git rev-parse HEAD"))))
+        (if hash
+            (substring hash 0 7)
+          (substring branch 0 (1- (length branch)))))))
 #+END_SRC
 
 ** SK-mode-line
@@ -390,8 +399,7 @@ Simple mode line setting function.
                                (concat " " (upcase (symbol-name evil-state)))))
                (buffer-info (concat " %* %I " current-input-method-title))
                (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
-               (git-branch (and (git-tracked-file-p buffer-file-name)
-                                (vc-git--symbolic-ref buffer-file-name)))
+               (git-branch (git-branch-of-file buffer-file-name))
                (vc-info (and git-branch (concat " (" git-branch ") ")))
                (mode-and-vc (propertize
                              (concat " "
@@ -1082,12 +1090,9 @@ settings.
                            (((background dark)) (:background "gray35")))))
 
   (use-package vc
-    :commands vc-git--symbolic-ref
     :custom
     (vc-follow-symlinks nil)
-    (vc-handled-backends nil)
-    :config
-    (require 'vc-git))
+    (vc-handled-backends nil))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
