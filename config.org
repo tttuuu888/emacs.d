@@ -103,8 +103,7 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    '(tab-always-indent (quote complete))
    '(tab-width 4)
    '(tool-bar-mode nil)
-   '(use-file-dialog nil)
-   '(vc-follow-symlinks nil))
+   '(use-file-dialog nil))
 #+END_SRC
 
 ** User information
@@ -181,8 +180,9 @@ Simple mode line setting function.
                                (concat " " (upcase (symbol-name evil-state)))))
                (buffer-info (concat " %* %I " current-input-method-title))
                (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
-               (git-branch (format-mode-line '(vc-mode vc-mode)))
-               (vc-info (and vc-mode (concat " (" (substring git-branch 5) ") ")))
+               (git-branch (and (git-tracked-file-p buffer-file-name)
+                                (vc-git--symbolic-ref buffer-file-name)))
+               (vc-info (and git-branch (concat " (" git-branch ") ")))
                (mode-and-vc (propertize
                              (concat " "
                                      (format-mode-line mode-name)
@@ -411,6 +411,14 @@ Various useful functions.
              (remove-hook 'pre-command-hook ',name)
              (unintern ',name nil))
            (add-hook 'pre-command-hook #',name)))))
+
+  (defun git-tracked-file-p (&optional file-name)
+    (let ((file (or file-name buffer-file-name)))
+      (and file
+           (file-exists-p file)
+           (zerop (call-process "git" nil nil nil
+                                "ls-files" "--error-unmatch"
+                                file)))))
 #+END_SRC
 
 ** Use-package
@@ -1072,6 +1080,14 @@ settings.
     :custom-face
     (smerge-refined-added ((((background light)) (:background "grey"))
                            (((background dark)) (:background "gray35")))))
+
+  (use-package vc
+    :commands vc-git--symbolic-ref
+    :custom
+    (vc-follow-symlinks nil)
+    (vc-handled-backends nil)
+    :config
+    (require 'vc-git))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
