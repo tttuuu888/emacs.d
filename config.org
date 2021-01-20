@@ -165,52 +165,6 @@ M-up,down,left,right keys for moving to windows.
   (windmove-default-keybindings 'meta)
 #+END_SRC
 
-** SK-mode-line
-Simple mode line setting function.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (defun sk-mode-line ()
-    (set-face-attribute 'mode-line nil :box nil)
-    (set-face-attribute 'mode-line-inactive nil :box nil)
-    (setq-default
-     mode-line-format
-     '("%e"
-       (:eval
-        (let* ((evil-info (and (featurep 'evil) evil-mode
-                               (concat " " (upcase (symbol-name evil-state)))))
-               (buffer-info (concat " %* %I " current-input-method-title))
-               (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
-               (git-branch (and (git-tracked-file-p buffer-file-name)
-                                (vc-git--symbolic-ref buffer-file-name)))
-               (vc-info (and git-branch (concat " (" git-branch ") ")))
-               (mode-and-vc (propertize
-                             (concat " "
-                                     (format-mode-line mode-name)
-                                     vc-info
-                                     " ")
-                             'face 'mode-line-inactive))
-               (line-info (format-mode-line " %l,%3c  "))
-               (pos-info (format-mode-line "%p%% "))
-               (right-info (concat line-info pos-info))
-               (right-length (length right-info))
-               (center-fill (propertize
-                             " "
-                             'face 'mode-line-inactive
-                             'display
-                             `((space :align-to
-                                      (- (+ right right-fringe right-margin)
-                                         ,right-length))))))
-          (concat evil-info buffer-info buffer-name mode-and-vc
-                  center-fill
-                  right-info))))))
-#+END_SRC
-
-Enable =sk-mode-line=.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (sk-mode-line)
-#+END_SRC
-
 ** SK-utils
 Various useful functions.
 
@@ -419,6 +373,52 @@ Various useful functions.
            (zerop (call-process "git" nil nil nil
                                 "ls-files" "--error-unmatch"
                                 file)))))
+#+END_SRC
+
+** SK-mode-line
+Simple mode line setting function.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun sk-mode-line ()
+    (set-face-attribute 'mode-line nil :box nil)
+    (set-face-attribute 'mode-line-inactive nil :box nil)
+    (setq-default
+     mode-line-format
+     '("%e"
+       (:eval
+        (let* ((evil-info (and (featurep 'evil) evil-mode
+                               (concat " " (upcase (symbol-name evil-state)))))
+               (buffer-info (concat " %* %I " current-input-method-title))
+               (buffer-name (propertize " %b " 'face 'mode-line-emphasis))
+               (git-branch (and (git-tracked-file-p buffer-file-name)
+                                (vc-git--symbolic-ref buffer-file-name)))
+               (vc-info (and git-branch (concat " (" git-branch ") ")))
+               (mode-and-vc (propertize
+                             (concat " "
+                                     (format-mode-line mode-name)
+                                     vc-info
+                                     " ")
+                             'face 'mode-line-inactive))
+               (line-info (format-mode-line " %l,%3c  "))
+               (pos-info (format-mode-line "%p%% "))
+               (right-info (concat line-info pos-info))
+               (right-length (length right-info))
+               (center-fill (propertize
+                             " "
+                             'face 'mode-line-inactive
+                             'display
+                             `((space :align-to
+                                      (- (+ right right-fringe right-margin)
+                                         ,right-length))))))
+          (concat evil-info buffer-info buffer-name mode-and-vc
+                  center-fill
+                  right-info))))))
+#+END_SRC
+
+Enable =sk-mode-line=.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (sk-mode-line)
 #+END_SRC
 
 ** Use-package
