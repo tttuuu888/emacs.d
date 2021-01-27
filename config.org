@@ -246,8 +246,7 @@ Various useful functions.
   (defun nuke-all-buffers ()
     "kill all buffers, leaving *scratch* only"
     (interactive)
-    (mapc (lambda (x) (kill-buffer x))
-          (buffer-list))
+    (mapc #'kill-buffer (buffer-list))
     (delete-other-windows))
 
   (defun hide-ctrl-M ()
@@ -261,11 +260,10 @@ Various useful functions.
     "Move the current line up or down by N lines."
     (interactive "p")
     (let ((col (current-column))
-          (line-text
-           (delete-and-extract-region (line-beginning-position)
-                                      (line-beginning-position 2))))
+          (txt (delete-and-extract-region (line-beginning-position)
+                                          (line-beginning-position 2))))
       (forward-line n)
-      (insert line-text)
+      (insert txt)
       ;; restore point to original column in moved line
       (forward-line -1)
       (forward-char col)))
