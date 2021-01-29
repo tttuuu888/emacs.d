@@ -286,7 +286,7 @@ Various useful functions.
 
   (defun tmux-running-p ()
     "Check if tmux is currently running or not."
-    (zerop (process-file "tmux" nil nil nil "has-session")))
+    (zerop (call-process "tmux" nil nil nil "has-session")))
 
   (defun tmux-new-pane-here ()
     "Open tmux pane of the current path."
