@@ -368,8 +368,9 @@ Various useful functions.
     (let ((file (or file-name buffer-file-name)))
       (and file
            (file-exists-p file)
-           (zerop (call-process "git" nil nil nil
-                                "ls-files" "--error-unmatch" file)))))
+           (zerop (process-file "git" nil nil nil
+                                "ls-files" "--error-unmatch"
+                                (file-name-nondirectory file))))))
 
   (defun git-branch-of-file (file)
     (when (git-tracked-file-p file)
