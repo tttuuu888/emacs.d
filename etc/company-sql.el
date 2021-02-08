@@ -25,7 +25,7 @@
 (require 'company)
 
 (eval-when-compile
-  (require 'cl))
+  (require 'cl-lib))
 
 (defconst sql-completions
   '("ADD" "ALTER" "ANALYZE" "ASC" "BIGINT" "BLOB" "BY" "CACHE" "CHANGE"
@@ -51,7 +51,7 @@
 ;;;###autoload
 (defun company-sql (command &optional arg &rest ignored)
   (interactive (list 'interactive))
-  (case command
+  (cl-case command
     (interactive (company-begin-backend 'company-sql))
     (prefix (and (or (eq major-mode 'sql-interactive-mode)
                      (eq major-mode 'sql-mode))
@@ -62,7 +62,7 @@
                      (not (string-prefix-p "." (thing-at-point 'symbol)))))
                  (company-grab-symbol)))
     (candidates
-    (cl-remove-if-not
+     (cl-remove-if-not
       (lambda (c) (string-prefix-p arg c t))
       sql-completions))))
 
