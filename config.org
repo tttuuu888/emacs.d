@@ -1716,8 +1716,8 @@ settings.
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
   (use-package paredit
-    :hook ((clojure-mode emacs-lisp-mode lisp-mode scheme-mode geiser-repl-mode
-                         sly-mrepl-mode)
+    :hook ((clojure-mode cider-repl-mode emacs-lisp-mode geiser-repl-mode
+                         lisp-mode scheme-mode sly-mrepl-mode)
            . enable-paredit-mode)
     :bind (:map paredit-mode-map
             ("M-b" . paredit-backward)
@@ -1781,15 +1781,20 @@ settings.
     (evil-set-initial-state 'cider-stacktrace-mode          'emacs)
     (evil-set-initial-state 'cider-test-report-mode         'emacs)
     (evil-define-key 'normal cider-repl-mode-map
-      "gd"        'cider-find-dwim
-      "gp"        'cider-pop-back
+      "gd"  'cider-find-dwim
+      "gp"  'cider-pop-back
+      "ghc" 'cider-clojuredocs
+      "ghe" 'cider-apropos-documentation-select
+      "ghh" 'cider-doc
+      "ghj" 'cider-javadoc
+      "ghw" 'cider-clojuredocs-web
       (kbd "RET") 'my-comint-return)
     (evil-define-minor-mode-key 'normal 'cider-popup-buffer-mode
-      "q"  'quit-window)
+      "q" 'quit-window)
     (evil-leader/set-key-for-mode 'clojurescript-mode
-      "z"  'cider-switch-to-repl-buffer)
+      "z" 'cider-switch-to-repl-buffer)
     (evil-leader/set-key-for-mode 'cider-repl-mode
-      "z"  'cider-switch-to-last-clojure-buffer))
+      "z" 'cider-switch-to-last-clojure-buffer))
 
   (use-package clj-refactor
     :disabled t
