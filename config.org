@@ -1137,7 +1137,7 @@ settings.
     :init
     (sk-defer-init (global-company-mode 1))
     :config
-    (setq company-idle-delay 0.3)
+    (setq company-idle-delay 0.2)
     (defun my-company-abort ()
       (when (company--active-p)
         (company-cancel 'abort)))
