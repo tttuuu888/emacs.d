@@ -570,12 +570,12 @@ settings.
     :init
     (sk-defer-init (global-evil-surround-mode 1))
     :config
-    (setq evil-surround-pairs-alist
-          (append evil-surround-pairs-alist
-                  '((?` . ("`" . "`"))
-                    (?d . ("[" . "]"))
-                    (?j . ("{" . "}"))
-                    (?k . ("<" . ">")))))
+    (setq-default evil-surround-pairs-alist
+                  (append evil-surround-pairs-alist
+                          '((?` . ("`" . "`"))
+                            (?d . ("[" . "]"))
+                            (?j . ("{" . "}"))
+                            (?k . ("<" . ">")))))
     (evil-define-key 'visual evil-surround-mode-map
       "gs" 'evil-surround-region))
 
