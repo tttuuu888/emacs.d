@@ -523,7 +523,13 @@ settings.
     :init
     (evil-mode)
     :config
-    (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
+    (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes)
+          evil-inner-text-objects-map (append evil-inner-text-objects-map
+                                              '((?d . evil-inner-bracket)
+                                                (?j . evil-inner-curly)))
+          evil-outer-text-objects-map (append evil-outer-text-objects-map
+                                              '((?d . evil-a-bracket)
+                                                (?j . evil-a-curly))))
     (push '("*eldoc*" . emacs) evil-buffer-regexps)
     (add-hook 'evil-insert-state-entry-hook
               (lambda () (when buffer-read-only (read-only-mode -1))))
