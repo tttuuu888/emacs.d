@@ -1598,8 +1598,16 @@ settings.
         (python-shell-send-region
          (line-beginning-position) (line-end-position n)))
       (setq deactivate-mark t))
+    (defun my-python-help-repl ()
+      (interactive)
+      (move-beginning-of-line 1)
+      (insert "help(")
+      (move-end-of-line 1)
+      (insert ")")
+      (comint-send-input))
     (evil-leader/set-key-for-mode 'inferior-python-mode
-      "l"  'my-comint-history)
+      "l"  'my-comint-history
+      "ch" 'my-python-help-repl)
     (evil-leader/set-key-for-mode 'python-mode
       "eb" 'python-shell-send-buffer
       "ee" 'my-python-shell-send-line-or-region
