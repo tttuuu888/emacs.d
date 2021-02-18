@@ -39,7 +39,7 @@ Process =package-initialize= first and set =package-archives= for boot time
 speed up. =package-initialize= should be called again after boot up.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (unless (and (boundp 'package--activated) package--activated)
+  (unless package--activated
     (package-initialize))
 
   (setq package-archives
