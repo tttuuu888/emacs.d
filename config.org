@@ -1101,6 +1101,7 @@ settings.
                            (((background dark)) (:background "gray35")))))
 
   (use-package vc
+    :ensure nil
     :custom
     (vc-follow-symlinks nil)
     (vc-handled-backends nil))
