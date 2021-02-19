@@ -35,8 +35,9 @@ performed.
 #+END_SRC
 
 ** Package initialize
-Process =package-initialize= first and set =package-archives= for boot time
-speed up. =package-initialize= should be called again after boot up.
+Process =package-initialize= before setting =package-archives= to speed up Emacs
+start up time. So =package-read-all-archive-contents= should be called after
+start up to use of updated =package-archives=.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (unless package--activated
@@ -1055,7 +1056,7 @@ settings.
   (use-package package
     :ensure nil
     :init
-    (sk-defer-init (package-initialize)))
+    (sk-defer-init (package-read-all-archive-contents)))
 
   (use-package ediff
     :ensure nil
