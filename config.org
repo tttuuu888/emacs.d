@@ -974,7 +974,7 @@ settings.
   (use-package term
     :ensure nil
     :custom-face
-    (term-color-blue ((t :foreground "blue4" :background "blue4")))
+    (term-color-blue ((t :foreground "skyblue3" :background "skyblue3")))
     :config
     (evil-set-initial-state 'term-mode 'emacs))
 
@@ -993,7 +993,7 @@ settings.
     :hook (compilation-filter . my-ansi-colorize-buffer)
     :custom
     (ansi-color-names-vector
-     ["black" "red3" "green3" "yellow3" "blue4" "magenta3" "cyan3" "gray90"])
+     ["black" "red3" "green3" "yellow3" "skyblue3" "magenta3" "cyan3" "gray90"])
     :config
     (defun my-ansi-colorize-buffer ()
       (let ((buffer-read-only nil))
