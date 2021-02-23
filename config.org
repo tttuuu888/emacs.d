@@ -535,6 +535,8 @@ settings.
                                                 (?j . evil-a-curly))))
     (define-key evil-operator-state-map "a" evil-outer-text-objects-map)
     (define-key evil-operator-state-map "i" evil-inner-text-objects-map)
+    (define-key evil-visual-state-map "a" evil-outer-text-objects-map)
+    (define-key evil-visual-state-map "i" evil-inner-text-objects-map)
     (push '("*eldoc*" . emacs) evil-buffer-regexps)
     (add-hook 'evil-insert-state-entry-hook
               (lambda () (when buffer-read-only (read-only-mode -1))))
