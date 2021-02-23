@@ -1304,7 +1304,6 @@ settings.
     :after org
     :config
     (setq org-reveal-hlevel 2
-          org-reveal-plugins '(classList markdown highlight zoom notes)
           org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
           org-reveal-theme "moon"
           org-reveal-title-slide "<h2>%t</h2><h4>%a&nbsp(%e)</h4>"
