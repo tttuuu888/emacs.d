@@ -1302,7 +1302,6 @@ settings.
   (use-package ox-reveal
     :demand t
     :after org
-    :custom (org-reveal-note-key-char nil)
     :config
     (setq org-reveal-hlevel 2
           org-reveal-plugins '(classList markdown highlight zoom notes)
