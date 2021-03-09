@@ -215,6 +215,13 @@ Various useful functions.
             (use-process (call-process-shell-command scmd))
             (t (compile scmd)))))
 
+  (defun sk-sbin-dired ()
+    (interactive)
+    (let ((sbin (find-file-in-tree default-directory ".sbin" t)))
+      (if sbin
+          (dired sbin)
+        (message "Folder .sbin not found."))))
+
   (defun sk-build ()
     (interactive)
     (my-sbin-process "build.sh"))
@@ -1130,6 +1137,7 @@ settings.
      ("M-,"              . my-other-window)
      ("<f5>"             . sk-build)
      ("C-<f5>"           . sk-rebuild)
+     ("M-<f5>"           . sk-sbin-dired)
      ("C-M-,"            . transpose-windows)
      ("M-S-<up>"         . (lambda () (interactive) (move-line -1)))
      ("M-S-<down>"       . (lambda () (interactive) (move-line  1)))
