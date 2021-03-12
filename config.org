@@ -1119,6 +1119,23 @@ settings.
     :custom
     (vc-follow-symlinks nil)
     (vc-handled-backends nil))
+
+  (use-package tex-mode
+    :ensure nil
+    :config
+    (setq-default TeX-master nil)
+    (setq TeX-parse-self t
+          TeX-PDF-mode t)
+    (evil-leader/set-key-for-mode 'latex-mode
+      "cc" 'my-latex-compile
+      "ce" 'LaTeX-environment
+      "cj" 'LaTeX-insert-item
+      "cs" 'LaTeX-section
+      "cv" 'TeX-view
+      "cz" 'LaTeX-command-section)
+    (defun my-latex-compile ()
+      (interactive)
+      (TeX-command "LaTeX" 'TeX-master-file)))
 #+END_SRC
 * General packages - external
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1544,6 +1561,8 @@ settings.
   (use-package which-key
     :init
     (sk-defer-init (which-key-mode 1)))
+
+  (use-package auctex)
 #+END_SRC
 * Development packages - built-in
 #+BEGIN_SRC emacs-lisp :tangle yes
