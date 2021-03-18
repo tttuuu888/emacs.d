@@ -1,0 +1,5 @@
+.local/*
+auto-save-list/*
+elpa/*
+
+config.el
