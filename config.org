@@ -1170,6 +1170,8 @@ settings.
       (interactive)
       (if (minibufferp)
           (abort-recursive-edit)
+        (when (or (evil-insert-state-p) (evil-visual-state-p))
+          (evil-normal-state))
         (call-interactively 'other-window))))
 
   (use-package company
