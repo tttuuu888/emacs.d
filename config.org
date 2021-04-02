@@ -776,7 +776,8 @@ settings.
      my-org-path "~/Dropbox/org/"
      my-org-note (expand-file-name "notes.org" my-org-path)
      org-agenda-files (list my-org-path)
-     org-babel-load-languages '((css . t)
+     org-babel-load-languages '((C . t)
+                                (css . t)
                                 (dot . t)
                                 (gnuplot . t)
                                 (emacs-lisp . t)
