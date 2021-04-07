@@ -1261,7 +1261,8 @@ settings.
     (require 'helm-files)
     (setq helm-imenu-execute-action-at-once-if-one nil
           helm-split-window-default-side 'right
-          helm-show-completion-display-function nil))
+          helm-show-completion-display-function nil)
+    (advice-add 'helm-occur-goto-line :after (lambda (_) (which-func-update))))
 
   (use-package helm-ag
     :commands (helm-ag-project-or-here helm-ag-here)
