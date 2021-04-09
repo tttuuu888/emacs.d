@@ -1188,7 +1188,8 @@ settings.
     (defun my-company-yas-expand ()
       (interactive)
       (yas-minor-mode-on)
-      (let ((company-backends '(company-yasnippet)))
+      (let ((org-src-tab-acts-natively nil)
+            (company-backends '(company-yasnippet)))
         (company-complete-common)))
     (add-hook 'evil-insert-state-exit-hook #'my-company-abort)
     (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -1498,8 +1499,13 @@ settings.
 
   (use-package ivy-yasnippet
     :init
-    (evil-leader/set-key "/" 'ivy-yasnippet)
+    (evil-leader/set-key "/" 'my-ivy-yasnippet)
+    :commands my-ivy-yasnippet
     :config
+    (defun my-ivy-yasnippet ()
+      (interactive)
+      (let ((org-src-tab-acts-natively nil))
+        (call-interactively 'ivy-yasnippet)))
     (advice-add 'ivy-yasnippet :before 'yas-minor-mode-on)
     (advice-add 'ivy-yasnippet :after 'evil-insert-state))
 
