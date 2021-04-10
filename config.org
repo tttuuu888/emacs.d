@@ -1188,8 +1188,7 @@ settings.
     (defun my-company-yas-expand ()
       (interactive)
       (yas-minor-mode-on)
-      (let ((org-src-tab-acts-natively nil)
-            (company-backends '(company-yasnippet)))
+      (let ((company-backends '(company-yasnippet)))
         (company-complete-common)))
     (add-hook 'evil-insert-state-exit-hook #'my-company-abort)
     (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -1423,7 +1422,11 @@ settings.
   (use-package yasnippet
     :commands yas-expand yas-minor-mode-on
     :config
-    (advice-add 'yas-expand :before (lambda () (yas-minor-mode-on)))
+    (advice-add 'yas-expand-snippet :around
+                (lambda (old &rest r)
+                  (let ((org-src-tab-acts-natively nil))
+                    (yas-minor-mode-on)
+                    (apply old r))))
     (let ((my-yasnippet-dir (expand-file-name "snippets/" emacs-etc-dir)))
       (add-to-list 'yas-snippet-dirs my-yasnippet-dir)
       (yas-load-directory my-yasnippet-dir t)))
@@ -1499,13 +1502,8 @@ settings.
 
   (use-package ivy-yasnippet
     :init
-    (evil-leader/set-key "/" 'my-ivy-yasnippet)
-    :commands my-ivy-yasnippet
+    (evil-leader/set-key "/" 'ivy-yasnippet)
     :config
-    (defun my-ivy-yasnippet ()
-      (interactive)
-      (let ((org-src-tab-acts-natively nil))
-        (call-interactively 'ivy-yasnippet)))
     (advice-add 'ivy-yasnippet :before 'yas-minor-mode-on)
     (advice-add 'ivy-yasnippet :after 'evil-insert-state))
 
