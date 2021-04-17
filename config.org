@@ -1,6 +1,7 @@
-#+title: SK Emacs configuration
-#+author: SeungKi Kim
-#+email: tttuuu888@gmail.com
+#+TITLE: SK Emacs configuration
+#+AUTHOR: SeungKi Kim
+#+EMAIL: tttuuu888@gmail.com
+#+PROPERTY: header-args :tangle yes
 
 * About
 This is my personal Emacs setting.
@@ -17,7 +18,7 @@ All the other settings will be located in =config.org=.
 ** Commentary
 This comment will be added on the top of =config.el=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   ;;; config.el --- generated from config.org -*- lexical-binding: t -*-
   ;;
   ;;; Code:
@@ -27,7 +28,7 @@ This comment will be added on the top of =config.el=.
 If Emacs is executed with an =-init= argument, =parallel install= process is
 performed.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (when (member "-init" command-line-args)
     (delete "-init" command-line-args)
     (require 'pinstall "~/.emacs.d/etc/pinstall.el")
@@ -39,7 +40,7 @@ Process =package-initialize= before setting =package-archives= to speed up Emacs
 start up time. So =package-read-all-archive-contents= should be called after
 start up to use of updated =package-archives=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (unless package--activated
     (package-initialize))
 
@@ -55,7 +56,7 @@ all package local files would be hidden under the path.
 
 =emacs-config-dir= would be used instead of =user-emacs-directory=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defvar emacs-config-dir user-emacs-directory)
   (setq user-emacs-directory (expand-file-name ".local/" emacs-config-dir))
   (unless (file-exists-p user-emacs-directory)
@@ -64,7 +65,7 @@ all package local files would be hidden under the path.
 
 Set =emacs-etc-dir= to indicate a folder containing extra files.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defvar emacs-etc-dir (expand-file-name "etc/" emacs-config-dir))
   (unless (file-exists-p emacs-etc-dir)
     (make-directory-internal emacs-etc-dir))
@@ -73,13 +74,13 @@ Set =emacs-etc-dir= to indicate a folder containing extra files.
 ** Custom file
 =custom.el= will be saved under =~/.emacs.d/.local/= but will not be used.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 #+END_SRC
 
 Instead of using =custom.el=, insert the contents of the file directly here.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
@@ -110,7 +111,7 @@ Instead of using =custom.el=, insert the contents of the file directly here.
 If =USER_FULL_NAME= and =USER_MAIL_ADDRESS= environment variables exist, update
 =user_full_name= and =user_mail_address= variables.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (let ((name (getenv "USER_FULL_NAME"))
         (mail (getenv "USER_MAIL_ADDRESS")))
     (when name (setq user-full-name name))
@@ -120,7 +121,7 @@ If =USER_FULL_NAME= and =USER_MAIL_ADDRESS= environment variables exist, update
 ** Color setting
 Simple color setting function which has 'dark' and 'light' theme.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun my-theme-setting (&optional light-theme)
     (let ((fg-color (if light-theme "Black"  "Gray80"))
           (bg-color (if light-theme "Ivory2" "Gray23")))
@@ -138,11 +139,11 @@ Simple color setting function which has 'dark' and 'light' theme.
 
 Enable dark theme.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (my-theme-setting)
 #+END_SRC
 ** Font setting
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defvar sk-font "D2Coding")
 
   (when (display-graphic-p)
@@ -154,21 +155,21 @@ Enable dark theme.
 ** Yes-or-no -> y-or-n
 Use =y-or-n= instead of =yes-or-no=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
 ** M-up, M-down, M-left, and M-right keys.
 M-up,down,left,right keys for moving to windows.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (windmove-default-keybindings 'meta)
 #+END_SRC
 
 ** SK-utils
 Various useful functions.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun sharp-ifdef-insert (start end pre)
     (save-excursion
       (goto-char (1- end))
@@ -393,7 +394,7 @@ Various useful functions.
 ** SK-mode-line
 Simple mode line setting function.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (defun sk-mode-line ()
     (set-face-attribute 'mode-line nil :box nil)
     (set-face-attribute 'mode-line-inactive nil :box nil)
@@ -431,7 +432,7 @@ Simple mode line setting function.
 
 Enable =sk-mode-line=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (sk-mode-line)
 #+END_SRC
 
@@ -439,7 +440,7 @@ Enable =sk-mode-line=.
 Install =use-package= if not exists. Set some default settings for
 =use-package=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
@@ -453,12 +454,12 @@ Install =use-package= if not exists. Set some default settings for
 Load =use-package=. From this point, only =use-package= will be used for
 settings.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (require 'use-package)
 #+END_SRC
 
 * Evil and Evil-leader packages
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package evil-leader
     :init
     (defvar sk-evil-sub-leader "M-m")
@@ -601,7 +602,7 @@ settings.
     (sk-defer-init (evil-commentary-mode 1)))
 #+END_SRC
 * General packages - built-in
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   ;;; Personal packages
   (use-package company-sql
     :ensure nil
@@ -1136,7 +1137,7 @@ settings.
       (TeX-command "LaTeX" 'TeX-master-file)))
 #+END_SRC
 * General packages - external
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package bind-key
     :init
     (bind-keys*
@@ -1572,7 +1573,7 @@ settings.
   (use-package auctex)
 #+END_SRC
 * Development packages - built-in
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package prog-mode
     :ensure nil
     :config
@@ -1761,7 +1762,7 @@ settings.
     (evil-add-hjkl-bindings compilation-mode-map))
 #+END_SRC
 * Development packages - external
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
   (use-package ggtags
     :hook ((c-mode-common asm-mode) . ggtags-mode))
 
@@ -2135,6 +2136,6 @@ settings.
 ** Provide a feature
 Make =config.el= available to load by =require=.
 
-#+BEGIN_SRC emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp
 (provide 'config)
 #+END_SRC
