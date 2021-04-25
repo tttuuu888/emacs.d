@@ -197,6 +197,8 @@ Various useful functions.
           (parent (unless (or (equal "~/" dir) (equal "/" dir))
                     (file-name-directory (directory-file-name dir)))))
       (cond ((file-exists-p file)
+             (when (file-directory-p file)
+               (setq file (file-name-as-directory file)))
              (if return-include-file file dir))
             (parent (find-file-in-tree parent filename return-include-file))
             (t nil))))
