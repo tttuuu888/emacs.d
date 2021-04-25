@@ -203,37 +203,12 @@ Various useful functions.
             (parent (find-file-in-tree parent filename return-include-file))
             (t nil))))
 
-  (defun my-sbin-process (script &optional use-process)
-    "Find .sbin folder and execute SCRIPT. Use compile function
-  unless USE-PROCESS is not nil."
-    (let* ((sbin (find-file-in-tree default-directory ".sbin" t))
-           (scmd (expand-file-name script sbin)))
-      (cond ((equal sbin nil)
-             (message "Folder .sbin not found."))
-            ((not (file-exists-p scmd))
-             (message (format "File %s not found in .sbin folder." script)))
-            (use-process (call-process-shell-command scmd))
-            (t (compile scmd)))))
-
   (defun sk-sbin-dired ()
     (interactive)
     (let ((sbin (find-file-in-tree default-directory ".sbin" t)))
       (if sbin
           (dired sbin)
         (message "Folder .sbin not found."))))
-
-  (defun sk-build ()
-    (interactive)
-    (my-sbin-process "build.sh"))
-
-  (defun sk-clean ()
-    (interactive)
-    (my-sbin-process "clean.sh"))
-
-  (defun sk-rebuild ()
-    (interactive)
-    (my-sbin-process "clean.sh" t)
-    (my-sbin-process "build.sh"))
 
   (defun sk-clang-complete-make ()
     "Generate .clang_complete file."
@@ -1155,8 +1130,6 @@ settings.
      ("C-c <escape>"     . keyboard-quit)
      ("C-x <escape>"     . keyboard-quit)
      ("M-,"              . my-other-window)
-     ("<f5>"             . sk-build)
-     ("C-<f5>"           . sk-rebuild)
      ("M-<f5>"           . sk-sbin-dired)
      ("C-M-,"            . transpose-windows)
      ("M-S-<up>"         . (lambda () (interactive) (move-line -1)))
@@ -1534,7 +1507,8 @@ settings.
            ("C-x C-f" . counsel-find-file)
            ("C-h b"   . counsel-descbinds)
            ("C-h v"   . counsel-describe-variable)
-           ("C-h f"   . counsel-describe-function))
+           ("C-h f"   . counsel-describe-function)
+           ("<f5>"    . sk-compile))
     :init
     (evil-leader/set-key
       "<SPC>" 'counsel-M-x
@@ -1550,7 +1524,8 @@ settings.
       "sb"    'my-counsel-switch-shell-buffer)
     :config
     (setq ivy-initial-inputs-alist nil
-          ivy-height-alist '((t . 15)))
+          ivy-height-alist '((t . 15))
+          sk-compile-history nil)
     (defun counsel-fzf-here ()
       (interactive)
       (counsel-fzf nil default-directory))
@@ -1566,7 +1541,34 @@ settings.
      'counsel-shell-history
      '(("d" (lambda (x) (ring-remove comint-input-ring
                                      (ring-member comint-input-ring (car x))))
-        "delete"))))
+        "delete")))
+
+    (defun sk-compile-candidates ()
+      (when-let ((sbin (find-file-in-tree default-directory ".sbin" t)))
+        (let ((files-alist)
+              (files (directory-files sbin t "\\.sh$")))
+          (dolist (f files)
+            (add-to-list 'files-alist (cons (file-name-nondirectory f) f) t))
+          (when-let ((cand (alist-get sbin sk-compile-history nil nil #'equal)))
+            (push (cons (file-name-nondirectory cand) cand) files-alist))
+          (delete-dups files-alist))))
+
+    (defun sk-compile-action (cmd-alist)
+      (let* ((cmd (cdr cmd-alist))
+             (dir (file-name-directory cmd))
+             (cand (alist-get dir sk-compile-history nil nil #'equal)))
+        (setf (alist-get dir sk-compile-history nil 'remove #'equal) cmd)
+        (delete-dups sk-compile-history)
+        (compile cmd)))
+
+    (defun sk-compile (&optional dir)
+      (interactive)
+      (ivy-read "Compile script: "
+                (sk-compile-candidates)
+                :require-match t
+                :action  #'sk-compile-action
+                :keymap counsel-compile-map
+                :caller 'sk-compile)))
 
   (use-package which-key
     :init
