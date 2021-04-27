@@ -87,9 +87,9 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(auth-source-save-behavior nil)
-   '(backup-directory-alist (quote ((".*" . "/tmp/"))))
+   '(backup-directory-alist '((".*" . "/tmp/")))
    '(blink-cursor-mode nil)
-   '(completion-styles (quote (basic partial-completion emacs22 initials)))
+   '(completion-styles '(basic partial-completion emacs22 initials))
    '(css-indent-offset 2)
    '(fill-column 80)
    '(font-use-system-font t)
@@ -98,11 +98,11 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    '(make-backup-files nil)
    '(mouse-wheel-progressive-speed nil)
    '(password-cache-expiry 900)
-   '(send-mail-function (quote smtpmail-send-it))
+   '(send-mail-function 'smtpmail-send-it)
    '(size-indication-mode t)
    '(split-height-threshold nil)
    '(split-width-threshold 140)
-   '(tab-always-indent (quote complete))
+   '(tab-always-indent 'complete)
    '(tab-width 4)
    '(use-file-dialog nil))
 #+END_SRC
