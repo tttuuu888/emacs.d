@@ -282,10 +282,10 @@ Various useful functions.
       (message "New tmux pane is opened.")))
 
   (defun get-week-form (&optional offset date)
-    "Create a specific form with the week number and the date. DATE
-  is a list of the form (month day year). OFFSET is a integer
-  number. DATE takes precedence over OFFSET when both are
-  provided."
+    "Create a string with the week number and the date range of the
+  week. OFFSET is a integer number indicating offset from
+  today. DATE is a list in a form of (month day year). OFFSET is
+  ignored if DATE is provided."
     (require 'cal-iso)
     (let* ((d (calendar-absolute-from-gregorian
                (or date (calendar-current-date offset))))
@@ -293,17 +293,13 @@ Various useful functions.
            (week-number (car (calendar-iso-from-absolute d)))
            (monday (calendar-gregorian-from-absolute (- d (- day 1))))
            (friday (calendar-gregorian-from-absolute (+ d (- 5 day))))
-           (month-of-next-friday (if (equal (car monday) (car friday))
-                                     ""
-                                   (format "%2d월 " (car friday))))
-           (start (format "%2d주차  %2d월 %2d일 ~ "
-                          week-number
-                          (car monday)
-                          (nth 1 monday)))
-           (end (format "%s%2d일"
-                        month-of-next-friday
-                        (nth 1 friday))))
-      (format "%s%s" start end)))
+           (month-of-monday (format "%2d월 " (car monday)))
+           (month-of-friday (if (equal (car monday) (car friday))
+                                ""
+                              (format "%2d월 " (car friday))))
+           (start (format "%s%2d일" month-of-monday (nth 1 monday)))
+           (end (format "%s%2d일" month-of-friday (nth 1 friday))))
+      (format "%2d주차  %s ~ %s" week-number start end)))
 
   (defun sk-insert-current-week-form ()
     (interactive)
