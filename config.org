@@ -1485,7 +1485,8 @@ settings.
       (((background dark)) :background "#282a36" :foreground "gray80")))
     (ivy-posframe-border ((t (:inherit ivy-posframe))))
     :config
-    (setq ivy-posframe-border-width 20
+    (setq ivy-truncate-lines nil
+          ivy-posframe-border-width 20
           ivy-posframe-display-functions-alist
           '((complete-symbol . ivy-posframe-display-at-point)
             (ivy-yasnippet   . ivy-display-function-fallback)
