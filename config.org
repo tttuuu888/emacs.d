@@ -2123,7 +2123,11 @@ settings.
     (evil-leader/set-key-for-mode 'rust-mode
       "ee" 'rust-compile
       "er" 'rust-run
-      "et" 'rust-test))
+      "et" 'rust-test-nocapture)
+    (defun rust-test-nocapture ()
+      "Test using `cargo test -- --nocapture`"
+      (interactive)
+      (rust--compile "%s test -- --nocapture" rust-cargo-bin)))
 
   (use-package lua-mode)
 
