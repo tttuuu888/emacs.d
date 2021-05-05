@@ -1760,7 +1760,11 @@ settings.
   (use-package compile
     :ensure nil
     :config
-    (setq compilation-scroll-output t)
+    (setq compilation-scroll-output t
+          compilation-process-setup-function
+          (lambda ()
+            (setq-local scroll-conservatively 10000
+                        scroll-step 1)))
     (evil-add-hjkl-bindings compilation-mode-map))
 #+END_SRC
 * Development packages - external
