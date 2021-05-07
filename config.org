@@ -1755,9 +1755,9 @@ settings.
            ("C-c <DEL>"     . c-hungry-backspace))
     :init
     (evil-leader/set-key (kbd "<DEL>") 'c-hungry-backspace)
+    (defvaralias 'c-basic-offset 'tab-width)
     :config
-    (setq c-basic-offset 4
-          c-default-style "bsd"))
+    (setq c-default-style "bsd"))
 
   (use-package compile
     :ensure nil
