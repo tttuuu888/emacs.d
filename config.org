@@ -409,6 +409,30 @@ Enable =sk-mode-line=.
 #+BEGIN_SRC emacs-lisp
   (sk-mode-line)
 #+END_SRC
+** Add notification for package loading
+Some packages takes relatively long time to load and Emacs freeze while loading package. This setting make Emacs print notification that specific package is loading.
+#+begin_src emacs-lisp
+  (defvar sk-pacakge-loading-notice-list '(org yasnippet))
+
+  (advice-add 'require :around
+              (lambda (old pkg &rest r)
+                (if (not (member pkg sk-pacakge-loading-notice-list))
+                    (apply old pkg r)
+                  (let* ((msg (capitalize (format "%s loading ..." pkg)))
+                         (pos (point))
+                         (endp (equal pos (point-max)))
+                         (beg (if endp (- pos 1) pos))
+                         (end (if endp  pos (+ pos 1)))
+                         (ovr (make-overlay beg end)))
+                    (message msg)
+                    (overlay-put ovr 'display msg)
+                    (overlay-put ovr 'face '(:bold t :inverse-video t))
+                    (redisplay)
+                    (apply old pkg r)
+                    (delete-overlay ovr)
+                    (setq sk-pacakge-loading-notice-list
+                          (delq pkg sk-pacakge-loading-notice-list))))))
+#+end_src
 
 ** Use-package
 Install =use-package= if not exists. Set some default settings for
