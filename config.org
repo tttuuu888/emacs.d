@@ -1158,6 +1158,7 @@ settings.
         (company-cancel 'abort)))
     (defun my-company-yas-expand ()
       (interactive)
+      (when (company--active-p) (company-cancel))
       (yas-minor-mode-on)
       (let ((company-backends '(company-yasnippet)))
         (company-complete-common)))
