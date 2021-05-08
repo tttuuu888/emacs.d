@@ -410,24 +410,35 @@ Enable =sk-mode-line=.
   (sk-mode-line)
 #+END_SRC
 ** Add notification for package loading
-Some packages takes relatively long time to load and Emacs freeze while loading package. This setting make Emacs print notification that specific package is loading.
+Some packages take relatively long time to load and Emacs freeze while loading a
+package. This setting make Emacs print notification that specific package is
+loading.
 #+begin_src emacs-lisp
   (defvar sk-pacakge-loading-notice-list '(org yasnippet))
 
-  (advice-add 'require :around
-              (lambda (old pkg &rest r)
-                (if (not (member pkg sk-pacakge-loading-notice-list))
-                    (apply old pkg r)
-                  (let ((msg (capitalize (format " %s loading ..." pkg)))
-                        (ovr (make-overlay (point) (point))))
-                    (message msg)
-                    (overlay-put ovr 'after-string
-                                 (propertize msg 'face '(:inverse-video t)))
-                    (redisplay)
-                    (apply old pkg r)
-                    (delete-overlay ovr)
-                    (setq sk-pacakge-loading-notice-list
-                          (delq pkg sk-pacakge-loading-notice-list))))))
+  (defun sk-package-loading-notice (old &rest r)
+    (let* ((elt (car r))
+           (mode (when (stringp elt)
+                   (symbol-name
+                    (assoc-default elt auto-mode-alist 'string-match))))
+           (pkg (if (symbolp elt)
+                    elt
+                  (intern (string-remove-suffix "-mode" mode)))))
+      (if (not (member pkg sk-pacakge-loading-notice-list))
+          (apply old r)
+        (let ((msg (capitalize (format " %s loading ..." pkg)))
+              (ovr (make-overlay (point) (point))))
+          (message msg)
+          (overlay-put ovr 'after-string
+                       (propertize msg 'face '(:inverse-video t :weight bold)))
+          (redisplay)
+          (apply old r)
+          (delete-overlay ovr)
+          (setq sk-pacakge-loading-notice-list
+                (delq pkg sk-pacakge-loading-notice-list))))))
+
+  (advice-add 'require :around #'sk-package-loading-notice)
+  (advice-add 'find-file :around #'sk-package-loading-notice)
 #+end_src
 
 ** Use-package
