@@ -435,7 +435,10 @@ loading.
           (apply old r)
           (delete-overlay ovr)
           (setq sk-pacakge-loading-notice-list
-                (delq pkg sk-pacakge-loading-notice-list))))))
+                (delq pkg sk-pacakge-loading-notice-list))
+          (unless sk-pacakge-loading-notice-list
+            (advice-remove 'require #'sk-package-loading-notice)
+            (advice-remove 'find-file #'sk-package-loading-notice))))))
 
   (advice-add 'require :around #'sk-package-loading-notice)
   (advice-add 'find-file :around #'sk-package-loading-notice)
