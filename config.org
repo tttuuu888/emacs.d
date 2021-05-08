@@ -428,17 +428,17 @@ loading.
           (apply old r)
         (let ((msg (capitalize (format " %s loading ..." pkg)))
               (ovr (make-overlay (point) (point))))
+          (setq sk-pacakge-loading-notice-list
+                (delq pkg sk-pacakge-loading-notice-list))
+          (unless sk-pacakge-loading-notice-list
+            (advice-remove 'require #'sk-package-loading-notice)
+            (advice-remove 'find-file #'sk-package-loading-notice))
           (message msg)
           (overlay-put ovr 'after-string
                        (propertize msg 'face '(:inverse-video t :weight bold)))
           (redisplay)
           (apply old r)
-          (delete-overlay ovr)
-          (setq sk-pacakge-loading-notice-list
-                (delq pkg sk-pacakge-loading-notice-list))
-          (unless sk-pacakge-loading-notice-list
-            (advice-remove 'require #'sk-package-loading-notice)
-            (advice-remove 'find-file #'sk-package-loading-notice))))))
+          (delete-overlay ovr)))))
 
   (advice-add 'require :around #'sk-package-loading-notice)
   (advice-add 'find-file :around #'sk-package-loading-notice)
