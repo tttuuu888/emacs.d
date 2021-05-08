@@ -428,6 +428,7 @@ loading.
           (apply old r)
         (let ((msg (capitalize (format " %s loading ..." pkg)))
               (ovr (make-overlay (point) (point))))
+          (when (fboundp 'company-cancel) (company-cancel))
           (setq sk-pacakge-loading-notice-list
                 (delq pkg sk-pacakge-loading-notice-list))
           (unless sk-pacakge-loading-notice-list
