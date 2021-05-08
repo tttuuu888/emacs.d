@@ -418,12 +418,14 @@ loading.
 
   (defun sk-package-loading-notice (old &rest r)
     (let* ((elt (car r))
-           (mode (when (stringp elt)
-                   (symbol-name
-                    (assoc-default elt auto-mode-alist 'string-match))))
-           (pkg (if (symbolp elt)
-                    elt
-                  (intern (string-remove-suffix "-mode" mode)))))
+           (mode
+            (when (stringp elt)
+              (let ((ret (assoc-default elt auto-mode-alist 'string-match)))
+                (and (symbolp ret) (symbol-name ret)))))
+           (pkg
+            (cond ((symbolp elt) elt)
+                  ((stringp mode) (intern (string-remove-suffix "-mode" mode)))
+                  (t nil))))
       (if (not (member pkg sk-pacakge-loading-notice-list))
           (apply old r)
         (let ((msg (capitalize (format " %s loading ..." pkg)))
@@ -438,11 +440,12 @@ loading.
           (overlay-put ovr 'after-string
                        (propertize msg 'face '(:inverse-video t :weight bold)))
           (redisplay)
-          (apply old r)
-          (delete-overlay ovr)))))
+          (let ((ret (apply old r)))
+            (delete-overlay ovr)
+            ret)))))
 
   (advice-add 'require :around #'sk-package-loading-notice)
-  (advice-add 'find-file :around #'sk-package-loading-notice)
+  (advice-add 'find-file-noselect :around #'sk-package-loading-notice)
 #+end_src
 
 ** Use-package
