@@ -1427,7 +1427,7 @@ settings.
     (define-key term-raw-map (kbd "<escape>") 'term-send-esc)
     (defun fzf-here ()
       (interactive)
-      (fzf/start default-directory)))
+      (fzf/start default-directory #'fzf/action-find-file)))
 
   (use-package yasnippet
     :commands yas-expand yas-minor-mode-on
