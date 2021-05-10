@@ -414,7 +414,7 @@ Some packages take relatively long time to load and Emacs freeze while loading a
 package. This setting make Emacs print notification that specific package is
 loading.
 #+begin_src emacs-lisp
-  (defvar sk-pacakge-loading-notice-list '(org yasnippet))
+  (defvar sk-package-loading-notice-list '(org yasnippet))
 
   (defun sk-package-loading-notice (old &rest r)
     (let* ((elt (car r))
@@ -426,14 +426,14 @@ loading.
             (cond ((symbolp elt) elt)
                   ((stringp mode) (intern (string-remove-suffix "-mode" mode)))
                   (t nil))))
-      (if (not (member pkg sk-pacakge-loading-notice-list))
+      (if (not (member pkg sk-package-loading-notice-list))
           (apply old r)
         (let ((msg (capitalize (format " %s loading ..." pkg)))
               (ovr (make-overlay (point) (point))))
           (when (fboundp 'company-cancel) (company-cancel))
-          (setq sk-pacakge-loading-notice-list
-                (delq pkg sk-pacakge-loading-notice-list))
-          (unless sk-pacakge-loading-notice-list
+          (setq sk-package-loading-notice-list
+                (delq pkg sk-package-loading-notice-list))
+          (unless sk-package-loading-notice-list
             (advice-remove 'require #'sk-package-loading-notice)
             (advice-remove 'find-file #'sk-package-loading-notice))
           (message msg)
