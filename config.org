@@ -89,6 +89,7 @@ Instead of using =custom.el=, insert the contents of the file directly here.
    '(auth-source-save-behavior nil)
    '(backup-directory-alist '((".*" . "/tmp/")))
    '(blink-cursor-mode nil)
+   '(browse-url-browser-function 'browse-url-chrome)
    '(completion-styles '(basic partial-completion emacs22 initials))
    '(css-indent-offset 2)
    '(fill-column 80)
