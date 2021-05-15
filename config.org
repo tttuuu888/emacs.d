@@ -1409,7 +1409,7 @@ settings.
     (setq calendar-holidays korean-holidays))
 
   (use-package fzf
-    :bind (("C-c j o" . fzf)
+    :bind (("C-c j o" . fzf-projectile)
            ("C-c j h" . fzf-here)
            ("C-c o"   . fzf-git-files))
     :init
