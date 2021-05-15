@@ -1200,8 +1200,8 @@ settings.
       (let ((company-backends '(company-yasnippet)))
         (company-complete-common)))
     (add-hook 'evil-insert-state-exit-hook #'my-company-abort)
-    (define-key company-active-map (kbd "C-n") 'company-select-next)
-    (define-key company-active-map (kbd "C-p") 'company-select-previous)
+    (define-key company-active-map (kbd "M-n") 'company-select-next)
+    (define-key company-active-map (kbd "M-p") 'company-select-previous)
     (evil-define-key 'insert company-mode-map
       (kbd "M-/") 'my-company-yas-expand
       (kbd "TAB") 'company-indent-or-complete-common))
