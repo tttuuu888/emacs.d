@@ -1407,32 +1407,17 @@ settings.
     (setq calendar-holidays korean-holidays))
 
   (use-package fzf
-    :bind (("C-c j o" . my-fzf)
-           ("C-c j h" . fzf-here)
-           ("C-c o"   . fzf-git-files))
-    :init
-    (evil-leader/set-key
-      "o"  'fzf-git-files
-      "jh" 'fzf-here
-      "jo" 'my-fzf)
+    :bind (("C-c j h" . fzf-here))
     :config
-    (setq fzf/window-height 20)
     (require 'term)
     (defun term-send-esc ()
       "Send ESC in term mode."
       (interactive)
       (term-send-raw-string "\e"))
-    ;; to quit fzf with ESC key
     (define-key term-raw-map (kbd "<escape>") 'term-send-esc)
     (defun fzf-here ()
       (interactive)
-      (fzf/start default-directory #'fzf/action-find-file))
-    (defun my-fzf ()
-      (interactive)
-      (if (fboundp #'projectile-project-root)
-          (fzf/start (or (projectile-project-root) default-directory)
-                     #'fzf/action-find-file)
-        (fzf/start default-directory #'fzf/action-find-file))))
+      (fzf/start default-directory #'fzf/action-find-file)))
 
   (use-package yasnippet
     :commands yas-expand yas-minor-mode-on
@@ -1558,12 +1543,14 @@ settings.
       "M-m"   'counsel-M-x
       "d"     'counsel-find-file
       "f"     'counsel-find-file
+      "o"     'counsel-git
       "r"     'counsel-recentf
       "hb"    'counsel-descbinds
       "hv"    'counsel-describe-variable
       "hf"    'counsel-describe-function
-      "jc"    'counsel-fzf-here
       "nx"    'counsel-org-capture
+      "jh"    'counsel-fzf-here
+      "jo"    'counsel-fzf
       "sb"    'my-counsel-switch-shell-buffer)
     :config
     (setq ivy-initial-inputs-alist nil
