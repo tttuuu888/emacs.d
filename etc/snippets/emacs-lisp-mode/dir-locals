@@ -3,4 +3,4 @@
 # key: dll
 # condition: (equal (file-name-nondirectory (buffer-file-name)) ".dir-locals.el")
 # --
-((nil ((tab-width . 2))))
+((nil . ((tab-width . 2))))
