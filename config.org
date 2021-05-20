@@ -267,9 +267,9 @@ Various useful functions.
     (if restore
         (progn
           (jump-to-register num)
-          (message (concat "Windows are Restored by F" (number-to-string num))))
+          (message "Windows are Restored by F%d" num))
       (window-configuration-to-register num)
-      (message (concat "Windows are saved to F" (number-to-string num)))))
+      (message "Windows are saved to F%d" num)))
 
   (defun tmux-running-p ()
     "Check if tmux is currently running or not."
