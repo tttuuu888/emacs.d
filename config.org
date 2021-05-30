@@ -555,6 +555,7 @@ settings.
     (define-key evil-operator-state-map "i" evil-inner-text-objects-map)
     (define-key evil-visual-state-map "a" evil-outer-text-objects-map)
     (define-key evil-visual-state-map "i" evil-inner-text-objects-map)
+    (evil-leader/set-key "C-v" 'my-evil-visual-block)
     (push '("*eldoc*" . emacs) evil-buffer-regexps)
     (add-hook 'evil-insert-state-entry-hook
               (lambda () (when buffer-read-only (read-only-mode -1))))
@@ -578,6 +579,10 @@ settings.
     (defun undo-at-here (n)
       (interactive "p")
       (save-excursion (undo-tree-undo-1 n)))
+    (defun my-evil-visual-block (&optional arg)
+      (interactive)
+      (evil-execute-in-emacs-state)
+      (rectangle-mark-mode arg))
     (evil-swap-key evil-motion-state-map "j" "gj")
     (evil-swap-key evil-motion-state-map "k" "gk")
     (evil-global-set-key 'normal "U" 'undo-at-here)
