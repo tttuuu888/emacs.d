@@ -410,45 +410,6 @@ Enable =sk-mode-line=.
 #+BEGIN_SRC emacs-lisp
   (sk-mode-line)
 #+END_SRC
-** Add notification for package loading
-Some packages take relatively long time to load and Emacs freeze while loading a
-package. This setting make Emacs print notification that specific package is
-loading.
-#+begin_src emacs-lisp
-  (defvar sk-package-loading-notice-list '(magit org yasnippet))
-
-  (defun sk-package-loading-notice (old &rest r)
-    (let* ((elt (car r))
-           (mode
-            (when (stringp elt)
-              (let ((ret (assoc-default elt auto-mode-alist 'string-match)))
-                (and (symbolp ret) (symbol-name ret)))))
-           (pkg
-            (cond ((symbolp elt) elt)
-                  ((stringp mode) (intern (string-remove-suffix "-mode" mode)))
-                  (t nil))))
-      (if (not (member pkg sk-package-loading-notice-list))
-          (apply old r)
-        (let ((msg (capitalize (format " %s loading ..." pkg)))
-              (ovr (make-overlay (point) (point))))
-          (when (fboundp 'company-cancel) (company-cancel))
-          (setq sk-package-loading-notice-list
-                (delq pkg sk-package-loading-notice-list))
-          (unless sk-package-loading-notice-list
-            (advice-remove 'require #'sk-package-loading-notice)
-            (advice-remove 'find-file #'sk-package-loading-notice))
-          (message msg)
-          (overlay-put ovr 'after-string
-                       (propertize msg 'face '(:inverse-video t :weight bold)))
-          (redisplay)
-          (let ((ret (apply old r)))
-            (delete-overlay ovr)
-            ret)))))
-
-  (advice-add 'require :around #'sk-package-loading-notice)
-  (advice-add 'find-file-noselect :around #'sk-package-loading-notice)
-#+end_src
-
 ** Use-package
 Install =use-package= if not exists. Set some default settings for
 =use-package=.
@@ -1188,6 +1149,11 @@ settings.
         (when (or (evil-insert-state-p) (evil-visual-state-p))
           (evil-normal-state))
         (call-interactively 'other-window))))
+
+  (use-package package-loading-notifier
+    :custom  (package-loading-notifier-packages '(org magit yasnippet))
+    :init
+    (package-loading-notifier-mode 1))
 
   (use-package company
     :init
