@@ -1546,14 +1546,14 @@ settings.
 
     (defun sk-compile-candidates ()
       (if-let ((sbin (find-file-in-tree default-directory ".sbin" t)))
-        (let ((files-alist)
-              (files (directory-files sbin t "\\.sh$"))
-              (cand (alist-get sbin sk-compile-history nil nil #'equal)))
-          (dolist (f files)
-            (add-to-list 'files-alist (cons (file-name-nondirectory f) f) t))
-          (when cand
-            (push (cons (file-name-nondirectory cand) cand) files-alist))
-          (delete-dups files-alist))
+          (let ((files-alist)
+                (files (directory-files sbin t "\\.sh$"))
+                (cand (alist-get sbin sk-compile-history nil nil #'equal)))
+            (dolist (f files)
+              (add-to-list 'files-alist (cons (file-name-nondirectory f) f) t))
+            (when cand
+              (push (cons (file-name-nondirectory cand) cand) files-alist))
+            (delete-dups files-alist))
         (error "Couldn't find .sbin folder")))
 
     (defun sk-compile-action (cmd-alist)
