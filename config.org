@@ -1151,7 +1151,7 @@ settings.
         (call-interactively 'other-window))))
 
   (use-package package-loading-notifier
-    :custom  (package-loading-notifier-packages '(org magit yasnippet))
+    :custom  (package-loading-notifier-packages '(helm org magit yasnippet))
     :init
     (package-loading-notifier-mode 1))
 
