@@ -963,7 +963,12 @@ settings.
     :custom-face
     (term-color-blue ((t :foreground "skyblue3" :background "skyblue3")))
     :config
-    (evil-set-initial-state 'term-mode 'emacs))
+    (evil-set-initial-state 'term-mode 'emacs)
+    (defun term-send-esc ()
+      "Send ESC in term mode."
+      (interactive)
+      (term-send-raw-string "\e"))
+    (define-key term-raw-map (kbd "<escape>") 'term-send-esc))
 
   (use-package paren
     :ensure nil
@@ -1380,12 +1385,6 @@ settings.
   (use-package fzf
     :bind (("C-c j h" . fzf-here))
     :config
-    (require 'term)
-    (defun term-send-esc ()
-      "Send ESC in term mode."
-      (interactive)
-      (term-send-raw-string "\e"))
-    (define-key term-raw-map (kbd "<escape>") 'term-send-esc)
     (defun fzf-here ()
       (interactive)
       (fzf/start default-directory #'fzf/action-find-file)))
