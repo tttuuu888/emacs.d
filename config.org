@@ -1914,6 +1914,8 @@ settings.
     (evil-define-minor-mode-key 'normal 'sly-popup-buffer-mode
       "q"  'quit-window))
 
+  (use-package geiser-chicken)
+
   (use-package geiser
     :commands sk-geiser-repl
     :config
@@ -1935,6 +1937,8 @@ settings.
       (geiser-mode-switch-to-repl nil))
     (sk-switch-buffer-repl sk-scheme-buffer-repl-toggle
       scheme-mode geiser-repl-mode sk-geiser-repl)
+    (evil-define-key 'normal geiser-mode-map
+      "gh" 'geiser-doc-symbol-at-point)
     (evil-leader/set-key-for-mode 'scheme-mode
       "eb" 'geiser-eval-buffer
       "ee" 'my-geiser-eval-last-sexp-or-region
