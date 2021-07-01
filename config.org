@@ -505,17 +505,7 @@ settings.
     :init
     (evil-mode)
     :config
-    (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes)
-          evil-inner-text-objects-map (append evil-inner-text-objects-map
-                                              '((?d . evil-inner-bracket)
-                                                (?j . evil-inner-curly)))
-          evil-outer-text-objects-map (append evil-outer-text-objects-map
-                                              '((?d . evil-a-bracket)
-                                                (?j . evil-a-curly))))
-    (define-key evil-operator-state-map "a" evil-outer-text-objects-map)
-    (define-key evil-operator-state-map "i" evil-inner-text-objects-map)
-    (define-key evil-visual-state-map "a" evil-outer-text-objects-map)
-    (define-key evil-visual-state-map "i" evil-inner-text-objects-map)
+    (setq evil-insert-state-modes (delete 'wdired-mode evil-insert-state-modes))
     (evil-leader/set-key "C-v" 'my-evil-visual-block)
     (push '("*eldoc*" . emacs) evil-buffer-regexps)
     (add-hook 'evil-insert-state-entry-hook
@@ -544,6 +534,29 @@ settings.
       (interactive)
       (evil-execute-in-emacs-state)
       (rectangle-mark-mode arg))
+    (evil-define-text-object evil-a-c-func (count &optional beg end type)
+      (save-excursion
+        (move-end-of-line 1)
+        (let ((p1 (and (evil-backward-section-begin) (point)))
+              (p2 (ignore-errors (and (search-forward "{") (evil-jump-item)))))
+          (if p2
+              (evil-range p1 (1+ p2) type :expanded t)
+            (error "Can't find c function.")))))
+    (evil-define-text-object evil-inner-c-func (count &optional beg end type)
+      (save-excursion
+        (move-end-of-line 1)
+        (evil-backward-section-begin)
+        (let* ((p1 (ignore-errors (search-forward "{")))
+               (p2 (ignore-errors (and p1 (evil-jump-item)))))
+          (if p2
+              (evil-range p1 p2 type :expanded t)
+            (error "Can't find c function.")))))
+    (define-key evil-inner-text-objects-map "d" 'evil-inner-bracket)
+    (define-key evil-outer-text-objects-map "d" 'evil-a-bracket)
+    (define-key evil-inner-text-objects-map "j" 'evil-inner-curly)
+    (define-key evil-outer-text-objects-map "j" 'evil-a-curly)
+    (define-key evil-inner-text-objects-map "f" 'evil-inner-c-func)
+    (define-key evil-outer-text-objects-map "f" 'evil-a-c-func)
     (evil-swap-key evil-motion-state-map "j" "gj")
     (evil-swap-key evil-motion-state-map "k" "gk")
     (evil-global-set-key 'normal "U" 'undo-at-here)
