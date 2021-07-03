@@ -2129,11 +2129,27 @@ settings.
 
   (use-package eglot
     :config
+    (setq eglot-server-programs
+          (append '(((c++-mode c-mode) "clangd")
+                    (python-mode
+                     . (eglot-pyright . ("pyright-langserver" "--stdio"))))
+                  eglot-server-programs))
     (require 'projectile)
     (defun my-projectile-project-find (dir)
       (let ((root (projectile-project-root dir)))
         (and root (cons 'transient root))))
-    (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+
+    (defclass eglot-pyright (eglot-lsp-server) ()
+      :documentation "MS pyright Language Server.")
+    (cl-defmethod eglot-client-capabilities ((server eglot-pyright))
+      "EGLOT LSP client supports for pyright."
+      `(:workspace
+        (:didChangeWatchedFiles
+         (:dynamicRegistration
+          ,(if (my-projectile-project-find default-directory)
+               t
+             :json-false)))))
+
     (add-to-list 'project-find-functions 'my-projectile-project-find)
     (advice-add 'projectile-kill-buffers :before
                 (lambda ()
