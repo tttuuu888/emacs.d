@@ -36,9 +36,9 @@
 
 (defun package-archives-init ()
   (setq package-archives
-        '(("gnu"   . "http://elpa.gnu.org/packages/")
+        '(("gnu"   . "https://elpa.gnu.org/packages/")
           ("org"   . "https://orgmode.org/elpa/")
-          ("melpa" . "http://melpa.org/packages/")))
+          ("melpa" . "https://melpa.org/packages/")))
   (package-initialize))
 
 (defun get-package-list ()
