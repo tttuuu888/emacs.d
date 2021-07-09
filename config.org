@@ -802,7 +802,10 @@ settings.
        ("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'"))
      org-html-metadata-timestamp-format "%Y-%m-%d"
      org-html-validation-link ""
-     org-latex-packages-alist '(("" "parskip" nil) ("" "kotex" nil))
+     org-latex-packages-alist '(("" "kotex" nil)
+                                ("" "parskip" nil)
+                                ("margin=2cm" "geometry" nil))
+     org-latex-tables-centered nil
      org-latex-title-command "\\maketitle \\clearpage"
      org-latex-toc-command "\\tableofcontents \\clearpage"
      org-log-done 'time
