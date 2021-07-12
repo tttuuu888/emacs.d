@@ -802,9 +802,15 @@ settings.
        ("https" . "\\.\\(jpeg\\|jpg\\|png\\|gif\\|svg\\|bmp\\)\\'"))
      org-html-metadata-timestamp-format "%Y-%m-%d"
      org-html-validation-link ""
+     org-latex-listings 'minted
      org-latex-packages-alist '(("" "kotex" nil)
                                 ("" "parskip" nil)
-                                ("margin=2cm" "geometry" nil))
+                                ("margin=2cm" "geometry" nil)
+                                ("cachedir=/tmp/minted" "minted"))
+     org-latex-pdf-process
+     '("%latex -shell-escape -interaction nonstopmode -output-directory %o %f"
+       "%latex -shell-escape -interaction nonstopmode -output-directory %o %f"
+       "%latex -shell-escape -interaction nonstopmode -output-directory %o %f")
      org-latex-tables-centered nil
      org-latex-title-command "\\maketitle \\clearpage"
      org-latex-toc-command "\\tableofcontents \\clearpage"
@@ -867,28 +873,33 @@ settings.
     (defun my-org-inline-image-hook ()
       (when org-inline-image-overlays
         (org-redisplay-inline-images)))
-    (defun my-org-inline-css-hook (exporter)
-      (when (eq exporter 'html)
-        (setq-local org-html-head-include-default-style nil)
-        (setq-local org-html-head
-                    (concat "<style type=\"text/css\">\n"
-                            "<!--/*--><![CDATA[/*><!--*/\n"
-                            (with-temp-buffer
-                              (insert-file-contents
-                               (expand-file-name "org.css" emacs-etc-dir))
-                              (buffer-string))
-                            (apply #'format
-                                   "\n.src {background-color: %s; color: %s;}\n"
-                                   (mapcar
-                                    (lambda (x)
-                                      (apply #'color-rgb-to-hex
-                                             (append (color-name-to-rgb x) '(2))))
-                                    (list (face-background 'default)
-                                          (face-foreground 'default))))
-                            "/*]]>*/-->\n"
-                            "</style>\n"))))
+    (defun my-org-before-process-hook (exporter)
+      (cond
+       ((eq exporter 'html)
+        (setq-local org-html-head-include-default-style nil
+                    org-html-head
+                    (concat
+                     "<style type=\"text/css\">\n"
+                     "<!--/*--><![CDATA[/*><!--*/\n"
+                     (with-temp-buffer
+                       (insert-file-contents
+                        (expand-file-name "org.css" emacs-etc-dir))
+                       (buffer-string))
+                     (apply #'format
+                            "\n.src {background-color: %s; color: %s;}\n"
+                            (mapcar
+                             (lambda (x)
+                               (apply #'color-rgb-to-hex
+                                      (append (color-name-to-rgb x) '(2))))
+                             (list (face-background 'default)
+                                   (face-foreground 'default))))
+                     "/*]]>*/-->\n"
+                     "</style>\n")))
+       ((eq exporter 'latex)
+        (setq-local org-export-with-section-numbers t
+                    org-export-with-toc 2))))
     (add-hook 'org-babel-after-execute-hook 'my-org-inline-image-hook)
-    (add-hook 'org-export-before-processing-hook 'my-org-inline-css-hook))
+    (add-hook 'org-export-before-processing-hook 'my-org-before-process-hook))
 
   (use-package ibuffer
     :ensure nil
